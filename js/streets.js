@@ -350,8 +350,11 @@ function st_waterLevel(o){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0
   const A=Math.abs(sArea(o)),st=Math.max(5,Math.sqrt(A)/14),v=[];for(let x=x0+st/2;x<x1;x+=st)for(let z=z0+st/2;z<z1;z+=st)if(pip(x,z,o))v.push(st_gy(x,z));
   if(v.length<3)for(const p of o)v.push(st_gy(p[0],p[1]));v.sort((a,b)=>a-b);const level=v[Math.floor(v.length*.2)]-.3;
   st_lakes.push({x0,x1,z0,z1,level});return level;}
-function st_terrainTile(t,grp,water){if(t.key==='all'||!isFinite(t.x0))return;const far=t.lod==='far',N=far?24:64,C=(t.x1-t.x0)/N;
-  const clamp=water.length?(x,z,y)=>{for(const w of water){if(x<w.x0||x>w.x1||z<w.z0||z>w.z1)continue;if(pip(x,z,w.o)&&!w.hs.some(h=>pip(x,z,h)))return Math.min(y,w.level-1.2);}return y;}:null;
+// river channels (mapcore rv_*) need a finer grid to show the trapezoid; far tiles ignore the channel (smooth valley)
+function st_tileHasRiver(t){if(typeof rv_dist!=='function')return false;if(!RV)rv_dist(0,0);for(const L of (RV&&RV.lines)||[])for(const p of L.pts)if(p[0]>t.x0-30&&p[0]<t.x1+30&&p[1]>t.z0-30&&p[1]<t.z1+30)return true;return false;}
+function st_terrainTile(t,grp,water){if(t.key==='all'||!isFinite(t.x0))return;const far=t.lod==='far',riv=st_tileHasRiver(t),N=far?24:riv?160:64,C=(t.x1-t.x0)/N;
+  const wclamp=water.length?(x,z,y)=>{for(const w of water){if(x<w.x0||x>w.x1||z<w.z0||z>w.z1)continue;if(pip(x,z,w.o)&&!w.hs.some(h=>pip(x,z,h)))return Math.min(y,w.level-1.2);}return y;}:null;
+  const clamp=!riv?wclamp:(x,z,y)=>{const o=rv_off(x,z);if(o<0){if(far)y-=o;else if(o<-.9)y-=.7;}return wclamp?wclamp(x,z,y):y;};
   const m=st_gridMesh(t.x0,t.z0,N,N,C,-.15,clamp,st_col(0xf2f2f2));m.name='st_terrain';grp.add(m);t.hasTerrain=true;}
 // Map road -> Set(segment indices) for a tile
 function st_tileRoads(t){const M2=new Map();
@@ -375,7 +378,7 @@ function buildStreetsTile(t){
   // ---- areas (clipped to the tile) ----
   const water=[],bigParks=[];
   for(const [kind,ring,holes] of (d.a||[])){const o=dec(ring),hs=(holes||[]).map(dec);if(o.length<3)continue;
-    if(kind==='water'){water.push([o,hs]);continue;}
+    if(kind==='water'){if(typeof rv_dist==='function'){let cx=0,cz=0;for(const p of o){cx+=p[0];cz+=p[1];}if(RV&&RV.lines.some(L=>L.water)&&rv_off(cx/o.length,cz/o.length)<-2)continue;}water.push([o,hs]);continue;}
     const k=.92+rnd()*.16;
     if(kind==='park'){st_poly(o,hs,st_Y.PARK,st_T.GRASS,5,new THREE.Color(k,k*(.98+rnd()*.06),k*.95));
       if(Math.abs(sArea(o))>=4000){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}bigParks.push({o,x0,x1,z0,z1});}}

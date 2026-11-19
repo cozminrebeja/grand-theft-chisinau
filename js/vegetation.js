@@ -269,7 +269,7 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
   const parks=[],waters=[],plazas=[];
   for(const [kind,ring,holes] of (d.a||[])){const o=dec(ring);if(o.length<3)continue;let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}
     const P={o,hs:(holes||[]).map(dec),A:Math.abs(sArea(o)),x0,x1,z0,z1};(kind==='park'?parks:kind==='water'?waters:plazas).push(P);}
-  const inWater=(x,z)=>{for(const W of waters)if(x>W.x0-1&&x<W.x1+1&&z>W.z0-1&&z<W.z1+1&&pip(x,z,W.o))return true;return false;};
+  const inWater=(x,z)=>{if(typeof rv_dist==='function'&&rv_dist(x,z)<1.5)return true;for(const W of waters)if(x>W.x0-1&&x<W.x1+1&&z>W.z0-1&&z<W.z1+1&&pip(x,z,W.o))return true;return false;};
   sec.m1=performance.now();
   // 1) individually mapped trees
   const tr=d.trees||[];for(let i=0;i<tr.length;i+=2){const x=tr[i]*SC,z=tr[i+1]*SC;if(near(x,z,2.5)||onRoadF(x,z)||solidAt(x,z))continue;add(x,z,rr(.75,1.2),pickArch(true));}

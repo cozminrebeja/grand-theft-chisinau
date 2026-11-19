@@ -19,6 +19,11 @@ const lm_TARGETS={
   cath2:{x:-281.9,z:-491.3},   // Catedrala Catolică (main nave with apse)
 };
 for(const k in lm_TARGETS){const t=lm_TARGETS[k];t.x*=WS;t.z*=WS;LANDMARK_SKIP.push({x:t.x,z:t.z,r:2.5});}
+// State Circus (Circul de Stat, 1981): drum fitted to the OSM/Overture ring + the back-of-house wing (footprint minus drum), original metres
+const lm_CIRC={c:[1257.7,-1394.9],r:28.3,wing:[[[11644,-14333,11640,-14186,12214,-14175,12323,-14081,12324,-14084,12328,-14090,12331,-14097,12335,-14103,12339,-14108,12343,-14114,12347,-14120,12351,-14125,12356,-14131,12360,-14136,12365,-14142,12370,-14147,12374,-14152,12379,-14157,12385,-14161,12390,-14166,12395,-14171,12401,-14175,12406,-14179,12412,-14183,12418,-14187,12424,-14191,12430,-14195,12436,-14198,12442,-14202,12444,-14203,12464,-14222,12376,-14312,12355,-14290,12344,-14301,12355,-14869,12138,-14875,12060,-14799,12052,-14807,12048,-14804,12052,-14800,11716,-14478,11719,-14476,11641,-14400,11639,-14333],[[11771,-14290,11773,-14400,11908,-14528,11942,-14492,12038,-14582,12004,-14619,12138,-14747,12249,-14743,12245,-14547,12069,-14553,11972,-14460,11968,-14285]]]]};
+lm_CIRC.c=lm_CIRC.c.map(v=>v*WS);lm_CIRC.r*=WS;for(const w of lm_CIRC.wing){ws_flat(w[0]);for(const h of w[1])ws_flat(h);}
+LANDMARK_SKIP.push({x:1242.3*WS,z:-1408.4*WS,r:2.5});
+lm_TARGETS.circ={x:lm_CIRC.c[0],z:lm_CIRC.c[1],fixed:true,fp:{ring:Array.from({length:32},(_,i)=>{const a=i/32*Math.PI*2;return [lm_CIRC.c[0]+Math.sin(a)*lm_CIRC.r,lm_CIRC.c[1]+Math.cos(a)*lm_CIRC.r];}),cx:lm_CIRC.c[0],cz:lm_CIRC.c[1]}};
 
 // ---- atlas ----
 const lm_AT={PLAIN:0,CLASSIC:1,ARCHWIN:2,SOVIET:3,SOVPLAIN:4,GOTHIC:5,BRICK:6,GLASS:7,SLATS:8,BELL:9,CATHWIN:10,DOOR:11,CLOCK:12,RUST:13,GOTHDOOR:14,FRIEZE:15,DRUM:16,BNM:17,ARTWIN:18,OPERAGLASS:19,SOVDOOR:20,WATERWIN:21};
@@ -86,6 +91,10 @@ function lm_buildAtlas(){
     T(22,g=>{g.fillStyle='#4f6575';g.fillRect(0,0,TS,TS);g.fillStyle='rgba(255,255,255,.12)';for(let x=0;x<TS;x+=32)g.fillRect(x,0,4,TS);noise(0,.08);});
     // 23 parliament: white fins + deep dark windows
     T(23,g=>{g.fillStyle='#f0efea';g.fillRect(0,0,TS,TS);noise(0,.04);glass(30,26,196,166,'#8297a9','#1f2b36');g.fillStyle='#f0efea';g.fillRect(122,26,12,166);g.fillStyle='#e4e2da';g.fillRect(0,0,22,TS);g.fillRect(234,0,22,TS);g.fillStyle='rgba(0,0,0,.14)';g.fillRect(22,26,6,166);});
+    // 24 circus sign: red letters on white
+    T(24,g=>{g.fillStyle='#f6f3ec';g.fillRect(0,0,TS,TS);g.fillStyle='#c8202a';g.font='bold 92px Arial, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('CIRC',128,128);});
+    // 25 circus glazing: tall mullioned glass
+    T(25,g=>{glass(0,0,TS,TS,'#9fb7c8','#2a3a47');g.fillStyle='#d9dde0';for(let x=0;x<TS;x+=32)g.fillRect(x,0,4,TS);for(let y=0;y<TS;y+=64)g.fillRect(0,y,TS,3);});
   },false);tex.anisotropy=renderer.capabilities.getMaxAnisotropy();tex.generateMipmaps=true;tex.minFilter=THREE.LinearMipmapLinearFilter;return tex;
 }
 function lm_uv(t){const c=t%8,r=Math.floor(t/8),e=.002;return [c/8+e,(c+1)/8-e,1-(r+1)/4+e,1-r/4-e];}
@@ -151,7 +160,7 @@ function lm_flag(x,y,z,ang){SB.add(CYL(.07,.09,7,6),M(x,y+3.5,z),0xdddddd);const
 // ---- colliders for every landmark, registered right after buildBuildings so vegetation/agents avoid them ----
 // ---- terrain: every landmark sits on the LOWEST ground under its footprint (nothing floats; uphill side is embedded) ----
 const lm_BASE={};
-const lm_KEYS=['arc','cathedral','belltower','statue','gov','parl','prim','opera','water','emin','art','bnm','cath2'];
+const lm_KEYS=['arc','cathedral','belltower','statue','gov','parl','prim','opera','water','emin','art','bnm','cath2','circ'];
 function lm_sq(x,z,s,ang){const c=Math.cos(ang||0),n=Math.sin(ang||0);return [[-1,-1],[1,-1],[1,1],[-1,1]].map(([a,b])=>[x+(a*c+b*n)*s/2,z+(-a*n+b*c)*s/2]);}
 function lm_base(key){if(lm_BASE[key]!=null)return lm_BASE[key];const S=D.special||{};let ring=null;
   if(S[key]){const [x,z,ang,size]=S[key];ring=key==='statue'?lm_sq(x,z,6,ang):lm_sq(x,z,size*(key==='arc'?1.35:key==='cathedral'?1.15:1.1),ang);}
@@ -169,7 +178,8 @@ function lm_registerColliders0(){if(lm_colDone)return;lm_colDone=true;
   if(S.cathedral){const [x,z,ang,size]=S.cathedral,k=size/31;addRect(x,z,28*k,13*k,ang,30);addRect(x,z,13*k,28*k,ang,30);addRect(x,z,13*k,38*k,ang,12);addRect(x,z,38*k,13*k,ang,12);}
   if(S.belltower){const [x,z,ang,size]=S.belltower;addRect(x,z,size,size,ang,60);}
   if(S.statue){const [x,z,ang]=S.statue;addRect(x,z,4.6,4.6,ang,10);}
-  for(const k in lm_TARGETS){const fp=lm_footprint(lm_TARGETS[k]);if(fp){lm_TARGETS[k].fp=fp;addPoly([fp.ring],40);}}
+  for(const k in lm_TARGETS){if(lm_TARGETS[k].fixed)continue;const fp=lm_footprint(lm_TARGETS[k]);if(fp){lm_TARGETS[k].fp=fp;addPoly([fp.ring],40);}}
+  addPoly([lm_ccw(lm_TARGETS.circ.fp.ring)],26);for(const w of lm_CIRC.wing)addPoly([lm_ccw(dec(w[0]))],13);
 }
 // make sure colliders exist before vegetation/streets run (buildBuildings is the first world builder called by game.js)
 // world.js calls landmarksPreBuild() once before any tile is built
@@ -357,13 +367,43 @@ function lm_cath2(){const t=lm_TARGETS.cath2,fp=t.fp;if(!fp)return;const ring=fp
   // small belfry with dome above the entrance end
   lm_pg(F,BOX(4,5,4),0,H+5.5,-20,0xf7eedb);const dm=new THREE.SphereGeometry(2.2,12,6,0,TAU,0,Math.PI/2);lm_pg(F,dm,0,H+8,-20,0x55705f);lm_pg(F,BOX(.15,2,.15),0,H+11,-20,lm_GOLD);lm_pg(F,BOX(.9,.12,.12),0,H+11.5,-20,lm_GOLD);
 }
-lm_AT.PARL=23;
+lm_AT.PARL=23;lm_AT.CIRCSIGN=24;lm_AT.CIRCGLASS=25;
+function lm_circ(){const [cx,cz]=lm_CIRC.c,R=lm_CIRC.r,N=24,TAU2=Math.PI*2,W=0xf4f1ea,ST=0xd2cbbd;
+  // entrance faces the nearest big road (bd. Renașterii Naționale)
+  const ns=nearestSeg(cx,cz,160,s=>s.r&&s.r.kind===0&&s.r.w>=10)||nearestSeg(cx,cz,160);const fa=ns?Math.atan2(ns.qx-cx,ns.qz-cz):0;
+  const at=(a,r)=>[cx+Math.sin(a)*r,cz+Math.cos(a)*r];
+  // stylobate with steps
+  SB.add(CYL(R+5,R+5,1.4,64),M(cx,.7,cz),ST);SB.add(CYL(R+5.8,R+5.8,.9,64),M(cx,.45,cz),0xc4bdaf);SB.add(CYL(R+6.6,R+6.6,.45,64),M(cx,.22,cz),0xbab3a5);
+  // ground-floor glazing (recessed) + upper glazed drum
+  {const g=new THREE.CylinderGeometry(R-1.6,R-1.6,4.6,64,1,true);SB.add(g,M(cx,3.7,cz),0x2c3a46);}
+  {const g=new THREE.CylinderGeometry(R-.6,R-.6,10.6,N*3,1,true).toNonIndexed();const Uv=g.attributes.uv;const [u0,u1,v0,v1]=lm_uv(lm_AT.CIRCGLASS);
+    for(let i=0;i<Uv.count;i+=3){const base=Math.floor((Uv.getX(i)+Uv.getX(i+1)+Uv.getX(i+2))/3*N);for(let j=i;j<i+3;j++){const u=Math.min(1,Math.max(0,Uv.getX(j)*N-base));Uv.setXY(j,u0+u*(u1-u0),v0+Uv.getY(j)*(v1-v0));}}
+    lm_B.add(g,M(cx,6+5.3,cz),0xffffff);}
+  SB.add(CYL(R-.3,R-.3,.5,64),M(cx,6.1,cz),W);   // slab edge between storeys
+  // tall arcade: N white piers rising to round arches, frieze ring above
+  const bayW=TAU2*R/N;
+  for(let i=0;i<N;i++){const a=(i+.5)/N*TAU2,p=at(a,R+.2);SB.add(BOX(1.2,15.6,1.8),M(p[0],1.4+7.8,p[1],a),W);
+    const b=i/N*TAU2,q=at(b,R+.25),sp=lm_spandrel(bayW-1.2,3.6,.9);SB.add(sp,M(q[0],13.4,q[1],b),W);}
+  SB.add(CYL(R+.75,R+.75,3.2,64),M(cx,18.6,cz),W);SB.add(CYL(R+1.05,R+1.05,.45,64),M(cx,20.4,cz),0xe2ddd2);
+  // crown: low drum + shallow ribbed silver dome + lantern
+  SB.add(CYL(R-2,R-2,1.6,48),M(cx,21.4,cz),0xe8e4da);
+  const dome=new THREE.SphereGeometry(R-2,48,10,0,TAU2,0,Math.PI/2);dome.scale(1,4.2/(R-2),1);SB.add(dome,M(cx,22.2,cz),0xa8afb4);
+  for(let i=0;i<16;i++){const a=i/16*TAU2;for(let k=0;k<5;k++){const f=(k+.5)/5,r=(R-2)*Math.cos(f*Math.PI/2),y=22.2+4.2*Math.sin(f*Math.PI/2),p=at(a,r);const ph=f*Math.PI/2,tl=Math.atan2(4.2*Math.cos(ph),(R-2)*Math.sin(ph));SB.add(BOX(.35,.35,(R-2)*.34),M(p[0],y+.15,p[1],a,tl),0xd0d4d6);}}
+  SB.add(CYL(2.6,3,1.6,20),M(cx,27,cz),0xe8e4da);SB.add(new THREE.ConeGeometry(3,1.4,20),M(cx,28.5,cz),0x8d969c);
+  // entrance canopy on columns + sign
+  const F=lm_F(cx,cz,fa);
+  lm_pg(F,BOX(26,.9,9),0,6.4,R+3.2,W);for(let i=0;i<6;i++)lm_pg(F,CYL(.35,.35,5,10),-11+i*4.4,3.9,R+7,W);
+  for(let st=0;st<3;st++)lm_pg(F,BOX(28,.3,4-st),0,1.4-st*.45+.15,R+7.5+st,0xc4bdaf);
+  const sp=at(fa,R+1.1);lm_decal(sp[0],18.6,sp[1],Math.sin(fa),Math.cos(fa),9,2.6,lm_AT.CIRCSIGN,0xffffff);
+  // back-of-house wing
+  for(const w of lm_CIRC.wing){const ring=lm_ccw(dec(w[0]));lm_ringWalls(ring,0,12,4,3.4,()=>lm_AT.SOVPLAIN,0xe9e4da);polyFill(SB,12,ring,[],0x8e8b84);lm_parapet(ring,12,.6,0xdedad0);}
+}
 
 function buildLandmarks(){
   lm_registerColliders();   // no-op if already done after buildBuildings
   if(!lm_atlasTex)lm_atlasTex=lm_buildAtlas();
   lm_B=new Bk(new THREE.MeshLambertMaterial({map:lm_atlasTex,vertexColors:true}),true);
-  const jobs=[[lm_arc,'arc'],[lm_cathedral,'cathedral'],[lm_belltower,'belltower'],[lm_statue,'statue'],[lm_gov,'gov'],[lm_parl,'parl'],[lm_prim,'prim'],[lm_opera,'opera'],[lm_water,'water'],[lm_emin,'emin'],[lm_art,'art'],[lm_bnm,'bnm'],[lm_cath2,'cath2']];
+  const jobs=[[lm_arc,'arc'],[lm_cathedral,'cathedral'],[lm_belltower,'belltower'],[lm_statue,'statue'],[lm_gov,'gov'],[lm_parl,'parl'],[lm_prim,'prim'],[lm_opera,'opera'],[lm_water,'water'],[lm_emin,'emin'],[lm_art,'art'],[lm_bnm,'bnm'],[lm_cath2,'cath2'],[lm_circ,'circ']];
   for(const [j,key] of jobs){const s0=SB.p.length,b0=lm_B.p.length;try{j();}catch(e){console.error('landmark '+j.name,e);}
     const base=lm_base(key);if(base){for(let i=s0+1;i<SB.p.length;i+=3)SB.p[i]+=base;for(let i=b0+1;i<lm_B.p.length;i+=3)lm_B.p[i]+=base;}}
   const m=lm_B.mesh();m.name='landmarks';scene.add(m);

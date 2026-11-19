@@ -48,7 +48,11 @@ function br_profile(sp){
   const a=groundY(sp.pts[0][0],sp.pts[0][1]),b=groundY(sp.pts[sp.pts.length-1][0],sp.pts[sp.pts.length-1][1]);
   const g=new Float32Array(n),line=new Float32Array(n);
   let depth=0;
-  for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s);g[k]=groundY(p[0],p[1]);line[k]=a+(b-a)*s/L;depth=Math.max(depth,line[k]-g[k]);}
+  // humps (make_cuts.py): lift the deck over roads that pass underneath — sin² rise from each abutment to the crossing
+  const bump=new Float32Array(n);
+  for(const [hx,hz,H,R] of (D.humps||[])){let bs=0,bd=1e9;for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s),d=Math.hypot(p[0]-hx,p[1]-hz);if(d<bd){bd=d;bs=s;}}
+    if(bd>R||bs<2||bs>L-2)continue;for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),u=s<bs?Math.sin(Math.PI/2*s/bs):Math.sin(Math.PI/2*(L-s)/(L-bs));bump[k]=Math.max(bump[k],H*u*u);}}
+  for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s);g[k]=groundY(p[0],p[1]);line[k]=a+(b-a)*s/L+bump[k];depth=Math.max(depth,line[k]-g[k]);}
   // clearance: real bridges (deep) keep their structure depth above ground; culverts barely lift
   const clr=depth>2?1.2:0.15;
   let env=new Float32Array(n);for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP);const endFade=Math.min(1,Math.min(s,L-s)/6);env[k]=Math.max(line[k],g[k]+clr*endFade);}
@@ -93,9 +97,12 @@ function br_wall(B,P,h,th,col,capCol){for(let i=0;i<P.length-1;i++){const a=P[i]
   const a0=[a[0]+nx,a[1],a[2]+nz],b0=[b[0]+nx,b[1],b[2]+nz],a1=[a[0]-nx,a[1],a[2]-nz],b1=[b[0]-nx,b[1],b[2]-nz];
   const up=p=>[p[0],p[1]+h,p[2]];
   br_quad(B,a0,b0,up(b0),up(a0),col);br_quad(B,b1,a1,up(a1),up(b1),col);br_quad(B,up(a0),up(b0),up(b1),up(a1),capCol);}}
+// a pier would stand on a road passing under the span (crossing, not parallel)?
+function br_onUnderRoad(p){if(typeof nearestSeg!=='function')return false;const ns=nearestSeg(p[0],p[1],25,q=>{if(!q.r||q.r.kind===3)return false;const dx=q.b[0]-q.a[0],dz=q.b[1]-q.a[1],l=Math.hypot(dx,dz)||1;return Math.abs((dx*p[2]+dz*p[3])/l)<.75;});return !!ns&&ns.d<ns.s.r.w/2+1.2;}
 function br_box(B,cx,cy,cz,w,h,d,ry,col){B.add(BOX(w,h,d),M(cx,cy,cz,ry),col);}
 // per-tile build: spans/pieces whose sample midpoints fall inside the tile (seams between tiles meet exactly)
 function buildBridgesTile(t){
+  if(t.lod!=='far')try{buildRiversTile(t);}catch(e){console.error('rivers',e);}
   if(!BR)bridgesInit();if(!BR||(!BR.spans.length&&!BR.tunnels.length))return;
   const B=new Bk(br_mat,false);let any=false;
   const inTile=(x,z)=>x>=t.x0&&x<t.x1&&z>=t.z0&&z<t.z1;
@@ -134,7 +141,7 @@ function buildBridgesTile(t){
     // piers every ~24 m where the deck is up high enough (positions by distance along span → deterministic, seam-safe)
     if(deep){const pitch=sp.L>200?30:24,np=Math.max(1,Math.floor(sp.L/pitch));
       for(let q=1;q<=np;q++){const s=sp.L*q/(np+1);const p=br_at(sp,s);if(!inTile(p[0],p[1]))continue;
-        const yd=br_deck(sp,s)-th-(sp.L>40&&!foot?.7:0),g=groundY(p[0],p[1])-.5,hgt=yd-g;if(hgt<1.6)continue;any=true;
+        const yd=br_deck(sp,s)-th-(sp.L>40&&!foot?.7:0),g=groundY(p[0],p[1])-.5,hgt=yd-g;if(hgt<1.6||br_onUnderRoad(p))continue;any=true;
         const ang=Math.atan2(p[2],p[3]);const cols=foot?[0]:half>5?[-.6,.6]:[0];
         for(const f of cols){const cx=p[0]-p[3]*half*f,cz=p[1]+p[2]*half*f;
           B.add(CYL(foot?.25:.65,foot?.25:.75,hgt,foot?8:12),M(cx,g+hgt/2,cz,0),BR_C.pier);}
@@ -159,3 +166,45 @@ function buildBridgesTile(t){
   const m=B.mesh();m.castShadow=true;m.receiveShadow=true;m.name='bridges_'+t.key;t.group.add(m);
 }
 function bridgesUnloadTile(t){}
+
+// ================= river channels (Bîc): concrete trapezoid + water + rim coping + railing =================
+// The cut itself lives in groundY (mapcore rv_*); this draws the lining exactly on that profile.
+const RVC={bed:0x6c6a63,bank:0xa39f95,wall:0xb5ab98,floor:0x6a6a66,cope:0xbdb8ac,rail:0x2f3236};
+let rv_sm=null,rv_wmat=null;
+function rv_samples(){if(rv_sm)return rv_sm;rv_sm=[];if(typeof rv_dist!=='function')return rv_sm;if(!RV)rv_dist(0,0);
+  for(const L of RV.lines){const P=L.pts,S=[];for(let i=0;i<P.length-1;i++){const a=P[i],b=P[i+1],l=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(l/4));
+      for(let k=0;k<n;k++){const u=k/n;S.push([a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u,0,0,0,L.dep[i]+(L.dep[i+1]-L.dep[i])*u]);}}
+    const e=P[P.length-1];S.push([e[0],e[1],0,0,0,L.dep[L.dep.length-1]]);
+    // unit left normal from central differences
+    for(let i=0;i<S.length;i++){const a=S[Math.max(0,i-1)],b=S[Math.min(S.length-1,i+1)],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz)||1;S[i][2]=-dz/l;S[i][3]=dx/l;}
+    // water level: smoothed bed
+    const bed=S.map(p=>hmY(p[0],p[1])-p[5]);for(let i=0;i<S.length;i++){let m=0,c=0;for(let k=-3;k<=3;k++){const j=i+k;if(j<0||j>=S.length)continue;m+=bed[j];c++;}S[i][4]=m/c;}
+    rv_sm.push({hw:L.hw,run:L.run,water:L.water,S});}
+  return rv_sm;}
+function buildRiversTile(t){const LS=rv_samples();if(!LS.length)return;
+  const B=new Bk(br_mat,false),Wb=new Bk(rv_wmat||(rv_wmat=(typeof st_waterMat!=='undefined'&&st_waterMat)||new THREE.MeshPhongMaterial({color:0x3b6f7f,specular:0x99bbcc,shininess:80})),false);let any=false,anyW=false;
+  const inTile=(x,z)=>x>=t.x0&&x<t.x1&&z>=t.z0&&z<t.z1;
+  const roadAt=(x,z,m)=>{if(typeof nearestSeg!=='function')return false;const ns=nearestSeg(x,z,30,s=>s.r&&s.r.kind!==3);return ns&&ns.d<ns.s.r.w/2+m;};
+  for(const {hw,run,water,S} of LS){const hb=hw-run;
+    const cols=water?[RVC.cope,RVC.cope,RVC.bank,RVC.bed,RVC.bank,RVC.cope,RVC.cope]:[RVC.cope,RVC.cope,RVC.wall,RVC.floor,RVC.wall,RVC.cope,RVC.cope];
+    const sec=p=>{const dep=p[5],fl=water?0:.12;return [[hw+1.4,.12],[hw,.12],[hw,0],[hb,-dep-fl],[-hb,-dep-fl],[-hw,0],[-hw,.12],[-hw-1.4,.12]].map(([o,dy])=>{const x=p[0]+p[2]*o,z=p[1]+p[3]*o;return [x,hmY(x,z)+dy,z];});};
+    let prev=null,prevP=null;
+    for(let i=0;i<S.length;i++){const p=S[i],cur=sec(p);
+      if(prev){const mx=(p[0]+prevP[0])/2,mz=(p[1]+prevP[1])/2,dep=(p[5]+prevP[5])/2;
+        if(inTile(mx,mz)&&dep>.05){any=true;const road=roadAt(mx,mz,2.5),rim=dep>.6&&!(water&&road);
+          for(let k=0;k<7;k++){if(!rim&&(k<2||k>4))continue;if(!water&&k===3&&dep<.3)continue;
+            const a=prev[k],b=prev[k+1],c=cur[k+1],d=cur[k];br_quad(B,a,d,c,b,cols[k]);}
+          if(water){anyW=true;const wl0=prevP[4]+.55,wl1=p[4]+.55,ww=hb+.55/RV_DEP*run;const q=(P,o,y)=>[P[0]+P[2]*o,y,P[1]+P[3]*o];
+            br_quad(Wb,q(prevP,ww,wl0),q(p,ww,wl1),q(p,-ww,wl1),q(prevP,-ww,wl0),0xffffff);}
+          // railings along both rims (not where a road deck crosses)
+          if(rim)for(const sd of [1,-1]){const o=sd*(hw+1.0),a=[prevP[0]+prevP[2]*o,0,prevP[1]+prevP[3]*o],b=[p[0]+p[2]*o,0,p[1]+p[3]*o];
+            if(!water&&roadAt((a[0]+b[0])/2,(a[2]+b[2])/2,.5))continue;
+            a[1]=hmY(a[0],a[2])+.12;b[1]=hmY(b[0],b[2])+.12;
+            br_wall(B,[[a[0],a[1]+1.0,a[2]],[b[0],b[1]+1.0,b[2]]],.07,.07,RVC.rail,RVC.rail);br_wall(B,[[a[0],a[1]+.5,a[2]],[b[0],b[1]+.5,b[2]]],.04,.04,RVC.rail,RVC.rail);
+            if(i%2===0)br_box(B,a[0],a[1]+.53,a[2],.08,1.06,.08,0,RVC.rail);}
+        }}
+      prev=cur;prevP=p;}}
+  if(!any)return;
+  const m=B.mesh();m.receiveShadow=true;m.name='river_'+t.key;t.group.add(m);
+  if(!anyW)return;const w=Wb.mesh();w.name='riverw_'+t.key;if(rv_wmat===st_waterMat&&typeof st_waterUni!=='undefined')w.onBeforeRender=()=>{st_waterUni.uTime.value=performance.now()/1000;};t.group.add(w);
+}
