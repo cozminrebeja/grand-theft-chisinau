@@ -92,7 +92,7 @@ function hmY(x,z){if(!HM)return 0;let fx=(x-HM.x0)/HM.c,fz=(z-HM.z0)/HM.c;fx=fx<
 // ---- channels carved into groundY: rivers (Bîc) and road cuts under grade-separated bridges ----
 // world.json `rivers`: [[w, flat dm]]  → concrete trapezoid, RV_DEP deep, banks RV_RUN wide, water on the bed
 // world.json `cuts`:   [[hw, depth, centre_s, flat dm]] → steep retaining walls; full depth within CUT_FULL of the crossing, 0 at both ends
-const RV_DEP=3.6,RV_RUN=3.4,RV_C=16,CUT_RUN=.8,CUT_FULL=22;let RV=null;
+const RV_DEP=4.8,RV_RUN=3.4,RV_C=16,CUT_RUN=.8,CUT_FULL=12;let RV=null;
 function rv_addLine(L){RV.lines.push(L);const p=L.pts;
   for(let i=0;i<p.length-1;i++){const a=p[i],b=p[i+1],dx=b[0]-a[0],dz=b[1]-a[1],hw=L.hw;const s={ax:a[0],az:a[1],dx,dz,l2:dx*dx+dz*dz||1e-9,hw,run:L.run,d0:L.dep[i],d1:L.dep[i+1]};
     const x0=Math.floor((Math.min(a[0],b[0])-hw-1)/RV_C),x1=Math.floor((Math.max(a[0],b[0])+hw+1)/RV_C),z0=Math.floor((Math.min(a[1],b[1])-hw-1)/RV_C),z1=Math.floor((Math.max(a[1],b[1])+hw+1)/RV_C);

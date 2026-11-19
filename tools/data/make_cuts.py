@@ -11,8 +11,8 @@ import numpy as np
 WD = sys.argv[1] if len(sys.argv) > 1 else 'world'
 W = json.load(open(WD + '/world.json'))
 NAMES = W['names']
-CLEAR = 6.4      # wanted deck-top height over the under-road (metres, game heights)
-LC = 85.0        # cut half-length along the under-road (original metres)
+CLEAR = 7.2      # deck top over the under-road (game metres): 5.5 m vertical clearance (MD/SNiP norm for city streets) + ~1.7 m deck & girders
+LC = 115.0       # cut half-length along the under-road (original metres) — keeps the ramp grade under ~9%
 H = W['height']; A = np.array(__import__('base64').b64decode(json.load(open(WD + '/height.json'))['b64']) and np.frombuffer(__import__('base64').b64decode(json.load(open(WD + '/height.json'))['b64']), dtype='<i2')).reshape(H['nz'], H['nx'])
 def gy(x, z):  # original metres -> game height (heightmap metres * WS=0.8)
     fx = (x - H['x0']) / H['cell']; fz = (z - H['z0']) / H['cell']; i = int(fx); j = int(fz); u = fx - i; v = fz - j
@@ -55,7 +55,10 @@ for b, sl in road_spans:
         have = (gy(sl.coords[0][0], sl.coords[0][1]) * (1 - s0 / sl.length) + gy(sl.coords[-1][0], sl.coords[-1][1]) * s0 / sl.length) - gy(pc.x, pc.y)
         need = CLEAR - have
         if need <= .5: continue
-        D = min(4.6, need * .66); Hh = min(3.0, need - D)
+        # hump on the deck: sin² rise from the nearer abutment, max grade ~9%  (slope_max = H·π/(2·s*), s* in game metres)
+        sstar = min(s0, sl.length - s0) * .8
+        Hh = max(0.0, min(3.2, need * .45, .09 * 2 * sstar / math.pi))
+        D = min(6.0, need - Hh); Hh = need - D if need - D > Hh else Hh
         # centre line: merge same-name pieces near the crossing, take the piece through the first hit, offset to the cluster middle
         r0, rl0 = G[0][2], G[0][3]
         same = [roads[i][1] for i in rtree.query(pc.buffer(LC + 40)) if roads[i][0][3] == r0[3] and roads[i][0][0] == r0[0]]
