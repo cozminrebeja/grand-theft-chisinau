@@ -24,18 +24,19 @@ const RADIO_STATIONS=[
   {id:'roks',name:'Radio ROKS',sub:'Rock · Moldova',src:'https://stream.dixi.md:9443/Roks',c1:'#111',c2:'#e10600',t:'ROKS'},
   {id:'record',name:'Radio Record',sub:'Dance',src:'https://radiorecord.hostingradio.ru/rr_main96.aacp',alt:'https://air.unmixed.ru/record320',c1:'#f7941d',c2:'#111',t:'RECORD'},
 ];
-const RADIO_THEME=1,RADIO_VOL=.55,RADIO_N=RADIO_STATIONS.length;
+const RADIO_THEME=1,RADIO_N=RADIO_STATIONS.length;
+let radio_vol=.75;try{const v=parseFloat(localStorage.getItem('gtc_radio_vol'));if(v>=0&&v<=1)radio_vol=v;}catch(e){}
 let radio_ingame=false,radio_on=true,radio_st=5,radio_inCar=false,radio_unlocked=false,radio_cur=null;
 try{radio_on=localStorage.getItem('gtc_radio')!=='0';const s=RADIO_STATIONS.findIndex(x=>x.id===localStorage.getItem('gtc_station'));if(s>=0)radio_st=s;}catch(e){}
 
 // ---------- audio ----------
 // one <audio> per local track (keeps its position while you switch around), one shared element for live streams
 const radio_local=new Map();
-function radio_localEl(i){let a=radio_local.get(i);if(a)return a;const s=RADIO_STATIONS[i];a=new Audio(s.local);a.preload=i===RADIO_THEME?'auto':'metadata';a.loop=true;a.volume=RADIO_VOL;
+function radio_localEl(i){let a=radio_local.get(i);if(a)return a;const s=RADIO_STATIONS[i];a=new Audio(s.local);a.preload=i===RADIO_THEME?'auto':'metadata';a.loop=true;a.volume=radio_gain();
   // start somewhere in the middle, not from the beginning
   a.addEventListener('loadedmetadata',()=>{if(isFinite(a.duration))a.currentTime=a.duration*(.35+Math.random()*.25);},{once:true});radio_local.set(i,a);return a;}
 radio_localEl(RADIO_THEME);
-const radio_live=new Audio();radio_live.preload='none';radio_live.volume=RADIO_VOL;
+const radio_live=new Audio();radio_live.preload='none';radio_live.volume=radio_gain();
 radio_live.addEventListener('error',()=>{const s=RADIO_STATIONS[radio_cur];if(!s||!s.src||!radio_live.getAttribute('src'))return;
   if(s.alt&&radio_live.src!==s.alt){radio_live.src=s.alt;radio_live.play().catch(()=>{});}else radio_toast('📻 '+s.name+' — fără semnal');});
 
@@ -117,6 +118,17 @@ addEventListener('keydown',e=>{
 let radio_qHold=0,radio_qShift=false;
 addEventListener('keyup',e=>{if(e.code!=='KeyQ')return;clearTimeout(radio_qHold);
   if(radio_open)radio_close(true);else if(radio_inCar&&performance.now()-radio_qT<170)radio_tune(radio_st+(radio_qShift?-1:1));},true);
+
+// ---------- volume: pause-menu slider, -/+ keys (also numpad). Perceived loudness ~ square of the slider. ----------
+function radio_gain(){return radio_vol*radio_vol;}
+function radio_setVol(v,toast){radio_vol=Math.max(0,Math.min(1,Math.round(v*100)/100));try{localStorage.setItem('gtc_radio_vol',radio_vol);}catch(e){}
+  const g=radio_gain();radio_live.volume=g;for(const a of radio_local.values())a.volume=g;
+  const sl=$('pmRadVol'),sv=$('pmRadVolV');if(sl)sl.value=Math.round(radio_vol*100);if(sv)sv.textContent=Math.round(radio_vol*100)+'%';
+  if(toast)radio_toast((radio_vol===0?'🔇':radio_vol<.5?'🔉':'🔊')+' Volum muzică '+Math.round(radio_vol*100)+'%  (−/+)');}
+addEventListener('keydown',e=>{const c=e.code;const d=c==='Minus'||c==='NumpadSubtract'?-1:c==='Equal'||c==='NumpadAdd'?1:0;if(!d)return;
+  if(e.target&&/INPUT|TEXTAREA/.test(e.target.tagName))return;e.preventDefault();radio_setVol(radio_vol+d*.1,true);});
+{const sl=$('pmRadVol');if(sl)sl.addEventListener('input',()=>radio_setVol(sl.value/100,false));}
+radio_setVol(radio_vol,false);
 
 // ---------- start-up + following the player ----------
 // browsers block audio until a user gesture: try right away, then on every click/key/touch until something plays
