@@ -149,6 +149,7 @@ function drawMap(){mapBudget=3;const W=mapC.width,rad=210,sc=W/(rad*2);mg.save()
   const dot=(x,z,c,r=5,edge=false)=>{let [dx,dz]=P(x,z);const l=Math.hypot(dx,dz),lim=W/2-9;if(l>lim){if(!edge)return;dx*=lim/l;dz*=lim/l;}mg.fillStyle=c;mg.beginPath();mg.arc(dx,dz,r,0,TAU);mg.fill();mg.strokeStyle='#000';mg.lineWidth=1.5;mg.stroke();};
   for(const v of vehicles)if(v.mode==='chase')dot(v.x,v.z,(performance.now()/250|0)%2?'#ff3030':'#3070ff',5,true);
   if(player.car&&player.car.type==='trolley')for(const s of stops)if(s.i!==lastStation&&Math.abs(s.px-player.x)<400&&Math.abs(s.pz-player.z)<400)dot(s.px,s.pz,'#57a0ff',4.5);
+  hook('mapIcons',mg,P,'mini',{R:W/2-9,rot:camYaw+Math.PI,sc});
   if(mission)dot(mission.x,mission.z,mission.stage==='pickup'?'#3cff6e':'#ffd23f',8,true);
   mg.restore();
   mg.save();mg.translate(W/2,W/2);mg.rotate(-(player.h-camYaw));mg.fillStyle='#fff';mg.beginPath();mg.moveTo(0,-11);mg.lineTo(8,9);mg.lineTo(0,4);mg.lineTo(-8,9);mg.closePath();mg.fill();mg.strokeStyle='#000';mg.lineWidth=2;mg.stroke();mg.restore();
@@ -295,6 +296,7 @@ function fmDraw(){if(!FM.on)return;const dpr=devicePixelRatio||1,W=innerWidth,H=
   g.textAlign='center';g.textBaseline='middle';
   for(const d of DISTRICTS){const [px,pz]=P(d.cx,d.cz);if(px<-200||px>W+200||pz<-50||pz>H+50)continue;g.font=`400 ${Math.max(18,Math.min(44,Math.sqrt(d.area)*sc*.08))}px 'Pirata One',serif`;g.lineWidth=4;g.strokeStyle='rgba(0,0,0,.7)';g.fillStyle='rgba(255,255,255,.92)';g.strokeText(d.name,px,pz);g.fillText(d.name,px,pz);}
   if(sc>.12){g.font='700 11px Inter';for(const p of D.pois){const [px,pz]=P(p[1],p[2]);if(px<0||px>W||pz<0||pz>H)continue;g.fillStyle='#ffd23f';g.beginPath();g.arc(px,pz,3.5,0,TAU);g.fill();if(sc>.35){g.fillStyle='#fff';g.strokeStyle='#000';g.lineWidth=3;g.strokeText(p[0],px,pz-9);g.fillText(p[0],px,pz-9);}}}
+  hook('mapIcons',g,P,'big',{W,H,sc});
   if(mission){const [mx,mz]=P(mission.x,mission.z);g.fillStyle=mission.stage==='pickup'?'#3cff6e':'#ffd23f';g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.arc(mx,mz,8,0,TAU);g.fill();g.stroke();}
   const [qx,qz]=P(player.x,player.z);g.save();g.translate(qx,qz);g.rotate(-player.h+Math.PI);g.fillStyle='#fff';g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.moveTo(0,-12);g.lineTo(8,10);g.lineTo(0,5);g.lineTo(-8,10);g.closePath();g.fill();g.stroke();g.restore();
   g.font='600 11px Inter';g.fillStyle='rgba(255,255,255,.75)';g.textAlign='left';g.fillText('Trage pentru a muta · rotița pentru zoom · Tab / Esc închide',14,H-14);
