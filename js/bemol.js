@@ -14,7 +14,8 @@ function bemol_logo(g,w,h,bg){g.fillStyle=bg;g.fillRect(0,0,w,h);g.fillStyle='#f
 function bemol_build(){
   bemol_list=[];
   // orient each station along its nearest road, and keep the canopy off the asphalt
-  for(let i=0;i<BEMOL_PTS.length;i+=2){let x=BEMOL_PTS[i],z=BEMOL_PTS[i+1],a=0;
+  const ws=typeof WS==='number'?WS:1; // map scale (mapcore.js): stored points are real-world metres
+  for(let i=0;i<BEMOL_PTS.length;i+=2){let x=BEMOL_PTS[i]*ws,z=BEMOL_PTS[i+1]*ws,a=0;
     const ns=typeof nearestSeg==='function'?nearestSeg(x,z,60):null;
     if(ns){const s=ns.s,dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1];a=Math.atan2(dx,dz);const min=s.r.w/2+7.5;
       if(ns.d<min){let nx=x-ns.qx,nz=z-ns.qz,l=Math.hypot(nx,nz);if(l<.01){nx=-dz;nz=dx;l=Math.hypot(nx,nz)||1;}x=ns.qx+nx/l*min;z=ns.qz+nz/l*min;}}
