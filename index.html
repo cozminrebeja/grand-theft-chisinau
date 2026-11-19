@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Grand Theft Chișinău</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%;overflow:hidden;background:#0b0d10;font-family:Inter,system-ui,sans-serif;color:#fff;touch-action:none}
+canvas#gl{display:block;position:fixed;inset:0;width:100%;height:100%}
+.hud{position:fixed;pointer-events:none;text-shadow:0 2px 4px rgba(0,0,0,.75);transition:opacity .4s}
+body.pre .hud,body.pre #touch{opacity:0!important;pointer-events:none!important}
+#topl{top:calc(14px + env(safe-area-inset-top));right:16px;text-align:right}
+.ol{-webkit-text-stroke:0}
+#clock{font:400 30px/1 Anton;color:#e8e8e8;letter-spacing:1px;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,2px 2px #000,-2px -2px #000,2px -2px #000,-2px 2px #000}
+#money{font:400 32px/1.05 Anton;color:#5fbf4f;letter-spacing:1px;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,2px 2px #000,-2px -2px #000,2px -2px #000,-2px 2px #000}
+#stars{font-size:26px;letter-spacing:1px;color:#e9c53b;margin-top:2px;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000}
+#stars .off{color:rgba(0,0,0,.35);text-shadow:none}
+#stars.flash{animation:flash .5s steps(2) infinite}
+@keyframes flash{50%{opacity:.25}}
+#zone{position:fixed;right:22px;bottom:calc(210px + env(safe-area-inset-bottom));font:400 40px/1 'Pirata One',serif;color:#f3f3f0;opacity:0;transition:opacity .6s;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000,3px 3px 6px rgba(0,0,0,.6);text-align:right;max-width:80vw}
+#street{position:fixed;left:16px;top:calc(176px + env(safe-area-inset-top));font:800 11px Inter;letter-spacing:.6px;text-transform:uppercase;opacity:.9;max-width:44vw}
+#mapwrap{top:calc(14px + env(safe-area-inset-top));left:14px;width:150px;height:150px;border-radius:50%;overflow:hidden;border:4px solid #111;outline:2px solid rgba(255,255,255,.7);box-shadow:0 4px 14px rgba(0,0,0,.5);background:#2d3d25;pointer-events:auto;cursor:pointer}
+#map{width:100%;height:100%}
+#veh{right:22px;bottom:calc(160px + env(safe-area-inset-bottom));text-align:right}
+body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.touch) #zone{bottom:calc(90px + env(safe-area-inset-bottom))}
+#vname{font:400 26px/1 "Pirata One",serif;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000}
+#speed{font:400 30px Anton;line-height:1.1;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000}
+#speed small{font:700 12px Inter;opacity:.7;margin-left:3px}
+#batt{font:700 11px Inter;color:#ffb347;min-height:14px}
+#mission{top:calc(122px + env(safe-area-inset-top));right:16px;max-width:230px;text-align:right;font:700 13px Inter;line-height:1.35}
+#mission .t{color:#ffd23f;font-size:19px;font-family:Anton;font-weight:400}
+#msg{top:27%;left:50%;transform:translateX(-50%);text-align:center;font:400 30px Anton;letter-spacing:1px;opacity:0;transition:opacity .35s;width:94%}
+#msg small{display:block;font:700 14px Inter;letter-spacing:.3px;margin-top:4px}
+#hint{left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom));font:700 13px Inter;background:rgba(0,0,0,.45);padding:6px 12px;border-radius:20px;opacity:0;transition:opacity .2s;white-space:nowrap}
+#busted{inset:0;display:flex;align-items:center;justify-content:center;font:400 72px Anton;color:#ff3b3b;background:rgba(10,0,0,.45);opacity:0;letter-spacing:3px}
+#osm{right:8px;bottom:calc(4px + env(safe-area-inset-bottom));font:600 9px Inter;opacity:.6;pointer-events:auto}
+#osm a{color:#fff}
+#title{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(6,10,20,.2),rgba(6,10,20,.85));z-index:10;padding:24px;text-align:center}
+#title h1{font:400 clamp(44px,11vw,96px)/0.92 Anton;margin:0;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#ffe27a 55%,#ff9d2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #1a1208) drop-shadow(0 10px 20px rgba(0,0,0,.6))}
+#title h1 span{display:block;font-size:.62em;letter-spacing:6px}
+#title .flag{display:flex;width:64px;height:6px;margin:16px auto 10px;border-radius:3px;overflow:hidden}
+#title .flag i{flex:1}
+#title p{max-width:440px;opacity:.85;font-size:14px;line-height:1.5;margin:6px 0}
+#play{pointer-events:auto;margin-top:22px;font:400 26px Anton;letter-spacing:2px;padding:14px 46px;border:0;border-radius:40px;background:#ffd23f;color:#1a1305;cursor:pointer;box-shadow:0 6px 0 #a7801a,0 10px 30px rgba(255,210,63,.35)}
+#play:disabled{background:#6b6b6b;color:#ddd;box-shadow:none;cursor:wait;font-size:18px}
+#play:active{transform:translateY(3px)}
+#qsel{margin-top:16px;font:700 12px Inter;opacity:.85}#qsel button{pointer-events:auto;cursor:pointer;margin-left:6px;font:700 12px Inter;padding:6px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.3);color:#fff}#qsel button.on{background:#ffd23f;color:#1a1305;border-color:#ffd23f}
+.keys{font-size:12px;opacity:.7;margin-top:18px;line-height:1.7}
+.keys b{background:rgba(255,255,255,.15);padding:1px 6px;border-radius:4px;font-weight:700}
+#touch{position:fixed;inset:0;pointer-events:none;display:none;z-index:5}
+#joy{position:absolute;left:calc(22px + env(safe-area-inset-left));bottom:calc(26px + env(safe-area-inset-bottom));width:138px;height:138px;border-radius:50%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);pointer-events:auto;touch-action:none}
+#knob{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(255,255,255,.55)}
+.btn{position:absolute;pointer-events:auto;touch-action:none;border-radius:50%;background:rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;font:800 12px Inter;text-transform:uppercase;letter-spacing:.5px;color:#fff;text-align:center;line-height:1.1}
+.btn.on{background:rgba(255,210,63,.55)}
+#bEnter{right:calc(24px + env(safe-area-inset-right));bottom:calc(120px + env(safe-area-inset-bottom));width:78px;height:78px;background:rgba(255,210,63,.35)}
+#bBrake{right:calc(112px + env(safe-area-inset-right));bottom:calc(30px + env(safe-area-inset-bottom));width:74px;height:74px}
+#bHorn{right:calc(24px + env(safe-area-inset-right));bottom:calc(30px + env(safe-area-inset-bottom));width:74px;height:74px}
+#bCam{right:calc(118px + env(safe-area-inset-right));bottom:calc(124px + env(safe-area-inset-bottom));width:52px;height:52px;font-size:18px}
+#bigmap{position:fixed;inset:0;z-index:20;background:rgba(8,10,12,.92);display:none;align-items:center;justify-content:center;flex-direction:column}
+#bigmap.on{display:flex}
+#bigmap canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none}
+#bigmap .t{position:absolute;top:14px;left:50%;transform:translateX(-50%);font:400 38px 'Pirata One',serif;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000;pointer-events:none}
+#bigx{position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.6);background:rgba(0,0,0,.5);color:#fff;font:700 20px Inter;cursor:pointer}
+#pause{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(10,12,18,.55),rgba(5,6,10,.9))}
+#pause.on{display:flex}
+#pause .box{width:min(440px,92vw);text-align:center}
+#pause h2{font:400 64px/1 Anton;margin:0 0 4px;letter-spacing:2px;background:linear-gradient(180deg,#fff,#ffe27a 60%,#ff9d2e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #1a1208)}
+#pause .sub{font:400 22px 'Pirata One',serif;opacity:.8;margin-bottom:18px}
+#pause .mb{display:block;width:100%;margin:8px 0;padding:13px 16px;font:400 22px Anton;letter-spacing:1.5px;border:0;border-radius:10px;cursor:pointer;background:rgba(255,255,255,.08);color:#fff;text-align:left;transition:background .15s,transform .15s}
+#pause .mb:hover{background:#ffd23f;color:#1a1305;transform:translateX(6px)}
+#pause .mb.primary{background:#ffd23f;color:#1a1305}
+#pause .set{display:none;text-align:left;background:rgba(255,255,255,.06);border-radius:10px;padding:14px 16px;margin:8px 0;font:600 13px Inter}
+#pause .set.on{display:block}
+#pause .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0}
+#pause .row input[type=range]{flex:1;accent-color:#ffd23f}
+#pause .seg button{font:700 12px Inter;padding:6px 10px;margin-left:4px;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer}
+#pause .seg button.on{background:#ffd23f;color:#1a1305;border-color:#ffd23f}
+#pause .keysl{font:500 12px/1.9 Inter;opacity:.85}
+#pause .keysl b{background:rgba(255,255,255,.15);padding:1px 6px;border-radius:4px}
+#lockhint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;font:700 14px Inter;background:rgba(0,0,0,.55);padding:10px 16px;border-radius:22px;display:none;pointer-events:none}
+</style>
+</head>
+<body class="pre">
+<canvas id="gl"></canvas>
+<div class="hud" id="topl"><div id="clock">17:30</div><div id="money">50 lei</div><div id="stars"></div></div>
+<div class="hud" id="zone"></div><div class="hud" id="street"></div>
+<div id="bigmap"><canvas id="bigc"></canvas><div class="t">Chișinău</div><button id="bigx">✕</button></div>
+<div class="hud" id="mapwrap"><canvas id="map" width="272" height="272"></canvas></div>
+<div class="hud" id="mission"></div>
+<div class="hud" id="veh"><div id="vname">Pe jos</div><div id="speed"></div><div id="batt"></div></div>
+<div class="hud" id="hint"></div>
+<div class="hud" id="msg"></div>
+<div class="hud" id="busted">ARESTAT</div>
+<div class="hud" id="osm">Hartă © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a></div>
+<div id="touch">
+  <div id="joy"><div id="knob"></div></div>
+  <div class="btn" id="bEnter">Intră</div>
+  <div class="btn" id="bBrake">Frână</div>
+  <div class="btn" id="bHorn">Claxon</div>
+  <div class="btn" id="bCam">🎥</div>
+</div>
+<div id="pause"><div class="box">
+  <h2>PAUZĂ</h2><div class="sub">Grand Theft Chișinău</div>
+  <button class="mb primary" id="pmResume">▶ Continuă</button>
+  <button class="mb" id="pmMap">🗺 Hartă</button>
+  <button class="mb" id="pmSetBtn">⚙ Setări</button>
+  <div class="set" id="pmSet">
+    <div class="row">Sensibilitate mouse <input type="range" id="pmSens" min="0.2" max="3" step="0.05"> <span id="pmSensV"></span></div>
+    <div class="row">Inversează axa Y <input type="checkbox" id="pmInv"></div>
+    <div class="row">Sunet <span class="seg"><button id="pmSndOn">Pornit</button><button id="pmSndOff">Oprit</button></span></div>
+    <div class="row">Grafică <span class="seg" id="pmQ"><button data-q="med">Medie</button><button data-q="high">Înaltă</button><button data-q="ultra">Ultra</button></span></div>
+  </div>
+  <button class="mb" id="pmKeysBtn">⌨ Controale</button>
+  <div class="set" id="pmKeys"><div class="keysl"><b>Mouse</b> privește · <b>WASD</b> mers / condus · <b>Shift</b> fugi · <b>Space</b> frână de mână<br><b>E</b> intră / ieși · <b>H</b> claxon · <b>C</b> cameră · <b>Tab</b> hartă · <b>M</b> sunet · <b>Esc</b> meniu</div></div>
+  <button class="mb" id="pmRestart">↻ Repornește</button>
+</div></div>
+<div id="lockhint">Click pentru a controla camera</div>
+<div id="title">
+  <h1>Grand Theft<span>Chișinău</span></h1>
+  <div class="flag"><i style="background:#0046ae"></i><i style="background:#ffd200"></i><i style="background:#cc092f"></i></div>
+  <p>Centrul real al Chișinăului — fiecare stradă, clădire și fir de troleibuz, după OpenStreetMap. Fură un taxi, deturnează un troleibuz pe Ștefan cel Mare și fugi de poliție.</p>
+  <button id="play" disabled>SE ÎNCARCĂ…</button>
+  <div id="qsel">Grafică: <button data-q="med">Medie</button><button data-q="high">Înaltă</button><button data-q="ultra">Ultra</button></div>
+  <div class="keys" id="keys"><b>WASD</b> / săgeți — mers / condus &nbsp; <b>E</b> — intră / ieși<br><b>Space</b> — frână de mână &nbsp; <b>Shift</b> — fugi &nbsp; <b>H</b> — claxon &nbsp; <b>C</b> — cameră &nbsp; mouse — privește · <b>Esc</b> — meniu</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/core.js"></script>
+<script src="js/env.js"></script>
+<script src="js/mapcore.js"></script>
+<script src="js/bridges.js"></script>
+<script src="js/facades.js"></script>
+<script src="js/streets.js"></script>
+<script src="js/traffic.js"></script>
+<script src="js/world.js"></script>
+<script src="js/vegetation.js"></script>
+<script src="js/landmarks.js"></script>
+<script src="js/vehicles.js"></script>
+<script src="js/people.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
