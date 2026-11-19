@@ -347,7 +347,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
   else if(!started){titleT+=dt*.06;const cx=arcP[0]+60,cz=arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
   else{const inp=input();window.gtcInput=inp;if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('fxUpdate',dt);updTrolleyStation();updCamera(dt);updHUD(dt);drawMap();engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('bemolUpdate',dt,player,say);hook('fxUpdate',dt);updTrolleyStation();updCamera(dt);updHUD(dt);drawMap();engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);
