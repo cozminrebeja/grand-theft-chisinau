@@ -31,8 +31,8 @@ const world_packs=new Map();
 async function worldFetchTile(key){
   if(D.packs){const [i,j]=key.split('_').map(Number);const pk='p_'+Math.floor(i/D.packs)+'_'+Math.floor(j/D.packs);
     let pr=world_packs.get(pk);if(!pr){pr=fetch(WORLD.base+'packs/'+pk+'.json').then(r=>{if(!r.ok)throw new Error('pack '+pk+' '+r.status);return r.json();});world_packs.set(pk,pr);pr.catch(()=>world_packs.delete(pk));}
-    const P=await pr;const t=P[key];if(!t)throw new Error('tile '+key+' missing in '+pk);return t;}
-  const r=await fetch(WORLD.base+'tiles/'+key+'.json');if(!r.ok)throw new Error('tile '+key+' '+r.status);return r.json();}
+    const P=await pr;const t=P[key];if(!t)throw new Error('tile '+key+' missing in '+pk);return scaleTileData(t);}
+  const r=await fetch(WORLD.base+'tiles/'+key+'.json');if(!r.ok)throw new Error('tile '+key+' '+r.status);return scaleTileData(await r.json());}
 function worldMakeTile(key,data,lod='near'){const [i,j]=key.split('_').map(Number);const T=WORLD.T;
   const t={key,i,j,x0:i*T,z0:j*T,x1:(i+1)*T,z1:(j+1)*T,data,lod,steps:world_stepsFor(lod),group:new THREE.Group(),polys:[],state:'building',step:0,pri:0,next:null};
   t.group.name='tile_'+key;t.group.visible=false;scene.add(t.group);WORLD.tiles.set(key,t);return t;}
@@ -154,7 +154,7 @@ function world_farInit(){
   if(camera.far<WORLD.viewDist+300){camera.far=WORLD.viewDist+300;camera.updateProjectionMatrix();}
   // ENV owns fog; if it hasn't been adapted to the streaming radius yet, stretch it so far-LOD tiles are visible through the haze
   if(WORLD.mode==='stream'&&scene.fog&&scene.fog.far<WORLD.loadR){scene.fog.near=Math.max(scene.fog.near,260);scene.fog.far=WORLD.loadR+400;WORLD.fogAdjusted=true;}
-  fetch(WORLD.base+'far.json').then(r=>r.ok?r.json():null).then(F=>{if(!F||!F.boxes||!F.boxes.length)return;
+  fetch(WORLD.base+'far.json').then(r=>r.ok?r.json():null).then(F=>{if(!F||!F.boxes||!F.boxes.length)return;F.boxes=F.boxes.map(b=>[b[0]*WS,b[1]*WS,b[2]*WS,b[3]]);
     const SZ=2000,groups=new Map();
     for(const b of F.boxes){const k=Math.floor(b[0]/SZ)+'_'+Math.floor(b[1]/SZ);let a=groups.get(k);if(!a){a=[];groups.set(k,a);}a.push(b);}
     const fogC=scene.fog?scene.fog.color.clone():new THREE.Color(0xc4d6e6);

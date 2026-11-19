@@ -5,7 +5,29 @@ const glassGrad=(g,y0,y1,a='#6f88a0',b='#24303c')=>{const gr=g.createLinearGradi
 const blobTex=ctex(64,64,g=>{const gr=g.createRadialGradient(32,32,6,32,32,32);gr.addColorStop(0,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);},false);
 const blobMat=new THREE.MeshBasicMaterial({map:blobTex,transparent:true,depthWrite:false});
 let D=null,BX0=0,BX1=0,BZ0=0,BZ1=0;
-function initMap(data){D=data;[BX0,BX1,BZ0,BZ1]=D.bounds;}
+// ---- world scale: the real city is shrunk horizontally+vertically by WS so driving distances feel game-sized;
+// vehicles, people, street furniture and building floor heights keep real-world size (so they read ~1/WS bigger). ----
+const WS=0.8;
+const ws_flat=a=>{if(a)for(let i=0;i<a.length;i++)a[i]*=WS;return a;};
+function scaleWorldData(W){if(W._ws)return W;W._ws=true;
+  for(const r of W.r||[]){r[1]*=WS;ws_flat(r[6]);}
+  for(const p of W.pois||[]){p[1]*=WS;p[2]*=WS;}
+  for(const s of W.stops||[]){s[0]*=WS;s[1]*=WS;}
+  for(const k in W.special||{}){const s=W.special[k];s[0]*=WS;s[1]*=WS;s[3]*=WS;}
+  if(W.bounds)W.bounds=W.bounds.map(v=>v*WS);
+  for(const d of W.districts||[])ws_flat(d[1]);
+  for(const b of (W.bridges||[]).concat(W.tunnels||[])){b[0]*=WS;ws_flat(b[2]);}
+  if(W.tile)W.tile*=WS;
+  if(W.height){const h=W.height;h.x0*=WS;h.z0*=WS;h.cell*=WS;h.scale*=WS;}
+  if(W.map){W.map.mpp*=WS;W.map.x0*=WS;W.map.z0*=WS;}
+  return W;}
+// tile payloads (called by world.js once per fetched tile object; building heights are NOT scaled)
+function scaleTileData(t){if(!t||t._ws)return t;t._ws=true;
+  for(const b of t.b||[]){ws_flat(b[4]);for(const h of b[5]||[])ws_flat(h);}
+  for(const r of t.r||[]){r[1]*=WS;ws_flat(r[6]);}
+  for(const a of t.a||[]){ws_flat(a[1]);for(const h of a[2]||[])ws_flat(h);}
+  ws_flat(t.trees);ws_flat(t.cross);return t;}
+function initMap(data){D=scaleWorldData(data);[BX0,BX1,BZ0,BZ1]=D.bounds;}
 const SC=0.1;const dec=a=>{const o=[];for(let i=0;i<a.length;i+=2)o.push([a[i]*SC,a[i+1]*SC]);return o;};
 const CH=520;const chunk=(x,z)=>Math.floor((x-BX0)/CH)+'_'+Math.floor((z-BZ0)/CH);
 const buckets=new Map();
