@@ -19,7 +19,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Controls
 Mouse — look · WASD — walk / drive · Shift — run · Space — handbrake · E — enter / exit vehicle · H — horn · C — camera ·
-Tab — map · M — sound · R — music on/off · Q — car radio station (Hit FM, Kiss FM, Radio Record) · Esc — pause menu. Graphics quality: title screen or pause menu (Medie / Înaltă / Ultra).
+Tab — map · M — sound · R — music on/off · Q — car radio (tap: next station, hold: radio wheel; Moldovan + Romanian + Russian stations) · Esc — pause menu. Graphics quality: title screen or pause menu (Medie / Înaltă / Ultra).
 
 ## Layout
 - `index.html` — page, HUD, menus; loads `js/*.js` in order (classic scripts sharing one global scope).
