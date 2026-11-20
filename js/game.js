@@ -160,13 +160,15 @@ function drawMap(){mapBudget=3;const W=mapC.width,rad=210,sc=W/(rad*2);mg.save()
   mapDrawTiles(mg,player.x,player.z,rad*1.45,sc);
   const P=(x,z)=>[(x-player.x)*sc,(z-player.z)*sc];
   const dot=(x,z,c,r=5,edge=false)=>{let [dx,dz]=P(x,z);const l=Math.hypot(dx,dz),lim=W/2-9;if(l>lim){if(!edge)return;dx*=lim/l;dz*=lim/l;}mg.fillStyle=c;mg.beginPath();mg.arc(dx,dz,r,0,TAU);mg.fill();mg.strokeStyle='#000';mg.lineWidth=1.5;mg.stroke();};
+  if(gps){gpsStroke(mg,P,gps.k+1,(rad*1.6)**2);mg.strokeStyle='rgba(0,0,0,.55)';mg.lineWidth=9;mg.stroke();mg.strokeStyle=GPS_COL;mg.lineWidth=5.5;mg.stroke();dot(gps.x,gps.z,GPS_COL,7,true);}
   for(const v of vehicles)if(v.mode==='chase')dot(v.x,v.z,(performance.now()/250|0)%2?'#ff3030':'#3070ff',5,true);
   if(player.car&&player.car.type==='trolley')for(const s of stops)if(s.i!==lastStation&&Math.abs(s.px-player.x)<400&&Math.abs(s.pz-player.z)<400)dot(s.px,s.pz,'#57a0ff',4.5);
   hook('mapIcons',mg,P,'mini',{R:W/2-9,rot:camYaw+Math.PI,sc});
   if(mission)dot(mission.x,mission.z,mission.stage==='pickup'?'#3cff6e':'#ffd23f',8,true);
   mg.restore();
   mg.save();mg.translate(W/2,W/2);mg.rotate(-(player.h-camYaw));mg.fillStyle='#fff';mg.beginPath();mg.moveTo(0,-11);mg.lineTo(8,9);mg.lineTo(0,4);mg.lineTo(-8,9);mg.closePath();mg.fill();mg.strokeStyle='#000';mg.lineWidth=2;mg.stroke();mg.restore();
-  mg.save();mg.translate(W/2,W/2);mg.rotate(camYaw+Math.PI);mg.fillStyle='#fff';mg.font='900 20px Inter';mg.textAlign='center';mg.textBaseline='middle';const nr=W/2-16;mg.translate(0,-nr);mg.rotate(-(camYaw+Math.PI));mg.lineWidth=3;mg.strokeStyle='#000';mg.strokeText('N',0,0);mg.fillText('N',0,0);mg.restore();}
+  mg.save();mg.translate(W/2,W/2);mg.rotate(camYaw+Math.PI);mg.fillStyle='#fff';mg.font='900 20px Inter';mg.textAlign='center';mg.textBaseline='middle';const nr=W/2-16;mg.translate(0,-nr);mg.rotate(-(camYaw+Math.PI));mg.lineWidth=3;mg.strokeStyle='#000';mg.strokeText('N',0,0);mg.fillText('N',0,0);mg.restore();
+  if(gps){const t='GPS '+gpsFmt(gpsLeft());mg.font='800 17px Inter';mg.textAlign='center';mg.textBaseline='middle';mg.lineWidth=4;mg.strokeStyle='#000';mg.fillStyle=GPS_COL;mg.strokeText(t,W/2,W-22);mg.fillText(t,W/2,W-22);}}
 // districts (sector / neighbourhood polygons) for HUD + full map
 const DISTRICTS=(D.districts||[]).map(([name,flat])=>{const ring=dec(flat);let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9,sx=0,sz=0;for(const p of ring){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);sx+=p[0];sz+=p[1];}
   return {name,ring,x0,x1,z0,z1,cx:sx/ring.length,cz:sz/ring.length,area:(x1-x0)*(z1-z0)};}).sort((a,b)=>a.area-b.area);
@@ -296,7 +298,40 @@ function updHUD(dt){gameMin+=dt*(60/60);const hh=Math.floor(gameMin/60)%24,mm=Ma
   let hint='';if(player.mode==='foot'){let bd=9;for(const o of vehicles){if(Math.abs(o.x-x)>10||Math.abs(o.z-z)>10)continue;const d=segDist(o,x,z)-o.spec.wid/2;if(d<bd)bd=d;}if(bd<2.6)hint=(isTouch?'Apasă INTRĂ':'Apasă E')+' ca să urci';}
   const he=$('hint');if(he.textContent!==hint)he.textContent=hint;he.style.opacity=hint?1:0;setH('bEnter',player.mode==='foot'?'Intră':'Ieși');}
 // full-screen map: drag to pan, wheel to zoom; Tab / Esc / ✕ to close
-const bigEl=$('bigmap'),bigC=$('bigc');const FM={cx:0,cz:0,s:.25,on:false,drag:null,raf:0,ov:null};
+const bigEl=$('bigmap'),bigC=$('bigc');const FM={cx:0,cz:0,s:.25,on:false,drag:null,down:null,raf:0,ov:null};
+// ================= GPS: click the big map to set a waypoint; route follows the road graph (one-ways respected when driving) =================
+let gps=null;const mkG=makeMarker(0xc77dff);const GPS_COL='#c77dff';
+function gpsRoute(sx,sz,tx,tz,oneway){const s=nodeNear(sx,sz,300),g=nodeNear(tx,tz,500);if(s==null||g==null)return null;
+  const pts=[[sx,sz]];
+  if(s!==g){const gp=nodePos[g],gs=new Map([[s,0]]),came=new Map(),closed=new Set(),H=[];
+    const push=(f,n)=>{H.push([f,n]);let i=H.length-1;while(i>0){const q=(i-1)>>1;if(H[q][0]<=H[i][0])break;[H[q],H[i]]=[H[i],H[q]];i=q;}};
+    const pop=()=>{const top=H[0],last=H.pop();if(H.length){H[0]=last;let i=0;for(;;){const l=2*i+1,r=l+1;let m=i;if(l<H.length&&H[l][0]<H[m][0])m=l;if(r<H.length&&H[r][0]<H[m][0])m=r;if(m===i)break;[H[m],H[i]]=[H[i],H[m]];i=m;}}return top;};
+    push(0,s);let it=0,found=false;
+    while(H.length&&it++<120000){const n=pop()[1];if(n===g){found=true;break;}if(closed.has(n))continue;closed.add(n);
+      for(const e of adj.get(n)||[]){const fwd=e.a===n,m=fwd?e.b:e.a;if(closed.has(m))continue;if(oneway&&e.ow&&((fwd&&e.ow===-1)||(!fwd&&e.ow===1)))continue;
+        const ng=gs.get(n)+e.len;if(ng<(gs.has(m)?gs.get(m):1e18)){gs.set(m,ng);came.set(m,[n,e,fwd]);const p=nodePos[m];push(ng+Math.hypot(p[0]-gp[0],p[1]-gp[1]),m);}}}
+    if(!found)return oneway?gpsRoute(sx,sz,tx,tz,false):null;
+    const segs=[];let c=g;while(came.has(c)){const [n,e,fwd]=came.get(c);segs.push(fwd?e.pts:e.pts.slice().reverse());c=n;}
+    for(let i=segs.length-1;i>=0;i--)for(const p of segs[i])pts.push(p);}
+  else pts.push(nodePos[s]);
+  pts.push([tx,tz]);const cum=[0];for(let i=1;i<pts.length;i++)cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+  return {pts,cum};}
+function gpsSet(x,z){const r=gpsRoute(player.x,player.z,x,z,!!player.car);if(!r){say('GPS','Nu găsesc drum până acolo',1.8,'#ff8a65');return;}
+  gps={x,z,pts:r.pts,cum:r.cum,k:0,chk:1,car:!!player.car};mkG.position.set(x,surfaceY(x,z),z);mkG.visible=true;say('GPS activat',gpsFmt(gpsLeft()),1.8,GPS_COL);}
+function gpsClear(msg){gps=null;mkG.visible=false;if(msg)say(msg,'',1.8,GPS_COL);}
+function gpsLeft(){if(!gps)return 0;const p=gps.pts,k=Math.min(gps.k+1,p.length-1);return gps.cum[p.length-1]-gps.cum[k]+Math.hypot(p[k][0]-player.x,p[k][1]-player.z);}
+const gpsFmt=m=>m>=1000?(m/1000).toFixed(1)+' km':Math.round(m/10)*10+' m';
+function gpsUpdate(dt){if(!gps)return;const p=gps.pts;
+  // progress: nearest route segment a little ahead of the last one
+  let bk=gps.k,bd=1e18;for(let i=Math.max(0,gps.k-2);i<Math.min(p.length-1,gps.k+80);i++){const a=p[i],b=p[i+1],dx=b[0]-a[0],dz=b[1]-a[1],l2=dx*dx+dz*dz||1e-9;
+    let t=((player.x-a[0])*dx+(player.z-a[1])*dz)/l2;t=t<0?0:t>1?1:t;const d=(a[0]+dx*t-player.x)**2+(a[1]+dz*t-player.z)**2;if(d<bd){bd=d;bk=i;}}
+  gps.k=bk;
+  if(Math.hypot(gps.x-player.x,gps.z-player.z)<22){gpsClear('Ai ajuns la destinație');return;}
+  // off-route or switched car/foot → recalculate (at most once a second)
+  gps.chk-=dt;if(gps.chk<=0){gps.chk=1;if(bd>40*40||gps.car!==!!player.car){const r=gpsRoute(player.x,player.z,gps.x,gps.z,!!player.car);if(r){gps.pts=r.pts;gps.cum=r.cum;gps.k=0;gps.car=!!player.car;}}}}
+function gpsStroke(g,P,from,maxR2){const p=gps.pts;let [x,y]=P(player.x,player.z);g.beginPath();g.moveTo(x,y);
+  for(let i=from;i<p.length;i++){[x,y]=P(p[i][0],p[i][1]);g.lineTo(x,y);if(maxR2){const dx=p[i][0]-player.x,dz=p[i][1]-player.z;if(dx*dx+dz*dz>maxR2)break;}}
+  g.lineCap='round';g.lineJoin='round';}
 function fmOverview(){if(FM.ov)return FM.ov;
   if(D.map&&D.map.image){const img=new Image();FM.ov={img,mpp:D.map.mpp,x0:D.map.x0,z0:D.map.z0,ok:false};img.onload=()=>{FM.ov.ok=true;fmDraw();};img.src=D.map.image.replace(/^world\//,WORLD.base);return FM.ov;}
   const span=Math.max(BX1-BX0,BZ1-BZ0),mpp=Math.max(1,span/3200),c=document.createElement('canvas');c.width=Math.ceil((BX1-BX0)/mpp);c.height=Math.ceil((BZ1-BZ0)/mpp);
@@ -316,16 +351,24 @@ function fmDraw(){if(!FM.on)return;const dpr=devicePixelRatio||1,W=innerWidth,H=
   for(const d of DISTRICTS){const [px,pz]=P(d.cx,d.cz);if(px<-200||px>W+200||pz<-50||pz>H+50)continue;g.font=`400 ${Math.max(18,Math.min(44,Math.sqrt(d.area)*sc*.08))}px 'Pirata One',serif`;g.lineWidth=4;g.strokeStyle='rgba(0,0,0,.7)';g.fillStyle='rgba(255,255,255,.92)';g.strokeText(d.name,px,pz);g.fillText(d.name,px,pz);}
   if(sc>.12){g.font='700 11px Inter';for(const p of D.pois){const [px,pz]=P(p[1],p[2]);if(px<0||px>W||pz<0||pz>H)continue;g.fillStyle='#ffd23f';g.beginPath();g.arc(px,pz,3.5,0,TAU);g.fill();if(sc>.35){g.fillStyle='#fff';g.strokeStyle='#000';g.lineWidth=3;g.strokeText(p[0],px,pz-9);g.fillText(p[0],px,pz-9);}}}
   hook('mapIcons',g,P,'big',{W,H,sc});
+  if(gps){gpsStroke(g,P,gps.k+1,0);g.strokeStyle='rgba(0,0,0,.6)';g.lineWidth=8;g.stroke();g.strokeStyle=GPS_COL;g.lineWidth=4.5;g.stroke();
+    const [gx,gz]=P(gps.x,gps.z);g.fillStyle=GPS_COL;g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.moveTo(gx,gz);g.lineTo(gx-9,gz-22);g.lineTo(gx+9,gz-22);g.closePath();g.fill();g.stroke();g.beginPath();g.arc(gx,gz-24,9,0,TAU);g.fill();g.stroke();
+    g.font='800 13px Inter';g.textAlign='center';g.lineWidth=3;g.strokeStyle='#000';g.fillStyle='#fff';g.strokeText(gpsFmt(gpsLeft()),gx,gz-42);g.fillText(gpsFmt(gpsLeft()),gx,gz-42);}
   if(mission){const [mx,mz]=P(mission.x,mission.z);g.fillStyle=mission.stage==='pickup'?'#3cff6e':'#ffd23f';g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.arc(mx,mz,8,0,TAU);g.fill();g.stroke();}
   const [qx,qz]=P(player.x,player.z);g.save();g.translate(qx,qz);g.rotate(-player.h+Math.PI);g.fillStyle='#fff';g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.moveTo(0,-12);g.lineTo(8,10);g.lineTo(0,5);g.lineTo(-8,10);g.closePath();g.fill();g.stroke();g.restore();
-  g.font='600 11px Inter';g.fillStyle='rgba(255,255,255,.75)';g.textAlign='left';g.fillText('Trage pentru a muta · rotița pentru zoom · Tab / Esc închide',14,H-14);
+  g.font='600 11px Inter';g.fillStyle='rgba(255,255,255,.75)';g.textAlign='left';g.fillText('Click: GPS (click pe steag îl șterge) · Trage pentru a muta · rotița pentru zoom · Tab / Esc închide',14,H-14);
   if(missing&&!FM.raf)FM.raf=requestAnimationFrame(()=>{FM.raf=0;fmDraw();});}
 function openBigMap(){FM.on=true;FM.cx=player.x;FM.cz=player.z;FM.s=.35;bigEl.classList.add('on');fmDraw();}
 function closeBigMap(){FM.on=false;bigEl.classList.remove('on');}
 $('mapwrap').addEventListener('pointerdown',e=>{e.stopPropagation();openBigMap();});
-bigC.addEventListener('pointerdown',e=>{e.stopPropagation();FM.drag={x:e.clientX,y:e.clientY};bigC.setPointerCapture(e.pointerId);});
+bigC.addEventListener('pointerdown',e=>{e.stopPropagation();FM.drag={x:e.clientX,y:e.clientY};FM.down={x:e.clientX,y:e.clientY};bigC.setPointerCapture(e.pointerId);});
 bigC.addEventListener('pointermove',e=>{if(!FM.drag)return;FM.cx-=(e.clientX-FM.drag.x)/FM.s;FM.cz-=(e.clientY-FM.drag.y)/FM.s;FM.drag={x:e.clientX,y:e.clientY};fmDraw();});
-bigC.addEventListener('pointerup',()=>{FM.drag=null;});
+bigC.addEventListener('pointerup',e=>{FM.drag=null;const d=FM.down;FM.down=null;if(!d||Math.hypot(e.clientX-d.x,e.clientY-d.y)>6)return;   // a click, not a drag
+  const x=FM.cx+(e.clientX-innerWidth/2)/FM.s,z=FM.cz+(e.clientY-innerHeight/2)/FM.s;
+  const fd=gps?Math.min(Math.hypot((x-gps.x)*FM.s,(z-gps.z)*FM.s+24),Math.hypot((x-gps.x)*FM.s,(z-gps.z)*FM.s)):1e9;   // flag head / tip
+  if(fd<18)gpsClear('GPS oprit');
+  else if(x>=BX0&&x<=BX1&&z>=BZ0&&z<=BZ1)gpsSet(x,z);
+  fmDraw();});
 bigC.addEventListener('wheel',e=>{e.preventDefault();const k=Math.exp(-e.deltaY*.0015),ns=clamp(FM.s*k,.02,2.5);const mx=e.clientX-innerWidth/2,my=e.clientY-innerHeight/2;
   FM.cx+=mx/FM.s-mx/ns;FM.cz+=my/FM.s-my/ns;FM.s=ns;fmDraw();},{passive:false});
 $('bigx').addEventListener('pointerdown',e=>{e.stopPropagation();closeBigMap();lockMouse();});
@@ -376,7 +419,7 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
   else{const inp=input();window.gtcInput=inp;const inStore=player.mode==='foot'&&hook('storeUpdate',dt,inp);if(inStore){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);

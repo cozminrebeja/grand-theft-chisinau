@@ -33,4 +33,4 @@ function linella_build(){
     linella_list.forEach((s,k)=>{st.makeRotationY(s.a).setPosition(s.x,s.y,s.z);lo.makeTranslation(p.at[0],p.at[1],p.at[2]);im.setMatrixAt(k,m4.multiplyMatrices(st,lo));});
     im.instanceMatrix.needsUpdate=true;im.castShadow=!!p.shadow;im.receiveShadow=true;im.frustumCulled=false;scene.add(im);}
 }
-function linellaUpdate(){if(linella_list){if(typeof st_frontsUpdate==='function')st_frontsUpdate();return;}if(typeof nearestSeg!=='function'||typeof groundY!=='function'||typeof scene==='undefined')return;linella_build();}
+function linellaUpdate(){if(linella_list){if(typeof lst_frontsUpdate==='function')lst_frontsUpdate();return;}if(typeof nearestSeg!=='function'||typeof groundY!=='function'||typeof scene==='undefined')return;linella_build();}

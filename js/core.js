@@ -38,3 +38,12 @@ const BOX=(w,h,d)=>new THREE.BoxGeometry(w,h,d), CYL=(a,b,h,s=12)=>new THREE.Cyl
 const VC=new THREE.MeshLambertMaterial({vertexColors:true});
 const VC2=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});
 
+
+// NPC speech subtitles, bottom of the screen (max 2 lines): subtitle('Paznic Ion','Stai, hoțule!','#ff8a65')
+let subsEl=null;
+function subtitle(who,text,color='#ffd23f',dur){
+  if(!subsEl){subsEl=document.createElement('div');subsEl.id='subs';subsEl.style.cssText='position:fixed;left:50%;bottom:7%;transform:translateX(-50%);z-index:13;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;max-width:92vw';document.body.appendChild(subsEl);}
+  const d=document.createElement('div');d.style.cssText='font:700 19px Inter,Arial,sans-serif;color:#fff;background:rgba(0,0,0,.62);padding:6px 14px;border-radius:8px;text-align:center;text-shadow:0 1px 2px #000;transition:opacity .3s';
+  const b=document.createElement('b');b.style.color=color;b.textContent=who+': ';d.append(b,document.createTextNode(text));subsEl.appendChild(d);
+  while(subsEl.children.length>2)subsEl.firstChild.remove();
+  setTimeout(()=>{d.style.opacity=0;setTimeout(()=>d.remove(),300);},(dur||1.8+text.length*.06)*1000);}
