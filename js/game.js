@@ -8,6 +8,7 @@ await progress('SE ÎNCARCĂ HARTA…');
 initMap(await (await fetch(WORLD.base+'world.json',{cache:'no-cache'})).json());
 if(D.attribution){const o=$('osm');if(o)o.innerHTML='Hartă: '+D.attribution.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace('OpenStreetMap contributors','<a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>');}
 await initHeight();
+await mdl_preload();
 await progress('CONSTRUIM ORAȘUL…');
 {const __t=performance.now();await worldInitialLoad((a,b)=>{playBtn.textContent='SE ÎNCARCĂ ORAȘUL… '+Math.round(a/b*100)+'%';},D.special.arc[0],D.special.arc[1]);(window.__lt=window.__lt||{}).world=Math.round(performance.now()-__t);}
 for(const b of buckets.values())scene.add(b.mesh());scene.add(SB.mesh());

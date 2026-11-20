@@ -39,6 +39,15 @@ ROOF_TILE = [0x9a4b33, 0x8a3f2c, 0xa5583a, 0x6b5a4c, 0x7a4636, 0x4f6e58]
 def hsh(s): return zlib.crc32(s.encode())
 
 # ---------------- buildings ----------------
+def landmark_skips():
+    """Centroids of the footprints that models/landmarks.glb replaces (lm.skip extras), same test as js landmarkSkipped()."""
+    import struct
+    p = os.path.join(os.path.dirname(W), 'models', 'landmarks.glb')
+    if not os.path.exists(p): return []
+    b = open(p, 'rb').read(); n = struct.unpack('<I', b[12:16])[0]
+    return [s for nd in json.loads(b[20:20 + n]).get('nodes', []) for s in json.loads((nd.get('extras') or {}).get('lm', '{}')).get('skip', [])]
+LM_SKIP = landmark_skips()
+print('landmark skips', len(LM_SKIP))
 CH = 2000  # chunk size (m): smaller culls better at street level, more draw calls from the air
 chunks = {}
 nb = 0
@@ -47,6 +56,8 @@ for f in sorted(glob.glob(os.path.join(W, 'packs', '*.json'))):
         ti, tj = map(int, key.split('_'))
         for n, b in enumerate(t.get('b', [])):
             h, minH, style = float(b[0]), float(b[1] or 0), int(b[2])
+            fl = b[4]; n2 = len(fl) // 2
+            if n2 and any(math.hypot(sum(fl[0::2][:n2]) * .1 / n2 - sx, sum(fl[1::2][:n2]) * .1 / n2 - sz) < 2.5 for sx, sz in LM_SKIP): continue  # landmark model
             outer = ring(b[4])
             if len(outer) < 3 or h <= 0: continue
             holes = [r for r in (ring(hh) for hh in (b[5] or [])) if len(r) >= 3]
