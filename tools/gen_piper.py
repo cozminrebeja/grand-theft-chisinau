@@ -47,6 +47,8 @@ def lines():
     cc, ph = js("carcare.js"), js("phone.js")
     for n in ["CC_MECH_HI", "CC_MECH_DONE", "CC_MECH_OK", "CC_MECH_BROKE", "CC_PUMP"]: L += arr(cc, n)
     S = r"'((?:[^'\\]|\\.)*)'"
+    lf = js("life.js")  # street life: every LF_L_* array
+    for n in re.findall(r"const (LF_L_\w+)=", lf): L += arr(lf, n)
     L += re.findall(r"intro_say\('[^']*'," + S, js("intro.js"))
     for pat in [r"sms:" + S, r"ph_say\('[^']*'," + S, r"ph_done\(m,[\w.]+," + S, r"ph_fail\(m," + S]: L += re.findall(pat, ph)
     seen = set(); return [t for t in L if re.search(r"[A-Za-zăâîșțĂÂÎȘȚ]", t) and not (t in seen or seen.add(t))]

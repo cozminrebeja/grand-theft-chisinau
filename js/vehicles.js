@@ -181,7 +181,7 @@ function renderVehicles(dt){dt=dt||0.016;if(!veh_ready)return;
     // ground fit = 4 surface queries: only when the car moved and is close enough to matter (or is the player's)
     if((v._gx!==v.x||v._gz!==v.z||v._gh!==v.h||v.y==null)&&(d2<veh_FAR2*1.2||v.mode==='player'||v.y==null)){veh_ground(v,dt);v._gx=v.x;v._gz=v.z;v._gh=v.h;}
     if(d2>veh_FAR2)continue;
-    veh_qq.setFromEuler(veh_eu.set(-v.pitch,v.h,v.roll));veh_m4.compose(veh_tp.set(v.x,v.y,v.z),veh_qq,veh_one);
+    veh_qq.setFromEuler(veh_eu.set(-v.pitch,v.h,v.roll));veh_m4.compose(veh_tp.set(v.x,v.y+(v.bump||0),v.z),veh_qq,veh_one); // bump: pothole bounce (carcare.js)
     veh_sph.center.set(v.x,v.y+1,v.z);veh_sph.radius=v.spec.len*.6+1;if(!veh_fr.intersectsSphere(veh_sph))continue;
     const near=d2<P.nearR2;
     if(near){if(P.nk<P.near.instanceMatrix.count){P.near.setMatrixAt(P.nk,veh_m4);P.near.setColorAt(P.nk,v.veh_col);P.nk++;}
