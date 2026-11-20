@@ -60,7 +60,9 @@ function collideVehicle(v){let tx=0,tz=0,hit=false,other=null,wall=false;const c
   for(const o of vehicles){if(o===v)continue;const lim=(v.spec.len+o.spec.len)/2+1;if(Math.abs(o.x-v.x)>lim||Math.abs(o.z-v.z)>lim)continue;
     for(const [x,z,r] of cs)for(const [ox,oz,orr] of circles(o)){const dx=x-ox,dz=z-oz,d=Math.hypot(dx,dz),m=r+orr;
       if(d<m&&d>1e-4){const k=(m-d)/d;if(o.mode==='chase'||(o.mode==='parked'&&o.spec.len<7)){tx+=dx*k*.5;tz+=dz*k*.5;o.x-=dx*k*.5;o.z-=dz*k*.5;}else{tx+=dx*k;tz+=dz*k;}hit=true;other=o;}}}
-  if(hit){v.x+=tx;v.z+=tz;const imp=Math.abs(v.speed);if(imp>4){v.speed*=wall?.4:.5;if(v===player.car){shake=Math.min(1,imp/25);if(imp>9)crashSnd(imp);hook('fxEvent','crash',{x:v.x,z:v.z,imp,v});}}else v.speed*=.85;}
+  if(hit){v.x+=tx;v.z+=tz;const imp=Math.abs(v.speed),newCar=!wall&&other!==v.lastHit; // car contact: -10% once per new contact, not per substep/frame while overlapping
+    if(wall||newCar){if(wall)v.speed*=imp>4?.7:.925;else v.speed*=.9;if(imp>4&&v===player.car){shake=Math.min(1,imp/(wall?25:40));if(imp>9)crashSnd(imp);hook('fxEvent','crash',{x:v.x,z:v.z,imp,v});}}}
+  v.lastHit=other;
   v.x=clamp(v.x,BX0,BX1);v.z=clamp(v.z,BZ0,BZ1);return other;}
 
 // ================= input =================
@@ -71,7 +73,7 @@ const LS=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:v;}catch(e
 let mouseSens=+LS('gtc_sens',1),invertY=LS('gtc_inv','0')==='1';
 const locked=()=>document.pointerLockElement===canvas;
 function lockMouse(){if(isTouch||!started)return;try{const p=canvas.requestPointerLock();if(p&&p.catch)p.catch(()=>{});}catch(e){}}
-addEventListener('keydown',e=>{keys[e.code]=true;if(!started)return;if(e.code==='KeyE'||e.code==='KeyF')toggleCar();if(e.code==='KeyH')horn();if(e.code==='KeyC')camMode=(camMode+1)%3;if(e.code==='Space'||e.code.startsWith('Arrow'))e.preventDefault();});
+addEventListener('keydown',e=>{keys[e.code]=true;if(!started)return;if(e.code==='KeyE'||e.code==='KeyF')toggleCar();if(e.code==='KeyH')horn();if(e.code==='KeyC')camMode=(camMode+1)%4;if(e.code==='Space'||e.code.startsWith('Arrow'))e.preventDefault();});
 addEventListener('keyup',e=>{keys[e.code]=false;});
 let drag=null;
 canvas.addEventListener('pointerdown',e=>{if(!isTouch&&started&&!paused){if(!locked())lockMouse();return;}drag={id:e.pointerId,x:e.clientX};});
@@ -87,7 +89,7 @@ joyEl.addEventListener('pointermove',e=>{if(e.pointerId===joy.id)joyMove(e);});
 const joyEnd=e=>{if(e.pointerId===joy.id){joy.id=null;joy.x=joy.y=0;knob.style.transform='';}};joyEl.addEventListener('pointerup',joyEnd);joyEl.addEventListener('pointercancel',joyEnd);
 const btn={brake:false};
 function bindBtn(id,down,up){const el=$(id);el.addEventListener('pointerdown',e=>{e.stopPropagation();el.classList.add('on');down&&down();});const u=()=>{el.classList.remove('on');up&&up();};el.addEventListener('pointerup',u);el.addEventListener('pointercancel',u);el.addEventListener('pointerleave',u);}
-bindBtn('bEnter',()=>toggleCar());bindBtn('bBrake',()=>btn.brake=true,()=>btn.brake=false);bindBtn('bHorn',()=>horn());bindBtn('bCam',()=>camMode=(camMode+1)%3);
+bindBtn('bEnter',()=>toggleCar());bindBtn('bBrake',()=>btn.brake=true,()=>btn.brake=false);bindBtn('bHorn',()=>horn());bindBtn('bCam',()=>camMode=(camMode+1)%4);
 function input(){const k=keys;const t=(k.KeyW||k.ArrowUp?1:0)-(k.KeyS||k.ArrowDown?1:0)+joy.y,s=(k.KeyD||k.ArrowRight?1:0)-(k.KeyA||k.ArrowLeft?1:0)+joy.x;
   return{t:clamp(t,-1,1),s:clamp(s,-1,1),hb:!!k.Space||btn.brake,run:!!(k.ShiftLeft||k.ShiftRight)||Math.hypot(joy.x,joy.y)>.92};}
 
@@ -196,9 +198,11 @@ function drive(v,dt,inp){const sp=v.spec;let max=sp.max;if(v.type==='trolley'){v
    const fx=Math.sin(v.h),fz=Math.cos(v.h),L=Math.max(2,v.spec.len*.5);if(v.y==null)v.y=surfaceY(v.x,v.z,null,fx,fz);v.grade=(surfaceY(v.x+fx*L,v.z+fz*L,v.y,fx,fz)-surfaceY(v.x-fx*L,v.z-fz*L,v.y,fx,fz))/(2*L);
    const k=v.type==='trolley'||v.type==='rutiera'?1.0:.85;v.speed-=9.81*v.grade*k*dt;}
   if(v.speed>max&&t>.05)v.speed-=Math.min(v.speed-max,6*dt);else if(v.speed>max)v.speed-=Math.min(v.speed-max,1.4*dt); // throttle can't exceed max; coasting downhill may (air drag)
-  if(v.speed<-max*.5)v.speed+=Math.min(-max*.5-v.speed,6*dt);if(inp.hb)v.speed-=Math.sign(v.speed)*Math.min(Math.abs(v.speed),13*dt);
-  const turn=sp.turn*Math.min(1,Math.abs(v.speed)/4)*(inp.hb?1.5:1)/(1+Math.abs(v.speed)/32);v.h-=inp.s*turn*dt*(v.speed<0?-1:1);
-  const steps=Math.max(1,Math.ceil(Math.abs(v.speed)*dt/.7));for(let i=0;i<steps;i++){v.x+=Math.sin(v.h)*v.speed*dt/steps;v.z+=Math.cos(v.h)*v.speed*dt/steps;const o=collideVehicle(v);if(o&&Math.abs(v.speed)>3&&o.type==='police')addStar(1);}v.y=surfaceY(v.x,v.z,v.y,Math.sin(v.h),Math.cos(v.h));}
+  if(v.speed<-max*.5)v.speed+=Math.min(-max*.5-v.speed,6*dt);if(inp.hb)v.speed-=Math.sign(v.speed)*Math.min(Math.abs(v.speed),(Math.abs(v.speed)>8?3.5:13)*dt); // drifting bleeds speed slowly; below ~30 km/h Space still brakes to a stop
+  const turn=sp.turn*Math.min(1,Math.abs(v.speed)/4)*(inp.hb?1.8:1)/(1+Math.abs(v.speed)/32);v.h-=inp.s*turn*dt*(v.speed<0?-1:1);
+  // drift: travel direction v.mh trails the body heading v.h; Space drops grip so the tail swings out
+  if(v.mh==null||Math.abs(v.speed)<1)v.mh=v.h;v.mh=lerpAng(v.mh,v.h,1-Math.exp(-(inp.hb?3:9)*dt));v.speed*=1-Math.abs(Math.sin(v.h-v.mh))*.35*dt;
+  const steps=Math.max(1,Math.ceil(Math.abs(v.speed)*dt/.7));for(let i=0;i<steps;i++){v.x+=Math.sin(v.mh)*v.speed*dt/steps;v.z+=Math.cos(v.mh)*v.speed*dt/steps;const o=collideVehicle(v);if(o&&Math.abs(v.speed)>3&&o.type==='police')addStar(1);}v.y=surfaceY(v.x,v.z,v.y,Math.sin(v.h),Math.cos(v.h));}
 function updAI(v,dt){const a=v.ai;let target=Math.min(v.v0,a.e.vmax+(v.type==='taxi'?2:0));
   if(a.stopT>0){a.stopT-=dt;target=0;}
   if(a.kind==='trolley'){const rx=-Math.cos(v.h),rz=Math.sin(v.h);for(const s of stops){const dx=s.px-v.x,dz=s.pz-v.z;if(dx*dx+dz*dz<70&&dx*rx+dz*rz>0&&a.lastStop!==s.i){a.stopT=3.5;a.lastStop=s.i;target=0;}}}
@@ -265,9 +269,14 @@ function updFoot(dt,inp){const fx=Math.sin(camYaw),fz=Math.cos(camYaw),rx=-fz,rz
   {const ns=nearestSeg(player.x,player.z,20);const tgt=ns&&ns.d<ns.s.r.w/2?-.17:0;player.yo=(player.yo||0)+(tgt-(player.yo||0))*Math.min(1,dt*12);}player.y=surfaceY(player.x,player.z,player.y,Math.sin(player.h),Math.cos(player.h));player.m.position.set(player.x,player.y+player.yo,player.z);player.m.rotation.y=player.h;animatePlayer(player.m,player.ph,l>.08?(inp.run?8.5:4.6):0,dt);}
 const camPos=new THREE.Vector3(SPAWN.x,groundY(SPAWN.x,SPAWN.z)+40,SPAWN.z),camTgt=new THREE.Vector3();
 function updCamera(dt){let tx,ty,tz,dist,h;
+  if(player.car&&camMode===3){ // bumper cam: rigid, just ahead of the front bumper, looking down the road (mouse still looks around)
+    const v=player.car,y0=v.y!=null?v.y:groundY(v.x,v.z),o=v.spec.len/2+.15,bx=v.x+Math.sin(v.h)*o,bz=v.z+Math.cos(v.h)*o;
+    if(!drag&&performance.now()-mouseT>1500)lookOff*=Math.exp(-1.6*dt);camYaw=v.h+lookOff;const ax=bx+Math.sin(camYaw)*20,az=bz+Math.cos(camYaw)*20;
+    camPos.set(bx,y0+.75,bz);camTgt.set(ax,surfaceY(ax,az,y0)+.75,az);camera.position.copy(camPos);}
+  else{
   if(player.car){const v=player.car;tx=v.x;tz=v.z;ty=(v.y!=null?v.y:groundY(tx,tz))+(v.type==='trolley'?2.6:1.3);if(!drag&&performance.now()-mouseT>1500){lookOff*=Math.exp(-1.6*dt);camPitch+=(.12-camPitch)*(1-Math.exp(-1.2*dt));}camYaw=lerpAng(camYaw,v.h+lookOff+(v.speed<-3?Math.PI:0),1-Math.exp(-4*dt));
-    dist=v.spec.cam*[1,1.5,.72][camMode];h=v.spec.camH*[1,1.7,.72][camMode];}
-  else{tx=player.x;tz=player.z;ty=(player.y!=null?player.y:groundY(tx,tz))+(player.yo||0)+1.6;dist=[6.5,10,4][camMode];h=[2.4,4.5,1.4][camMode];}
+    dist=v.spec.cam*[1,1.5,.72][camMode%3];h=v.spec.camH*[1,1.7,.72][camMode%3];}
+  else{tx=player.x;tz=player.z;ty=(player.y!=null?player.y:groundY(tx,tz))+(player.yo||0)+1.6;dist=[6.5,10,4][camMode%3];h=[2.4,4.5,1.4][camMode%3];}
   h=Math.max(.5,h+camPitch*dist*.9-.12*dist*.9);dist*=1-Math.max(0,camPitch-.5)*.35;
   const fx=Math.sin(camYaw),fz=Math.cos(camYaw);let dx=-fx*dist,dz=-fz*dist;
   for(let k=1;k<=10;k++){if(solidAtAbs(tx+dx*k/10,tz+dz*k/10,ty+h*k/10)){const f=Math.max(.15,(k-1.5)/10);dx*=f;dz*=f;break;}}
@@ -275,9 +284,10 @@ function updCamera(dt){let tx,ty,tz,dist,h;
   let cy=ty+h;for(let k=1;k<=8;k++){const px=tx+dx*k/8,pz=tz+dz*k/8;const gy=groundY(px,pz)+1.1;const lineY=ty+h*k/8;if(gy>lineY)cy=Math.max(cy,ty+(gy-ty)*8/k);}
   cy=Math.max(cy,groundY(tx+dx,tz+dz)+1.2);
   const ahead=surfaceY(tx+fx*8,tz+fz*8,ty)-surfaceY(tx,tz,ty); // look a bit up/down the slope ahead
-  camPos.lerp(_pos.set(tx+dx,cy,tz+dz),1-Math.exp(-10*dt));{const gmin=Math.max(groundY(camPos.x,camPos.z),surfaceY(camPos.x,camPos.z,camPos.y))+.9;if(camPos.y<gmin)camPos.y=gmin;}camTgt.set(tx+fx*2,ty+clamp(ahead,-6,6)*.35,tz+fz*2);camera.position.copy(camPos);
+  const lead=player.car?player.car.speed/10:0; // ponytail: cancels the lerp's steady-state lag (v/k); without it the camera drifts ~4 m further back at 135 km/h
+  camPos.lerp(_pos.set(tx+dx+Math.sin(player.car?player.car.mh:0)*lead,cy,tz+dz+Math.cos(player.car?player.car.mh:0)*lead),1-Math.exp(-10*dt));{const gmin=Math.max(groundY(camPos.x,camPos.z),surfaceY(camPos.x,camPos.z,camPos.y))+.9;if(camPos.y<gmin)camPos.y=gmin;}camTgt.set(tx+fx*2,ty+clamp(ahead,-6,6)*.35,tz+fz*2);camera.position.copy(camPos);}
   if(shake>0){camera.position.x+=(Math.random()-.5)*shake;camera.position.y+=(Math.random()-.5)*shake;shake=Math.max(0,shake-dt*2.5);}
-  camera.lookAt(camTgt);if(window.__dbg&&__dbg.camOverride){const o=__dbg.camOverride;camera.position.set(o[0],o[1],o[2]);camera.lookAt(o[3],o[4],o[5]);}const spd=player.car?Math.abs(player.car.speed):0,fov=62+Math.min(14,spd*.35);if(Math.abs(camera.fov-fov)>.1){camera.fov+=(fov-camera.fov)*.1;camera.updateProjectionMatrix();}
+  camera.lookAt(camTgt);if(window.__dbg&&__dbg.camOverride){const o=__dbg.camOverride;camera.position.set(o[0],o[1],o[2]);camera.lookAt(o[3],o[4],o[5]);}const spd=player.car?Math.abs(player.car.speed):0,fov=62+Math.min(20,spd*.5);if(Math.abs(camera.fov-fov)>.1){camera.fov+=(fov-camera.fov)*(1-Math.exp(-6*dt));camera.updateProjectionMatrix();} // 60 km/h → 70°, 135 km/h → 81°
   envUpdate(dt);}
 let hudCache={},streetT=0;
 const setH=(id,v)=>{if(hudCache[id]!==v){hudCache[id]=v;$(id).innerHTML=v;}};
@@ -410,7 +420,7 @@ await progress('JOACĂ');playBtn.disabled=false;
 let last=performance.now(),titleT=0,parkT=0,mapT=0;
 // frame cap (pause menu → Setări): renders at most fpsCap frames/s; 0 = unlimited (monitor refresh rate)
 let fpsCap=+LS('gtc_fps',60);const fpsEl=/[?&]fps/.test(location.search)?Object.assign(document.body.appendChild(document.createElement('div')),{style:'position:fixed;left:8px;bottom:8px;z-index:40;font:700 12px monospace;color:#7dff8a;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:5px;pointer-events:none'}):null;let fpsN=0,fpsT=0,fpsWorst=0;
-function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsCap*.8)return;const dt=Math.min(.05,(now-last)/1000);
+function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsCap*.8)return;const dt=Math.min(.1,(now-last)/1000); // ponytail: clamp only stalls; at .05 anything under 20 fps ran in slow motion while the speedo read true
   if(fpsEl){fpsN++;fpsT+=now-last;fpsWorst=Math.max(fpsWorst,now-last);if(fpsT>=500){const r=__dbg.renderer.info.render;fpsEl.textContent=Math.round(fpsN*1000/fpsT)+' fps · worst '+Math.round(fpsWorst)+' ms · '+r.calls+' draws · '+Math.round(r.triangles/1000)+'k tris';fpsN=fpsT=fpsWorst=0;}}
   last=now;
   if(!paused){for(const v of vehicles)if(v.mode==='ai')updAI(v,dt);

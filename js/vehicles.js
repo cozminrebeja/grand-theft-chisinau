@@ -506,7 +506,8 @@ const SPEC={
   police:{model:'police',max:45,acc:12.5,brake:27,turn:2.15,cam:8.8,camH:3.1,name:'Poliția'},
   trolley:{model:null,max:19,acc:3.8,brake:10,turn:.95,cam:17,camH:6,name:'Troleibuz',len:12,wid:2.55},
 };
-for(const k in SPEC){const s=SPEC[k];if(s.model){const d=veh_DEFS[s.model];s.len=d.L;s.wid=d.W;}}
+for(const k in SPEC){const s=SPEC[k];s.max*=1.5;s.acc*=1.5; // player-driven top speed & pull +50% (AI/chase use their own speeds)
+  if(s.model){const d=veh_DEFS[s.model];s.len=d.L;s.wid=d.W;}}
 const veh_PAINTS={yaris:[0xc9ccd0,0x1f1f22,0xb51d24,0x2a4f8a,0xe8e8e6,0x6b6e72,0x8a9a5b],logan:[0xe8e8e6,0x8d9298,0x2b2d31,0x7a1c20,0x23395c,0x5d6b55,0xb7a98a,0x3d4a5c],
   lada:[0xf1efe4,0xb94a32,0x2d5b3a,0x55224a,0xd8c48d,0x3b6aa3,0x8a8f7a,0x6e1f22],suv:[0xe8e8e6,0x2b2d31,0x8d9298,0x5a1f24,0x39465a,0x6f7a63],sprinter:[0xf4f4f2,0xeeeeea,0xf3f1ea],police:[0xf7f7f7]};
 const vehicles=[];
