@@ -109,8 +109,8 @@ function engineUpdate(){if(!eng)return;const v=player.car,t=AC.currentTime;if(!v
 let money=50,stars=0,starCool=0,bustT=0,bustShow=0,mission=null,missionCD=2,lastStation=-1,msgT=0;
 if(SAVE&&isFinite(SAVE.money))money=Math.max(0,Math.round(SAVE.money));
 let saveOff=false,saveT=4;
-function saveGame(){if(saveOff||!started)return;const v=player.car;
-  try{localStorage.setItem(SAVE_K,JSON.stringify({v:1,x:+player.x.toFixed(1),z:+player.z.toFixed(1),h:+player.h.toFixed(3),money,car:v?v.type:null,paint:v&&v.paint!=null?v.paint:null,t:Date.now()}));}catch(e){}}
+function saveGame(){if(saveOff||!started)return;const v=player.car,sp=hook('storeSavePos')||player;
+  try{localStorage.setItem(SAVE_K,JSON.stringify({v:1,x:+sp.x.toFixed(1),z:+sp.z.toFixed(1),h:+sp.h.toFixed(3),money,car:v?v.type:null,paint:v&&v.paint!=null?v.paint:null,t:Date.now()}));}catch(e){}}
 addEventListener('pagehide',saveGame);document.addEventListener('visibilitychange',()=>{if(document.hidden)saveGame();});
 function say(t,sub='',dur=2.6,color='#fff'){const m=$('msg');m.innerHTML=t+(sub?`<small>${sub}</small>`:'');m.style.color=color;m.style.opacity=1;msgT=dur;}
 function addStar(n=1){const was=stars;stars=Math.min(4,stars+n);starCool=0;if(stars!==was)hook('fxEvent','wanted',{stars});if(stars>was)say(stars===1?'Ești căutat!':'Nivel căutare: '+stars,'Poliția te urmărește',2,'#ffd23f');}
@@ -173,7 +173,7 @@ const DISTRICTS=(D.districts||[]).map(([name,flat])=>{const ring=dec(flat);let x
 function districtAt(x,z){for(const d of DISTRICTS)if(x>=d.x0&&x<=d.x1&&z>=d.z0&&z<=d.z1&&pip(x,z,d.ring))return d.name;return null;}
 
 // ================= enter / exit =================
-function toggleCar(){
+function toggleCar(){if(hook('storeInside'))return;
   if(player.mode==='foot'){let best=null,bd=1e9;for(const v of vehicles){if(Math.abs(v.x-player.x)>10||Math.abs(v.z-player.z)>10)continue;const d=segDist(v,player.x,player.z)-v.spec.wid/2;if(d<bd){bd=d;best=v;}}
     if(!best||bd>2.6)return;const v=best;
     if(v.driver){const p=peds.reduce((a,b)=>Math.hypot(b.x-player.x,b.z-player.z)>Math.hypot(a.x-player.x,a.z-player.z)?b:a);p.a.x=v.x+Math.cos(v.h)*2;p.a.z=v.z-Math.sin(v.h)*2;p.x=p.a.x;p.z=p.a.z;p.flee=4;
@@ -233,7 +233,7 @@ function updWanted(dt){const chasers=vehicles.filter(v=>v.mode==='chase');
     const near=chasers.some(v=>Math.hypot(v.x-player.x,v.z-player.z)<60);starCool=near?0:starCool+dt;
     if(starCool>14){stars--;starCool=0;hook('fxEvent','wanted',{stars});say(stars?'Nivel căutare: '+stars:'Ai scăpat!',stars?'':'Poliția a pierdut urma',2,'#7dff8a');}
     const slow=player.mode==='foot'||Math.abs(player.car.speed)<2.5;const close=chasers.some(v=>(player.car?segDist(player.car,v.x,v.z):Math.hypot(v.x-player.x,v.z-player.z))<4.6);
-    bustT=slow&&close?bustT+dt:Math.max(0,bustT-dt);if(bustT>2.4)busted();}
+    bustT=slow&&close&&!hook('storeInside')?bustT+dt:Math.max(0,bustT-dt);if(bustT>2.4)busted();}
   else{for(const v of chasers){v.mode='parked';v.speed=0;}
     for(const v of vehicles.slice())if(v.type==='police'&&v.mode==='parked'&&Math.hypot(v.x-player.x,v.z-player.z)>200)removeVehicle(v);}}
 // arrest respawn points: Arc + well-known POIs spread across the city (≥1.3 km apart); you're released at the nearest one
@@ -359,6 +359,8 @@ function updTrolleyStation(){const v=player.car;if(!v||v.type!=='trolley'||Math.
 
 function v_steerTrack(dt,inp){for(const v of vehicles){if(v===player.car)v.steer=inp.s;else{const h0=v._ph==null?v.h:v._ph;v.steer=clamp(-angDiff(v.h,h0)/Math.max(dt,1e-3)/1.5,-1,1);}v._ph=v.h;}}
 // ================= main loop =================
+// small API for side modules (Linella store interior)
+window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v}};
 await progress('JOACĂ');playBtn.disabled=false;
 let last=performance.now(),titleT=0,parkT=0;
 function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last)/1000);last=now;
@@ -366,9 +368,9 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
   updPeds(dt);}
   if(paused){}
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
-  else{const inp=input();window.gtcInput=inp;if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
+  else{const inp=input();window.gtcInput=inp;const inStore=player.mode==='foot'&&hook('storeUpdate',dt,inp);if(inStore){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();updCamera(dt);updHUD(dt);drawMap();engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);drawMap();engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);

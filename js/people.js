@@ -328,7 +328,7 @@ function renderPed(p,dt){const o=p.pplO,sp=p.moveSpeed||0;
   ppl_bm.compose(ppl_pos.set(bx,ppl_sy(bx,bz,gy,phx,phz)+PPL_Y+.02,bz),ppl_qn,ppl_scl.set(.75,1,bs));ppl_blobs.setMatrixAt(p.i,ppl_bm);}
 function renderPedsCommit(){ppl_time=performance.now()/1000;while(ppl_hiTop>0&&!ppl_hiUsed[ppl_hiTop-1])ppl_hiTop--;for(let j=0;j<7;j++){const m=ppl_HISET[j];m.count=PPL_DOUBLE[j]?PPL_NEAR+ppl_hiTop:ppl_hiTop;}for(const m of ppl_MESHES)m.instanceMatrix.needsUpdate=true;ppl_blobs.instanceMatrix.needsUpdate=true;
   // idle passengers waiting for the taxi wave their arm
-  for(let k=ppl_groups.length-1;k>=0;k--){const g=ppl_groups[k];if(!g.parent){ppl_groups.splice(k,1);continue;}if(g.userData.hero)continue;
+  for(let k=ppl_groups.length-1;k>=0;k--){const g=ppl_groups[k];if(!g.parent){ppl_groups.splice(k,1);continue;}if(g.userData.hero||g.userData.own)continue;
     ppl_poseGroup(g,{t:0,k:0,run:0,fall:0,time:ppl_time,look:0,phoneL:false,wave:true});}}
 
 // ---------- player / passenger groups ----------
