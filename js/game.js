@@ -400,13 +400,36 @@ function pmSync(){$('pmSens').value=mouseSens;$('pmSensV').textContent=mouseSens
 for(const b of $('pmFps').querySelectorAll('button'))b.addEventListener('click',()=>{fpsCap=+b.dataset.f;LSset('gtc_fps',fpsCap);pmSync();});
 $('pmResume').addEventListener('click',resumeGame);
 $('pmMap').addEventListener('click',()=>{pmEl.classList.remove('on');paused=false;suppressMenu=true;openBigMap();});
-$('pmSetBtn').addEventListener('click',()=>$('pmSet').classList.toggle('on'));
-$('pmKeysBtn').addEventListener('click',()=>$('pmKeys').classList.toggle('on'));
 $('pmSens').addEventListener('input',e=>{mouseSens=+e.target.value;LSset('gtc_sens',mouseSens);$('pmSensV').textContent=mouseSens.toFixed(2);});
 $('pmInv').addEventListener('change',e=>{invertY=e.target.checked;LSset('gtc_inv',invertY?'1':'0');});
 $('pmSndOn').addEventListener('click',()=>{if(typeof fx_setMute==='function')fx_setMute(false);pmSync();});
 $('pmSndOff').addEventListener('click',()=>{if(typeof fx_setMute==='function')fx_setMute(true);pmSync();});
 for(const b of $('pmQ').querySelectorAll('button'))b.addEventListener('click',()=>{LSset('gtc_q',b.dataset.q);location.hash=b.dataset.q;location.reload();});
+// settings screen (splash SETTINGS / pause ⚙): each .seg row shows its .on button and steps through the hidden buttons, so the handlers above stay the only logic
+const stEl=$('settings');let stSel=0;
+const stRows=()=>[...stEl.querySelectorAll('.pg.on .row')];
+for(const s of stEl.querySelectorAll('.seg'))s.insertAdjacentHTML('afterbegin',s.classList.contains('tog')?'<span class="v"></span><i class="sw"></i>':'<span class="v"></span><span class="n"></span><i class="ar" data-d="-1"></i><i class="ar" data-d="1"></i>');
+function stPaint(){for(const s of stEl.querySelectorAll('.seg')){const bs=[...s.querySelectorAll('button')],i=bs.findIndex(b=>b.classList.contains('on')),n=s.querySelector('.n');
+    s.querySelector('.v').textContent=i<0?'':bs[i].textContent;if(n)n.innerHTML=(i+1)+'<em> / '+bs.length+'</em>';s.classList.toggle('is-on',i===0);}
+  const r=stRows();stSel=clamp(stSel,0,r.length-1);r.forEach((e,i)=>e.classList.toggle('sel',i===stSel));$('stN').innerHTML=r.length?(stSel+1)+'<em> / '+r.length+'</em>':'';}
+function stStep(row,d){const s=row.querySelector('.seg'),rg=row.querySelector('input[type=range]'),cb=row.querySelector('.sw');
+  if(s){const bs=[...s.querySelectorAll('button')],i=Math.max(0,bs.findIndex(b=>b.classList.contains('on')));bs[(i+d+bs.length)%bs.length].click();}
+  else if(rg){d>0?rg.stepUp(5):rg.stepDown(5);rg.dispatchEvent(new Event('input'));}
+  else if(cb)cb.click();
+  stPaint();}
+function openSettings(){pmSync();stEl.classList.add('on');stPaint();}
+const closeSettings=()=>stEl.classList.remove('on');
+$('pmSetBtn').addEventListener('click',openSettings);$('setBtn').addEventListener('click',openSettings);$('stBack').addEventListener('click',closeSettings);
+$('stTabs').addEventListener('click',e=>{const t=e.target.dataset.t;if(!t)return;for(const el of stEl.querySelectorAll('[data-t]'))el.classList.toggle('on',el.dataset.t===t);stSel=0;stPaint();});
+stEl.addEventListener('click',e=>{const row=e.target.closest('.row');if(row&&row.querySelector('.seg')&&e.target.tagName!=='BUTTON')stStep(row,+(e.target.dataset.d||1));});
+stEl.addEventListener('pointerover',e=>{const i=stRows().indexOf(e.target.closest('.row'));if(i>=0&&i!==stSel){stSel=i;stPaint();}});
+addEventListener('keydown',e=>{if(!stEl.classList.contains('on'))return;e.stopImmediatePropagation();   // capture: the game never sees keys while settings are open
+  const r=stRows();
+  if(e.code==='Escape'||e.code==='Backspace')closeSettings();
+  else if(e.code==='ArrowDown'||e.code==='ArrowUp'){if(!r.length)return;stSel=(stSel+(e.code==='ArrowDown'?1:-1)+r.length)%r.length;stPaint();r[stSel].scrollIntoView({block:'nearest'});}
+  else if((e.code==='ArrowLeft'||e.code==='ArrowRight')&&r[stSel])stStep(r[stSel],e.code==='ArrowRight'?1:-1);
+  else return;
+  e.preventDefault();},true);
 $('pmRestart').addEventListener('click',()=>{saveOff=true;try{localStorage.removeItem(SAVE_K);}catch(e){}location.reload();});
 addEventListener('resize',()=>{if(FM.on)fmDraw();});
 function updPoles(v,dt){const up=v.mode==='ai'||(v.mode==='player'?v.wire:false);for(const p of v.poles)p.rotation.x+=((up?.33:.04)-p.rotation.x)*Math.min(1,dt*4);}
@@ -417,7 +440,7 @@ function v_steerTrack(dt,inp){for(const v of vehicles){if(v===player.car)v.steer
 // ================= main loop =================
 // small API for side modules (Linella store interior)
 window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v},set shake(v){shake=Math.max(shake,v)},get stars(){return stars},get taxiMission(){return !!mission&&mission.stage==='drop'},cancelTaxi:()=>{if(mission)endMission();},gps:(x,z)=>gpsSet(x,z),gpsOff:()=>gpsClear()};
-await progress('JOACĂ');playBtn.disabled=false;
+await progress('PLAY');playBtn.disabled=false;$('setBtn').disabled=false;
 let last=performance.now(),titleT=0,parkT=0,mapT=0;
 // frame cap (pause menu → Setări): renders at most fpsCap frames/s; 0 = unlimited (monitor refresh rate)
 let fpsCap=+LS('gtc_fps',60);const fpsEl=/[?&]fps/.test(location.search)?Object.assign(document.body.appendChild(document.createElement('div')),{style:'position:fixed;left:8px;bottom:8px;z-index:40;font:700 12px monospace;color:#7dff8a;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:5px;pointer-events:none'}):null;let fpsN=0,fpsT=0,fpsWorst=0;

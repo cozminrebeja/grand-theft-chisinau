@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Grand Theft Chișinău</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 html,body{margin:0;height:100%;overflow:hidden;background:#0b0d10;font-family:Inter,system-ui,sans-serif;color:#fff;touch-action:none}
@@ -37,18 +37,47 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
 #busted{inset:0;display:flex;align-items:center;justify-content:center;font:400 72px Anton;color:#ff3b3b;background:rgba(10,0,0,.45);opacity:0;letter-spacing:3px}
 #osm{right:8px;bottom:calc(4px + env(safe-area-inset-bottom));font:600 9px Inter;opacity:.6;pointer-events:auto}
 #osm a{color:#fff}
-#title{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(6,10,20,.2),rgba(6,10,20,.85));z-index:10;padding:24px;text-align:center}
-#title h1{font:400 clamp(44px,11vw,96px)/0.92 Anton;margin:0;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#ffe27a 55%,#ff9d2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #1a1208) drop-shadow(0 10px 20px rgba(0,0,0,.6))}
-#title h1 span{display:block;font-size:.62em;letter-spacing:6px}
-#title .flag{display:flex;width:64px;height:6px;margin:16px auto 10px;border-radius:3px;overflow:hidden}
-#title .flag i{flex:1}
-#title p{max-width:440px;opacity:.85;font-size:14px;line-height:1.5;margin:6px 0}
-#play{pointer-events:auto;margin-top:22px;font:400 26px Anton;letter-spacing:2px;padding:14px 46px;border:0;border-radius:40px;background:#ffd23f;color:#1a1305;cursor:pointer;box-shadow:0 6px 0 #a7801a,0 10px 30px rgba(255,210,63,.35)}
-#play:disabled{background:#6b6b6b;color:#ddd;box-shadow:none;cursor:wait;font-size:18px}
-#play:active{transform:translateY(3px)}
-#qsel{margin-top:16px;font:700 12px Inter;opacity:.85}#qsel button{pointer-events:auto;cursor:pointer;margin-left:6px;font:700 12px Inter;padding:6px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.3);color:#fff}#qsel button.on{background:#ffd23f;color:#1a1305;border-color:#ffd23f}
-.keys{font-size:12px;opacity:.7;margin-top:18px;line-height:1.7}
-.keys b{background:rgba(255,255,255,.15);padding:1px 6px;border-radius:4px;font-weight:700}
+/* splash (Figma "Untitled" 1:155, 1954×1099 frame) */
+#title{position:fixed;inset:0;z-index:10;background:linear-gradient(90deg,#000,rgba(0,0,0,0) 50%),url(assets/splash/bg.jpg) center/cover #000}
+#title .crest{position:absolute;left:4.35vw;top:6.6vh;height:clamp(140px,28.1vh,309px);aspect-ratio:245.377/309}
+#title .crest img{position:absolute;left:0;top:0;width:100%}
+#title .crest .lg{left:17.51%;top:28.32%;width:49.31%}
+#title .menu{position:absolute;left:4.3vw;bottom:10.2vh;display:flex;flex-direction:column;align-items:flex-start;gap:1.2vh}
+#title .menu button{pointer-events:auto;font:400 clamp(32px,5.82vh,64px)/normal Inter;color:rgba(255,255,255,.5);background:none;border:0;padding:0;cursor:pointer;text-align:left;transition:color .15s}
+#title .menu:not(:hover) #play,#title .menu button:hover,#title .menu button:focus-visible{color:#fff;outline:0}
+#title #play:disabled{cursor:wait;font-size:clamp(14px,2vh,22px);letter-spacing:.5px}
+#title #setBtn:disabled{cursor:wait;color:rgba(255,255,255,.25)}
+/* settings screen */
+#settings{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;padding:clamp(20px,5vh,56px) clamp(16px,3.4vw,64px) clamp(14px,3vh,36px);background:radial-gradient(120% 90% at 100% 0%,#8a4a84 0%,rgba(138,74,132,0) 60%),linear-gradient(180deg,#6b3d70,#432a52);font-family:Inter}
+#settings.on{display:flex}
+#settings h2{font:400 clamp(30px,4.6vh,46px)/1 Anton;letter-spacing:1px;margin:0 0 clamp(14px,2.6vh,26px)}
+#stTabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:clamp(18px,6vh,70px);flex:none}
+#stTabs button{flex:none;font:400 clamp(17px,2.4vh,24px)/1 Anton;letter-spacing:1px;color:#fff;padding:9px 28px;border:0;background:rgba(255,255,255,.14);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);cursor:pointer}
+#stTabs button:hover{background:rgba(255,255,255,.24)}
+#stTabs button.on{background:#fff;color:#111}
+#settings .pgs{flex:1;min-height:0;overflow-y:auto;padding-right:18px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.35) transparent}
+#settings .pg{display:none}#settings .pg.on{display:block}
+#settings .row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:clamp(52px,7.4vh,68px);padding:0 clamp(12px,2.4vw,34px);border-bottom:1px solid rgba(255,255,255,.18);font:500 clamp(16px,2.4vh,23px) Inter;cursor:pointer}
+#settings .row.sel{background:linear-gradient(90deg,#fff 45%,rgba(255,255,255,.28));color:#1c1222;border-color:transparent}
+#settings .seg,#settings .ctl{display:flex;align-items:center;white-space:nowrap}
+#settings .seg button{display:none}
+#settings .v{margin-right:clamp(16px,3vw,44px)}
+#settings .n{margin-right:clamp(16px,3vw,52px)}
+#settings .n em,#stN em{font-style:normal;opacity:.45}
+#settings .ar{width:clamp(30px,3.6vw,52px);height:40px;display:inline-flex;align-items:center;justify-content:center}
+#settings .ar::before{content:'';width:11px;height:11px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(2px) rotate(45deg)}
+#settings .ar[data-d="1"]::before{transform:translateX(-2px) rotate(-135deg)}
+#settings .sw{appearance:none;-webkit-appearance:none;margin:0 6px 0 0;position:relative;width:62px;height:31px;flex:none;border:2px solid currentColor;border-radius:16px;background:rgba(255,255,255,.12);cursor:pointer;transition:background .15s}
+#settings .sw::after{content:'';position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(28,18,34,.75);transition:left .15s}
+#settings input.sw:checked,#settings .seg.is-on .sw{background:#fff}
+#settings input.sw:checked::after,#settings .seg.is-on .sw::after{left:34px;background:#6b3d70;box-shadow:none}
+#settings .cv::before{content:'Off'}#settings .row:has(.sw:checked) .cv::before{content:'On'}
+#settings input[type=range]{width:min(260px,28vw);accent-color:#fff;cursor:pointer}
+#settings .row.sel input[type=range]{accent-color:#6b3d70}
+#settings .kk b{display:inline-block;border:1.5px solid currentColor;border-radius:6px;padding:1px 9px;margin-left:6px;font:700 .78em Inter}
+#stFoot{display:flex;justify-content:space-between;align-items:center;padding-top:clamp(12px,3vh,36px);flex:none;font:500 clamp(22px,3.2vh,34px) Inter;text-shadow:0 2px 4px rgba(0,0,0,.35)}
+#stBack{font:600 15px Inter;color:#fff;background:none;border:0;cursor:pointer;opacity:.85}#stBack:hover{opacity:1}
+#stBack b{border:1.5px solid #fff;border-radius:6px;padding:2px 8px;margin-right:8px}
 #touch{position:fixed;inset:0;pointer-events:none;display:none;z-index:5}
 #joy{position:absolute;left:calc(22px + env(safe-area-inset-left));bottom:calc(26px + env(safe-area-inset-bottom));width:138px;height:138px;border-radius:50%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);pointer-events:auto;touch-action:none}
 #knob{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(255,255,255,.55)}
@@ -71,14 +100,6 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
 #pause .mb{display:block;width:100%;margin:8px 0;padding:13px 16px;font:400 22px Anton;letter-spacing:1.5px;border:0;border-radius:10px;cursor:pointer;background:rgba(255,255,255,.08);color:#fff;text-align:left;transition:background .15s,transform .15s}
 #pause .mb:hover{background:#ffd23f;color:#1a1305;transform:translateX(6px)}
 #pause .mb.primary{background:#ffd23f;color:#1a1305}
-#pause .set{display:none;text-align:left;background:rgba(255,255,255,.06);border-radius:10px;padding:14px 16px;margin:8px 0;font:600 13px Inter}
-#pause .set.on{display:block}
-#pause .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0}
-#pause .row input[type=range]{flex:1;accent-color:#ffd23f}
-#pause .seg button{font:700 12px Inter;padding:6px 10px;margin-left:4px;border-radius:12px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer}
-#pause .seg button.on{background:#ffd23f;color:#1a1305;border-color:#ffd23f}
-#pause .keysl{font:500 12px/1.9 Inter;opacity:.85}
-#pause .keysl b{background:rgba(255,255,255,.15);padding:1px 6px;border-radius:4px}
 #lockhint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;font:700 14px Inter;background:rgba(0,0,0,.55);padding:10px 16px;border-radius:22px;display:none;pointer-events:none}
 </style>
 </head>
@@ -106,52 +127,73 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
   <button class="mb primary" id="pmResume">▶ Continuă</button>
   <button class="mb" id="pmMap">🗺 Hartă</button>
   <button class="mb" id="pmSetBtn">⚙ Setări</button>
-  <div class="set" id="pmSet">
-    <div class="row">Sensibilitate mouse <input type="range" id="pmSens" min="0.2" max="3" step="0.05"> <span id="pmSensV"></span></div>
-    <div class="row">Inversează axa Y <input type="checkbox" id="pmInv"></div>
-    <div class="row">Sunet <span class="seg"><button id="pmSndOn">Pornit</button><button id="pmSndOff">Oprit</button></span></div>
-    <div class="row">Radio <span class="seg"><button id="pmRadOn">Pornit</button><button id="pmRadOff">Oprit</button></span></div>
-    <div class="row">Volum muzică <input type="range" id="pmRadVol" min="0" max="100" step="1"> <span id="pmRadVolV"></span></div>
-    <div class="row">Limită FPS <span class="seg" id="pmFps"><button data-f="30">30</button><button data-f="60">60</button><button data-f="0">Fără</button></span></div>
-    <div class="row">Grafică <span class="seg" id="pmQ"><button data-q="med">Medie</button><button data-q="high">Înaltă</button><button data-q="ultra">Ultra</button></span></div>
-  </div>
-  <button class="mb" id="pmKeysBtn">⌨ Controale</button>
-  <div class="set" id="pmKeys"><div class="keysl"><b>Mouse</b> privește · <b>WASD</b> mers / condus · <b>Shift</b> fugi · <b>Space</b> frână de mână<br><b>E</b> intră / ieși · <b>H</b> claxon · <b>C</b> cameră · <b>Tab</b> hartă · <b>M</b> sunet · <b>R</b> muzică · <b>−/+</b> volum · <b>Q</b> radio (ține apăsat: roata) · <b>Esc</b> meniu</div></div>
-  <button class="mb" id="pmRestart">↻ Joc nou (șterge salvarea)</button>
+<button class="mb" id="pmRestart">↻ Joc nou (șterge salvarea)</button>
 </div></div>
 <div id="lockhint">Click pentru a controla camera</div>
 <div id="title">
-  <h1>Grand Theft<span>Chișinău</span></h1>
-  <div class="flag"><i style="background:#0046ae"></i><i style="background:#ffd200"></i><i style="background:#cc092f"></i></div>
-  <p>Centrul real al Chișinăului — fiecare stradă, clădire și fir de troleibuz, după OpenStreetMap. Fură un taxi, deturnează un troleibuz pe Ștefan cel Mare și fugi de poliție.</p>
-  <button id="play" disabled>SE ÎNCARCĂ…</button>
-  <div id="qsel">Grafică: <button data-q="med">Medie</button><button data-q="high">Înaltă</button><button data-q="ultra">Ultra</button></div>
-  <div class="keys" id="keys"><b>WASD</b> / săgeți — mers / condus &nbsp; <b>E</b> — intră / ieși<br><b>Space</b> — frână de mână &nbsp; <b>Shift</b> — fugi &nbsp; <b>H</b> — claxon &nbsp; <b>C</b> — cameră &nbsp; mouse — privește · <b>Esc</b> — meniu</div>
+  <div class="crest"><img src="assets/splash/crest.svg" alt=""><img class="lg" src="assets/splash/logo.svg" alt="Grand Theft Chișinău"></div>
+  <nav class="menu"><button id="play" disabled>SE ÎNCARCĂ…</button><button id="setBtn" disabled>SETTINGS</button></nav>
+</div>
+<div id="settings">
+  <h2>SETTINGS</h2>
+  <nav id="stTabs"><button class="on" data-t="gp">GAMEPLAY</button><button data-t="dp">DISPLAY</button><button data-t="au">AUDIO</button><button data-t="ct">CONTROLS</button></nav>
+  <div class="pgs">
+    <div class="pg on" data-t="gp">
+      <div class="row"><span>Mouse Sensitivity</span><span class="ctl"><span class="v" id="pmSensV"></span><input type="range" id="pmSens" min="0.2" max="3" step="0.05"></span></div>
+      <label class="row"><span>Invert Y Axis</span><span class="ctl"><span class="v cv"></span><input type="checkbox" class="sw" id="pmInv"></span></label>
+    </div>
+    <div class="pg" data-t="dp">
+      <div class="row"><span>Graphics</span><span class="seg" id="pmQ"><button data-q="med">Medium</button><button data-q="high">High</button><button data-q="ultra">Ultra</button></span></div>
+      <div class="row"><span>FPS Limit</span><span class="seg" id="pmFps"><button data-f="30">30</button><button data-f="60">60</button><button data-f="0">Unlimited</button></span></div>
+    </div>
+    <div class="pg" data-t="au">
+      <div class="row"><span>Sound</span><span class="seg tog"><button id="pmSndOn">On</button><button id="pmSndOff">Off</button></span></div>
+      <div class="row"><span>Radio</span><span class="seg tog"><button id="pmRadOn">On</button><button id="pmRadOff">Off</button></span></div>
+      <div class="row"><span>Music Volume</span><span class="ctl"><span class="v" id="pmRadVolV"></span><input type="range" id="pmRadVol" min="0" max="100" step="1"></span></div>
+    </div>
+    <div class="pg kk" data-t="ct" id="keys">
+      <div class="row"><span>Look around</span><span><b>Mouse</b></span></div>
+      <div class="row"><span>Walk / drive</span><span><b>W</b><b>A</b><b>S</b><b>D</b></span></div>
+      <div class="row"><span>Run</span><span><b>Shift</b></span></div>
+      <div class="row"><span>Handbrake</span><span><b>Space</b></span></div>
+      <div class="row"><span>Enter / exit vehicle</span><span><b>E</b></span></div>
+      <div class="row"><span>Horn</span><span><b>H</b></span></div>
+      <div class="row"><span>Camera</span><span><b>C</b></span></div>
+      <div class="row"><span>Map</span><span><b>Tab</b></span></div>
+      <div class="row"><span>Phone</span><span><b>P</b></span></div>
+      <div class="row"><span>Radio (hold for wheel)</span><span><b>Q</b></span></div>
+      <div class="row"><span>Music on / off</span><span><b>R</b></span></div>
+      <div class="row"><span>Sound on / off</span><span><b>M</b></span></div>
+      <div class="row"><span>Volume</span><span><b>−</b><b>+</b></span></div>
+      <div class="row"><span>Menu</span><span><b>Esc</b></span></div>
+    </div>
+  </div>
+  <div id="stFoot"><span id="stN"></span><button id="stBack"><b>Esc</b>Back</button></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/core.js?v=20261121a"></script>
-<script src="js/env.js?v=20261121a"></script>
-<script src="js/mapcore.js?v=20261121a"></script>
-<script src="js/bridges.js?v=20261121a"></script>
-<script src="js/facades.js?v=20261121a"></script>
-<script src="js/streets.js?v=20261121a"></script>
-<script src="js/traffic.js?v=20261121a"></script>
-<script src="js/world.js?v=20261121a"></script>
-<script src="js/vegetation.js?v=20261121a"></script>
-<script src="js/landmarks.js?v=20261121a"></script>
-<script src="js/vehicles.js?v=20261121a"></script>
-<script src="js/people.js?v=20261121a"></script>
-<script src="js/fx.js?v=20261121a"></script>
-<script src="js/radio.js?v=20261121a"></script>
-<script src="js/bemol.js?v=20261121a"></script>
-<script src="js/bemol_terrace.js?v=20261121a"></script>
-<script src="js/linella.js?v=20261121a"></script>
-<script src="assets/voice/voices.js?v=20261121a"></script>
-<script src="js/linella_store.js?v=20261121a"></script>
-<script src="js/airport.js?v=20261121a"></script>
-<script src="js/carcare.js?v=20261121a"></script>
-<script src="js/phone.js?v=20261121a"></script>
-<script src="js/mapicons.js?v=20261121a"></script>
-<script src="js/game.js?v=20261121a"></script>
+<script src="js/core.js?v=20261121b"></script>
+<script src="js/env.js?v=20261121b"></script>
+<script src="js/mapcore.js?v=20261121b"></script>
+<script src="js/bridges.js?v=20261121b"></script>
+<script src="js/facades.js?v=20261121b"></script>
+<script src="js/streets.js?v=20261121b"></script>
+<script src="js/traffic.js?v=20261121b"></script>
+<script src="js/world.js?v=20261121b"></script>
+<script src="js/vegetation.js?v=20261121b"></script>
+<script src="js/landmarks.js?v=20261121b"></script>
+<script src="js/vehicles.js?v=20261121b"></script>
+<script src="js/people.js?v=20261121b"></script>
+<script src="js/fx.js?v=20261121b"></script>
+<script src="js/radio.js?v=20261121b"></script>
+<script src="js/bemol.js?v=20261121b"></script>
+<script src="js/bemol_terrace.js?v=20261121b"></script>
+<script src="js/linella.js?v=20261121b"></script>
+<script src="assets/voice/voices.js?v=20261121b"></script>
+<script src="js/linella_store.js?v=20261121b"></script>
+<script src="js/airport.js?v=20261121b"></script>
+<script src="js/carcare.js?v=20261121b"></script>
+<script src="js/phone.js?v=20261121b"></script>
+<script src="js/mapicons.js?v=20261121b"></script>
+<script src="js/game.js?v=20261121b"></script>
 </body>
 </html>

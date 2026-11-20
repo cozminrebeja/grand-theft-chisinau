@@ -16,7 +16,7 @@ const $=id=>document.getElementById(id);
 const playBtn=$('play');
 const progress=t=>{playBtn.textContent=t;return new Promise(r=>setTimeout(r,16));};
 if(isTouch)document.body.classList.add('touch');
-if(isTouch){$('touch').style.display='block';$('keys').innerHTML='Joystick stânga — mers / condus · trage pe ecran — privește<br><b>INTRĂ</b> — urcă în orice vehicul · <b>FRÂNĂ</b> · <b>CLAXON</b>';}
+if(isTouch){$('touch').style.display='block';$('keys').innerHTML=[['Walk / drive','Left joystick'],['Look around','Drag screen'],['Enter any vehicle','INTRĂ'],['Brake','FRÂNĂ'],['Horn','CLAXON'],['Camera','🎥']].map(([a,b])=>'<div class="row"><span>'+a+'</span><span><b>'+b+'</b></span></div>').join('');}
 // ================= mesh builder =================
 const _v=new THREE.Vector3(),_n=new THREE.Vector3(),_nm=new THREE.Matrix3(),_c=new THREE.Color();
 class Bk{
