@@ -1,14 +1,12 @@
 'use strict';
 // Music + car radio with a radio wheel.
-// - Theme song (MAC — Centru) loops on the loading/title screen, starting somewhere in the middle. On foot: no music.
+// - No music on the title screen or on foot (set RADIO_THEME to a local station index for a title theme).
 // - In a vehicle the car radio plays the selected station: local tracks (assets/music) or live internet streams.
 // - Hold Q in a vehicle: radio wheel. Move the mouse (or scroll) to pick a station, release Q to tune in.
 //   Tap Q: next station, Shift+Q: previous. R turns all music on/off (also in the pause menu).
 // - Station badges are drawn in CSS. To use a real logo, drop an image in assets/radio/ and set `logo` on the station.
 const RADIO_STATIONS=[
   {id:'off',name:'Radio oprit',off:true,c1:'#2a2a2a',c2:'#555',t:'OFF'},
-  {id:'mac',name:'MAC — Centru',sub:'Melodie',local:'assets/music/mac-centru.mp3',c1:'#111',c2:'#ff7a1a',t:'MAC',t2:'CENTRU'},
-  {id:'spice',name:'Spiceboys Online',sub:'Золотая коллекция',local:'assets/music/spiceboys-zolotaya-kolektsiya.mp3',c1:'#ff3fa4',c2:'#ffd23f',t:'SPICE',t2:'BOYS'},
   {id:'vb',name:'Vocea Basarabiei',sub:'Chișinău',src:'https://stream.noroc.tv/radiovb_aac',c1:'#0b3d91',c2:'#ffd200',t:'VB',t2:'VOCEA'},
   {id:'noroc',name:'Radio Noroc',sub:'Muzică moldovenească',src:'https://stream.noroc.tv/radionoroc_aac',c1:'#c8102e',c2:'#fff',t:'NOROC'},
   {id:'hit',name:'Hit FM',sub:'101.7 Chișinău',src:'https://stream.dixi.md:9443/HitFM',alt:'https://radio3.dixi.md/listen/hit_fm_hot_hits/hitfm_hothits128.aac',c1:'#e30613',c2:'#fff',t:'HIT',t2:'FM'},
@@ -24,9 +22,9 @@ const RADIO_STATIONS=[
   {id:'roks',name:'Radio ROKS',sub:'Rock · Moldova',src:'https://stream.dixi.md:9443/Roks',c1:'#111',c2:'#e10600',t:'ROKS'},
   {id:'record',name:'Radio Record',sub:'Dance',src:'https://radiorecord.hostingradio.ru/rr_main96.aacp',alt:'https://air.unmixed.ru/record320',c1:'#f7941d',c2:'#111',t:'RECORD'},
 ];
-const RADIO_THEME=1,RADIO_N=RADIO_STATIONS.length;
+const RADIO_THEME=-1,RADIO_N=RADIO_STATIONS.length;
 let radio_vol=.75;try{const v=parseFloat(localStorage.getItem('gtc_radio_vol'));if(v>=0&&v<=1)radio_vol=v;}catch(e){}
-let radio_ingame=false,radio_on=true,radio_st=5,radio_inCar=false,radio_unlocked=false,radio_cur=null;
+let radio_ingame=false,radio_on=true,radio_st=Math.max(0,RADIO_STATIONS.findIndex(x=>x.id==='vb')),radio_inCar=false,radio_unlocked=false,radio_cur=null;
 try{radio_on=localStorage.getItem('gtc_radio')!=='0';const s=RADIO_STATIONS.findIndex(x=>x.id===localStorage.getItem('gtc_station'));if(s>=0)radio_st=s;}catch(e){}
 
 // ---------- audio ----------
@@ -35,7 +33,7 @@ const radio_local=new Map();
 function radio_localEl(i){let a=radio_local.get(i);if(a)return a;const s=RADIO_STATIONS[i];a=new Audio(s.local);a.preload=i===RADIO_THEME?'auto':'metadata';a.loop=true;a.volume=radio_gain();
   // start somewhere in the middle, not from the beginning
   a.addEventListener('loadedmetadata',()=>{if(isFinite(a.duration))a.currentTime=a.duration*(.35+Math.random()*.25);},{once:true});radio_local.set(i,a);return a;}
-radio_localEl(RADIO_THEME);
+if(RADIO_THEME>=0)radio_localEl(RADIO_THEME);
 const radio_live=new Audio();radio_live.preload='none';radio_live.volume=radio_gain();
 radio_live.addEventListener('error',()=>{const s=RADIO_STATIONS[radio_cur];if(!s||!s.src||!radio_live.getAttribute('src'))return;
   if(s.alt&&radio_live.src!==s.alt){radio_live.src=s.alt;radio_live.play().catch(()=>{});}else radio_toast('📻 '+s.name+' — fără semnal');});
@@ -44,7 +42,7 @@ function radio_toast(t){if(typeof fx_toast==='function')fx_toast(t);}
 function radio_label(s){return s.name+(s.sub?' · '+s.sub:'');}
 function radio_elFor(i){const s=RADIO_STATIONS[i];return !s||s.off?null:s.local?radio_localEl(i):radio_live;}
 // index of what should be playing right now (null = silence)
-function radio_want(){if(!radio_on)return null;if(!radio_ingame)return RADIO_THEME;if(!radio_inCar)return null;return RADIO_STATIONS[radio_st].off?null:radio_st;}
+function radio_want(){if(!radio_on)return null;if(!radio_ingame)return RADIO_THEME>=0?RADIO_THEME:null;if(!radio_inCar)return null;return RADIO_STATIONS[radio_st].off?null:radio_st;}
 function radio_apply(force){const w=radio_want();const el=w===null?null:radio_elFor(w);
   if(!force&&w===radio_cur&&(!el||!el.paused))return;
   for(const [i,a] of radio_local)if(i!==w)a.pause();
