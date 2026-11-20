@@ -244,13 +244,16 @@ function veg_update(cam){const S=veg_S,Q=veg_Q;const c=cam.position,now=performa
   gm.count=gs.length;gm.instanceMatrix.needsUpdate=true;}
 
 // ---------- per-tile placement (deterministic per tile key) ----------
+// areas other modules keep free of trees/bushes (e.g. the airport): VEG_CLEAR.push((x,z)=>bool) before tiles build
+const VEG_CLEAR=[];
+function veg_solid(x,z){if(solidAt(x,z))return true;for(const f of VEG_CLEAR)if(f(x,z))return true;return false;}
 function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=veg_Q;
   const R=veg_rng('veg:'+t.key),rr=(a,b)=>a+R()*(b-a);const d=t.data||{};const sec={m0:t0};
   const X0=t.x0,X1=t.x1,Z0=t.z0,Z1=t.z1,inT=(x,z)=>x>=X0&&x<X1&&z>=Z0&&z<Z1;
   const maxT=t.vegMaxTrees||Q.tileMaxTrees;
   const pts=[];const G=new Map(),GC=6;const gkey=(x,z)=>Math.floor(x/GC)*73856093^Math.floor(z/GC)*19349663;
   const near=(x,z,dd)=>{for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){const c=G.get((Math.floor(x/GC)+i)*73856093^(Math.floor(z/GC)+j)*19349663);if(!c)continue;for(const k of c){const p=pts[k];if((p[0]-x)**2+(p[1]-z)**2<dd*dd)return true;}}return false;};
-  const add=(x,z,s,arch,tint,yo=0)=>{if(pts.length>=maxT)return;const rot=R()*Math.PI*2,tn=tint==null?(R()*8)|0:tint;if(inWater(x,z))return;const k=gkey(x,z);let c=G.get(k);if(!c){c=[];G.set(k,c);}c.push(pts.length);pts.push([x,z,s,rot,arch,tn,veg_baseY(x,z,.45*s)+yo]);};
+  const add=(x,z,s,arch,tint,yo=0)=>{if(pts.length>=maxT)return;if(VEG_CLEAR.length&&VEG_CLEAR.some(f=>f(x,z)))return;const rot=R()*Math.PI*2,tn=tint==null?(R()*8)|0:tint;if(inWater(x,z))return;const k=gkey(x,z);let c=G.get(k);if(!c){c=[];G.set(k,c);}c.push(pts.length);pts.push([x,z,s,rot,arch,tn,veg_baseY(x,z,.45*s)+yo]);};
   // this tile's road pieces (render pieces incl. footways); legacy builder passes decoded roads in t.vegRoads
   const rds=t.vegRoads||(d.r||[]).map(r=>({kind:r[0],w:r[1],pts:dec(r[6])}));
   const FG=new Map(),FC=12;
@@ -272,7 +275,7 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
   const inWater=(x,z)=>{if(typeof rv_dist==='function'&&rv_dist(x,z)<1.5)return true;for(const W of waters)if(x>W.x0-1&&x<W.x1+1&&z>W.z0-1&&z<W.z1+1&&pip(x,z,W.o))return true;return false;};
   sec.m1=performance.now();
   // 1) individually mapped trees
-  const tr=d.trees||[];for(let i=0;i<tr.length;i+=2){const x=tr[i]*SC,z=tr[i+1]*SC;if(near(x,z,2.5)||onRoadF(x,z)||solidAt(x,z))continue;add(x,z,rr(.75,1.2),pickArch(true));}
+  const tr=d.trees||[];for(let i=0;i<tr.length;i+=2){const x=tr[i]*SC,z=tr[i+1]*SC;if(near(x,z,2.5)||onRoadF(x,z)||veg_solid(x,z))continue;add(x,z,rr(.75,1.2),pickArch(true));}
   sec.m2=performance.now();
   // 2) street trees along this tile's drivable road pieces (lindens and chestnuts)
   for(const r of rds){if(r.kind!==0||r.w>24)continue;let acc=R()*13;
@@ -295,14 +298,14 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
   // 3) parks & forest parks (Valea Morilor, La Izvor, Grădina Botanică, Dendrariu …) — dense fill
   for(const P of parks){const {A}=P;if(A<250)continue;const forest=A>40000;const dens=forest?Q.dens*.75:Q.dens;
     const n=Math.min(forest?1600:420,Math.floor(A/dens));
-    for(let k=0;k<n*2&&k<(forest?3400:900);k++){const q=sampleIn(P);if(!q)continue;const x=q[0],z=q[1];if(near(x,z,forest?3.8:4.2)||onRoadF(x,z)||onPath(x,z,.6)||solidAt(x,z))continue;add(x,z,rr(.85,1.35),pickArch(false));}}
+    for(let k=0;k<n*2&&k<(forest?3400:900);k++){const q=sampleIn(P);if(!q)continue;const x=q[0],z=q[1];if(near(x,z,forest?3.8:4.2)||onRoadF(x,z)||onPath(x,z,.6)||veg_solid(x,z))continue;add(x,z,rr(.85,1.35),pickArch(false));}}
   sec.m4=performance.now();
   // 4) lake shores
   const inList=(L,x,z)=>L.some(P=>x>P.x0&&x<P.x1&&z>P.z0&&z<P.z1&&pip(x,z,P.o));
   for(const W of waters){if(W.A<3000)continue;const o=W.o;const sg=sArea(o)>0?1:-1;
     for(let i=0;i<o.length;i++){const a=o[i],c=o[(i+1)%o.length],dx=c[0]-a[0],dz=c[1]-a[1],l=Math.hypot(dx,dz);if(l<1)continue;const ox=dz/l*sg,oz=-dx/l*sg;
       for(let s=0;s<l;s+=6){for(let k=0;k<2;k++){const dd=rr(5,30);const x=a[0]+dx/l*s+ox*dd,z=a[1]+dz/l*s+oz*dd;
-        if(!inT(x,z)||inList(waters,x,z)||near(x,z,4.5)||onRoadF(x,z)||onPath(x,z,.8)||solidAt(x,z))continue;add(x,z,rr(.9,1.35),R()<.25?2:pickArch(false));}}}}
+        if(!inT(x,z)||inList(waters,x,z)||near(x,z,4.5)||onRoadF(x,z)||onPath(x,z,.8)||veg_solid(x,z))continue;add(x,z,rr(.9,1.35),R()<.25?2:pickArch(false));}}}}
   sec.m5=performance.now();
   // 5) private-house gardens (outskirts): walnut / apple / cherry around small low houses
   for(const b of (d.b||[])){const h=b[0],ring=b[4];if(h>8.5||ring.length<6)continue;let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;
@@ -322,18 +325,18 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
   for(const P of parks){const {o,A}=P;
     if(A>900&&P.mask)for(let i=0;i<o.length;i++){if(R()<.3)continue;const a=o[i],c=o[(i+1)%o.length],dx=c[0]-a[0],dz=c[1]-a[1],l=Math.hypot(dx,dz);if(l<6||l>400)continue;
       const inx=-dz/l,inz=dx/l;const sgn=sArea(o)>0?1:-1;
-      for(let s=2;s<l-2;s+=2.1){const x=a[0]+dx/l*s+inx*1.6*sgn,z=a[1]+dz/l*s+inz*1.6*sgn;if(!inT(x,z)||!inPark(P,x,z)||onRoadF(x,z)||solidAt(x,z))continue;{const sc=rr(.8,1.15),ro=R()*6.3,tn=(R()*8)|0;if(!inWater(x,z))bushes.push([x,z,sc,ro,tn,veg_baseY(x,z,.9*sc)]);}}}
-    const nb=Math.min(A>40000?600:220,A/170|0);for(let k=0;k<nb*1.5;k++){const q=sampleIn(P);if(!q)continue;const x=q[0],z=q[1];if(onPath(x,z,.8)||onRoadF(x,z)||solidAt(x,z))continue;{const sc=rr(.9,1.6),ro=R()*6.3,tn=(R()*8)|0;if(!inWater(x,z))bushes.push([x,z,sc,ro,tn,veg_baseY(x,z,.9*sc)]);}}
+      for(let s=2;s<l-2;s+=2.1){const x=a[0]+dx/l*s+inx*1.6*sgn,z=a[1]+dz/l*s+inz*1.6*sgn;if(!inT(x,z)||!inPark(P,x,z)||onRoadF(x,z)||veg_solid(x,z))continue;{const sc=rr(.8,1.15),ro=R()*6.3,tn=(R()*8)|0;if(!inWater(x,z))bushes.push([x,z,sc,ro,tn,veg_baseY(x,z,.9*sc)]);}}}
+    const nb=Math.min(A>40000?600:220,A/170|0);for(let k=0;k<nb*1.5;k++){const q=sampleIn(P);if(!q)continue;const x=q[0],z=q[1];if(onPath(x,z,.8)||onRoadF(x,z)||veg_solid(x,z))continue;{const sc=rr(.9,1.6),ro=R()*6.3,tn=(R()*8)|0;if(!inWater(x,z))bushes.push([x,z,sc,ro,tn,veg_baseY(x,z,.9*sc)]);}}
     const ng=Math.min(3500,A/5|0);for(let k=0;k<ng;k++){const q=sampleIn(P);if(!q)continue;const x=q[0],z=q[1];if(onPath(x,z,.1))continue;{const sc=rr(.7,1.4),ro=R()*6.3,tn=(R()*8)|0;if(!inWater(x,z))grass.push([x,z,sc,ro,tn,groundY(x,z)]);}}}
   for(const r of rds){if(r.kind!==3)continue;for(let i=0;i<r.pts.length-1;i++){const a=r.pts[i],c=r.pts[i+1],dx=c[0]-a[0],dz=c[1]-a[1],l=Math.hypot(dx,dz);if(l<4)continue;const nx=-dz/l,nz=dx/l;
     for(let s=2;s<l;s+=rr(3,7)){if(R()<.35)continue;const sd=R()<.5?1:-1;const x=a[0]+dx/l*s+nx*(r.w/2+1)*sd,z=a[1]+dz/l*s+nz*(r.w/2+1)*sd;
-      if(!parks.some(P=>inPark(P,x,z)))continue;if(onRoadF(x,z)||onPath(x,z,.3)||solidAt(x,z))continue;{const sc=rr(.8,1.3),ro=R()*6.3,tn=(R()*8)|0;bushes.push([x,z,sc,ro,tn,veg_baseY(x,z,.9*sc)]);}}}}
+      if(!parks.some(P=>inPark(P,x,z)))continue;if(onRoadF(x,z)||onPath(x,z,.3)||veg_solid(x,z))continue;{const sc=rr(.8,1.3),ro=R()*6.3,tn=(R()*8)|0;bushes.push([x,z,sc,ro,tn,veg_baseY(x,z,.9*sc)]);}}}}
   sec.m8=performance.now();
   // ---- flower beds in big parks (per-tile mesh, shared material) ----
   {const b=new Bk(S.bedMat,true);const fuv=veg_cellUV(1,1);
     for(const P of parks){if(P.A<6000)continue;const n=Math.min(6,P.A/9000|0)+1;let nbed=0;
       for(let k=0;k<n*6;k++){const x=rr(P.x0,P.x1),z=rr(P.z0,P.z1);const rx=rr(2.2,4.5),rz=rx*rr(.6,1);
-        if(!inT(x,z)||!inPark(P,x,z)||onRoadF(x,z)||onPath(x,z,.5)||solidAt(x,z)||pushOut(x,z,Math.max(rx,rz)+1)||near(x,z,Math.max(rx,rz)+1))continue;
+        if(!inT(x,z)||!inPark(P,x,z)||onRoadF(x,z)||onPath(x,z,.5)||veg_solid(x,z)||pushOut(x,z,Math.max(rx,rz)+1)||near(x,z,Math.max(rx,rz)+1))continue;
         const G0=(vx,vz)=>groundY(vx,vz);const yc=G0(x,z);const seg=16;for(let sI=0;sI<seg;sI++){const a0=sI/seg*Math.PI*2,a1=(sI+1)/seg*Math.PI*2;const c0=Math.cos(a0),s0=Math.sin(a0),c1=Math.cos(a1),s1=Math.sin(a1);
           const uvp=(cc,ss)=>[fuv[0]+(fuv[2]-fuv[0])*(.5+cc*.48),fuv[1]+(fuv[3]-fuv[1])*(.5+ss*.48)];
           const A0=uvp(c0,s0),A1=uvp(c1,s1),C=uvp(0,0);
