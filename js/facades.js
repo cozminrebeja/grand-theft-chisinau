@@ -177,7 +177,15 @@ class fac_Bk{constructor(cap=4096){this.cap=0;this.n=0;this.grow(cap);}
     g.setAttribute('normal',new THREE.BufferAttribute(N8,3,true).onUpload(rel));g.setAttribute('color',new THREE.BufferAttribute(C8,3,true).onUpload(rel));
     g.setAttribute('uv',new THREE.BufferAttribute(this.U.slice(0,n*2),2).onUpload(rel));g.setAttribute('atl',new THREE.BufferAttribute(A16,4,true).onUpload(rel));
     g.computeBoundingSphere();const m=new THREE.Mesh(g,mat);m.matrixAutoUpdate=false;m.updateMatrix();m.userData.facades=true;return m;}}
-const fac_tileBk=new fac_Bk(1<<17);
+const fac_tileBk=new fac_Bk(1<<17),fac_roofBk=new fac_Bk(1<<15);
+const FAC_PHOTO_H=14;  // m: roofs of taller buildings lean too far in the aerial photo, they keep their flat photo colour
+// low roofs sample the tile's aerial photo (streets.js st_photoU, shared texture), faded in from 40 to 140 m like the ground
+function fac_photoMat(t){const u=st_photoU(t),m=fac_mat.clone(),base=fac_mat.onBeforeCompile;
+  m.onBeforeCompile=function(sh,r){base(sh,r);Object.assign(sh.uniforms,u);const L='diffuseColor.rgb*=fC.rgb*mix(vec3(1.0),vColor,fM.r);';
+    sh.vertexShader='varying float vFacD;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nvFacD=length(mvPosition.xyz);');
+    sh.fragmentShader='varying float vFacD;\nuniform sampler2D uPh;uniform vec2 uPh0;uniform float uPhS,uPhOn;\n'+sh.fragmentShader.replace(L,L+`
+  if(uPhOn>.5){vec2 pu=(vFacWP.xz-uPh0)/uPhS;diffuseColor.rgb=mix(diffuseColor.rgb,texture2D(uPh,vec2(pu.x,1.0-pu.y)).rgb*1.05,smoothstep(40.,140.,vFacD));}`);};
+  m.customProgramCacheKey=()=>'facades_photo';return m;}
 const fac_chunks=new Map();
 const fac_dbg={shops:[],bal:[],pitch:[],t:{}};
 function fac_bk(x,z){const k=chunk(x,z);let b=fac_chunks.get(k);if(!b){b=new fac_Bk();fac_chunks.set(k,b);}return b;}
@@ -246,6 +254,7 @@ function fac_buildOne(b,ent,seed,lod,tile){const [h,mh,style,col0,ring,holes]=en
     const vStart=b.n;
     fac_rs=seed;const rnd=fac_r();
     const area=Math.abs(sArea(outer)),H=h-mh;
+    const rb=tile&&tile.facRoofBk&&H<=FAC_PHOTO_H?tile.facRoofBk:b,rStart=rb.n;  // rb: photo-roof bucket (low roofs, little aerial lean)
     // ---- archetype ----
     let kind=['classic','panel','glass','small','church'][style]||'classic';
     const outskirts=Math.hypot(mx,mz)>2600;
@@ -352,14 +361,14 @@ function fac_buildOne(b,ent,seed,lod,tile){const [h,mh,style,col0,ring,holes]=en
       for(let i=0;i<n;i++){const j=(i+1)%n;const A=[eave[i][0],ye,eave[i][1]],B=[eave[j][0],ye,eave[j][1]],Cq=[q[j][0],yr,q[j][1]],Dq=[q[i][0],yr,q[i][1]];
         const ex=B[0]-A[0],ez=B[2]-A[2],el=Math.hypot(ex,ez)||1;fac_t1.set(ex,0,ez);fac_t2.set(Dq[0]-A[0],Dq[1]-A[1],Dq[2]-A[2]);const nn=new THREE.Vector3().crossVectors(fac_t2,fac_t1).normalize();if(nn.y<0)nn.negate();
         const sl=Math.hypot(Dq[0]-A[0],rise+.12,Dq[2]-A[2]);const pu=(p)=>((p[0]-A[0])*ex+(p[2]-A[2])*ez)/el/2.5;
-        fac_quad(b,[A,B,Cq,Dq],[[pu(A),0],[pu(B),0],[pu(Cq),sl/2.5],[pu(Dq),sl/2.5]],[nn.x,nn.y,nn.z],[roofCol],RC.RTIN);
+        fac_quad(rb,[A,B,Cq,Dq],[[pu(A),0],[pu(B),0],[pu(Cq),sl/2.5],[pu(Dq),sl/2.5]],[nn.x,nn.y,nn.z],[roofCol],RC.RTIN);
         // eave underside strip
         fac_quad(b,[[outer[i][0],h-.12,outer[i][1]],[outer[j][0],h-.12,outer[j][1]],B,A],[[0,0],[1,0],[1,.1],[0,.1]],[0,-1,0],[[.35,.34,.33]],RC.DARK);}
-      if(Math.abs(sArea(q))>1)fac_fill(b,yr,q,[],RC.RTIN,roofCol,2.5);
+      if(Math.abs(sArea(q))>1)fac_fill(rb,yr,q,[],RC.RTIN,roofCol,2.5);
       // chimney
       if(!far&&fac_r()<.55){const k=Math.floor(fac_r()*q.length),p=q[k],pc=[.62,.38,.3];fac_addGeo(b,boxG,M(p[0]*.8+mx*.2,h+rise*.5,p[1]*.8+mz*.2,fac_r()*3,0,0,.6,rise*.5+1.2,.6),pc,RC.CONC);}
     }else{
-      fac_fill(b,h+.02,outer,hs,RC.RFLAT,fac_rgb(0x9b9893,.9+fac_r()*.15),6);
+      {const k=.9+fac_r()*.15;fac_fill(rb,h+.02,outer,hs,RC.RFLAT,ex&&(ex.rc||ex.roof_color)?roofCol:fac_rgb(0x9b9893,k),6);}  // rc: photo roof colour (make_roofs.py)
       // rooftop clutter
       if(!far&&H>6&&area>60){const inner=fac_offset(outer,-1.6);let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of outer){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}
         const nItems=Math.min(9,1+Math.floor(area/180));const ang=Math.atan2(outer[1][0]-outer[0][0],outer[1][1]-outer[0][1]);
@@ -371,7 +380,7 @@ function fac_buildOne(b,ent,seed,lod,tile){const [h,mh,style,col0,ring,holes]=en
           else if(t<.8){fac_addGeo(b,boxG,M(x,y,z,0,0,0,.07,3.5,.07),[.35,.35,.35],RC.DARK);fac_addGeo(b,boxG,M(x,y+2.6,z,fac_r()*3,0,0,1.6,.05,.05),[.35,.35,.35],RC.DARK);fac_addGeo(b,boxG,M(x,y+3.1,z,fac_r()*3,0,0,1.1,.05,.05),[.35,.35,.35],RC.DARK);}
           else{fac_addGeo(b,boxG,M(x,y,z,0,0,0,.08,.9,.08),[.4,.4,.4],RC.DARK);fac_addGeo(b,dishG,M(x,y+1.05,z,fac_r()*6,-.9,0),[1,1,1],RC.DISH);}}}
     }
-    if(Y0!==0){const P=b.P;for(let i=vStart*3+1,e=b.n*3;i<e;i+=3)P[i]+=Y0;}
+    if(Y0!==0){const P=b.P;for(let i=vStart*3+1,e=b.n*3;i<e;i+=3)P[i]+=Y0;if(rb!==b){const Q=rb.P;for(let i=rStart*3+1,e=rb.n*3;i<e;i+=3)Q[i]+=Y0;}}
     // plinth (downhill basement band) + skirt below grade so no gaps appear between footprint vertices on uneven ground
     if(standing&&(gD>0.15||lift>0)){const pc=kind==='panel'||kind==='small'?RC.CONC:RC.GPLINTH,pcol=fac_rgb(color,bright*.62),yb=gLo-0.8,yt=Y0+0.03;
       for(let i=0;i<outer.length;i++){const a=outer[i],c=outer[(i+1)%outer.length];const dx=c[0]-a[0],dz=c[1]-a[1],l=Math.hypot(dx,dz);if(l<0.05)continue;
@@ -381,10 +390,12 @@ function fac_buildOne(b,ent,seed,lod,tile){const [h,mh,style,col0,ring,holes]=en
 }
 // ======================= streaming API =======================
 function buildBuildingsTile(t){fac_init();const t0=performance.now();const list=(t.data&&t.data.b)||[];const b=fac_tileBk.reset();const base=fac_hash(t.key||'');
+  const pm=typeof st_photoU==='function'&&st_photoU(t)?fac_photoMat(t):null;t.facRoofBk=pm?fac_roofBk.reset():null;
   for(let k=0;k<list.length;k++)fac_buildOne(b,list[k],(base+k*7919)%2147483646+1,t.lod,t);
   if(b.n){const me=b.mesh(fac_mat);me.name='buildings_'+t.key;t.group.add(me);t.facMesh=me;}
+  if(pm){if(t.facRoofBk.n){const me=t.facRoofBk.mesh(pm);me.name='roofs_'+t.key;t.group.add(me);t.facRoofMat=pm;}else pm.dispose();t.facRoofBk=null;}
   const ms=performance.now()-t0;fac_stats.tiles++;fac_stats.ms.push([t.key,Math.round(ms*10)/10,list.length,b.n/3|0]);return ms;}
-function buildingsUnloadTile(t){t.facMesh=null;}
+function buildingsUnloadTile(t){t.facMesh=null;if(t.facRoofMat){t.facRoofMat.dispose();t.facRoofMat=null;}}
 // legacy: whole D.b into chunked buckets
 function buildBuildings(){fac_init();const t0=performance.now();let bi=0;
   for(const ent of D.b){bi++;const o=ent[4];fac_buildOne(fac_bk(o[0]*SC,o[1]*SC),ent,(bi*7919+13)%2147483646+1,null,null);}

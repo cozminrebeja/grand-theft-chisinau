@@ -197,7 +197,9 @@ async function world_cityInit(){try{
   if(!THREE.GLTFLoader)await world_script(CDN+'GLTFLoader.js');if(!THREE.DRACOLoader)await world_script(CDN+'DRACOLoader.js');
   // ground texture → distant terrain (premultiplied so transparent edges don't darken when filtered)
   if(world_terr){const G=meta.ground;new THREE.TextureLoader().load(WORLD.base+G.image+'?v='+meta.v,tex=>{tex.premultiplyAlpha=true;
-    tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());const U=world_terr.U;U.uGround.value=tex;U.uG0.value.set(G.x0*WS,G.z0*WS);U.uGS.value=G.size*WS;});}
+    tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());const U=world_terr.U;U.uGround.value=tex;U.uG0.value.set(G.x0*WS,G.z0*WS);U.uGS.value=G.size*WS;});
+    // Sentinel-2 colour (tools/data/make_sentinel.py), same square as ground.webp, blended under it; missing file = procedural only
+    new THREE.TextureLoader().load(WORLD.base+'city/sat.jpg?v='+meta.v,tex=>{tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());world_terr.U.uSat.value=tex;});}
   const T=WORLD.T,[X0,X1,Z0,Z1]=D.bounds,mx0=Math.floor(X0/WS/T)-1,mz0=Math.floor(Z0/WS/T)-1,mw=Math.ceil(X1/WS/T)-mx0+2,mh=Math.ceil(Z1/WS/T)-mz0+2;
   const mdata=new Uint8Array(mw*mh*4),mtex=new THREE.DataTexture(mdata,mw,mh,THREE.RGBAFormat);mtex.magFilter=mtex.minFilter=THREE.NearestFilter;mtex.needsUpdate=true;
   const U={uCMask:{value:mtex},uCM0:{value:new THREE.Vector2(mx0,mz0)},uCMS:{value:new THREE.Vector2(mw,mh)}};
@@ -244,15 +246,15 @@ function world_terrainInit(){if(!HM||world_terr)return;
   const T=WORLD.T,mx0=Math.floor(x0/T),mz0=Math.floor(z0/T),mw=Math.ceil((x0+(nx-1)*c)/T)-mx0+1,mh=Math.ceil((z0+(nz-1)*c)/T)-mz0+1;
   const mdata=new Uint8Array(mw*mh*4),mtex=new THREE.DataTexture(mdata,mw,mh,THREE.RGBAFormat);mtex.magFilter=mtex.minFilter=THREE.NearestFilter;mtex.needsUpdate=true;
   const U={uMask:{value:mtex},uM0:{value:new THREE.Vector2(mx0*T,mz0*T)},uMS:{value:new THREE.Vector2(mw*T,mh*T)},
-    uGround:{value:new THREE.DataTexture(new Uint8Array(4),1,1,THREE.RGBAFormat)},uG0:{value:new THREE.Vector2()},uGS:{value:1}}; // ground set by world_cityInit
-  U.uGround.value.needsUpdate=true;
+    uGround:{value:new THREE.DataTexture(new Uint8Array(4),1,1,THREE.RGBAFormat)},uSat:{value:new THREE.DataTexture(new Uint8Array(4),1,1,THREE.RGBAFormat)},uG0:{value:new THREE.Vector2()},uGS:{value:1}}; // ground set by world_cityInit
+  U.uGround.value.needsUpdate=U.uSat.value.needsUpdate=true;
   const mat=new THREE.MeshLambertMaterial({vertexColors:true});
   mat.onBeforeCompile=sh=>{Object.assign(sh.uniforms,U);
     sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec2 vTW;').replace('#include <project_vertex>','#include <project_vertex>\nvTW=(modelMatrix*vec4(transformed,1.0)).xz;');
-    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vTW;uniform sampler2D uMask,uGround;uniform vec2 uM0,uMS,uG0;uniform float uGS;')
+    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vTW;uniform sampler2D uMask,uGround,uSat;uniform vec2 uM0,uMS,uG0;uniform float uGS;')
       .replace('void main() {','void main() {\n if(texture2D(uMask,(vTW-uM0)/uMS).r>0.5)discard;')
-      .replace('#include <color_fragment>','#include <color_fragment>\n {vec2 gu=(vTW-uG0)/uGS;if(gu.x>0.0&&gu.y>0.0&&gu.x<1.0&&gu.y<1.0){vec4 g=texture2D(uGround,vec2(gu.x,1.0-gu.y));diffuseColor.rgb=diffuseColor.rgb*(1.0-g.a)+g.rgb;}}');};
-  mat.customProgramCacheKey=()=>'world_terr2';
+      .replace('#include <color_fragment>','#include <color_fragment>\n {vec2 gu=(vTW-uG0)/uGS;if(gu.x>0.0&&gu.y>0.0&&gu.x<1.0&&gu.y<1.0){vec2 tu=vec2(gu.x,1.0-gu.y);vec4 st=texture2D(uSat,tu);float ed=min(min(gu.x,gu.y),min(1.0-gu.x,1.0-gu.y));diffuseColor.rgb=mix(diffuseColor.rgb,st.rgb,st.a*0.85*smoothstep(0.0,0.04,ed));vec4 g=texture2D(uGround,tu);diffuseColor.rgb=diffuseColor.rgb*(1.0-g.a)+g.rgb;}}');};
+  mat.customProgramCacheKey=()=>'world_terr3';
   const m=new THREE.Mesh(g,mat);m.name='world_terrain';m.matrixAutoUpdate=false;m.frustumCulled=false;m.receiveShadow=true;m.castShadow=false;m.userData.noShadow=false;scene.add(m);
   world_terr={m,mdata,mtex,mx0,mz0,mw,mh,sig:'',t:0,U};}
 function world_terrainUpdate(dt){const W=world_terr;if(!W)return;W.t-=dt||0;if(W.t>0)return;W.t=.25;

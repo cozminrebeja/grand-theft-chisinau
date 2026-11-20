@@ -81,7 +81,7 @@ function landmarkSkipped(x,z){for(const s of LANDMARK_SKIP)if(Math.hypot(x-s.x,z
 // ---------------- terrain height (Copernicus DEM, ground-filtered; see world.json.height) ----------------
 // groundY(x,z): terrain height in metres relative to the Arc de Triumf ground (Arc = 0). 0 everywhere if no heightmap.
 let HM=null;
-async function initHeight(){const m=D&&D.height;if(!m)return;try{const r=await fetch((typeof WORLD!=='undefined'&&WORLD.base?WORLD.base:'world/')+m.file.replace(/^world\//,''));if(!r.ok)throw new Error(r.status);
+async function initHeight(){const m=D&&D.height;if(!m)return;try{const r=await fetch((typeof WORLD!=='undefined'&&WORLD.base?WORLD.base:'world/')+m.file.replace(/^world\//,''),{cache:'no-cache'});if(!r.ok)throw new Error(r.status);
   let buf;if(/\.json$/.test(m.file)){const j=await r.json();const bs=atob(j.b64);const u=new Uint8Array(bs.length);for(let i=0;i<bs.length;i++)u[i]=bs.charCodeAt(i);buf=u.buffer;}else buf=await r.arrayBuffer();HM={a:new Int16Array(buf),x0:m.x0,z0:m.z0,c:m.cell,nx:m.nx,nz:m.nz,s:m.scale};}catch(e){console.error('heightmap',e);HM=null;}
   await initEarthworks();}
 // DEM only (natural ground, no earthworks) — for retaining-wall feet and anything that must ignore embankments

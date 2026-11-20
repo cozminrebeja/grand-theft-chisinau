@@ -58,7 +58,8 @@ for f in sorted(glob.glob(os.path.join(W, 'packs', '*.json'))):
             s = hsh(key + ':' + str(n)); pal = WALL.get(style, WALL[0])
             wc = [c * .8 for c in lin(pal[s % len(pal)])]  # walls darker: detailed buildings read darker through their facade textures
             pitched = style in (0, 3) and h <= 10 and len(outer) <= 8  # private houses / low blocks: tiled roofs
-            rc = lin((ROOF_TILE if pitched else ROOF_FLAT)[(s >> 8) % (len(ROOF_TILE) if pitched else len(ROOF_FLAT))])
+            ex = b[6] if len(b) > 6 and b[6] else {}
+            rc = lin(int(ex['rc'][1:], 16)) if ex.get('rc') else lin((ROOF_TILE if pitched else ROOF_FLAT)[(s >> 8) % (len(ROOF_TILE) if pitched else len(ROOF_FLAT))])  # rc: photo roof colour (make_roofs.py)
             C = chunks.setdefault((math.floor(cx / CH), math.floor(cz / CH)), {'v': [], 'f': [], 'c': [], 't': []})
             V, F, Cc, Tt = C['v'], C['f'], C['c'], C['t']
             uvt = (ti + .5, tj + .5)

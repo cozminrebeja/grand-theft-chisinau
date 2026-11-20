@@ -88,19 +88,38 @@ function st_buildAtlas(){const A=document.createElement('canvas');A.width=A.heig
     st_pix(g,S,(x,y,r,gg,b)=>{const k=(Math.random()-.5)*28;return [r+k,gg+k,b+k];});}));
   const t=new THREE.CanvasTexture(A);t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());t.minFilter=THREE.LinearMipmapLinearFilter;return t;}
 let st_atlas=null,st_mat=null;
+const st_PH0={uPh:{value:null},uPh0:{value:new THREE.Vector2()},uPhS:{value:500},uPhOn:{value:0}},ST_PHK=1.05;  // photo brightness vs. the lit procedural surfaces
+// per-tile aerial photo (world/photo, tools/data/make_photo_tiles.py): one texture per tile object, shared by the ground (st_photoMat)
+// and low roofs (facades.js fac_photoMat); arrives async (uPhOn=0 until then), disposed on unload
+function st_photoU(t){if(t.ph!==undefined)return t.ph;if(t.key==='all'||!isFinite(t.x0)||!(D.tiles&&D.tiles[t.key]))return t.ph=null;
+  const u={uPh:{value:null},uPh0:{value:new THREE.Vector2(t.x0,t.z0)},uPhS:{value:t.x1-t.x0},uPhOn:{value:0}};
+  new THREE.TextureLoader().load((WORLD.base||'world/')+'photo/'+(t.lod==='far'?'lo/':'')+t.key+'.webp',tex=>{
+    if(t.state==='unloaded'){tex.dispose();return;}tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());u.uPh.value=tex;u.uPhOn.value=1;},undefined,()=>{});
+  return t.ph=u;}
+// ground material: same shader program as st_mat (cache key), the tile's photo uniforms
+function st_photoMat(t){const u=st_photoU(t);if(!u)return null;
+  const m=st_mat.clone();m.onBeforeCompile=st_mat.onBeforeCompile;m.customProgramCacheKey=st_mat.customProgramCacheKey;m.userData.ph=u;return m;}
+function streetsUnloadTile(t){if(t.stPhM){t.stPhM.dispose();t.stPhM=null;}if(t.ph){if(t.ph.uPh.value)t.ph.uPh.value.dispose();t.ph=null;}}
 function st_makeMat(){st_atlas=st_buildAtlas();
   const m=new THREE.MeshLambertMaterial({map:st_atlas,vertexColors:true,side:THREE.DoubleSide,alphaTest:.5});
   const K=((st_TS-2*st_PAD)/st_AS).toFixed(6),P0=(st_PAD/st_AS).toFixed(6);
-  m.onBeforeCompile=sh=>{
-    sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nattribute vec2 tile;\nvarying vec2 vStTile;').replace('#include <uv_vertex>','#include <uv_vertex>\nvStTile=tile;');
-    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vStTile;').replace('#include <map_fragment>',`
+  // aerial photo (js: st_photo*): ground, parks, plazas/pedestrian and parking/service surfaces take the tile's photo by world
+  // position, faded in from 30 to 110 m (0.5 m photo pixels and baked shadows smear up close); roads, pavements, kerbs, markings stay procedural
+  const ph=k=>`(abs(vStTile.x-${st_T[k][0].toFixed(6)})+abs(vStTile.y-${st_T[k][1].toFixed(6)})<.001)`;
+  m.onBeforeCompile=function(sh){Object.assign(sh.uniforms,this.userData.ph||st_PH0);
+    sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nattribute vec2 tile;\nvarying vec2 vStTile;\nvarying vec3 vStW;\nvarying float vStD;').replace('#include <uv_vertex>','#include <uv_vertex>\nvStTile=tile;')
+      .replace('#include <project_vertex>','#include <project_vertex>\nvStW=(modelMatrix*vec4(transformed,1.0)).xyz;vStD=length(mvPosition.xyz);');
+    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vStTile;\nvarying vec3 vStW;\nvarying float vStD;\nuniform sampler2D uPh;uniform vec2 uPh0;uniform float uPhS,uPhOn;').replace('#include <map_fragment>',`
       vec2 stA=vStTile+${P0}+fract(vUv)*${K};
       #if __VERSION__>=300
         vec4 texelColor=textureGrad(map,stA,dFdx(vUv)*${K},dFdy(vUv)*${K});
       #else
         vec4 texelColor=texture2D(map,stA);
       #endif
-      texelColor=mapTexelToLinear(texelColor);diffuseColor*=texelColor;`);};
+      texelColor=mapTexelToLinear(texelColor);diffuseColor*=texelColor;
+      if(uPhOn>.5&&(${ph('DIRT')}||${ph('GRASS')}||${ph('PAVE')}||${ph('ASPH2')})){vec2 pu=(vStW.xz-uPh0)/uPhS;
+        vec3 phc=texture2D(uPh,vec2(pu.x,1.0-pu.y)).rgb*(.72+.56*dot(texelColor.rgb,vec3(.3,.59,.11)))*${ST_PHK.toFixed(3)};
+        diffuseColor.rgb=mix(diffuseColor.rgb,phc,smoothstep(30.,110.,vStD));}`);};
   m.customProgramCacheKey=()=>'st_atlas';st_mat=m;}
 
 // ---- geometry accumulator for the atlas material ----
@@ -506,6 +525,7 @@ function buildStreetsTile(t){
   }
   // ---- finalize ----
   if(st_cur.p.length)grp.add(st_cur.mesh(st_mat));
+  {const m=st_photoMat(t);if(m){t.stPhM=m;for(const o of grp.children)if(o.material===st_mat)o.material=m;}}
   if(st_curF.p.length)grp.add(st_curF.mesh());
   if(st_curGlass.p.length){const gm=st_curGlass.mesh();gm.renderOrder=2;grp.add(gm);}
   st_cur=null;st_curF=null;st_curGlass=null;st_bridgeOK=false;

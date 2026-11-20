@@ -73,11 +73,12 @@ const LS=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:v;}catch(e
 let mouseSens=+LS('gtc_sens',1),invertY=LS('gtc_inv','0')==='1';
 const locked=()=>document.pointerLockElement===canvas;
 function lockMouse(){if(isTouch||!started)return;try{const p=canvas.requestPointerLock();if(p&&p.catch)p.catch(()=>{});}catch(e){}}
-addEventListener('keydown',e=>{keys[e.code]=true;if(!started)return;if(e.code==='KeyE'||e.code==='KeyF')toggleCar();if(e.code==='KeyH')horn();if(e.code==='KeyC')camMode=(camMode+1)%4;if(e.code==='Space'||e.code.startsWith('Arrow'))e.preventDefault();});
+addEventListener('keydown',e=>{keys[e.code]=true;if(!started)return;if(e.code==='Backquote')flyToggle();if(e.code==='KeyO')fly_shot=true;if(fly){if(e.code==='Space')e.preventDefault();return;}if(e.code==='KeyE'||e.code==='KeyF')toggleCar();if(e.code==='KeyH')horn();if(e.code==='KeyC')camMode=(camMode+1)%4;if(e.code==='Space'||e.code.startsWith('Arrow'))e.preventDefault();});
 addEventListener('keyup',e=>{keys[e.code]=false;});
 let drag=null;
 canvas.addEventListener('pointerdown',e=>{if(!isTouch&&started&&!paused){if(!locked())lockMouse();return;}drag={id:e.pointerId,x:e.clientX};});
 addEventListener('mousemove',e=>{if(!locked()||paused)return;const k=.0022*mouseSens,dx=e.movementX||0,dy=e.movementY||0;
+  if(fly){fly.yaw-=dx*k;fly.pitch=clamp(fly.pitch-(invertY?-dy:dy)*k,-1.5,1.5);return;}
   if(player.mode==='foot')camYaw-=dx*k;else{lookOff=clamp(lookOff-dx*k,-Math.PI,Math.PI);mouseT=performance.now();}
   camPitch=clamp(camPitch+(invertY?-dy:dy)*k*.8,-.35,.95);});
 addEventListener('pointermove',e=>{if(drag&&e.pointerId===drag.id){const dx=e.clientX-drag.x;drag.x=e.clientX;if(player.mode==='foot')camYaw-=dx*.008;else lookOff=clamp(lookOff-dx*.008,-Math.PI,Math.PI);}});
@@ -427,13 +428,32 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   updPeds(dt);}
   if(paused){}
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
+  else if(fly)flyUpdate(dt);
   else{const inp=input();window.gtcInput=inp;const inStore=(player.mode==='foot'&&hook('storeUpdate',dt,inp))||hook('airportUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
     window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('phoneUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);
-  renderVehicles(dt);envRender(dt);}
+  renderVehicles(dt);envRender(dt);if(fly_shot){fly_shot=false;flyShot();}}
+// ---- debug free-flight camera: ` toggles (WASD + mouse, Space/C up/down, Shift fast, Alt slow); O saves a screenshot named
+// with the camera position, in or out of flight. The world streams around the camera; the player stays where they were.
+let fly=null,fly_shot=false,fly_el=null;
+function flyToggle(){if(fly){fly=null;fly_el.style.display='none';camPos.copy(camera.position);return;}
+  const d=new THREE.Vector3();camera.getWorldDirection(d);fly={x:camera.position.x,y:camera.position.y,z:camera.position.z,yaw:Math.atan2(d.x,d.z),pitch:Math.asin(clamp(d.y,-1,1))};
+  if(!fly_el){fly_el=document.createElement('div');fly_el.style.cssText='position:fixed;left:50%;bottom:44px;transform:translateX(-50%);z-index:50;padding:6px 12px;border-radius:8px;background:rgba(0,0,0,.6);color:#fff;font:600 13px Inter,system-ui,sans-serif;pointer-events:none;white-space:nowrap';document.body.appendChild(fly_el);}
+  fly_el.style.display='block';lockMouse();}
+function flyUpdate(dt){const k=keys,sp=(k.ShiftLeft||k.ShiftRight?220:45)*(k.AltLeft||k.AltRight?.15:1),cp=Math.cos(fly.pitch);
+  const fx=Math.sin(fly.yaw)*cp,fy=Math.sin(fly.pitch),fz=Math.cos(fly.yaw)*cp,rx=-Math.cos(fly.yaw),rz=Math.sin(fly.yaw);
+  const t=(k.KeyW||k.ArrowUp?1:0)-(k.KeyS||k.ArrowDown?1:0),s=(k.KeyD||k.ArrowRight?1:0)-(k.KeyA||k.ArrowLeft?1:0),u=(k.Space?1:0)-(k.KeyC?1:0);
+  fly.x+=(fx*t+rx*s)*sp*dt;fly.z+=(fz*t+rz*s)*sp*dt;fly.y=Math.max(fly.y+(fy*t+u)*sp*dt,surfaceY(fly.x,fly.z,fly.y)+1.5);
+  camera.position.set(fly.x,fly.y,fly.z);camera.lookAt(fly.x+fx,fly.y+fy,fly.z+fz);
+  worldUpdate(dt,fly.x,fly.z);envUpdate(dt);hook('fxUpdate',dt);if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}
+  fly_el.textContent=`FLY  ${fly.x|0}, ${fly.z|0} · ${Math.round(fly.y-groundY(fly.x,fly.z))} m · O photo · \` exit`;}
+function flyShot(){const x=Math.round(camera.position.x),y=Math.round(camera.position.y),z=Math.round(camera.position.z),
+    name=`gtc_x${x}_z${z}_y${y}_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.png`;
+  renderer.domElement.toBlob(b=>{if(!b)return;const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);},'image/png');  // right after render: the drawing buffer is still intact
+  say('Captură salvată',name,2);}
 requestAnimationFrame(frame);
 playBtn.addEventListener('click',()=>{started=true;setTimeout(lockMouse,0);$('title').style.display='none';document.body.classList.remove('pre');ac();if(AC&&AC.state==='suspended')AC.resume();
   if(isTouch&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});

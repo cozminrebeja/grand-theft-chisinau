@@ -5,6 +5,7 @@
 // LOD selection runs from the impostor mesh's onBeforeRender (no game.js hook needed).
 
 const veg_U={uTime:{value:0}};
+window.VEGETATION_LOD=true;  // world.js: far-LOD tiles (800 m-1.9 km) get trees too (impostors, ~4 ms per tile), not just the 800 m ring
 const veg_Q=GTC_Q==='ultra'?{nearR:230,nearCap:1500,bushR:150,bushCap:3200,grassR:70,grassCap:9000,maxTrees:21000,tileMaxTrees:5000,dens:80,flowerR:90,flowerCap:3000}:GTC_Q==='med'?{nearR:110,nearCap:350,bushR:90,bushCap:1500,grassR:40,grassCap:3000,maxTrees:16000,tileMaxTrees:3000,dens:110,flowerR:60,flowerCap:1200}:{nearR:160,nearCap:700,bushR:120,bushCap:2400,grassR:55,grassCap:6000,maxTrees:21000,tileMaxTrees:4500,dens:80,flowerR:90,flowerCap:3000};
 
 // ---------- textures ----------
@@ -334,7 +335,8 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
   sec.m8=performance.now();
   // ---- flower beds in big parks (per-tile mesh, shared material) ----
   {const b=new Bk(S.bedMat,true);const fuv=veg_cellUV(1,1);
-    for(const P of parks){if(P.A<6000)continue;const n=Math.min(6,P.A/9000|0)+1;let nbed=0;
+    for(const P of parks){if(P.A<6000||t.lod==='far')continue;  // beds are a draw call per tile and invisible from far
+const n=Math.min(6,P.A/9000|0)+1;let nbed=0;
       for(let k=0;k<n*6;k++){const x=rr(P.x0,P.x1),z=rr(P.z0,P.z1);const rx=rr(2.2,4.5),rz=rx*rr(.6,1);
         if(!inT(x,z)||!inPark(P,x,z)||onRoadF(x,z)||onPath(x,z,.5)||veg_solid(x,z)||pushOut(x,z,Math.max(rx,rz)+1)||near(x,z,Math.max(rx,rz)+1))continue;
         const G0=(vx,vz)=>groundY(vx,vz);const yc=G0(x,z);const seg=16;for(let sI=0;sI<seg;sI++){const a0=sI/seg*Math.PI*2,a1=(sI+1)/seg*Math.PI*2;const c0=Math.cos(a0),s0=Math.sin(a0),c1=Math.cos(a1),s1=Math.sin(a1);
@@ -352,8 +354,9 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
   {const k=pts.filter(veg_keep);pts.length=0;pts.push(...k);}{const k=bushes.filter(veg_keep);bushes.length=0;bushes.push(...k);}{const k=grass.filter(veg_keep);grass.length=0;grass.push(...k);}
   const N=pts.length,farM=new Float32Array(N*16),col=new Float32Array(N*3),arch=new Float32Array(N);
   for(let i=0;i<N;i++){const p=pts[i];veg_mFar(p,veg_tmp).toArray(farM,i*16);const c=veg_TINT[p[5]];col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;arch[i]=p[4];}
-  const rec={trees:pts,bushes,grass,farM,col,arch,ms:Math.round(performance.now()-t0),prof,n:[N,bushes.length,grass.length]};veg_tiles.set(t.key,rec);S.dirty=true;return rec;}
-function vegetationUnloadTile(t){if(veg_tiles.delete(t.key)&&veg_S)veg_S.dirty=true;}
+  const rec={t,trees:pts,bushes,grass,farM,col,arch,ms:Math.round(performance.now()-t0),prof,n:[N,bushes.length,grass.length]};veg_tiles.set(t.key,rec);S.dirty=true;return rec;}
+// only drop this tile object's own record: on a LOD swap the replacement tile has already stored its trees under the same key
+function vegetationUnloadTile(t){const r=veg_tiles.get(t.key);if(r&&r.t===t){veg_tiles.delete(t.key);if(veg_S)veg_S.dirty=true;}}
 // legacy whole-map builder (used if the world loader has no tiles): one pseudo-tile covering the data bounds
 function buildVegetation(){return buildVegetationTile({key:'legacy',x0:BX0,x1:BX1,z0:BZ0,z1:BZ1,group:scene,vegMaxTrees:veg_Q.maxTrees,
   data:{trees:D.trees||[],a:D.a||[],b:D.b||[]},vegRoads:roads.map(r=>({kind:r.kind,w:r.w,pts:r.pts}))});}
