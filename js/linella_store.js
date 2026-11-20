@@ -205,9 +205,21 @@ function lst_ui_init(){if(lst_ui)return;const css=document.createElement('style'
   '#lst_bub:after{content:"";position:absolute;left:50%;bottom:-8px;margin-left:-8px;border:8px solid transparent;border-bottom:0;border-top-color:#fff}';
   document.head.appendChild(css);for(const id of ['lst_fade','lst_hint','lst_bub']){const d=document.createElement('div');d.id=id;document.body.appendChild(d);}
   lst_ui={fade:document.getElementById('lst_fade'),hint:document.getElementById('lst_hint'),bub:document.getElementById('lst_bub')};}
-function lst_speak(t,pitch,rate){try{if(typeof fx_muted!=='undefined'&&fx_muted)return;const S=window.speechSynthesis;if(!S)return;
+// every NPC line goes through here: a pre-rendered file (assets/voice/voices.js 'all', tools/gen_piper.py) if there is one,
+// pitched per character via playbackRate; otherwise the browser's speechSynthesis
+function lst_speak(t,pitch,rate){try{if(typeof fx_muted!=='undefined'&&fx_muted)return;
+  const V=window.NPC_VOICES&&NPC_VOICES.all,f=V&&V[t];if(f){npc_play(f,Math.min(1.2,Math.max(.85,pitch||1)));return;}
+  const S=window.speechSynthesis;if(!S)return;
   if(!lst_voice)lst_voice=S.getVoices().find(v=>/^ro/i.test(v.lang))||null;const u=new SpeechSynthesisUtterance(t);u.lang='ro-RO';if(lst_voice)u.voice=lst_voice;u.rate=rate||1.05;u.pitch=pitch||1;u.volume=1;S.cancel();S.speak(u);}catch(e){}}
-function lst_say(who,text,pitch){lst_bub={who,text,t:2.6};lst_speak(text,pitch);subtitle(who.name||'Casiera',text,who.col);}
+// pre-generated character voices (assets/voice/voices.js, made by tools/gen_voices.py); false = no file, caller falls back to lst_speak
+const npc_audio={};let npc_cur=null;
+function npc_voice(grp,name,text,rate){try{const V=window.NPC_VOICES,f=V&&V[grp]&&V[grp][name]&&V[grp][name][text];if(!f)return false;
+  if(typeof fx_muted!=='undefined'&&fx_muted)return true;const a=npc_audio[f]||(npc_audio[f]=new Audio(f));
+  npc_play(f,rate||1);return true;}catch(e){return false;}}
+// play one pre-rendered line; rate also shifts pitch (preservesPitch off), so one voice gives deeper/higher characters
+function npc_play(f,rate){const a=npc_audio[f]||(npc_audio[f]=new Audio(f));if(npc_cur&&npc_cur!==a)npc_cur.pause();if(window.speechSynthesis)speechSynthesis.cancel();
+  a.preservesPitch=false;a.mozPreservesPitch=false;a.webkitPreservesPitch=false;a.currentTime=0;a.playbackRate=rate;a.play().catch(()=>{});npc_cur=a;}
+function lst_say(who,text,pitch,vg){lst_bub={who,text,t:2.6};if(!(vg&&npc_voice(vg[0],vg[1],text)))lst_speak(text,pitch);subtitle(who.name||'Casiera',text,who.col);}
 function lst_beep(){try{const a=(typeof fx_AC!=='undefined'&&fx_AC)||(lst_beep.ac=lst_beep.ac||new (window.AudioContext||window.webkitAudioContext)());const t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type='square';
   for(let i=0;i<6;i++)o.frequency.setValueAtTime(i%2?880:1320,t+i*.12);g.gain.setValueAtTime(.08,t);g.gain.setValueAtTime(0,t+.72);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+.75);}catch(e){}}
 
@@ -285,7 +297,7 @@ function lst_insideUpdate(dt,inp,P,api){
   const gd=lst_guard;let gv=0;
   if(gd.st==='chase'){const dx=lst_px-gd.x,dz=lst_pz-gd.z,d=Math.hypot(dx,dz);
     if(!lst_item||lst_item.paid||lst_pz>9){gd.st='back';gd.path=[[gd.hx,gd.hz]];}
-    else if(d<.75){api.money=Math.max(0,api.money-20);lst_say(gd,'Stai! Dă încoace!',.8);api.say('Paza te-a prins!','Ți-a luat '+lst_item.name+' · amendă 20 lei',2.6,'#ff8a65');lst_item=null;lst_alarm=false;gd.st='back';gd.path=[[gd.hx,gd.hz]];}
+    else if(d<.75){api.money=Math.max(0,api.money-20);lst_say(gd,'Stai! Dă încoace!',.8,['guard',lst_gv(lst_guardName)]);api.say('Paza te-a prins!','Ți-a luat '+lst_item.name+' · amendă 20 lei',2.6,'#ff8a65');lst_item=null;lst_alarm=false;gd.st='back';gd.path=[[gd.hx,gd.hz]];}
     else{const s=Math.min(d,4.6*dt);gd.x+=dx/d*s;gd.z+=dz/d*s;gd.h=lerpAng(gd.h,Math.atan2(dx,dz),1-Math.exp(-10*dt));gv=4.6;}}
   else if(gd.path.length){gv=lst_walk(gd,1.5,dt);if(!gd.path.length){if(gd.st==='go'){gd.st='fix';gd.wait=3;gd.h=Math.PI/2;}else if(gd.st==='back'){gd.st='idle';gd.h=Math.PI/2;}}}
   else if(gd.st==='fix'){gd.wait-=dt;if(gd.wait<=0){gd.st='back';const p=gd.ret;gd.path=[[p[0],6.1],[gd.hx,6.1],[gd.hx,gd.hz]];}}
@@ -317,10 +329,12 @@ const LST_ION_LINES=['Stai, hoțule!','Paza! Prindeți-l!','Unde fugi, mă?!','D
 let lst_ion=null,lst_ionLast=0;
 // the store guard's name: picked fresh on every store visit, the same guard chases you if you steal
 const LST_GUARD_NAMES=['Ion','Vasile','Gheorghe','Toader','Grigore','Mitică'];let lst_guardName='Ion';
+// voice every guard speaks with (assets/voice/voices.js 'guard' entry); null = each guard his own voice (Ion, Vasile, ...)
+const LST_GUARD_VOICE=null;const lst_gv=n=>LST_GUARD_VOICE||n;
 function lst_ionStart(D){if(!lst_ion){const g=makePersonGroup(0x14161a,0x14161a,0xe0b896);const u=g.userData;u.own=true;u.o.top=0x14161a;u.o.bot=0x14161a;u.o.mask|=ppl_F.sleeves|ppl_F.cap;u.o.acc=0x111111;
     ppl_applyLook(u.ims,0,1,u.o);g.visible=false;lst_ion={g};}
   const I=lst_ion;I.x=D.x+D.ox*.8;I.z=D.z+D.oz*.8;I.h=Math.atan2(D.ox,D.oz);I.name=lst_guardName;I.delay=1.4;I.t=28;I.lineT=0;I.on=true;I.v=0;I.text='';I.textT=0;}
-function lst_ionSay(I,t){I.text=t;I.textT=2.2;lst_speak(t,.75,1.2);subtitle('Paznic '+I.name,t,'#ff8a65');}
+function lst_ionSay(I,t){I.text=t;I.textT=2.2;if(!npc_voice('guard',lst_gv(I.name),t))lst_speak(t,.75,1.2);subtitle('Paznic '+I.name,t,'#ff8a65');}
 function lst_ionEnd(msg,sub){const I=lst_ion;I.on=false;I.g.visible=false;if(lst_ui)lst_ui.bub.style.display='none';if(msg)gtcApi.say(msg,sub||'',2.4,'#7dff8a');}
 function lst_ionUpdate(P){const now=performance.now(),dt=Math.min(.05,(now-(lst_ionLast||now))/1000);lst_ionLast=now;const I=lst_ion;if(!I||!I.on)return;
   if(lst_cur){I.g.visible=false;if(lst_ui)lst_ui.bub.style.display='none';return;}   // waits outside while you're in a store
