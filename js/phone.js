@@ -75,9 +75,9 @@ function ph_end(){const m=ph_m;if(m&&m.def.cleanup)try{m.def.cleanup(m);}catch(e
 
 // ---------------- the missions ----------------
 const PH_MISSIONS=[
-  {id:'mama',from:'Mama',title:'Pâine pentru mama',sms:'Puiule, ia-mi te rog o pâine de la Linella și adu-o acasă.',
+  {id:'mama',from:'Mama',title:'Pâine pentru mama',sms:'Puiule, ia-mi te rog o pâine de la Lenella și adu-o acasă.',
    can:()=>typeof linella_list!=='undefined'&&linella_list&&linella_list.length,
-   start(m){const L=ph_nearest(linella_list);m.stage='buy';ph_goal(m,L.x,L.z,'Cumpără o pâine de la Linella',{r:30});},
+   start(m){const L=ph_nearest(linella_list);m.stage='buy';ph_goal(m,L.x,L.z,'Cumpără o pâine de la Lenella',{r:30});},
    ev(m,n,d){if(n!=='store_exit'||m.stage!=='buy')return;
      if(!/Pâine|Franzelă/.test(d.name)){ph_say('Mama','Am zis pâine, nu altceva!');return;}
      m.stage='home';const H=ph_getHome();ph_goal(m,H.x,H.z,'Du pâinea acasă',{r:5});if(!d.paid)ph_say('Mama','Sper că ai plătit-o, da?');},
@@ -95,11 +95,11 @@ const PH_MISSIONS=[
    start(m){const T=ph_poi(null,900,1700);if(!T)return false;m.t=180;m.stage='go';ph_goal(m,T.x,T.z,'Ajungi la lucru: '+T.name,{r:10});},
    update(m,dt){m.t-=dt;if(ph_at(m))ph_done(m,90,'Bine că ai venit. Azi te iert.');else if(m.t<=0)ph_fail(m,'Iar ai întârziat! Ți-am tăiat din salariu.');}},
 
-  {id:'jora',from:'Jora',title:'Canistra lui Jora',sms:'Frate, am rămas fără benzină. Ia o canistră de la Bemol și adu-mi-o!',
+  {id:'jora',from:'Jora',title:'Canistra lui Jora',sms:'Frate, am rămas fără benzină. Ia o canistră de la Bemoll și adu-mi-o!',
    can:()=>typeof bemol_list!=='undefined'&&bemol_list&&bemol_list.length,
    start(m){const s=ph_spot(ph_P().x,ph_P().z,500,1200,true);if(!s)return false;m.car=ph_car('lada',s,0x8a1c1c);m.jora={x:s.x,z:s.z};
      const fx=Math.cos(s.h),fz=-Math.sin(s.h),jx=s.x-s.fx*2.2,jz=s.z-s.fz*2.2;m.npc=ph_npc(jx,jz,0x4f7a2e,Math.atan2(s.fx,s.fz));
-     m.stage='buy';const B=ph_nearest(bemol_list);m.bemol=B;ph_goal(m,B.x,B.z,'Cumpără o canistră la Bemol (E lângă pompe) · 100 lei',{r:12});},
+     m.stage='buy';const B=ph_nearest(bemol_list);m.bemol=B;ph_goal(m,B.x,B.z,'Cumpără o canistră la Bemoll (E lângă pompe) · 100 lei',{r:12});},
    action(m){if(m.stage!=='buy')return false;const P=ph_P(),v=P.car,x=v?v.x:P.x,z=v?v.z:P.z;if(v&&Math.abs(v.speed)>1.5)return false;
      const B=ph_nearest(bemol_list);if(!B||Math.hypot(B.x-x,B.z-z)>12)return false;const api=ph_api();
      if(api.money<100){api.say('Canistra: 100 lei','Nu ai destui bani',2,'#ff8a65');return true;}
@@ -119,10 +119,10 @@ const PH_MISSIONS=[
        if(P.car===m.car&&ph_at(m,true)){const hp=typeof cc_state==='function'?cc_state(m.car).hp:100;
          if(hp>=90)ph_done(m,150,'Clientul e mulțumit. Uite 150 de lei!');else ph_done(m,40,'Ai zgâriat-o! Îți dau doar 40 de lei.');}}}},
 
-  {id:'tolea',from:'Tolea',title:'O belotă cu Tolea',sms:'Hai la belot la Bemol, ne trebuie al patrulea!',
+  {id:'tolea',from:'Tolea',title:'O belotă cu Tolea',sms:'Hai la belot la Bemoll, ne trebuie al patrulea!',
    can:()=>typeof bemol_list!=='undefined'&&bemol_list&&bemol_list.length&&typeof bemol_cfg==='function',
    start(m){const B=ph_nearest(bemol_list,s=>s.placed!==false&&bemol_cfg(s).belot.some(n=>n<4));if(!B)return false;m.stage='play';
-     ph_goal(m,B.x,B.z,'Joacă o partidă de belot la Bemol (ia loc la o masă cu E)',{r:25});},
+     ph_goal(m,B.x,B.z,'Joacă o partidă de belot la Bemoll (ia loc la o masă cu E)',{r:25});},
    ev(m,n,d){if(n!=='belot_end')return;if(d.win)ph_done(m,120,'Bravo! Ai câștigat, uite 120 de lei.');else ph_done(m,40,'Ai pierdut, dar ai jucat frumos. Uite 40 de lei.');}},
 
   {id:'necunoscut',from:'Necunoscut',title:'O treabă murdară',sms:'Am o treabă pentru tine. Un SUV alb e parcat aproape. Du-l la vulcanizare și primești 350 de lei.',
@@ -149,11 +149,11 @@ const PH_MISSIONS=[
      m.t-=dt;if(ph_away(m,dt)){ph_fail(m,'Las-o, iau troleibuzul.');return;}
      if(ph_at(m,true))ph_done(m,90,'Am ajuns! Mersi, frate, îți dau o bere după sesiune.');else if(m.t<=0)ph_fail(m,'Gata, am întârziat. Mă pică sigur.');}},
 
-  {id:'valentina',from:'Valentina',title:'Înghețata se topește',sms:'S-a defectat frigiderul! Ia înghețata de la noi și du-o la alt Linella, repede, că se topește!',
+  {id:'valentina',from:'Valentina',title:'Înghețata se topește',sms:'S-a defectat frigiderul! Ia înghețata de la noi și du-o la alt Lenella, repede, că se topește!',
    can:()=>typeof linella_list!=='undefined'&&linella_list&&linella_list.length>1,
    start(m){const A=ph_nearest(linella_list),B=linella_list.filter(s=>s!==A&&Math.hypot(s.x-A.x,s.z-A.z)>500).sort((a,b)=>Math.hypot(a.x-A.x,a.z-A.z)-Math.hypot(b.x-A.x,b.z-A.z))[0];
-     if(!B)return false;m.A=A;m.B=B;m.stage='get';ph_goal(m,A.x,A.z,'Ia înghețata de la Linella',{r:25});},
-   update(m,dt){if(m.stage==='get'){if(ph_at(m)){m.stage='go';m.t=Math.round(Math.max(90,Math.hypot(m.B.x-m.A.x,m.B.z-m.A.z)/8+30));ph_goal(m,m.B.x,m.B.z,'Du înghețata la celălalt Linella',{r:25});ph_say('Valentina','Fugi, fugi, că se topește!');}return;}
+     if(!B)return false;m.A=A;m.B=B;m.stage='get';ph_goal(m,A.x,A.z,'Ia înghețata de la Lenella',{r:25});},
+   update(m,dt){if(m.stage==='get'){if(ph_at(m)){m.stage='go';m.t=Math.round(Math.max(90,Math.hypot(m.B.x-m.A.x,m.B.z-m.A.z)/8+30));ph_goal(m,m.B.x,m.B.z,'Du înghețata la celălalt Lenella',{r:25});ph_say('Valentina','Fugi, fugi, că se topește!');}return;}
      m.t-=dt;if(ph_at(m))ph_done(m,120,'Ai salvat înghețata! Mulțumim frumos.');else if(m.t<=0)ph_fail(m,'S-a topit tot. Lasă, nu-i nimic.');}},
 
   {id:'grisa',from:'Grișa',title:'Cursa cu Grișa',sms:'Vecine, mi-a rămas mașina în Durlești. Mă duci s-o iau?',

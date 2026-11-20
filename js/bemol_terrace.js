@@ -28,7 +28,7 @@ let bemol_TA=null,bemol_scanT=0;
 function bemol_buildTerraces(){   // shared materials/geometry; the terraces themselves are built per station when you get close
   const wood=new THREE.MeshLambertMaterial({color:0x8a5a34}),white=new THREE.MeshLambertMaterial({color:0xf2f0ea}),metal=new THREE.MeshLambertMaterial({color:0x3a3d40});
   const bandT=bemol_tex(512,96,(g,w,h)=>{g.fillStyle='#0a8a43';g.fillRect(0,0,w,h);g.fillStyle='#ffd400';g.fillRect(0,h*.84,w,h*.16);g.fillStyle='#fff';g.textAlign='center';g.textBaseline='middle';
-    g.font='900 54px Anton, Impact, Arial Black, sans-serif';g.fillText('BEMOL',w*.3,h*.44);g.font='800 30px Inter, Arial, sans-serif';g.fillText('CAFEA · MARKET',w*.72,h*.46);});
+    g.font='900 54px Anton, Impact, Arial Black, sans-serif';g.fillText('BEMOLL',w*.3,h*.44);g.font='800 30px Inter, Arial, sans-serif';g.fillText('CAFEA · MARKET',w*.72,h*.46);});
   const bandM=new THREE.MeshLambertMaterial({map:bandT,emissive:0x00260e});
   bemol_TA={wood,white,metal,bandM,green:new THREE.MeshLambertMaterial({color:0x0a8a43}),chair:new THREE.MeshLambertMaterial({color:0x1f6b3a}),
     card:new THREE.MeshLambertMaterial({color:0xfafafa}),glass:new THREE.MeshLambertMaterial({color:0xbfe3d0,emissive:0x3a5a48}),

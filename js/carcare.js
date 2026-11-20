@@ -42,8 +42,8 @@ const cc_thirst=v=>v.type==='bus'||v.type==='rutiera'?1.8:v.type==='police'?1.2:
 
 function cc_carcareDrive_(v,dt,inp){const c=cc_state(v);let t=1,max=1;
   if(!cc_electric(v)){const d=Math.abs(v.speed)*dt;c.fuel=Math.max(0,c.fuel-(d*CC_LPM*(.55+.45*Math.abs(inp.t))+.0005*dt)*cc_thirst(v));
-    if(c.fuel<=0){t=0;if(!c.dry){c.dry=true;gtcApi.say('Ai rămas fără benzină!','Mergi pe jos până la un Bemol sau ia altă mașină',3,'#ff8a65');}}else c.dry=false;
-    if(c.fuel>0&&c.fuel<2.5&&!c.low){c.low=true;gtcApi.say('Rezervor aproape gol','Alimentează la Bemol',2.4,'#ffb347');}else if(c.fuel>4)c.low=false;}
+    if(c.fuel<=0){t=0;if(!c.dry){c.dry=true;gtcApi.say('Ai rămas fără benzină!','Mergi pe jos până la un Bemoll sau ia altă mașină',3,'#ff8a65');}}else c.dry=false;
+    if(c.fuel>0&&c.fuel<2.5&&!c.low){c.low=true;gtcApi.say('Rezervor aproape gol','Alimentează la Bemoll',2.4,'#ffb347');}else if(c.fuel>4)c.low=false;}
   if(c.hp<50)max*=.55+.45*c.hp/50;if(c.hp<=0){max*=.45;t*=.6;}
   if(cc_busy&&cc_busy.v===v)t=0;   // pump / lift running: engine off
   return {t,max};}
@@ -162,12 +162,12 @@ function cc_carcareAction_(){const P=gtcApi.player;
   if(cc_busy){cc_finish(true);return true;}
   const z=cc_zone(P);if(!z)return false;const c=cc_state(z.v),api=gtcApi;
   if(z.kind==='pump'){const need=CC_TANK-c.fuel;if(need<.5)return false;if(api.money<CC_PRICE*.5){api.say('Nu ai bani de benzină','Litrul: '+CC_PRICE+' lei',2.2,'#ff8a65');return true;}
-    cc_busy={kind:'pump',v:z.v,paid:0,l:0,cost:0,m0:api.money};cc_say('Bemol',CC_PUMP[0],'#7dffa8');return true;}
+    cc_busy={kind:'pump',v:z.v,paid:0,l:0,cost:0,m0:api.money};cc_say('Bemoll',CC_PUMP[0],'#7dffa8');return true;}
   const dmg=100-c.hp;if(dmg<1){cc_say(z.g.G.mech,CC_MECH_OK[0]);return false;}
   const cost=Math.ceil(dmg*CC_REPAIR);if(api.money<Math.min(cost,25)){cc_say(z.g.G.mech,CC_MECH_BROKE[0]);api.say('Reparația: '+cost+' lei','Nu ai destui bani',2.2,'#ff8a65');return true;}
   cc_busy={kind:'garage',v:z.v,g:z.g,t:0,dur:1.2+dmg*.03,from:c.hp,paid:0,m0:api.money};cc_say(z.g.G.mech,cc_pick(CC_MECH_HI));return true;}
 function cc_finish(stopped){const b=cc_busy;cc_busy=null;if(!b)return;const api=gtcApi;
-  if(b.kind==='pump'){api.say('⛽ +'+b.l.toFixed(1)+' L','-'+Math.round(b.paid)+' lei · Bemol',2.2,'#7dffa8');if(!stopped)cc_say('Bemol',CC_PUMP[1],'#7dffa8');}
+  if(b.kind==='pump'){api.say('⛽ +'+b.l.toFixed(1)+' L','-'+Math.round(b.paid)+' lei · Bemoll',2.2,'#7dffa8');if(!stopped)cc_say('Bemoll',CC_PUMP[1],'#7dffa8');}
   else{api.say('🔧 Mașina: '+Math.round(cc_state(b.v).hp)+'%','-'+Math.round(b.paid)+' lei · '+b.g.G.name,2.4,'#ffb347');if(!stopped)cc_say(b.g.G.mech,cc_pick(CC_MECH_DONE));}}
 function cc_work(dt,player){const b=cc_busy;if(!b)return;const api=gtcApi,c=cc_state(b.v);
   if(player.car!==b.v||Math.abs(b.v.speed)>1.2){cc_finish(true);return;}

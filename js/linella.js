@@ -17,7 +17,7 @@ function linella_build(){
     linella_list.push({x,z,a,y:groundY(x,z),nx:snx,nz:snz,armed:true});}
   const N=linella_list.length;
   const face=linella_tex(512,256,(g,w,h)=>{const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'#e4002b');gr.addColorStop(1,'#b0001f');g.fillStyle=gr;g.fillRect(0,0,w,h);
-    g.fillStyle='#ffd200';g.fillRect(0,h*.8,w,h*.2);g.fillStyle='#fff';g.font='900 128px Anton, Impact, Arial Black, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('LINELLA',w/2,h*.42);
+    g.fillStyle='#ffd200';g.fillRect(0,h*.8,w,h*.2);g.fillStyle='#fff';g.font='900 128px Anton, Impact, Arial Black, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('LENELLA',w/2,h*.42);
     g.fillStyle='#7a0016';g.font='800 30px Inter, Arial, sans-serif';g.fillText('SUPERMARKET · 08:00–22:00',w/2,h*.9);});
   linella_face=face;
   const signMat=new THREE.MeshLambertMaterial({map:face,emissive:0x5a0010,emissiveMap:face});

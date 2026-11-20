@@ -2,8 +2,8 @@
 // Map icons for places added by other modules (Bemol gas stations, Linella stores), drawn on the minimap and the big map (Tab).
 // Called from game.js: hook('mapIcons', ctx, P, 'mini'|'big', opts). P(x,z) -> canvas coords.
 const MAPICON_KINDS=[
-  {list:()=>typeof bemol_list!=='undefined'?bemol_list:null,bg:'#0a8a43',fg:'#ffd400',ch:'B',name:'Bemol'},
-  {list:()=>typeof linella_list!=='undefined'?linella_list:null,bg:'#e4002b',fg:'#fff',ch:'L',name:'Linella'},
+  {list:()=>typeof bemol_list!=='undefined'?bemol_list:null,bg:'#0a8a43',fg:'#ffd400',ch:'B',name:'Bemoll'},
+  {list:()=>typeof linella_list!=='undefined'?linella_list:null,bg:'#e4002b',fg:'#fff',ch:'L',name:'Lenella'},
   {list:()=>typeof APT_ICON!=='undefined'?APT_ICON:null,bg:'#1e5aa8',fg:'#fff',ch:'✈',name:'Aeroport'},
   {list:()=>typeof PH_HOME_ICON!=='undefined'?PH_HOME_ICON:null,bg:'#ff9ecb',fg:'#1a1305',ch:'🏠',name:'Acasă'},
   {list:()=>typeof CC_ICON!=='undefined'?CC_ICON():null,bg:'#f59e0b',fg:'#1a1305',ch:'🔧',name:'Vulcanizare'},

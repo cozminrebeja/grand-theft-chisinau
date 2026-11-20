@@ -23,7 +23,7 @@ const ST_ITEMS={
   frig:[['Bere rece',24],['Kvas',18],['Limonadă',20],['Chefir',14]],
 };
 const ST_CATNAME={lactate:'LACTATE',dulciuri:'DULCIURI',bauturi:'BĂUTURI',vinuri:'VINURI ȘI DIVINURI',paine:'PÂINE',conserve:'CONSERVE',snacks:'SNACKS',legume:'LEGUME ȘI FRUCTE',frig:'BĂUTURI RECI'};
-const ST_LINES=[['Paza, anulare!',.55],['Pachet vă trebuie?',.15],['Aveți card Linella?',.15],['Casă liberă!',.15]];
+const ST_LINES=[['Paza, anulare!',.55],['Pachet vă trebuie?',.15],['Aveți card Lenella?',.15],['Casă liberă!',.15]];
 
 let lst_mats=null,lst_tick=0,lst_markers=[],lst_int=null,lst_cur=null,lst_tr=null,lst_A=0,lst_cA=1,lst_sA=0,lst_O={x:0,z:0},lst_Y=0;
 let lst_px=0,lst_pz=0,lst_boxes=[],lst_npcs=[],lst_cash=[],lst_guard=null,lst_item=null,lst_eventT=10,lst_lights=null,lst_alarm=false;
@@ -128,7 +128,7 @@ function lst_buildInterior(){const g=new THREE.Group();g.visible=false;scene.add
   const lamp=new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false});
   for(let x=-9;x<=9;x+=3)for(let z=2;z<ST_D-1;z+=3.2)B(.35,.04,1.7,x,ST_H-.05,z,lamp);
   // big back-wall sign
-  const bigT=lst_tex(1024,160,(c,w,h)=>{c.fillStyle='#c4001f';c.fillRect(0,0,w,h);c.fillStyle='#ffd200';c.fillRect(0,h-22,w,22);c.fillStyle='#fff';c.font='900 112px Anton, Impact, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('LINELLA',w/2,h/2-10);});
+  const bigT=lst_tex(1024,160,(c,w,h)=>{c.fillStyle='#c4001f';c.fillRect(0,0,w,h);c.fillStyle='#ffd200';c.fillRect(0,h-22,w,22);c.fillStyle='#fff';c.font='900 112px Anton, Impact, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('LENELLA',w/2,h/2-10);});
   P(8,1.25,0,3.45,ST_D-.02,Math.PI,new THREE.MeshBasicMaterial({map:bigT}));
   const posterM=(t1,t2,bg,fg)=>new THREE.MeshBasicMaterial({map:lst_tex(256,340,(c,w,h)=>{c.fillStyle=bg;c.fillRect(0,0,w,h);c.fillStyle=fg;c.textAlign='center';c.font='900 52px Anton, Impact, sans-serif';c.fillText(t1,w/2,110);c.font='900 110px Anton, Impact, sans-serif';c.fillText(t2,w/2,250);})});
   P(1.3,1.7,-ST_HW+.02,1.9,7,Math.PI/2,posterM('REDUCERI','-30%','#ffd200','#c4001f'));P(1.3,1.7,ST_HW-.02,1.9,7.8,-Math.PI/2,posterM('OFERTA','2+1','#c4001f','#fff'));
@@ -233,7 +233,7 @@ function lst_enter(s){lst_initMats();if(!lst_int)lst_buildInterior();const api=g
   lst_guardName=LST_GUARD_NAMES[Math.floor(Math.random()*LST_GUARD_NAMES.length)];lst_guard.name='Paznic '+lst_guardName;
   lst_px=0;lst_pz=1.9;P.h=lst_A;api.camYaw=lst_A;lst_camSnap=true;lst_item=null;lst_alarm=false;lst_eventT=mr(5,12);
   const gd=lst_guard;gd.x=gd.hx;gd.z=gd.hz;gd.st='idle';gd.path=[];for(const m of lst_markers)m.g.visible=false;
-  api.say('LINELLA','Bine ați venit! · E lângă raft — ia un produs',2.4,'#ffd23f');}
+  api.say('LENELLA','Bine ați venit! · E lângă raft — ia un produs',2.4,'#ffd23f');}
 function lst_exit(){const api=gtcApi,P=api.player,s=lst_cur,D=s.door;const h=Math.atan2(D.ox,D.oz);
   P.x=D.x+D.ox*1.7;P.z=D.z+D.oz*1.7;P.h=h;P.y=groundY(P.x,P.z);api.camYaw=h;api.camPos.set(P.x-Math.sin(h)*6,P.y+3,P.z-Math.cos(h)*6);
   P.m.position.set(P.x,P.y,P.z);P.m.rotation.y=h;lst_int.visible=false;lst_lights.amb.intensity=0;lst_lights.dir.intensity=0;
