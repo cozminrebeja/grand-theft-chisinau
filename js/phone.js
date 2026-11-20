@@ -19,7 +19,7 @@ function ph_sms(who,text){ph_log.push({who,text});if(ph_log.length>8)ph_log.shif
 const PH_WHO={'Mama':{av:'👩',col:'#ff9ecb',pitch:1.15},'Mișa':{av:'🧔',col:'#7dd3ff',pitch:1},'Șeful':{av:'👔',col:'#ffb347',pitch:.88},
   'Jora':{av:'🧑‍🔧',col:'#9dff8a',pitch:.95},'Vasea':{av:'🔧',col:'#f59e0b',pitch:.9},'Tolea':{av:'🃏',col:'#c7a2ff',pitch:1.05},'Necunoscut':{av:'❓',col:'#d0d0d0',pitch:.85},
   'Bunica':{av:'👵',col:'#ffc1e3',pitch:1.18},'Vitea':{av:'🎓',col:'#7dffb0',pitch:1.08},'Valentina':{av:'🍦',col:'#ff8ab3',pitch:1.15},'Grișa':{av:'🧑‍🌾',col:'#d9b38c',pitch:.92},
-  'Fedea':{av:'🚕',col:'#ffd23f',pitch:.95},'Paznicul Ion':{av:'🦺',col:'#ff8a65',pitch:.8},'Nașul':{av:'🤵',col:'#e6c27a',pitch:.85},'Sanea':{av:'🚐',col:'#7fb2ff',pitch:1},'Pasager':{av:'🧍',col:'#cfd8dc',pitch:1.05}};
+  'Fedea':{av:'🚕',col:'#ffd23f',pitch:.95},'Paznicul Ion':{av:'🦺',col:'#ff8a65',pitch:.8},'Nașul':{av:'🤵',col:'#e6c27a',pitch:.85},'Sanea':{av:'🚐',col:'#7fb2ff',pitch:1},'Andrei':{av:'🧳',col:'#8fd3ff',pitch:1.02},'Pasager':{av:'🧍',col:'#cfd8dc',pitch:1.05}};
 function ph_spot(px,pz,dmin,dmax,park){for(let t=0;t<60;t++){const e=randEdgeNear(px,pz,dmin,dmax,edges,30);if(!e||e.w>13||e.len<20||e.tw)continue;const P=e.pts,s=Math.floor(Math.random()*(P.length-1)),a=P[s],b=P[s+1];
     const dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz);if(l<8)continue;const f=.3+Math.random()*.4,side=Math.random()<.5?1:-1,nx=-dz/l*side,nz=dx/l*side,o=e.w/2+(park?.55:1.5);
     const x=a[0]+dx*f+nx*o,z=a[1]+dz*f+nz*o;if(pushOut(x,z,park?2:.6))continue;if(park&&vehicles.some(v=>Math.abs(v.x-x)<6&&Math.abs(v.z-z)<6))continue;
@@ -206,6 +206,20 @@ const PH_MISSIONS=[
      if(ph_at(m,true)&&Math.abs(P.car.speed)<2){m.seen.add(m.stop.i);m.n++;const api=ph_api();api.money+=15;api.say('+15 lei','Stația '+m.stop.name,1.6,'#7dff8a');
        const r=Math.random();if(r<.33)ph_say('Pasager','Transmiteți banii, vă rog!');else if(r<.66)ph_say('Pasager','Opriți la stație, vă rog!');else ph_say('Pasager','Mai încet, șofer, nu duci cartofi!');
        m.stop=null;if(m.n>=5)ph_done(m,25,'Mersi, frate! Mâine iar ies eu pe traseu.');}}},
+  {id:'andrei',from:'Andrei',title:'Andrei vine din Arad',sms:'Salut, frate! Aterizez acum din Arad. Mă iei de la aeroport?',
+   can:()=>typeof APT!=='undefined',
+   start(m){const x=APT.x+4,z=APT.z-APT.D/2-12;m.t=480;m.stage='go';m.ax=x;m.az=z;ph_goal(m,x,z,'Ia-l pe Andrei de la Aeroport (zborul GT 311 din Arad)',{r:12});},
+   cleanup(m){if(m.bag)scene.remove(m.bag);},
+   update(m,dt){const P=ph_P();
+     if(m.stage==='go'||m.stage==='wait'){m.t-=dt;const d=Math.hypot(m.ax-P.x,m.az-P.z);
+       if(m.stage==='go'&&d<500){m.stage='wait';m.npc=ph_npc(m.ax,m.az,0x2f6fb0,Math.PI);
+         m.bag=new THREE.Mesh(new THREE.BoxGeometry(.42,.6,.25),new THREE.MeshLambertMaterial({color:0x7a1f2b}));m.bag.position.set(m.ax+.55,groundY(m.ax,m.az)+.32,m.az);m.bag.castShadow=true;scene.add(m.bag);
+         ph_say('Andrei','Gata, am aterizat! Te aștept la ieșire, cu valiza.');}
+       if(m.stage==='wait'&&ph_board(m,dt)){if(m.bag){scene.remove(m.bag);m.bag=null;}m.stage='drop';
+         const T=ph_poi(/Piața Centrală/i)||ph_poi(null,800,3000);ph_goal(m,T.x,T.z,'Du-l pe Andrei în centru: '+T.name,{r:10});ph_say('Andrei','Ce bine că ai venit! Hai, du-mă în centru.');return;}
+       if(m.t<=0)ph_fail(m,'Am așteptat prea mult. Iau un taxi de la aeroport.');return;}
+     if(ph_away(m,dt)){ph_fail(m,'Bine, iau un taxi de la aeroport.');return;}
+     if(ph_at(m,true))ph_done(m,180,'Mersi, frate! Ne vedem diseară la o bere.');}},
 ];
 
 // ---------------- phone UI ----------------
