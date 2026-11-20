@@ -5,7 +5,7 @@
 // carcareAction() on E/F/INTRĂ (true = handled, don't leave the car), carcareCrash(v,imp), carcareUpdate(dt,player).
 // vehicles.js lifts the body by v.bump (pothole bounce). Per-car state lives on the vehicle: v.cc={fuel,hp}.
 
-const CC_TANK=30,CC_PRICE=24.9,CC_LPM=1/1000;           // litres, lei per litre, litres per metre (a full tank ≈ 30 km)
+const CC_TANK=30,CC_PRICE=24.9,CC_LPM=.25/1000;         // litres, lei per litre, litres per metre (a full tank ≈ 120 km)
 const CC_HOLE_DMG=1;                                     // % of condition lost per pothole
 const CC_REPAIR=2.5;                                      // lei per % of damage
 const CC_FILL=5;                                          // litres per second at the pump
@@ -41,7 +41,7 @@ const cc_electric=v=>v.type==='trolley';
 const cc_thirst=v=>v.type==='bus'||v.type==='rutiera'?1.8:v.type==='police'?1.2:1;
 
 function cc_carcareDrive_(v,dt,inp){const c=cc_state(v);let t=1,max=1;
-  if(!cc_electric(v)){const d=Math.abs(v.speed)*dt;c.fuel=Math.max(0,c.fuel-(d*CC_LPM*(.55+.45*Math.abs(inp.t))+.002*dt)*cc_thirst(v));
+  if(!cc_electric(v)){const d=Math.abs(v.speed)*dt;c.fuel=Math.max(0,c.fuel-(d*CC_LPM*(.55+.45*Math.abs(inp.t))+.0005*dt)*cc_thirst(v));
     if(c.fuel<=0){t=0;if(!c.dry){c.dry=true;gtcApi.say('Ai rămas fără benzină!','Mergi pe jos până la un Bemol sau ia altă mașină',3,'#ff8a65');}}else c.dry=false;
     if(c.fuel>0&&c.fuel<2.5&&!c.low){c.low=true;gtcApi.say('Rezervor aproape gol','Alimentează la Bemol',2.4,'#ffb347');}else if(c.fuel>4)c.low=false;}
   if(c.hp<50)max*=.55+.45*c.hp/50;if(c.hp<=0){max*=.45;t*=.6;}
@@ -51,11 +51,11 @@ function cc_carcareDrive_(v,dt,inp){const c=cc_state(v);let t=1,max=1;
 function cc_damage(v,n,why){const c=cc_state(v),was=c.hp;c.hp=Math.max(0,c.hp-n);
   if(was>0&&c.hp<=0)gtcApi.say('Motorul s-a stricat!','Du mașina la o vulcanizare (🔧 pe hartă)',3,'#ff8a65');
   else if(was>=30&&c.hp<30)gtcApi.say('Mașina e grav avariată','Repar-o la o vulcanizare (🔧 pe hartă)',2.6,'#ffb347');}
-function cc_carcareCrash_(v,imp){if(imp>4)cc_damage(v,(imp-4)*1.6);}
+function cc_carcareCrash_(v,imp){if(imp>7)cc_damage(v,Math.min(3,(imp-7)*.25));}   // only real hits count, max 3% per crash
 
 // ---------------- potholes ----------------
 function cc_buildHoles(){cc_holes=[];
-  for(const e of edges){if(e.len<12||e.tw&&e.w>=14)continue;const r=cc_rnd(e.i,1),p=e.w>=14?.12:e.w>=9?.3:.5;if(r>p)continue;
+  for(const e of edges){if(e.len<12||e.tw&&e.w>=14)continue;const r=cc_rnd(e.i,1),p=e.w>=14?.06:e.w>=9?.15:.25;if(r>p)continue;
     const n=1+Math.floor(cc_rnd(e.i,2)*Math.min(4,e.len/45));
     // cumulative length along the polyline
     const P=e.pts,cum=[0];for(let i=1;i<P.length;i++)cum.push(cum[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]));const L=cum[cum.length-1];
