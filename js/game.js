@@ -217,9 +217,10 @@ function updAI(v,dt){const a=v.ai;let target=Math.min(v.v0,a.e.vmax+(v.type==='t
   const chk=(ox,oz,olen,owid)=>{const rx=ox-v.x,rz=oz-v.z,ah=rx*fx+rz*fz;if(ah<=0||ah>look+olen/2)return;if(Math.abs(rx*fz-rz*fx)>(v.spec.wid+owid)/2+.1)return;const gap=ah-v.spec.len/2-olen/2;target=Math.min(target,gap<2?0:(gap-2)*1.6);};
   for(const o of vehicles){if(o===v||Math.abs(o.x-v.x)>30||Math.abs(o.z-v.z)>30)continue;if(o.mode==='ai'&&Math.sin(o.h)*fx+Math.cos(o.h)*fz<.3)continue;chk(o.x,o.z,o.spec.len,o.spec.wid);}
   if(player.mode==='foot')chk(player.x,player.z,.5,.6);
+  {const t2=hook('aiTarget',v,a,target,dt);if(t2!=null&&isFinite(t2))target=t2;} // js/roadlife.js: lights, yielding, blocked drivers
   v.speed+=clamp(target-v.speed,-16*dt,4.5*dt);agentStep(a,Math.max(0,v.speed)*dt);
   if(a.dead){respawnAI(v);return;}
-  v.x=a.x;v.z=a.z;v.h=lerpAng(v.h,Math.atan2(a.hx,a.hz),1-Math.exp(-7*dt));v.y=surfaceY(v.x,v.z,v.y,a.hx,a.hz);
+  v.x=a.x;v.z=a.z;v.h=lerpAng(v.h,Math.atan2(a.hx,a.hz),1-Math.exp(-7*dt));hook('aiPost',v,dt);v.y=surfaceY(v.x,v.z,v.y,a.hx,a.hz);
   v.stuck=v.speed<.4&&a.stopT<=0?v.stuck+dt:0;
   const dp=Math.hypot(v.x-player.x,v.z-player.z);if(dp>(a.kind==='trolley'?900:520)||(v.stuck>14&&dp>70))respawnAI(v);}
 function updChase(v,dt){
@@ -447,7 +448,7 @@ function updTrolleyStation(){const v=player.car;if(!v||v.type!=='trolley'||Math.
 function v_steerTrack(dt,inp){for(const v of vehicles){if(v===player.car)v.steer=inp.s;else{const h0=v._ph==null?v.h:v._ph;v.steer=clamp(-angDiff(v.h,h0)/Math.max(dt,1e-3)/1.5,-1,1);}v._ph=v.h;}}
 // ================= main loop =================
 // small API for side modules (Linella store interior)
-window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v},set shake(v){shake=Math.max(shake,v)},get stars(){return stars},get taxiMission(){return !!mission&&mission.stage==='drop'},cancelTaxi:()=>{if(mission)endMission();},gps:(x,z)=>gpsSet(x,z),gpsOff:()=>gpsClear()};
+window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v},set shake(v){shake=Math.max(shake,v)},get stars(){return stars},get taxiMission(){return !!mission&&mission.stage==='drop'},cancelTaxi:()=>{if(mission)endMission();},spawnAI:(t,k,n)=>spawnAI(t,k,n),gps:(x,z)=>gpsSet(x,z),gpsOff:()=>gpsClear()};
 await progress('PLAY');playBtn.disabled=false;$('setBtn').disabled=false;
 let last=performance.now(),titleT=0,parkT=0,mapT=0;
 // frame cap (pause menu → Setări): renders at most fpsCap frames/s; 0 = unlimited (monitor refresh rate)
@@ -462,7 +463,7 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   else if(fly)flyUpdate(dt);
   else{const inp=input();window.gtcInput=inp;const inStore=(player.mode==='foot'&&hook('storeUpdate',dt,inp))||hook('airportUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated||hook('introBusy')){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('introUpdate',dt);hook('phoneUpdate',dt,player);hook('lifeUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('introUpdate',dt);hook('phoneUpdate',dt,player);hook('lifeUpdate',dt,player);hook('roadUpdate',dt,player);hook('ambUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);

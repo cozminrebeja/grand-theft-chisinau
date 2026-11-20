@@ -404,7 +404,7 @@ function lf_evFuneral(P){const e=lf_aheadEdge(P.x,P.z,e=>e.w>=6&&e.w<=12&&!e.ow&
     if(d<18&&S.talkT<=0){if(lf_say('Un bătrân',mpick(LF_L_FUN),.85,'#c8c8c8'))S.talkT=45;}};
   return S;}
 // police checkpoint: two cars on the kerb, an officer waving traffic through
-function lf_evPolice(P){const e=lf_aheadEdge(P.x,P.z,e=>e.w>=8&&e.len>50&&!e.tw,90,240);if(!e)return null;
+function lf_evPolice(P){if(window.__dbg&&__dbg.noPolice)return null;const e=lf_aheadEdge(P.x,P.z,e=>e.w>=8&&e.len>50&&!e.tw,90,240);if(!e)return null;
   let dir=dirsFor(e,'car').find(d=>{const[ux,uz]=edgeDir(e,d,false);return (e.mid[0]-P.x)*ux+(e.mid[1]-P.z)*uz>0;});if(dir==null)dir=mpick(dirsFor(e,'car'));
   const Pt=edgePath(e,dir,laneOff(e,'car',e.nPer-1)),C=lf_along(Pt,lf_len(Pt)*mr(.45,.65));
   const S=lf_scene('police',C.x,C.z,C.h);S.life=240;const rx=-C.uz,rz=C.ux;

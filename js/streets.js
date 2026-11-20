@@ -507,7 +507,8 @@ function buildStreetsTile(t){
     for(const N of nodes){const major=st_isMajor(N);const ref=N.arms[0];
       for(const A of N.arms){const oth=N.arms.filter(o=>o!==A);if(!oth.length)continue;const Ld=Math.max(...oth.map(o=>o.w/2))+2.2;const nx=A.uz,nz=-A.ux;const face=Math.atan2(A.ux,A.uz);
         if(major&&!A.out){const off=A.w/2+.45,x=N.x+A.ux*(Ld+.6)+nx*off,z=N.z+A.uz*(Ld+.6)+nz*off;if(solidAt(x,z,.5))continue;const b=st_curF;st_add(b,T.tl,x,0,z,face,null);
-          const go=Math.abs(A.ux*ref.ux+A.uz*ref.uz)>.6,kk=go?2:0;const lens=(px,py,pz)=>b.add(new THREE.CylinderGeometry(.11,.11,.035,10),M(px+Math.sin(face)*.15,py+.3-kk*.3,pz+Math.cos(face)*.15,face,Math.PI/2),go?0x4dff7a:0xff3326);lens(x,3.0,z);
+          const lens=(px,py,pz)=>{for(let kk=0;kk<3;kk++)b.add(new THREE.CylinderGeometry(.11,.11,.035,10),M(px+Math.sin(face)*.15,py+.3-kk*.3,pz+Math.cos(face)*.15,face,Math.PI/2),0x1c1c1c); // dark lenses: js/roadlife.js lights them per phase
+            (t.st_tl||(t.st_tl=[])).push({x:px,y:py,z:pz,face,ax:A.ux,az:A.uz,cx:N.x,cz:N.z});};lens(x,3.0,z);
           if(A.w>=11){const span=A.w/2-1.5;st_add(b,T.tlArm,x,0,z,face,null);b.add(new THREE.CylinderGeometry(.07,.08,span,6,1,true),M(x-nx*span/2,5.8,z-nz*span/2,face,0,Math.PI/2),0x2f3236);
             b.add(T.tl,M(x-nx*(span-.2),2.75,z-nz*(span-.2),face),null);lens(x-nx*(span-.2),5.75,z-nz*(span-.2));}}
         else if(!major&&oth.some(o=>o.w>=A.w+2.5)&&!A.out&&A.w<9){const off=A.w/2+.5,x=N.x+A.ux*(Ld+1.5)+nx*off,z=N.z+A.uz*(Ld+1.5)+nz*off;if(!solidAt(x,z,.5))st_add(st_curF,T.signYield,x,0,z,face,null);}}}
