@@ -24,7 +24,11 @@ const SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem(SAVE_K)||'null');
   if(s&&s.v===1&&isFinite(s.x)&&isFinite(s.z)&&s.x>=BX0&&s.x<=BX1&&s.z>=BZ0&&s.z<=BZ1)return s;}catch(e){}return null;})();
 if(SAVE){player.x=SAVE.x;player.z=SAVE.z;player.h=isFinite(SAVE.h)?SAVE.h:0;
   if(WORLD.mode==='stream'){await progress('REVENIM UNDE AI RĂMAS…');await worldLoadAround(player.x,player.z,WORLD.startR,1000,(a,b)=>{playBtn.textContent='REVENIM UNDE AI RĂMAS… '+Math.round(a/b*100)+'%';});}}
-const starter=(()=>{const sgn=(-SPAWN.uz*SPAWN.nx+SPAWN.ux*SPAWN.nz)>0?1:-1;const dx=SPAWN.ux*sgn,dz=SPAWN.uz*sgn;const o=SPAWN.w/2-1.15;
+// new game: arrive by rutieră at the Autogara Centrală (js/intro.js); the starter taxi waits there
+const ARRIVAL=SAVE?null:hook('introPlan');
+if(ARRIVAL){player.x=ARRIVAL.x;player.z=ARRIVAL.z;player.h=ARRIVAL.h;
+  if(WORLD.mode==='stream'){await progress('SOSIM LA AUTOGARĂ…');await worldLoadAround(player.x,player.z,WORLD.startR,1000,(a,b)=>{playBtn.textContent='SOSIM LA AUTOGARĂ… '+Math.round(a/b*100)+'%';});}}
+const starter=ARRIVAL?makeVehicle('taxi',ARRIVAL.taxi.x,ARRIVAL.taxi.z,ARRIVAL.taxi.h,0xf2c318):(()=>{const sgn=(-SPAWN.uz*SPAWN.nx+SPAWN.ux*SPAWN.nz)>0?1:-1;const dx=SPAWN.ux*sgn,dz=SPAWN.uz*sgn;const o=SPAWN.w/2-1.15;
   return makeVehicle('taxi',SPAWN.qx+SPAWN.nx*o+SPAWN.ux*4,SPAWN.qz+SPAWN.nz*o+SPAWN.uz*4,Math.atan2(dx,dz),0xf2c318);})();
 for(const p of peds)spawnPedAgent(p,{x:player.x,z:player.z,min:0,max:260});
 function spawnAI(type,kind,near){const list=kind==='trolley'?wiredEdges:edges;if(!list.length)return null;
@@ -178,7 +182,7 @@ const DISTRICTS=(D.districts||[]).map(([name,flat])=>{const ring=dec(flat);let x
 function districtAt(x,z){for(const d of DISTRICTS)if(x>=d.x0&&x<=d.x1&&z>=d.z0&&z<=d.z1&&pip(x,z,d.ring))return d.name;return null;}
 
 // ================= enter / exit =================
-function toggleCar(){if(hook('missionAction'))return;if(hook('carcareAction'))return;if(hook('storeInside')||hook('airportInside')||hook('bemolBusy'))return;
+function toggleCar(){if(hook('introBusy'))return;if(hook('missionAction'))return;if(hook('carcareAction'))return;if(hook('storeInside')||hook('airportInside')||hook('bemolBusy'))return;
   if(player.mode==='foot'){let best=null,bd=1e9;for(const v of vehicles){if(Math.abs(v.x-player.x)>10||Math.abs(v.z-player.z)>10)continue;const d=segDist(v,player.x,player.z)-v.spec.wid/2;if(d<bd){bd=d;best=v;}}
     if(!best||bd>2.6)return;const v=best;
     if(v.driver){const p=peds.reduce((a,b)=>Math.hypot(b.x-player.x,b.z-player.z)>Math.hypot(a.x-player.x,a.z-player.z)?b:a);p.a.x=v.x+Math.cos(v.h)*2;p.a.z=v.z-Math.sin(v.h)*2;p.x=p.a.x;p.z=p.a.z;p.flee=4;
@@ -455,9 +459,9 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   if(paused){}
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
   else if(fly)flyUpdate(dt);
-  else{const inp=input();window.gtcInput=inp;const inStore=(player.mode==='foot'&&hook('storeUpdate',dt,inp))||hook('airportUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
+  else{const inp=input();window.gtcInput=inp;const inStore=(player.mode==='foot'&&hook('storeUpdate',dt,inp))||hook('airportUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated||hook('introBusy')){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('phoneUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('introUpdate',dt);hook('phoneUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);
@@ -484,7 +488,7 @@ requestAnimationFrame(frame);
 playBtn.addEventListener('click',()=>{started=true;setTimeout(lockMouse,0);$('title').style.display='none';document.body.classList.remove('pre');ac();if(AC&&AC.state==='suspended')AC.resume();
   if(isTouch&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});
   camPos.set(player.x-Math.sin(camYaw)*6,groundY(player.x,player.z)+4,player.z-Math.cos(camYaw)*6);if(player.car)engineInit();
-  if(SAVE)say('Bine ai revenit!','Continui de unde ai rămas · '+money+' lei',3.6,'#ffd23f');else say('Bun venit în Chișinău!','Taxiul galben de pe Ștefan cel Mare e liber — urcă',3.6,'#ffd23f');});
+  if(ARRIVAL)hook('introStart');else if(SAVE)say('Bine ai revenit!','Continui de unde ai rămas · '+money+' lei',3.6,'#ffd23f');else say('Bun venit în Chișinău!','Taxiul galben de pe Ștefan cel Mare e liber — urcă',3.6,'#ffd23f');});
 window.__dbg={scene,player,renderer,camera,vehicles,peds,edges,toggleCar,keys,get stars(){return stars},set stars(v){stars=v;starCool=0;bustT=0;},noPolice:false,SPAWN,stops,DESTS,WORLD,
   teleport(x,z){if(player.car){player.car.x=x;player.car.z=z;player.car.speed=0;}player.x=x;player.z=z;camPos.set(x,groundY(x,z)+20,z);}};
 }

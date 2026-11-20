@@ -255,8 +255,10 @@ function ph_beep(){try{if(typeof fx_muted!=='undefined'&&fx_muted)return;if(!ph_
   for(let i=0;i<2;i++){const o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.value=i?1320:988;g.gain.setValueAtTime(0,t+i*.16);g.gain.linearRampToValueAtTime(.12,t+i*.16+.02);g.gain.linearRampToValueAtTime(0,t+i*.16+.14);o.connect(g).connect(a.destination);o.start(t+i*.16);o.stop(t+i*.16+.15);}}catch(e){}}
 function ph_canRing(){const api=ph_api();if(!api||document.body.classList.contains('pre'))return false;
   if(typeof storeInside==='function'&&storeInside()||typeof airportInside==='function'&&airportInside()||typeof bemolBusy==='function'&&bemolBusy())return false;
+  if(typeof introBusy==='function'&&introBusy())return false;
   return !api.taxiMission&&!api.stars;}
-function ph_ring(){const ok=PH_MISSIONS.filter(d=>(!d.can||d.can())&&d!==ph_last);if(!ok.length){ph_cd=30;return;}ph_call=ok[Math.floor(Math.random()*ok.length)];
+function ph_ring(){const ok=PH_MISSIONS.filter(d=>(!d.can||d.can())&&d!==ph_last);if(!ok.length){ph_cd=30;return;}
+  const f=window.ph_force&&ok.find(d=>d.id===window.ph_force);window.ph_force=null;ph_call=f||ok[Math.floor(Math.random()*ok.length)];   // ph_force: intro asks for Mama first
   ph_state='ringing';ph_ringT=PH_RING;ph_uiInit();const w=PH_WHO[ph_call.from]||{};ph_ui.call.querySelector('.av').textContent=w.av||'📞';ph_ui.call.querySelector('.nm').textContent=ph_call.from;ph_ui.call.style.display='block';ph_ringBeep=0;}
 function ph_answer(yes){if(ph_state!=='ringing')return;ph_uiInit();ph_ui.call.style.display='none';const d=ph_call;ph_call=null;
   if(!yes){ph_state='idle';ph_cd=PH_GAP[0];return;}
