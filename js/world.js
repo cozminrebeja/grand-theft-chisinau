@@ -90,8 +90,14 @@ function world_scan(){const px=world_px,pz=world_pz;let fx=0,fz=1;try{const v=ne
   want.sort((a,b)=>a[0]-b[0]);
   for(const [pri,key,lod] of want){if(world_fetching>=WORLD.fetchMax)break;world_requestFetch(key,pri,lod);}
   world_queue.sort((a,b)=>a.pri-b.pri);}
+// static tile meshes are baked in world space: stop three.js recomputing their matrices every frame
+let world_freezeT=1;
+function world_freeze(){for(const t of WORLD.tiles.values()){const g=t.group;if(!g)continue;
+  g.traverse(o=>{if(!o.matrixAutoUpdate)return;const p=o.position,r=o.rotation,s=o.scale;
+    if(p.x===0&&p.y===0&&p.z===0&&r.x===0&&r.y===0&&r.z===0&&s.x===1&&s.y===1&&s.z===1){o.updateMatrix();o.matrixAutoUpdate=false;}});}}
 // per frame (called by game.js): streaming + time-sliced building
 function worldUpdate(dt,px,pz){world_px=px;world_pz=pz;world_terrainUpdate(dt);if(WORLD.mode!=='stream'){world_farUpdate();return;}
+  world_freezeT-=dt;if(world_freezeT<=0){world_freezeT=2;world_freeze();}
   world_scanT-=dt;if(world_scanT<=0||world_fetching<WORLD.fetchMax&&world_scanT<.15){world_scanT=.3;world_scan();}
   const t0=performance.now();let spent=0,calls=0;
   while(world_queue.length&&(spent=performance.now()-t0)<WORLD.budgetMs){let qi=-1;for(let k=0;k<world_queue.length&&k<24;k++)if(!world_blocked(world_queue[k])){qi=k;break;}

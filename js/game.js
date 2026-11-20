@@ -294,7 +294,7 @@ function updHUD(dt){gameMin+=dt*(60/60);const hh=Math.floor(gameMin/60)%24,mm=Ma
   else if(mission)setH('mission',`<div>Client în așteptare</div><div class="t">${Math.round(Math.hypot(mission.x-x,mission.z-z))} m</div>`);
   else if(v&&v.type==='trolley')setH('mission','<div>Oprește în stațiile albastre</div><div>+4 lei / stație</div>');else setH('mission','');
   let hint='';if(player.mode==='foot'){let bd=9;for(const o of vehicles){if(Math.abs(o.x-x)>10||Math.abs(o.z-z)>10)continue;const d=segDist(o,x,z)-o.spec.wid/2;if(d<bd)bd=d;}if(bd<2.6)hint=(isTouch?'Apasă INTRĂ':'Apasă E')+' ca să urci';}
-  const he=$('hint');if(he.textContent!==hint)he.textContent=hint;he.style.opacity=hint?1:0;$('bEnter').textContent=player.mode==='foot'?'Intră':'Ieși';}
+  const he=$('hint');if(he.textContent!==hint)he.textContent=hint;he.style.opacity=hint?1:0;setH('bEnter',player.mode==='foot'?'Intră':'Ieși');}
 // full-screen map: drag to pan, wheel to zoom; Tab / Esc / ✕ to close
 const bigEl=$('bigmap'),bigC=$('bigc');const FM={cx:0,cz:0,s:.25,on:false,drag:null,raf:0,ov:null};
 function fmOverview(){if(FM.ov)return FM.ov;
@@ -341,7 +341,9 @@ document.addEventListener('pointerlockchange',()=>{if(locked()){$('lockhint').st
 document.addEventListener('pointerlockerror',()=>{if(started&&!paused&&!isTouch)$('lockhint').style.display='block';});
 function pmSync(){$('pmSens').value=mouseSens;$('pmSensV').textContent=mouseSens.toFixed(2);$('pmInv').checked=invertY;
   const muted=typeof fx_muted!=='undefined'&&fx_muted;$('pmSndOn').classList.toggle('on',!muted);$('pmSndOff').classList.toggle('on',muted);
-  for(const b of $('pmQ').querySelectorAll('button'))b.classList.toggle('on',b.dataset.q===GTC_Q);}
+  for(const b of $('pmQ').querySelectorAll('button'))b.classList.toggle('on',b.dataset.q===GTC_Q);
+  for(const b of $('pmFps').querySelectorAll('button'))b.classList.toggle('on',+b.dataset.f===fpsCap);}
+for(const b of $('pmFps').querySelectorAll('button'))b.addEventListener('click',()=>{fpsCap=+b.dataset.f;LSset('gtc_fps',fpsCap);pmSync();});
 $('pmResume').addEventListener('click',resumeGame);
 $('pmMap').addEventListener('click',()=>{pmEl.classList.remove('on');paused=false;suppressMenu=true;openBigMap();});
 $('pmSetBtn').addEventListener('click',()=>$('pmSet').classList.toggle('on'));
@@ -362,15 +364,19 @@ function v_steerTrack(dt,inp){for(const v of vehicles){if(v===player.car)v.steer
 // small API for side modules (Linella store interior)
 window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v}};
 await progress('JOACĂ');playBtn.disabled=false;
-let last=performance.now(),titleT=0,parkT=0;
-function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last)/1000);last=now;
+let last=performance.now(),titleT=0,parkT=0,mapT=0;
+// frame cap (pause menu → Setări): renders at most fpsCap frames/s; 0 = unlimited (monitor refresh rate)
+let fpsCap=+LS('gtc_fps',60);const fpsEl=/[?&]fps/.test(location.search)?Object.assign(document.body.appendChild(document.createElement('div')),{style:'position:fixed;left:8px;bottom:8px;z-index:40;font:700 12px monospace;color:#7dff8a;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:5px;pointer-events:none'}):null;let fpsN=0,fpsT=0,fpsWorst=0;
+function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsCap*.8)return;const dt=Math.min(.05,(now-last)/1000);
+  if(fpsEl){fpsN++;fpsT+=now-last;fpsWorst=Math.max(fpsWorst,now-last);if(fpsT>=500){const r=__dbg.renderer.info.render;fpsEl.textContent=Math.round(fpsN*1000/fpsT)+' fps · worst '+Math.round(fpsWorst)+' ms · '+r.calls+' draws · '+Math.round(r.triangles/1000)+'k tris';fpsN=fpsT=fpsWorst=0;}}
+  last=now;
   if(!paused){for(const v of vehicles)if(v.mode==='ai')updAI(v,dt);
   updPeds(dt);}
   if(paused){}
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
   else{const inp=input();window.gtcInput=inp;const inStore=player.mode==='foot'&&hook('storeUpdate',dt,inp);if(inStore){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);drawMap();engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);

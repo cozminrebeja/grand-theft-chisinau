@@ -25,8 +25,9 @@ renderer.setSize(innerWidth,innerHeight);
 renderer.toneMapping=THREE.CustomToneMapping;
 renderer.toneMappingExposure=1.0;
 renderer.shadowMap.enabled=true;
-renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-renderer.shadowMap.autoUpdate=true;
+renderer.shadowMap.type=GTC_Q==='med'?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
+renderer.shadowMap.autoUpdate=false;   // re-rendered every env_SHN frames in envRender (ultra: every frame)
+const env_SHN=GTC_Q==='ultra'?1:2;let env_shF=0;
 renderer.info.autoReset=false;      // info accumulates over the whole frame (shadow + post passes); reset in envRender
 const scene=new THREE.Scene();
 const FOGC=0xd6d3c6;                      // warm haze; sky horizon uses the same colour
@@ -42,7 +43,7 @@ const env_amb=new THREE.AmbientLight(0xffe9cc,0.05);scene.add(env_amb);
 const sun=new THREE.DirectionalLight(0xffdcaa,0.86);
 sun.castShadow=true;
 const env_SR=isTouch?62:150;                // half-size of shadow box (m)
-const env_SMAP=isTouch?1024:GTC_Q==='med'?2048:4096;
+const env_SMAP=isTouch?1024:GTC_Q==='ultra'?4096:2048;
 sun.shadow.mapSize.set(env_SMAP,env_SMAP);
 {const c=sun.shadow.camera;c.left=-env_SR;c.right=env_SR;c.top=env_SR;c.bottom=-env_SR;c.near=10;c.far=900;c.updateProjectionMatrix();}
 sun.shadow.bias=-0.00035;sun.shadow.normalBias=0.035;sun.shadow.radius=1.5;
@@ -170,4 +171,4 @@ function envUpdate(dt){
   sun.target.position.copy(env_T);sun.position.copy(env_T).addScaledVector(env_sunDir,420);sun.target.updateMatrixWorld();
   env_scanT-=dt||0;if(env_scanT<=0){env_scanT=2.5;env_scan();}
 }
-function envRender(dt){renderer.info.reset();if(env_post){try{env_post.composer.render(dt);return;}catch(e){console.warn('post failed, falling back',e);env_post=null;env_vig.style.display='';}}renderer.render(scene,camera);}
+function envRender(dt){renderer.info.reset();if(++env_shF>=env_SHN){env_shF=0;renderer.shadowMap.needsUpdate=true;}if(env_post){try{env_post.composer.render(dt);return;}catch(e){console.warn('post failed, falling back',e);env_post=null;env_vig.style.display='';}}renderer.render(scene,camera);}

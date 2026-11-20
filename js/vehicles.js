@@ -549,7 +549,9 @@ function renderVehicles(dt){dt=dt||0.016;
     const acc=(sp-v.veh_ps)/Math.max(dt,1e-3);v.veh_ps=sp;const moving=v.mode!=='parked';
     const want=moving&&(acc<-1.2||(Math.abs(sp)<.4&&v.mode!=='player')||(v.mode==='player'&&Math.abs(sp)<.4))?1:0;v.veh_brk+=(want-v.veh_brk)*Math.min(1,dt*12);
     const dx=v.x-cx,dz=v.z-cz,d2=dx*dx+dz*dz;
-    veh_ground(v,dt);veh_qq.setFromEuler(veh_eu.set(-v.pitch,v.h,v.roll));veh_m4.compose(veh_tp.set(v.x,v.y,v.z),veh_qq,veh_one);
+    // ground fit = 4 surface queries: only when the car moved and is close enough to matter (or is the player's)
+    if((v._gx!==v.x||v._gz!==v.z||v._gh!==v.h||v.y==null)&&(d2<veh_FAR2*1.2||v.mode==='player'||v.y==null)){veh_ground(v,dt);v._gx=v.x;v._gz=v.z;v._gh=v.h;}
+    veh_qq.setFromEuler(veh_eu.set(-v.pitch,v.h,v.roll));veh_m4.compose(veh_tp.set(v.x,v.y,v.z),veh_qq,veh_one);
     if(v.g){const vis=d2<veh_FAR2;v.g.visible=vis;if(!vis)continue;v.g.position.set(v.x,v.y,v.z);v.g.quaternion.copy(veh_qq);
       veh_sph.center.set(v.x,v.y+1.7,v.z);veh_sph.radius=7;if(!veh_fr.intersectsSphere(veh_sph))continue;
       veh_wheelsOf(v,veh_m4,veh_TWHEEL,veh_THW,d2<veh_NEAR2*1.6,dt);
