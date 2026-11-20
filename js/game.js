@@ -175,7 +175,7 @@ const DISTRICTS=(D.districts||[]).map(([name,flat])=>{const ring=dec(flat);let x
 function districtAt(x,z){for(const d of DISTRICTS)if(x>=d.x0&&x<=d.x1&&z>=d.z0&&z<=d.z1&&pip(x,z,d.ring))return d.name;return null;}
 
 // ================= enter / exit =================
-function toggleCar(){if(hook('storeInside'))return;
+function toggleCar(){if(hook('storeInside')||hook('bemolBusy'))return;
   if(player.mode==='foot'){let best=null,bd=1e9;for(const v of vehicles){if(Math.abs(v.x-player.x)>10||Math.abs(v.z-player.z)>10)continue;const d=segDist(v,player.x,player.z)-v.spec.wid/2;if(d<bd){bd=d;best=v;}}
     if(!best||bd>2.6)return;const v=best;
     if(v.driver){const p=peds.reduce((a,b)=>Math.hypot(b.x-player.x,b.z-player.z)>Math.hypot(a.x-player.x,a.z-player.z)?b:a);p.a.x=v.x+Math.cos(v.h)*2;p.a.z=v.z-Math.sin(v.h)*2;p.x=p.a.x;p.z=p.a.z;p.flee=4;
@@ -417,7 +417,7 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   updPeds(dt);}
   if(paused){}
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
-  else{const inp=input();window.gtcInput=inp;const inStore=player.mode==='foot'&&hook('storeUpdate',dt,inp);if(inStore){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
+  else{const inp=input();window.gtcInput=inp;const inStore=player.mode==='foot'&&hook('storeUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
     window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}

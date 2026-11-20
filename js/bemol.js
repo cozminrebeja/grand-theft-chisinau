@@ -15,22 +15,24 @@ function bemol_build(){
   bemol_list=[];
   // orient each station along its nearest road, and keep the canopy off the asphalt
   const ws=typeof WS==='number'?WS:1; // map scale (mapcore.js): stored points are real-world metres
-  for(let i=0;i<BEMOL_PTS.length;i+=2){let x=BEMOL_PTS[i]*ws,z=BEMOL_PTS[i+1]*ws,a=0;
+  for(let i=0;i<BEMOL_PTS.length;i+=2){let x=BEMOL_PTS[i]*ws,z=BEMOL_PTS[i+1]*ws,a=0,sd=1;
     const ns=typeof nearestSeg==='function'?nearestSeg(x,z,60):null;
     if(ns){const s=ns.s,dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1];a=Math.atan2(dx,dz);const min=s.r.w/2+7.5;
-      if(ns.d<min){let nx=x-ns.qx,nz=z-ns.qz,l=Math.hypot(nx,nz);if(l<.01){nx=-dz;nz=dx;l=Math.hypot(nx,nz)||1;}x=ns.qx+nx/l*min;z=ns.qz+nz/l*min;}}
-    bemol_list.push({x,z,a,y:groundY(x,z)});}
+      if(ns.d<min){let nx=x-ns.qx,nz=z-ns.qz,l=Math.hypot(nx,nz);if(l<.01){nx=-dz;nz=dx;l=Math.hypot(nx,nz)||1;}x=ns.qx+nx/l*min;z=ns.qz+nz/l*min;}
+      // terrace + shop go on the side away from the road (local +x after rotation is (cos a,-sin a))
+      sd=((x-ns.qx)*Math.cos(a)-(z-ns.qz)*Math.sin(a))<0?-1:1;}
+    bemol_list.push({x,z,a,sd,i:i/2,y:groundY(x,z)});}
   const N=bemol_list.length;
   const white=new THREE.MeshLambertMaterial({color:0xf4f4f0});
-  const band=bemol_tex(512,64,(g,w,h)=>{g.fillStyle='#c8102e';g.fillRect(0,0,w,h);g.fillStyle='#ffd400';g.fillRect(0,h*.82,w,h*.18);g.fillStyle='#fff';
+  const band=bemol_tex(512,64,(g,w,h)=>{g.fillStyle='#0a8a43';g.fillRect(0,0,w,h);g.fillStyle='#ffd400';g.fillRect(0,h*.82,w,h*.18);g.fillStyle='#fff';
     g.font='900 40px Anton, Impact, Arial Black, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('BEMOL',w*.25,h*.42);g.fillText('BEMOL',w*.75,h*.42);});
-  const bandMat=new THREE.MeshLambertMaterial({map:band,emissive:0x330000});
+  const bandMat=new THREE.MeshLambertMaterial({map:band,emissive:0x00260e});
   const under=new THREE.MeshLambertMaterial({color:0xffffff,emissive:0x8a8a80});
-  const sign=new THREE.MeshLambertMaterial({map:bemol_tex(256,512,(g,w,h)=>{g.fillStyle='#c8102e';g.fillRect(0,0,w,h);
-    g.save();g.translate(0,0);bemol_logo(g,w,h*.32,'#c8102e');g.restore();
+  const sign=new THREE.MeshLambertMaterial({map:bemol_tex(256,512,(g,w,h)=>{g.fillStyle='#0a8a43';g.fillRect(0,0,w,h);
+    g.save();g.translate(0,0);bemol_logo(g,w,h*.32,'#0a8a43');g.restore();
     g.fillStyle='#fff';g.fillRect(w*.08,h*.38,w*.84,h*.56);g.fillStyle='#111';g.font='800 34px Inter, Arial, sans-serif';g.textAlign='left';g.textBaseline='middle';
-    [['Benzină 95','25.49'],['Motorină','23.99'],['GPL','13.29']].forEach(([n,p],k)=>{const y=h*.46+k*h*.17;g.fillText(n,w*.12,y);g.fillStyle='#c8102e';g.textAlign='right';g.fillText(p,w*.88,y);g.fillStyle='#111';g.textAlign='left';});}),emissive:0x2a0000});
-  const red=new THREE.MeshLambertMaterial({color:0xc8102e}),grey=new THREE.MeshLambertMaterial({color:0x9a9a96}),dark=new THREE.MeshLambertMaterial({color:0x2a2a2a});
+    [['Benzină 95','25.49'],['Motorină','23.99'],['GPL','13.29']].forEach(([n,p],k)=>{const y=h*.46+k*h*.17;g.fillText(n,w*.12,y);g.fillStyle='#0a8a43';g.textAlign='right';g.fillText(p,w*.88,y);g.fillStyle='#111';g.textAlign='left';});}),emissive:0x00260e});
+  const red=new THREE.MeshLambertMaterial({color:0x0a8a43}),grey=new THREE.MeshLambertMaterial({color:0x9a9a96}),dark=new THREE.MeshLambertMaterial({color:0x2a2a2a});
   // canopy: textured band on the four sides, white top, lit underside (box face order: +x,-x,+y,-y,+z,-z)
   const parts=[
     {geo:new THREE.BoxGeometry(9,1.1,15),mat:[bandMat,bandMat,white,under,bandMat,bandMat],at:[[0,5.6,0]],shadow:true},
@@ -43,6 +45,7 @@ function bemol_build(){
   for(const p of parts){const im=new THREE.InstancedMesh(p.geo,p.mat,N*p.at.length);let k=0;
     for(const s of bemol_list){st.makeRotationY(s.a).setPosition(s.x,s.y,s.z);for(const o of p.at){lo.makeTranslation(o[0],o[1],o[2]);im.setMatrixAt(k++,m4.multiplyMatrices(st,lo));}}
     im.instanceMatrix.needsUpdate=true;im.castShadow=!!p.shadow;im.receiveShadow=true;im.computeBoundingSphere&&im.computeBoundingSphere();im.frustumCulled=false;scene.add(im);}
+  bemol_buildTerraces();
 }
 
 function bemolUpdate(dt,player,say){
@@ -50,5 +53,6 @@ function bemolUpdate(dt,player,say){
   // nearest station (cheap: 160 points)
   let best=-1,bd=1e9;for(let i=0;i<bemol_list.length;i++){const s=bemol_list[i],d=Math.abs(s.x-player.x)+Math.abs(s.z-player.z);if(d<bd){bd=d;best=i;}}
   if(best<0)return;const s=bemol_list[best],d=Math.hypot(s.x-player.x,s.z-player.z);
+  bemol_terraceUpdate(dt,player,s,d);
   if(bemol_inside<0&&d<BEMOL_NEAR){bemol_inside=best;say('O cofe la Bemol?','Benzinăria Bemol',3,'#ffd400');}
   else if(bemol_inside>=0){const c=bemol_list[bemol_inside];if(Math.hypot(c.x-player.x,c.z-player.z)>BEMOL_FAR)bemol_inside=-1;}}

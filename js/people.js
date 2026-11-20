@@ -266,6 +266,19 @@ function ppl_pose(root,st,out){
       const ua=sd?uR:uL;ua.copy(mT);ppl_T(ua,g*PPL_SHO_X,PPL_SHO_Y,0);ppl_RX(ua,ar*w);ppl_RZ(ua,g*.12);
       const fa=sd?fR:fL;fa.copy(ua);ppl_T(fa,0,-PPL_UARM,0);ppl_RX(fa,el*w);}
     return;}
+  if(st.sit>0){ // sitting on a chair: thighs forward, shins down; arms on the table, holding cards, or lifting a cup (st.sip 0..1)
+    const dr=.55;mT.copy(root);ppl_T(mT,0,-dr,0);ppl_T(mT,0,PPL_HIP,0);ppl_RX(mT,.1+(st.cards?.08:0));ppl_T(mT,0,-PPL_HIP,0);
+    mH.copy(mT);ppl_T(mH,0,PPL_NECK,0);ppl_RY(mH,st.look||0);ppl_RX(mH,st.cards?.25:.05);
+    for(let sd=0;sd<2;sd++){const g=sd?-1:1;
+      const th=sd?tR:tL;th.copy(root);ppl_T(th,g*.1,PPL_HIP-.03-dr,0);ppl_RX(th,-1.5);ppl_RZ(th,g*.05);
+      const sh=sd?sR:sL;sh.copy(th);ppl_T(sh,0,-PPL_THIGH,0);ppl_RX(sh,1.45);
+      const ft=sd?ftR:ftL;ft.copy(sh);ppl_T(ft,0,-.44,0);ppl_RX(ft,.05);}
+    for(let sd=0;sd<2;sd++){const g=sd?-1:1;let ar=-.55,abd=.12,el=-1.0;
+      if(st.cards){ar=-.75;abd=.18;el=-1.45;}
+      if(sd===1&&st.sip>0){ar=-.55-.5*st.sip;el=-1.0-1.3*st.sip;abd=.12+.15*st.sip;}
+      const ua=sd?uR:uL;ua.copy(mT);ppl_T(ua,g*PPL_SHO_X,PPL_SHO_Y,0);ppl_RX(ua,ar);ppl_RZ(ua,g*abd);
+      const fa=sd?fR:fL;fa.copy(ua);ppl_T(fa,0,-PPL_UARM,0);ppl_RX(fa,el);}
+    return;}
   const bob=k*(.024+.04*run)*Math.cos(2*t)+(1-k)*.004*Math.sin(time*2.1)-run*k*.04;
   const lean=k*(.035+.2*run),twist=k*(.07+.08*run)*s,roll=k*.025*s*(1-run*.5),sway=k*.012*s;
   mT.copy(root);ppl_T(mT,sway,PPL_HIP+bob,0);ppl_RY(mT,twist);ppl_RZ(mT,roll*.6);ppl_RX(mT,lean);ppl_T(mT,0,-PPL_HIP,0);

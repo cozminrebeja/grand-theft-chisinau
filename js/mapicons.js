@@ -2,7 +2,7 @@
 // Map icons for places added by other modules (Bemol gas stations, Linella stores), drawn on the minimap and the big map (Tab).
 // Called from game.js: hook('mapIcons', ctx, P, 'mini'|'big', opts). P(x,z) -> canvas coords.
 const MAPICON_KINDS=[
-  {list:()=>typeof bemol_list!=='undefined'?bemol_list:null,bg:'#c8102e',fg:'#ffd400',ch:'B',name:'Bemol'},
+  {list:()=>typeof bemol_list!=='undefined'?bemol_list:null,bg:'#0a8a43',fg:'#ffd400',ch:'B',name:'Bemol'},
   {list:()=>typeof linella_list!=='undefined'?linella_list:null,bg:'#e4002b',fg:'#fff',ch:'L',name:'Linella'},
 ];
 function mapicon_draw(g,x,y,r,k,rot,label){
