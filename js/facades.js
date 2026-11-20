@@ -138,10 +138,10 @@ function fac_material(atlas){
   const mat=new THREE.MeshLambertMaterial({map:atlas.tex,vertexColors:true});
   const pad=(4/FAC_A).toFixed(6),w2=renderer.capabilities.isWebGL2;
   mat.onBeforeCompile=sh=>{
-    sh.uniforms.facMask={value:atlas.mask};sh.uniforms.uNight=env_nightU;sh.uniforms.uSunD=env_skyU.uSun;
+    sh.uniforms.facMask={value:atlas.mask};sh.uniforms.uNight=env_nightU;sh.uniforms.uLit=env_litU;sh.uniforms.uFacT=env_skyU.uTime;sh.uniforms.uSunD=env_skyU.uSun;
     sh.vertexShader='attribute vec4 atl;\nvarying vec4 vAtl;\nvarying vec3 vFacWP;\nvarying vec3 vFacN;\n'+sh.vertexShader.replace('#include <begin_vertex>',
       '#include <begin_vertex>\nvAtl=atl;vec4 facWP4=modelMatrix*vec4(transformed,1.0);vFacWP=facWP4.xyz;vFacN=normalize(mat3(modelMatrix)*objectNormal);');
-    sh.fragmentShader='uniform sampler2D facMask;\nuniform float uNight;\nuniform vec3 uSunD;\nvarying vec4 vAtl;\nvarying vec3 vFacWP;\nvarying vec3 vFacN;\n'+sh.fragmentShader
+    sh.fragmentShader='uniform sampler2D facMask;\nuniform float uNight;\nuniform float uLit;\nuniform float uFacT;\nfloat fac_h(vec2 p){vec3 q=fract(vec3(p.xyx)*0.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}\nuniform vec3 uSunD;\nvarying vec4 vAtl;\nvarying vec3 vFacWP;\nvarying vec3 vFacN;\n'+sh.fragmentShader
       .replace('#include <map_fragment>',`
   vec2 fT=vUv;vec2 fF=fract(fT);vec2 fP=vec2(${pad});vec2 fA=vAtl.xy+fP+fF*(vAtl.zw-2.0*fP);
   ${w2?'vec2 fGx=dFdx(fT)*vAtl.zw,fGy=dFdy(fT)*vAtl.zw;vec4 fC=textureGrad(map,fA,fGx,fGy);vec4 fM=textureGrad(facMask,fA,fGx,fGy);':'vec4 fC=texture2D(map,fA);vec4 fM=texture2D(facMask,fA);'}
@@ -155,11 +155,16 @@ function fac_material(atlas){
    sky=mix(vec3(0.22,0.23,0.22),sky,smoothstep(-0.12,0.06,Rf.y));
    float sun=pow(max(dot(Rf,uSunD),0.0),80.0)*2.5*(1.0-uNight);
    outgoingLight=mix(outgoingLight,(sky*0.85*(1.0-0.88*uNight))+sun,facGlass*fres*0.7);
-   // night: ~40% of windows lit warm (hash per window cell + building colour)
-   vec2 wc=floor(fT)+vColor.rg*97.0;float lit=step(0.6,fract(sin(dot(wc,vec2(12.9898,78.233)))*43758.5453));
-   outgoingLight+=vec3(1.0,0.74,0.42)*facGlass*lit*uNight*0.85;}`);
+   // night: windows lit per window cell; the share follows the hour (env_litU) and each window switches on/off on its own
+   // every 1-3 min. Hash without sin() (stable on every GPU) from the cell + a coarse world block + the facade direction
+   // (the old hash used the interpolated vertex colour, which varies across a wall: every window came out speckled-lit).
+   vec2 wc=floor(fT)+floor(vFacWP.xz/61.0)*vec2(37.0,61.0)+floor(vFacN.xz*2.5+3.0)*vec2(7.0,13.0);
+   float h1=fac_h(wc),h2=fac_h(wc+floor(uFacT/(60.0+h1*120.0)+h1*13.0)*vec2(1.7,3.1));
+   float lit=step(h2,uLit);
+   vec3 lc=h1<0.7?vec3(1.0,0.74,0.42):h1<0.9?vec3(0.86,0.9,1.0)*0.85:vec3(0.45,0.62,1.0)*(0.65+0.35*sin(uFacT*6.0+h1*50.0)); // warm bulbs, cool LED, TV flicker
+   outgoingLight+=lc*facGlass*lit*uNight*(0.55+0.45*fract(h1*7.13))*0.95;}`);
   };
-  mat.customProgramCacheKey=()=>'facades_v2';
+  mat.customProgramCacheKey=()=>'facades_v3';
   return mat;
 }
 

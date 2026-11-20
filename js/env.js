@@ -168,7 +168,8 @@ const env_TOD=[
   [ 0.10,0xdcc2a4,0x4c7cc2,0xb6c0d2,0xc0cce0,0x7d6a52,0.48,0xffb46e,0.72,0xffe6cc],
   [ 0.35,FOGC,    0x5a8fd0,0x9bbde0,0xc2d6ee,0x7d705a,0.50,0xffdcaa,0.86,0xffffff]].map(r=>r.map((v,i)=>[1,2,3,4,5,7,9].includes(i)?new THREE.Color(v):v));
 const env_LAT=47*Math.PI/180,env_DEC=12*Math.PI/180,env_FOG0=new THREE.Color(FOGC),env_tc=new THREE.Color();
-const env_nightU={value:0},env_dayU={value:1},env_lightsU={value:0}; // env_lightsU: street lamps / headlights on (0..1), from sunset // shared with facades (lit windows) / vehicles (reflections)
+const env_nightU={value:0},env_dayU={value:1},env_lightsU={value:0},env_litU={value:.5}; // env_litU: share of lit windows at night (follows the hour)
+const env_LIT=[[0,.32],[1.5,.2],[3,.1],[5,.12],[6.5,.35],[8,.2],[17,.4],[19,.62],[22,.55],[23.5,.4],[24,.32]]; // env_lightsU: street lamps / headlights on (0..1), from sunset // shared with facades (lit windows) / vehicles (reflections)
 let env_hour=-1,env_gameMin=17.5*60; // game.js updHUD writes the clock here (its gameMin is local to main())
 function env_tod(hour){
   const H=(hour-12.5)/12*Math.PI,cl=Math.cos(env_LAT),sl=Math.sin(env_LAT),cd=Math.cos(env_DEC),sdc=Math.sin(env_DEC);
@@ -183,6 +184,7 @@ function env_tod(hour){
   const fc=scene.fog.color;env_hills.material.color.setRGB(fc.r/env_FOG0.r,fc.g/env_FOG0.g,fc.b/env_FOG0.b);
   env_sunDir.copy(e>=0?sd:sd.negate());if(env_sunDir.y<0.08){env_sunDir.y=0.08;env_sunDir.normalize();} // light never from below
   env_U.crossVectors(env_sunDir,new THREE.Vector3(0,1,0)).normalize();env_V.crossVectors(env_U,env_sunDir).normalize();
+  for(let i=1;i<env_LIT.length;i++)if(hour<=env_LIT[i][0]){const [h0,a]=env_LIT[i-1],[h1,b]=env_LIT[i];env_litU.value=a+(b-a)*(hour-h0)/(h1-h0);break;}
   env_nightU.value=env_skyU.uNight.value=clamp((0.02-e)/0.2,0,1);env_lightsU.value=clamp((0.04-e)/0.1,0,1);env_dayU.value=clamp((e+0.1)/0.3,0.08,1);
   if(typeof st_poolMat!=='undefined'&&st_poolMat){st_poolMat.visible=env_lightsU.value>0.01;st_poolMat.color.setRGB(.42,.33,.18).multiplyScalar(env_lightsU.value);}
   if(typeof veh_MATS!=='undefined')for(const m of veh_MATS.values())m.envMapIntensity=0.45*env_dayU.value;
