@@ -39,45 +39,46 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
 #osm a{color:#fff}
 /* splash (Figma "Untitled" 1:155, 1954×1099 frame) */
 #title{position:fixed;inset:0;z-index:10;background:linear-gradient(90deg,#000,rgba(0,0,0,0) 50%),url(assets/splash/bg.jpg) center/cover #000}
-#title .crest{position:absolute;left:4.35vw;top:6.6vh;height:clamp(140px,28.1vh,309px);aspect-ratio:245.377/309}
-#title .crest img{position:absolute;left:0;top:0;width:100%}
-#title .crest .lg{left:17.51%;top:28.32%;width:49.31%}
+#title .crest{position:absolute;left:4.35vw;top:6.6vh;height:clamp(140px,28.1vh,309px)}
 #title .menu{position:absolute;left:4.3vw;bottom:10.2vh;display:flex;flex-direction:column;align-items:flex-start;gap:1.2vh}
 #title .menu button{pointer-events:auto;font:400 clamp(32px,5.82vh,64px)/normal Inter;color:rgba(255,255,255,.5);background:none;border:0;padding:0;cursor:pointer;text-align:left;transition:color .15s}
 #title .menu:not(:hover) #play,#title .menu button:hover,#title .menu button:focus-visible{color:#fff;outline:0}
 #title #play:disabled{cursor:wait;font-size:clamp(14px,2vh,22px);letter-spacing:.5px}
 #title #setBtn:disabled{cursor:wait;color:rgba(255,255,255,.25)}
 /* settings screen */
-#settings{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;padding:clamp(20px,5vh,56px) clamp(16px,3.4vw,64px) clamp(14px,3vh,36px);background:radial-gradient(120% 90% at 100% 0%,#8a4a84 0%,rgba(138,74,132,0) 60%),linear-gradient(180deg,#6b3d70,#432a52);font-family:Inter}
-#settings.on{display:flex}
-#settings h2{font:400 clamp(30px,4.6vh,46px)/1 Anton;letter-spacing:1px;margin:0 0 clamp(14px,2.6vh,26px)}
+.scr{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;padding:clamp(20px,5vh,56px) clamp(16px,3.4vw,64px) clamp(14px,3vh,36px);background:radial-gradient(120% 90% at 100% 0%,#8a4a84 0%,rgba(138,74,132,0) 60%),linear-gradient(180deg,#6b3d70,#432a52);font-family:Inter}
+.scr.on{display:flex}
+#pause{z-index:30;background:radial-gradient(120% 90% at 100% 0%,rgba(138,74,132,.92) 0%,rgba(138,74,132,0) 60%),linear-gradient(180deg,rgba(107,61,112,.9),rgba(67,42,82,.94))}
+.scr h2{font:400 clamp(30px,4.6vh,46px)/1 Anton;letter-spacing:1px;margin:0 0 clamp(14px,2.6vh,26px)}
 #stTabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:clamp(18px,6vh,70px);flex:none}
 #stTabs button{flex:none;font:400 clamp(17px,2.4vh,24px)/1 Anton;letter-spacing:1px;color:#fff;padding:9px 28px;border:0;background:rgba(255,255,255,.14);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);cursor:pointer}
 #stTabs button:hover{background:rgba(255,255,255,.24)}
 #stTabs button.on{background:#fff;color:#111}
-#settings .pgs{flex:1;min-height:0;overflow-y:auto;padding-right:18px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.35) transparent}
-#settings .pg{display:none}#settings .pg.on{display:block}
-#settings .row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:clamp(52px,7.4vh,68px);padding:0 clamp(12px,2.4vw,34px);border-bottom:1px solid rgba(255,255,255,.18);font:500 clamp(16px,2.4vh,23px) Inter;cursor:pointer}
-#settings .row.sel{background:linear-gradient(90deg,#fff 45%,rgba(255,255,255,.28));color:#1c1222;border-color:transparent}
-#settings .seg,#settings .ctl{display:flex;align-items:center;white-space:nowrap}
-#settings .seg button{display:none}
-#settings .v{margin-right:clamp(16px,3vw,44px)}
-#settings .n{margin-right:clamp(16px,3vw,52px)}
-#settings .n em,#stN em{font-style:normal;opacity:.45}
-#settings .ar{width:clamp(30px,3.6vw,52px);height:40px;display:inline-flex;align-items:center;justify-content:center}
-#settings .ar::before{content:'';width:11px;height:11px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(2px) rotate(45deg)}
-#settings .ar[data-d="1"]::before{transform:translateX(-2px) rotate(-135deg)}
-#settings .sw{appearance:none;-webkit-appearance:none;margin:0 6px 0 0;position:relative;width:62px;height:31px;flex:none;border:2px solid currentColor;border-radius:16px;background:rgba(255,255,255,.12);cursor:pointer;transition:background .15s}
-#settings .sw::after{content:'';position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(28,18,34,.75);transition:left .15s}
-#settings input.sw:checked,#settings .seg.is-on .sw{background:#fff}
-#settings input.sw:checked::after,#settings .seg.is-on .sw::after{left:34px;background:#6b3d70;box-shadow:none}
-#settings .cv::before{content:'Off'}#settings .row:has(.sw:checked) .cv::before{content:'On'}
-#settings input[type=range]{width:min(260px,28vw);accent-color:#fff;cursor:pointer}
-#settings .row.sel input[type=range]{accent-color:#6b3d70}
-#settings .kk b{display:inline-block;border:1.5px solid currentColor;border-radius:6px;padding:1px 9px;margin-left:6px;font:700 .78em Inter}
-#stFoot{display:flex;justify-content:space-between;align-items:center;padding-top:clamp(12px,3vh,36px);flex:none;font:500 clamp(22px,3.2vh,34px) Inter;text-shadow:0 2px 4px rgba(0,0,0,.35)}
-#stBack{font:600 15px Inter;color:#fff;background:none;border:0;cursor:pointer;opacity:.85}#stBack:hover{opacity:1}
-#stBack b{border:1.5px solid #fff;border-radius:6px;padding:2px 8px;margin-right:8px}
+.scr .pgs{flex:1;min-height:0;overflow-y:auto;padding-right:18px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.35) transparent}
+.scr button.row{width:100%;border:0;border-bottom:1px solid rgba(255,255,255,.18);background:transparent;color:inherit;text-align:left}
+.scr .row .sub{opacity:.5;font-size:.8em}
+.scr .pg{display:none}.scr .pg.on{display:block}
+.scr .row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:clamp(52px,7.4vh,68px);padding:0 clamp(12px,2.4vw,34px);border-bottom:1px solid rgba(255,255,255,.18);font:500 clamp(16px,2.4vh,23px) Inter;cursor:pointer}
+.scr .row.sel{background:linear-gradient(90deg,#fff 45%,rgba(255,255,255,.28));color:#1c1222;border-color:transparent}
+.scr .seg,.scr .ctl{display:flex;align-items:center;white-space:nowrap}
+.scr .seg button{display:none}
+.scr .v{margin-right:clamp(16px,3vw,44px)}
+.scr .n{margin-right:clamp(16px,3vw,52px)}
+.scr .n em,.cnt em{font-style:normal;opacity:.45}
+.scr .ar{width:clamp(30px,3.6vw,52px);height:40px;display:inline-flex;align-items:center;justify-content:center}
+.scr .ar::before{content:'';width:11px;height:11px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(2px) rotate(45deg)}
+.scr .ar[data-d="1"]::before{transform:translateX(-2px) rotate(-135deg)}
+.scr .sw{appearance:none;-webkit-appearance:none;margin:0 6px 0 0;position:relative;width:62px;height:31px;flex:none;border:2px solid currentColor;border-radius:16px;background:rgba(255,255,255,.12);cursor:pointer;transition:background .15s}
+.scr .sw::after{content:'';position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(28,18,34,.75);transition:left .15s}
+.scr input.sw:checked,.scr .seg.is-on .sw{background:#fff}
+.scr input.sw:checked::after,.scr .seg.is-on .sw::after{left:34px;background:#6b3d70;box-shadow:none}
+.scr .cv::before{content:'Off'}.scr .row:has(.sw:checked) .cv::before{content:'On'}
+.scr input[type=range]{width:min(260px,28vw);accent-color:#fff;cursor:pointer}
+.scr .row.sel input[type=range]{accent-color:#6b3d70}
+.scr .kk b{display:inline-block;border:1.5px solid currentColor;border-radius:6px;padding:1px 9px;margin-left:6px;font:700 .78em Inter}
+.scr .foot{display:flex;justify-content:space-between;align-items:center;padding-top:clamp(12px,3vh,36px);flex:none;font:500 clamp(22px,3.2vh,34px) Inter;text-shadow:0 2px 4px rgba(0,0,0,.35)}
+.scr .back{font:600 15px Inter;color:#fff;background:none;border:0;cursor:pointer;opacity:.85}.scr .back:hover{opacity:1}
+.scr .back b{border:1.5px solid #fff;border-radius:6px;padding:2px 8px;margin-right:8px}
 #touch{position:fixed;inset:0;pointer-events:none;display:none;z-index:5}
 #joy{position:absolute;left:calc(22px + env(safe-area-inset-left));bottom:calc(26px + env(safe-area-inset-bottom));width:138px;height:138px;border-radius:50%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);pointer-events:auto;touch-action:none}
 #knob{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(255,255,255,.55)}
@@ -92,14 +93,6 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
 #bigmap canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none}
 #bigmap .t{position:absolute;top:14px;left:50%;transform:translateX(-50%);font:400 38px 'Pirata One',serif;text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000;pointer-events:none}
 #bigx{position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.6);background:rgba(0,0,0,.5);color:#fff;font:700 20px Inter;cursor:pointer}
-#pause{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(10,12,18,.55),rgba(5,6,10,.9))}
-#pause.on{display:flex}
-#pause .box{width:min(440px,92vw);text-align:center}
-#pause h2{font:400 64px/1 Anton;margin:0 0 4px;letter-spacing:2px;background:linear-gradient(180deg,#fff,#ffe27a 60%,#ff9d2e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #1a1208)}
-#pause .sub{font:400 22px 'Pirata One',serif;opacity:.8;margin-bottom:18px}
-#pause .mb{display:block;width:100%;margin:8px 0;padding:13px 16px;font:400 22px Anton;letter-spacing:1.5px;border:0;border-radius:10px;cursor:pointer;background:rgba(255,255,255,.08);color:#fff;text-align:left;transition:background .15s,transform .15s}
-#pause .mb:hover{background:#ffd23f;color:#1a1305;transform:translateX(6px)}
-#pause .mb.primary{background:#ffd23f;color:#1a1305}
 #lockhint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;font:700 14px Inter;background:rgba(0,0,0,.55);padding:10px 16px;border-radius:22px;display:none;pointer-events:none}
 </style>
 </head>
@@ -122,19 +115,22 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
   <div class="btn" id="bHorn">Claxon</div>
   <div class="btn" id="bCam">🎥</div>
 </div>
-<div id="pause"><div class="box">
-  <h2>PAUZĂ</h2><div class="sub">Grand Theft Chișinău</div>
-  <button class="mb primary" id="pmResume">▶ Continuă</button>
-  <button class="mb" id="pmMap">🗺 Hartă</button>
-  <button class="mb" id="pmSetBtn">⚙ Setări</button>
-<button class="mb" id="pmRestart">↻ Joc nou (șterge salvarea)</button>
-</div></div>
+<div id="pause" class="scr">
+  <h2>PAUSED</h2>
+  <div class="pgs"><div class="pg on">
+    <button class="row" id="pmResume">Resume</button>
+    <button class="row" id="pmMap">Map</button>
+    <button class="row" id="pmSetBtn">Settings</button>
+    <button class="row" id="pmRestart">New Game<span class="sub">Deletes your save</span></button>
+  </div></div>
+  <div class="foot"><span class="cnt"></span><button class="back" id="pmBack"><b>Esc</b>Resume</button></div>
+</div>
 <div id="lockhint">Click pentru a controla camera</div>
 <div id="title">
-  <div class="crest"><img src="assets/splash/crest.svg" alt=""><img class="lg" src="assets/splash/logo.svg" alt="Grand Theft Chișinău"></div>
+  <img class="crest" src="assets/splash/emblem.svg" alt="Grand Theft Chișinău">
   <nav class="menu"><button id="play" disabled>SE ÎNCARCĂ…</button><button id="setBtn" disabled>SETTINGS</button></nav>
 </div>
-<div id="settings">
+<div id="settings" class="scr">
   <h2>SETTINGS</h2>
   <nav id="stTabs"><button class="on" data-t="gp">GAMEPLAY</button><button data-t="dp">DISPLAY</button><button data-t="au">AUDIO</button><button data-t="ct">CONTROLS</button></nav>
   <div class="pgs">
@@ -168,32 +164,32 @@ body:not(.touch) #veh{bottom:calc(24px + env(safe-area-inset-bottom))}body:not(.
       <div class="row"><span>Menu</span><span><b>Esc</b></span></div>
     </div>
   </div>
-  <div id="stFoot"><span id="stN"></span><button id="stBack"><b>Esc</b>Back</button></div>
+  <div class="foot"><span class="cnt"></span><button class="back" id="stBack"><b>Esc</b>Back</button></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="js/core.js?v=20261121b"></script>
-<script src="js/env.js?v=20261121b"></script>
-<script src="js/mapcore.js?v=20261121b"></script>
-<script src="js/bridges.js?v=20261121b"></script>
-<script src="js/facades.js?v=20261121b"></script>
-<script src="js/streets.js?v=20261121b"></script>
-<script src="js/traffic.js?v=20261121b"></script>
-<script src="js/world.js?v=20261121b"></script>
-<script src="js/vegetation.js?v=20261121b"></script>
-<script src="js/landmarks.js?v=20261121b"></script>
-<script src="js/vehicles.js?v=20261121b"></script>
-<script src="js/people.js?v=20261121b"></script>
-<script src="js/fx.js?v=20261121b"></script>
-<script src="js/radio.js?v=20261121b"></script>
-<script src="js/bemol.js?v=20261121b"></script>
-<script src="js/bemol_terrace.js?v=20261121b"></script>
-<script src="js/linella.js?v=20261121b"></script>
-<script src="assets/voice/voices.js?v=20261121b"></script>
-<script src="js/linella_store.js?v=20261121b"></script>
-<script src="js/airport.js?v=20261121b"></script>
-<script src="js/carcare.js?v=20261121b"></script>
-<script src="js/phone.js?v=20261121b"></script>
-<script src="js/mapicons.js?v=20261121b"></script>
-<script src="js/game.js?v=20261121b"></script>
+<script src="js/core.js?v=20261121s"></script>
+<script src="js/env.js?v=20261121s"></script>
+<script src="js/mapcore.js?v=20261121s"></script>
+<script src="js/bridges.js?v=20261121s"></script>
+<script src="js/facades.js?v=20261121s"></script>
+<script src="js/streets.js?v=20261121s"></script>
+<script src="js/traffic.js?v=20261121s"></script>
+<script src="js/world.js?v=20261121s"></script>
+<script src="js/vegetation.js?v=20261121s"></script>
+<script src="js/landmarks.js?v=20261121s"></script>
+<script src="js/vehicles.js?v=20261121s"></script>
+<script src="js/people.js?v=20261121s"></script>
+<script src="js/fx.js?v=20261121s"></script>
+<script src="js/radio.js?v=20261121s"></script>
+<script src="js/bemol.js?v=20261121s"></script>
+<script src="js/bemol_terrace.js?v=20261121s"></script>
+<script src="js/linella.js?v=20261121s"></script>
+<script src="assets/voice/voices.js?v=20261121s"></script>
+<script src="js/linella_store.js?v=20261121s"></script>
+<script src="js/airport.js?v=20261121s"></script>
+<script src="js/carcare.js?v=20261121s"></script>
+<script src="js/phone.js?v=20261121s"></script>
+<script src="js/mapicons.js?v=20261121s"></script>
+<script src="js/game.js?v=20261121s"></script>
 </body>
 </html>

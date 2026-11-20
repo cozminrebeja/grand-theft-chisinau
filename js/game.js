@@ -388,7 +388,7 @@ addEventListener('keydown',e=>{if(!started)return;
   else if(e.code==='Escape'){e.preventDefault();if(FM.on){closeBigMap();return;}if(paused)resumeGame();else if(locked())document.exitPointerLock();else openMenu();}});
 // pause menu
 const pmEl=$('pause');
-function openMenu(){if(paused)return;paused=true;pmEl.classList.add('on');$('lockhint').style.display='none';try{if(AC)AC.suspend();if(typeof fx_AC!=='undefined'&&fx_AC)fx_AC.suspend();}catch(e){}pmSync();}
+function openMenu(){if(paused)return;paused=true;pmEl.classList.add('on');$('lockhint').style.display='none';pmEl._sel=0;scrPaint(pmEl);try{if(AC)AC.suspend();if(typeof fx_AC!=='undefined'&&fx_AC)fx_AC.suspend();}catch(e){}pmSync();}
 function resumeGame(){paused=false;pmEl.classList.remove('on');try{if(AC)AC.resume();if(typeof fx_AC!=='undefined'&&fx_AC)fx_AC.resume();}catch(e){}last=performance.now();lockMouse();}
 document.addEventListener('pointerlockchange',()=>{if(locked()){$('lockhint').style.display='none';return;}
   if(suppressMenu){suppressMenu=false;return;}if(started&&!paused&&!FM.on&&!isTouch)openMenu();});
@@ -405,29 +405,32 @@ $('pmInv').addEventListener('change',e=>{invertY=e.target.checked;LSset('gtc_inv
 $('pmSndOn').addEventListener('click',()=>{if(typeof fx_setMute==='function')fx_setMute(false);pmSync();});
 $('pmSndOff').addEventListener('click',()=>{if(typeof fx_setMute==='function')fx_setMute(true);pmSync();});
 for(const b of $('pmQ').querySelectorAll('button'))b.addEventListener('click',()=>{LSset('gtc_q',b.dataset.q);location.hash=b.dataset.q;location.reload();});
-// settings screen (splash SETTINGS / pause ⚙): each .seg row shows its .on button and steps through the hidden buttons, so the handlers above stay the only logic
-const stEl=$('settings');let stSel=0;
-const stRows=()=>[...stEl.querySelectorAll('.pg.on .row')];
+// menu screens (.scr: pause + settings) share rows, hover/arrow-key selection and the "n / N" counter.
+// Settings rows with a .seg show its .on button and step through the hidden buttons, so the handlers above stay the only logic.
+const stEl=$('settings');
+const scrRows=el=>[...el.querySelectorAll('.pg.on .row')];
+const scrTop=()=>stEl.classList.contains('on')?stEl:pmEl.classList.contains('on')?pmEl:null;
 for(const s of stEl.querySelectorAll('.seg'))s.insertAdjacentHTML('afterbegin',s.classList.contains('tog')?'<span class="v"></span><i class="sw"></i>':'<span class="v"></span><span class="n"></span><i class="ar" data-d="-1"></i><i class="ar" data-d="1"></i>');
-function stPaint(){for(const s of stEl.querySelectorAll('.seg')){const bs=[...s.querySelectorAll('button')],i=bs.findIndex(b=>b.classList.contains('on')),n=s.querySelector('.n');
+function scrPaint(el){for(const s of el.querySelectorAll('.seg')){const bs=[...s.querySelectorAll('button')],i=bs.findIndex(b=>b.classList.contains('on')),n=s.querySelector('.n');
     s.querySelector('.v').textContent=i<0?'':bs[i].textContent;if(n)n.innerHTML=(i+1)+'<em> / '+bs.length+'</em>';s.classList.toggle('is-on',i===0);}
-  const r=stRows();stSel=clamp(stSel,0,r.length-1);r.forEach((e,i)=>e.classList.toggle('sel',i===stSel));$('stN').innerHTML=r.length?(stSel+1)+'<em> / '+r.length+'</em>':'';}
+  const r=scrRows(el);el._sel=clamp(el._sel||0,0,r.length-1);r.forEach((e,i)=>e.classList.toggle('sel',i===el._sel));el.querySelector('.cnt').innerHTML=r.length?(el._sel+1)+'<em> / '+r.length+'</em>':'';}
 function stStep(row,d){const s=row.querySelector('.seg'),rg=row.querySelector('input[type=range]'),cb=row.querySelector('.sw');
   if(s){const bs=[...s.querySelectorAll('button')],i=Math.max(0,bs.findIndex(b=>b.classList.contains('on')));bs[(i+d+bs.length)%bs.length].click();}
   else if(rg){d>0?rg.stepUp(5):rg.stepDown(5);rg.dispatchEvent(new Event('input'));}
   else if(cb)cb.click();
-  stPaint();}
-function openSettings(){pmSync();stEl.classList.add('on');stPaint();}
+  scrPaint(stEl);}
+function openSettings(){pmSync();stEl.classList.add('on');scrPaint(stEl);}
 const closeSettings=()=>stEl.classList.remove('on');
-$('pmSetBtn').addEventListener('click',openSettings);$('setBtn').addEventListener('click',openSettings);$('stBack').addEventListener('click',closeSettings);
-$('stTabs').addEventListener('click',e=>{const t=e.target.dataset.t;if(!t)return;for(const el of stEl.querySelectorAll('[data-t]'))el.classList.toggle('on',el.dataset.t===t);stSel=0;stPaint();});
+$('pmSetBtn').addEventListener('click',openSettings);$('setBtn').addEventListener('click',openSettings);$('stBack').addEventListener('click',closeSettings);$('pmBack').addEventListener('click',resumeGame);
+$('stTabs').addEventListener('click',e=>{const t=e.target.dataset.t;if(!t)return;for(const el of stEl.querySelectorAll('[data-t]'))el.classList.toggle('on',el.dataset.t===t);stEl._sel=0;scrPaint(stEl);});
 stEl.addEventListener('click',e=>{const row=e.target.closest('.row');if(row&&row.querySelector('.seg')&&e.target.tagName!=='BUTTON')stStep(row,+(e.target.dataset.d||1));});
-stEl.addEventListener('pointerover',e=>{const i=stRows().indexOf(e.target.closest('.row'));if(i>=0&&i!==stSel){stSel=i;stPaint();}});
-addEventListener('keydown',e=>{if(!stEl.classList.contains('on'))return;e.stopImmediatePropagation();   // capture: the game never sees keys while settings are open
-  const r=stRows();
-  if(e.code==='Escape'||e.code==='Backspace')closeSettings();
-  else if(e.code==='ArrowDown'||e.code==='ArrowUp'){if(!r.length)return;stSel=(stSel+(e.code==='ArrowDown'?1:-1)+r.length)%r.length;stPaint();r[stSel].scrollIntoView({block:'nearest'});}
-  else if((e.code==='ArrowLeft'||e.code==='ArrowRight')&&r[stSel])stStep(r[stSel],e.code==='ArrowRight'?1:-1);
+for(const el of [stEl,pmEl])el.addEventListener('pointerover',e=>{const i=scrRows(el).indexOf(e.target.closest('.row'));if(i>=0&&i!==el._sel){el._sel=i;scrPaint(el);}});
+addEventListener('keydown',e=>{const el=scrTop();if(!el)return;e.stopImmediatePropagation();   // capture: the game never sees keys while a menu screen is open
+  const r=scrRows(el),row=r[el._sel];
+  if(e.code==='Escape'||e.code==='Backspace'){if(el===stEl)closeSettings();else resumeGame();}
+  else if(e.code==='ArrowDown'||e.code==='ArrowUp'){if(!r.length)return;el._sel=(el._sel+(e.code==='ArrowDown'?1:-1)+r.length)%r.length;scrPaint(el);r[el._sel].scrollIntoView({block:'nearest'});}
+  else if((e.code==='ArrowLeft'||e.code==='ArrowRight')&&row&&el===stEl)stStep(row,e.code==='ArrowRight'?1:-1);
+  else if((e.code==='Enter'||e.code==='Space')&&row){if(el===stEl)stStep(row,1);else row.click();}
   else return;
   e.preventDefault();},true);
 $('pmRestart').addEventListener('click',()=>{saveOff=true;try{localStorage.removeItem(SAVE_K);}catch(e){}location.reload();});
