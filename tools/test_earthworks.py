@@ -15,6 +15,7 @@ T = Terrain(w)
 assert abs(T.ground(0, -21) - 7.9) < .2                      # embankment top follows the line
 assert 3 < T.ground(13, -21) < 4                             # 1.5:1 side slope: 7 m out of the 6 m half-width → ~4.6 m lower
 assert abs(T.ground(30, -21) - float(T.dem(30, -21))) < 1e-6  # outside the slope reach: natural ground
+assert abs(T.ground(0, -12) - float(T.dem(0, -12))) < 1e-6  # fills end square: nothing under the deck past the line end
 assert abs(T.ground(0, 40) + 5) < .01 and abs(T.ground(0, 43) + 5) < .01   # walled channel bottom across its width
 assert T.ground(0, 50) == float(T.dem(0, 50))                # wall: no slope beyond the edge
 assert json.load(open(os.path.join(w, 'world.json')))['bridge_spec']['0']['deck'][0] == [0, 0, 9]

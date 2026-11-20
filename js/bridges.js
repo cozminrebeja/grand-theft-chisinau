@@ -162,7 +162,8 @@ function buildBridgesTile(t){
       }}
     // abutment walls where an end of a deep span meets the ground
     if(deep&&!foot)for(const s of [0,sp.L]){const p=br_at(sp,s);if(!inTile(p[0],p[1]))continue;any=true;
-      const y=br_deck(sp,s);br_box(B,p[0],y-1.4,p[1],half*2+.6,2.8,1.4,Math.atan2(p[2],p[3]),BR_C.pier);}
+      const y=br_deck(sp,s),e=s?-1:1,g=Math.min(groundY(p[0],p[1]),groundY(p[0]+p[2]*e*2,p[1]+p[3]*e*2))-.5,h=Math.max(2.8,y-g);   // down to the ground under the span end
+      br_box(B,p[0],y-h/2,p[1],half*2+.6,h,1.4,Math.atan2(p[2],p[3]),BR_C.pier);}
   }
   // tunnel / underpass portals (roads stay at ground; pedestrian underpasses get a stair-pit parapet, road tunnels a portal frame)
   for(const tn of BR.tunnels){if(tn.kind===1)continue;   // service tunnels are passages through buildings

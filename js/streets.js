@@ -363,13 +363,16 @@ function st_gridMesh(x0,z0,nx,nz,C,lift,waterClamp,col){const V=(nx+1)*(nz+1),P=
   const g=new THREE.BufferGeometry();g.setIndex(new THREE.BufferAttribute(I,1));g.setAttribute('position',new THREE.BufferAttribute(P,3));g.setAttribute('normal',new THREE.BufferAttribute(N,3));
   g.setAttribute('uv',new THREE.BufferAttribute(U,2));g.setAttribute('color',new THREE.BufferAttribute(Cc,3));g.setAttribute('tile',new THREE.BufferAttribute(Tt,2));g.computeBoundingSphere();
   const m=new THREE.Mesh(g,st_mat);m.matrixAutoUpdate=false;m.updateMatrix();return m;}
-// ---- lakes are level: one water level per lake, shared by all its clipped tile pieces (cache by bbox overlap) ----
+// ---- lakes are level: one water level per lake, shared by all its clipped tile pieces (cache by bbox contact) ----
+// Only pieces cut by a tile border are shared: with a loose margin a nearby pond could hand its level to a whole lake,
+// depending on load order (Valea Morilor rose 16 m). ponytail: bbox contact, a polygon-adjacency test if two lakes ever touch.
 const st_lakes=[];
-function st_waterLevel(o){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}
-  for(const L of st_lakes)if(x0<L.x1+25&&x1>L.x0-25&&z0<L.z1+25&&z1>L.z0-25){L.x0=Math.min(L.x0,x0);L.x1=Math.max(L.x1,x1);L.z0=Math.min(L.z0,z0);L.z1=Math.max(L.z1,z1);return L.level;}
+function st_waterLevel(o,t){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}
+  const e=.06,clip=o.some(p=>Math.abs(p[0]-t.x0)<e||Math.abs(p[0]-t.x1)<e||Math.abs(p[1]-t.z0)<e||Math.abs(p[1]-t.z1)<e);
+  if(clip)for(const L of st_lakes)if(x0<L.x1+1&&x1>L.x0-1&&z0<L.z1+1&&z1>L.z0-1){L.x0=Math.min(L.x0,x0);L.x1=Math.max(L.x1,x1);L.z0=Math.min(L.z0,z0);L.z1=Math.max(L.z1,z1);return L.level;}
   const A=Math.abs(sArea(o)),st=Math.max(5,Math.sqrt(A)/14),v=[];for(let x=x0+st/2;x<x1;x+=st)for(let z=z0+st/2;z<z1;z+=st)if(pip(x,z,o))v.push(st_gy(x,z));
   if(v.length<3)for(const p of o)v.push(st_gy(p[0],p[1]));v.sort((a,b)=>a-b);const level=v[Math.floor(v.length*.2)]-.3;
-  st_lakes.push({x0,x1,z0,z1,level});return level;}
+  if(clip)st_lakes.push({x0,x1,z0,z1,level});return level;}
 // channels (mapcore RV, audited beds carved into groundY) need a finer grid to show the profile; far tiles keep the smooth valley
 function st_tileHasRiver(t){if(typeof rv_dist!=='function')return false;if(!RV)rv_dist(0,0);for(const L of (RV&&RV.lines)||[])for(const p of L.pts)if(p[0]>t.x0-30&&p[0]<t.x1+30&&p[1]>t.z0-30&&p[1]<t.z1+30)return true;return false;}
 function st_terrainTile(t,grp,water){if(t.key==='all'||!isFinite(t.x0))return;const far=t.lod==='far',riv=st_tileHasRiver(t),N=far?24:riv?160:64,C=(t.x1-t.x0)/N;
@@ -405,7 +408,7 @@ function buildStreetsTile(t){
       if(Math.abs(sArea(o))>=4000){let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}bigParks.push({o,x0,x1,z0,z1});}}
     else if(kind==='parking')st_poly(o,hs,st_Y.PARKING,st_T.ASPH2,6,st_col(0xe8e8e8));
     else st_poly(o,hs,st_Y.PLAZA,st_T.PAVE,3,new THREE.Color(k,k,k));}
-  for(const w of water){const o=w[0];w.level=st_waterLevel(o);let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}Object.assign(w,{o,hs:w[1],x0,x1,z0,z1});}
+  for(const w of water){const o=w[0];w.level=st_waterLevel(o,t);let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of o){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}Object.assign(w,{o,hs:w[1],x0,x1,z0,z1});}
   st_terrainTile(t,grp,water);
   if(water.length)st_buildWaterTile(water,grp,t);
   st_maxe2=49;st_bridgeOK=true;

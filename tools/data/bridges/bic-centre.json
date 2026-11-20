@@ -259,16 +259,7 @@
      "structure": {
       "type": "beam",
       "deck_depth": 1.3,
-      "piers": [
-       [
-        1033,
-        -1027
-       ],
-       [
-        1043,
-        -1037
-       ]
-      ],
+      "piers": [],
       "pier_type": "wall",
       "abutment": "beige limestone-clad abutment wall at the SW end forming the Albișoara portal",
       "railing": "metal",
@@ -277,7 +268,8 @@
        2.5,
        2.5
       ],
-      "colour": "#a8a49b"
+      "colour": "#a8a49b",
+      "pier_note": "no piers: Street View shows a single opening over Albișoara; the canal and Luncii run skewed under the deck, so the old ESTIMATE wall piers stood diagonally in the Bîc"
      },
      "under": [
       {

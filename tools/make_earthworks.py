@@ -26,17 +26,21 @@ def raster(line, top_w, side, slope, mode):
     half = max(top_w, 1.0) / 2; slope = max(slope or 1.5, .3)
     reach = half + (0 if side == 'wall' else 25 * slope)  # 25 m max height difference handled
     P = np.array(line, float)
-    for a, b in zip(P, P[1:]):
+    for si, (a, b) in enumerate(zip(P, P[1:])):
         x0, x1 = min(a[0], b[0]) - reach, max(a[0], b[0]) + reach; z0, z1 = min(a[1], b[1]) - reach, max(a[1], b[1]) + reach
         I, J = np.meshgrid(np.arange(math.floor(x0 / C), math.ceil(x1 / C) + 1), np.arange(math.floor(z0 / C), math.ceil(z1 / C) + 1))
         X, Z = I * C, J * C
         dx, dz = b[0] - a[0], b[1] - a[1]; l2 = dx * dx + dz * dz or 1e-9
-        t = np.clip(((X - a[0]) * dx + (Z - a[1]) * dz) / l2, 0, 1)
+        t0 = ((X - a[0]) * dx + (Z - a[1]) * dz) / l2; t = np.clip(t0, 0, 1)
         d = np.hypot(X - (a[0] + dx * t), Z - (a[1] + dz * t)); y = a[2] + (b[2] - a[2]) * t
         if side == 'wall': tgt = np.where(d <= half, y, np.nan)
         elif mode == 'set': tgt = np.where(d <= half, y, np.nan)  # slopes of a set line come from the fill/cut passes below
         else: tgt = np.where(d <= half, y, (y - (d - half) / slope) if mode == 'fill' else (y + (d - half) / slope))
         tgt = np.where(d <= reach, tgt, np.nan)
+        if mode != 'cut':  # fills end square at the line ends: an embankment ending at a bridge deck must not round-cap
+            # back under the span and bury what passes beneath (Luncii under Podul Circului)
+            if si == 0: tgt = np.where(t0 < 0, np.nan, tgt)
+            if si == len(P) - 2: tgt = np.where(t0 > 1, np.nan, tgt)
         dem = T.dem(X, Z)
         keep = ~np.isnan(tgt) & ((tgt > dem + .05) if mode == 'fill' else (tgt < dem - .05) if mode == 'cut' else True)
         D = {'fill': fill, 'cut': cut, 'set': setv}[mode]

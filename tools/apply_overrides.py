@@ -130,6 +130,47 @@ for o in blds:
     elif b[0] >= 22 and b[2] in (0, 3): b[2] = 1  # same as the pipeline: ≥22 m reads as a panel block
     S['bld-explicit'] += 1
 
+# ---------------- 3. buildings standing in the road ----------------
+# Drop footprints that sit >30% on a drivable/service carriageway, and low ones (≤8 m) a street centreline runs ≥4 m into
+# (Overture/OSM misalignment: kiosks, sheds, houses on the asphalt). Runs after the width fixes; deleting is idempotent.
+C = 20; SEG = collections.defaultdict(list); CL = collections.defaultdict(list)
+for P in PACKS.values():
+    for t in P.values():
+        for r in t.get('r', []):
+            if r[0] > 1: continue
+            p = pts(r[6]); w = r[1]
+            for a, b in zip(p, p[1:]):
+                for i in range(math.floor((min(a[0], b[0]) - w) / C), math.floor((max(a[0], b[0]) + w) / C) + 1):
+                    for j in range(math.floor((min(a[1], b[1]) - w) / C), math.floor((max(a[1], b[1]) + w) / C) + 1):
+                        SEG[(i, j)].append((a, b, w))
+                if r[0] == 0:
+                    n = max(1, int(math.hypot(b[0] - a[0], b[1] - a[1])))
+                    for k in range(n):
+                        x, z = a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n; CL[(math.floor(x / C), math.floor(z / C))].append((x, z))
+def on_road(x, z):
+    for a, b, w in SEG.get((math.floor(x / C), math.floor(z / C)), ()):
+        dx, dz = b[0] - a[0], b[1] - a[1]; l2 = dx * dx + dz * dz or 1e-9; u = max(0, min(1, ((x - a[0]) * dx + (z - a[1]) * dz) / l2))
+        if math.hypot(a[0] + dx * u - x, a[1] + dz * u - z) < w / 2 - .5: return True
+    return False
+def in_road(b):
+    p = pts(b[4])
+    if len(p) < 3: return False
+    xs, zs = [q[0] for q in p], [q[1] for q in p]; x0, x1, z0, z1 = min(xs), max(xs), min(zs), max(zs)
+    if b[0] <= 8 and sum(pip(p, x, z) for i in range(math.floor(x0 / C), math.floor(x1 / C) + 1)
+                         for j in range(math.floor(z0 / C), math.floor(z1 / C) + 1) for x, z in CL.get((i, j), ())) >= 4: return True
+    st = max(.8, math.sqrt((x1 - x0) * (z1 - z0)) / 14); n = on = 0; x = x0 + st / 2
+    while x < x1:
+        z = z0 + st / 2
+        while z < z1:
+            if pip(p, x, z): n += 1; on += on_road(x, z)
+            z += st
+        x += st
+    return n > 0 and on / n > .3
+for P in PACKS.values():
+    for t in P.values():
+        if 'b' in t:
+            keep = [b for b in t['b'] if not in_road(b)]; S['bld-in-road'] += len(t['b']) - len(keep); t['b'] = keep
+
 dump = lambda o, f: open(f, 'w').write(json.dumps(o, separators=(',', ':'), ensure_ascii=False))
 dump(WJ, f'{W}/world.json')
 for f, P in PACKS.items(): dump(P, f)
