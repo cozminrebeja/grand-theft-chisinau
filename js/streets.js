@@ -268,6 +268,7 @@ function st_free(x,z,r){if(solidAt(x,z,.5))return false;const ns=nearestSeg(x,z,
 let st_globalDone=false,st_TILE=500;
 const st_tileSegs=new Map();   // tile key -> [[road, segIndex], ...]
 const st_tileNodes=new Map();  // tile key -> [junction node, ...]
+const st_POLES=false; // street lamps + trolley catenary poles (and their cross-span wires) switched off; contact wires stay
 let st_lampMat=null,st_glassMat=null,st_wireMat=null,st_waterMat=null,st_kioskMat=null;
 let st_curF=null,st_curGlass=null;
 function st_f(x,z){return st_curF;}
@@ -463,10 +464,10 @@ function buildStreetsTile(t){
         st_quad(st_cur,[[p0[0]-ax,st_Y.ZEBRA,p0[1]-az,0,0],[p1[0]-ax,st_Y.ZEBRA,p1[1]-az,1,0],[p1[0]+ax,st_Y.ZEBRA,p1[1]+az,1,.4],[p0[0]+ax,st_Y.ZEBRA,p0[1]+az,0,.4]],[0,1,0],st_T.PAINT,cPaint);}}
     // ---- street lamps along drivable roads without trolley wires (spacing along the whole road) ----
     const lamps=[];
-    for(const [r,S] of RM){if(r.kind!==0||r.tw||r.w<4.5)continue;const rr=st_rng(r.idx*7919+1),both=r.w>=9.5,sp=r.w>=9.5?30:36;const tot=r.cum[r.cum.length-1];let flip=1;
+    if(st_POLES)for(const [r,S] of RM){if(r.kind!==0||r.tw||r.w<4.5)continue;const rr=st_rng(r.idx*7919+1),both=r.w>=9.5,sp=r.w>=9.5?30:36;const tot=r.cum[r.cum.length-1];let flip=1;
       for(let s=8+rr()*8;s<tot-4;s+=sp){const sides=both?[1,-1]:[flip];flip=-flip;const P=st_pointAt(r,s);if(!S.has(P.i))continue;const nx=-P.uz,nz=P.ux;
         for(const sd of sides){const e=r.w/2+.55,x=P.x+nx*e*sd,z=P.z+nz*e*sd;if(!st_free(x,z,.25))continue;lamps.push([x,z,Math.atan2(-nx*sd,-nz*sd)]);}}}
-    st_lampMesh('lamp',lamps,grp);
+    if(st_POLES)st_lampMesh('lamp',lamps,grp);
     // ---- junction furniture: traffic lights (+mast arms, lenses), yield signs ----
     for(const N of nodes){const major=st_isMajor(N);const ref=N.arms[0];
       for(const A of N.arms){const oth=N.arms.filter(o=>o!==A);if(!oth.length)continue;const Ld=Math.max(...oth.map(o=>o.w/2))+2.2;const nx=A.uz,nz=-A.ux;const face=Math.atan2(A.ux,A.uz);
@@ -537,7 +538,7 @@ function buildTransitTile(t){
     for(let i=0;i<r.pts.length-1;i++){const a=r.pts[i],c=r.pts[i+1],dx=c[0]-a[0],dz=c[1]-a[1],l=Math.hypot(dx,dz);if(l<.01)continue;
       if(S.has(i)){const nx=-dz/l,nz=dx/l;
         for(const o of offs)for(const dd of[-.3,.3])wirePts.push(a[0]+nx*(o+dd),5.8,a[1]+nz*(o+dd),c[0]+nx*(o+dd),5.8,c[1]+nz*(o+dd));
-        for(let tt=(35-acc%35)%35;tt<l;tt+=35){const px=a[0]+dx/l*tt,pz=a[1]+dz/l*tt,e=r.w/2+.75;const ry=Math.atan2(nx,nz);
+        if(st_POLES)for(let tt=(35-acc%35)%35;tt<l;tt+=35){const px=a[0]+dx/l*tt,pz=a[1]+dz/l*tt,e=r.w/2+.75;const ry=Math.atan2(nx,nz);
           const okL=st_free(px+nx*e,pz+nz*e,.3),okR=st_free(px-nx*e,pz-nz*e,.3);
           if(okL)cpoles.push([px+nx*e,pz+nz*e,ry+Math.PI]);if(okR)cpoles.push([px-nx*e,pz-nz*e,ry]);
           const L=okL?e:r.w/2,Rr=okR?e:r.w/2;const sag=s=>6.95-.25*(1-((s+L)/(L+Rr)*2-1)**2);

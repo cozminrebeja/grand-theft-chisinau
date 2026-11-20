@@ -347,6 +347,9 @@ function buildVegetationTile(t){const t0=performance.now();const S=veg_init(),Q=
         if(++nbed>=n)break;}}
     if(b.p.length){const m=b.mesh();m.name='veg_beds';(t.group||scene).add(m);}}
   sec.end=performance.now();const ks=Object.keys(sec);const prof={};for(let i=1;i<ks.length;i++)prof[ks[i-1]]=Math.round(sec[ks[i]]-sec[ks[i-1]]);
+  // foliage at half density: keep a fixed half of trees, bushes and grass, chosen by position so a reloaded tile looks the same
+  const veg_keep=p=>((Math.floor(p[0]*3.7)*73856093^Math.floor(p[1]*3.7)*19349663)>>>3&1)===0;
+  {const k=pts.filter(veg_keep);pts.length=0;pts.push(...k);}{const k=bushes.filter(veg_keep);bushes.length=0;bushes.push(...k);}{const k=grass.filter(veg_keep);grass.length=0;grass.push(...k);}
   const N=pts.length,farM=new Float32Array(N*16),col=new Float32Array(N*3),arch=new Float32Array(N);
   for(let i=0;i<N;i++){const p=pts[i];veg_mFar(p,veg_tmp).toArray(farM,i*16);const c=veg_TINT[p[5]];col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;arch[i]=p[4];}
   const rec={trees:pts,bushes,grass,farM,col,arch,ms:Math.round(performance.now()-t0),prof,n:[N,bushes.length,grass.length]};veg_tiles.set(t.key,rec);S.dirty=true;return rec;}
