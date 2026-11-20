@@ -1,0 +1,3668 @@
+{
+ "sites": [
+  {
+   "id": "r3-m2-codru",
+   "name": "Pod R3 (Șos. Hîncești) peste Centura M2, nod Codru",
+   "x": -5878,
+   "z": 6812,
+   "lat": 46.963125,
+   "lon": 28.755137,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      234,
+      235
+     ],
+     "road": "Șoseaua Hîncești (R3), 2×2 lanes",
+     "deck": [
+      [
+       -5904.5,
+       6842.5,
+       18.39
+      ],
+      [
+       -5877.7,
+       6812.2,
+       16.49
+      ],
+      [
+       -5850.9,
+       6782.0,
+       15.68
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       0.8,
+       0.8
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Centura Chișinăului (M2) + loop ramp, 2 carriageways",
+       "y": 3.9,
+       "width": 30,
+       "clearance": 5.0
+      }
+     ],
+     "evidence": "img/s00.jpg, s00z.jpg, s00z_crop.jpg (Esri). Twin decks ~80 m, abutment cones visible; piers not visible top-down. Deck heights ≈ DEM (game deck is OK) — the error is the road UNDER it, which the game keeps at DEM ≈11 so it runs through the deck. Deck/clearance values are ESTIMATES (shadow + grade reasoning). | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): deck = DSM + 1.6 m (decks read ~1.6 m low at 30 m, measured on the Grădina Botanică decks)."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "raised_road",
+     "road": "Șoseaua Hîncești (R3) SW approach",
+     "line": [
+      [
+       -5383.8,
+       6131.5,
+       38.88
+      ],
+      [
+       -5398.4,
+       6151.7,
+       38.05
+      ],
+      [
+       -5412.6,
+       6172.3,
+       37.21
+      ],
+      [
+       -5441.1,
+       6213.4,
+       34.27
+      ],
+      [
+       -5455.3,
+       6234.0,
+       32.72
+      ],
+      [
+       -5469.5,
+       6254.6,
+       30.98
+      ],
+      [
+       -5483.7,
+       6275.1,
+       29.29
+      ],
+      [
+       -5497.9,
+       6295.7,
+       27.62
+      ],
+      [
+       -5512.1,
+       6316.3,
+       26.08
+      ],
+      [
+       -5526.2,
+       6336.9,
+       24.73
+      ],
+      [
+       -5540.4,
+       6357.5,
+       23.32
+      ],
+      [
+       -5554.6,
+       6378.1,
+       21.85
+      ],
+      [
+       -5568.9,
+       6398.6,
+       20.27
+      ],
+      [
+       -5583.2,
+       6419.1,
+       19.0
+      ],
+      [
+       -5597.4,
+       6439.6,
+       17.37
+      ],
+      [
+       -5611.7,
+       6460.2,
+       16.62
+      ],
+      [
+       -5626.0,
+       6480.7,
+       15.77
+      ],
+      [
+       -5640.2,
+       6501.2,
+       14.42
+      ],
+      [
+       -5654.4,
+       6521.8,
+       13.51
+      ],
+      [
+       -5668.6,
+       6542.4,
+       13.11
+      ],
+      [
+       -5682.7,
+       6563.0,
+       12.21
+      ],
+      [
+       -5739.7,
+       6645.2,
+       11.55
+      ],
+      [
+       -5754.3,
+       6665.5,
+       11.55
+      ],
+      [
+       -5768.9,
+       6685.8,
+       11.55
+      ],
+      [
+       -5783.4,
+       6706.1,
+       11.75
+      ],
+      [
+       -5798.8,
+       6725.8,
+       12.1
+      ],
+      [
+       -5814.4,
+       6745.4,
+       12.46
+      ],
+      [
+       -5850.9,
+       6782.0,
+       15.68
+      ]
+     ],
+     "top_w": 28,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "R3 runs on a 9–13 m embankment the DEM opening filter erased | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): line = DSM (5-point median); one continuous line so there is no dip between pieces."
+    },
+    {
+     "type": "raised_road",
+     "road": "Șoseaua Hîncești (R3) NE approach",
+     "line": [
+      [
+       -5904.5,
+       6842.5,
+       18.39
+      ],
+      [
+       -5894.6,
+       6841.3,
+       16.61
+      ],
+      [
+       -5911.2,
+       6859.9,
+       17.35
+      ],
+      [
+       -5928.3,
+       6878.2,
+       18.17
+      ],
+      [
+       -5945.4,
+       6896.4,
+       18.59
+      ]
+     ],
+     "top_w": 30,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "DSM shows R3 on fill here, not in a cutting | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): line = DSM."
+    },
+    {
+     "type": "cutting",
+     "road": "Centura Chișinăului (M2) under R3",
+     "line": [
+      [
+       -5955,
+       6499,
+       8.89
+      ],
+      [
+       -5958,
+       6560,
+       8.89
+      ],
+      [
+       -5945,
+       6642,
+       8.99
+      ],
+      [
+       -5929,
+       6723,
+       8.99
+      ],
+      [
+       -5910,
+       6773,
+       8.99
+      ],
+      [
+       -5897,
+       6795,
+       8.99
+      ],
+      [
+       -5870,
+       6840,
+       8.99
+      ],
+      [
+       -5838,
+       6891,
+       8.99
+      ]
+     ],
+     "top_w": 24,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE from geometry: deck top ≈7.3 m above M2 (deck shadow 4.4 m perpendicular vs bus shadow 1.5 m for ~3.2 m bus on same image, img/s00z_crop.jpg → 7-8.5 m); R3 cannot sit higher than DEM (grade). Bare sandy cut slopes visible W of M2 (img/s00.jpg x≈-6000, z 6620-6900). M2 comes up the Bostancea floor (DEM 1.8 at z 6396) so a ~0.5 % grade into the cut is natural. | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): shifted +5.1 m so M2 is 7.5 m under the DSM deck (agent clearance kept, anchor was low)."
+    },
+    {
+     "type": "cutting",
+     "road": "M2→R3 loop ramp (south loop)",
+     "line": [
+      [
+       -5838,
+       6891,
+       8.99
+      ],
+      [
+       -5834,
+       6928,
+       11.09
+      ],
+      [
+       -5851,
+       6955,
+       12.99
+      ],
+      [
+       -5889,
+       6967,
+       15.19
+      ],
+      [
+       -5922,
+       6943,
+       17.59
+      ],
+      [
+       -5931,
+       6914,
+       19.29
+      ],
+      [
+       -5924,
+       6889,
+       20.79
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: loop OSM 25452919/25452920 must climb from the M2 under the bridge to R3; linear ~5.5 % ramp, capped at DEM. | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): shifted +5.1 m so M2 is 7.5 m under the DSM deck (agent clearance kept, anchor was low)."
+    }
+   ]
+  },
+  {
+   "id": "r3-isnovat-dam",
+   "name": "Barajul lacului de pe Ișnovăț (Șos. Hîncești R3 pe coronament)",
+   "x": -6820,
+   "z": 7700,
+   "lat": 46.955094,
+   "lon": 28.742724,
+   "status": "missing_in_data",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "raised_road",
+     "road": "Șoseaua Hîncești (R3) on the reservoir dam crest",
+     "line": [
+      [
+       -6300.0,
+       7250.0,
+       16.3
+      ],
+      [
+       -6323.7,
+       7256.8,
+       15.43
+      ],
+      [
+       -6342.0,
+       7273.8,
+       14.95
+      ],
+      [
+       -6360.2,
+       7290.9,
+       14.47
+      ],
+      [
+       -6378.3,
+       7308.2,
+       13.15
+      ],
+      [
+       -6396.2,
+       7325.6,
+       10.47
+      ],
+      [
+       -6414.3,
+       7342.9,
+       10.18
+      ],
+      [
+       -6432.5,
+       7360.1,
+       8.51
+      ],
+      [
+       -6450.6,
+       7377.3,
+       7.96
+      ],
+      [
+       -6468.7,
+       7394.5,
+       7.0
+      ],
+      [
+       -6486.9,
+       7411.7,
+       6.48
+      ],
+      [
+       -6505.1,
+       7428.8,
+       6.22
+      ],
+      [
+       -6523.3,
+       7445.9,
+       4.89
+      ],
+      [
+       -6541.4,
+       7463.2,
+       4.89
+      ],
+      [
+       -6559.3,
+       7480.6,
+       3.59
+      ],
+      [
+       -6577.4,
+       7497.9,
+       3.43
+      ],
+      [
+       -6595.5,
+       7515.1,
+       2.4
+      ],
+      [
+       -6613.6,
+       7532.4,
+       2.34
+      ],
+      [
+       -6631.7,
+       7549.6,
+       2.18
+      ],
+      [
+       -6649.8,
+       7566.8,
+       1.5
+      ],
+      [
+       -6667.9,
+       7584.1,
+       1.49
+      ],
+      [
+       -6686.1,
+       7601.3,
+       1.08
+      ],
+      [
+       -6704.2,
+       7618.5,
+       0.95
+      ],
+      [
+       -6722.3,
+       7635.7,
+       0.25
+      ],
+      [
+       -6740.5,
+       7652.9,
+       0.22
+      ],
+      [
+       -6758.6,
+       7670.1,
+       0.19
+      ],
+      [
+       -6776.8,
+       7687.3,
+       0.04
+      ],
+      [
+       -6794.9,
+       7704.5,
+       -0.03
+      ],
+      [
+       -6813.0,
+       7721.7,
+       -0.1
+      ],
+      [
+       -6831.1,
+       7739.0,
+       -0.16
+      ],
+      [
+       -6849.2,
+       7756.2,
+       -0.16
+      ],
+      [
+       -6867.4,
+       7773.4,
+       -0.16
+      ],
+      [
+       -6885.5,
+       7790.6,
+       -0.22
+      ],
+      [
+       -6903.8,
+       7807.7,
+       -0.16
+      ],
+      [
+       -6922.0,
+       7824.8,
+       -0.09
+      ],
+      [
+       -6940.0,
+       7842.2,
+       -0.07
+      ],
+      [
+       -6957.9,
+       7859.6,
+       0.12
+      ],
+      [
+       -6976.2,
+       7876.6,
+       0.29
+      ],
+      [
+       -6994.6,
+       7893.6,
+       0.35
+      ],
+      [
+       -7013.0,
+       7910.4,
+       0.65
+      ],
+      [
+       -7031.7,
+       7927.0,
+       0.94
+      ],
+      [
+       -7050.9,
+       7943.1,
+       1.07
+      ],
+      [
+       -7071.1,
+       7957.7,
+       1.2
+      ],
+      [
+       -7091.5,
+       7972.3,
+       1.76
+      ],
+      [
+       -7112.6,
+       7985.7,
+       1.77
+      ],
+      [
+       -7134.2,
+       7998.2,
+       1.79
+      ],
+      [
+       -7148.1,
+       8014.0,
+       2.23
+      ]
+     ],
+     "top_w": 30,
+     "side": "slope",
+     "slope": 2.5,
+     "evidence": "img/r3isn.jpg, r3sw.jpg: R3 runs ~750 m along a dam, lake on the NW, concrete-faced upstream slope with parked cars; Ișnovăț leaves through a 120 m culvert under it (OSM 110296525) and a 212 m retaining wall (OSM 84557769). DEM: lake surface -7.2, downstream floodplain -10…-13, but the DEM under the road is -7.7 (grey-opening erased the dam). Crest = lake + 3.2 m freeboard is an ESTIMATE (±1.5 m). Upstream face ~1:2.5 concrete revetment to the water; downstream face to ~-10…-12. ALSO: the lake water surface in game must be -7.2 (not the lowest shore DEM, which reads ≈-8 on the erased dam). | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): crest = DSM (7-point median), never below the old estimate."
+    }
+   ],
+   "note": "Not a bridge; the most visible earthwork in the area. First ~6 points are the R3 descent from Codru plateau at 6 % (ESTIMATE)."
+  },
+  {
+   "id": "miorita-hincesti",
+   "name": "Pasajul str. Miorița peste Șos. Hâncești (trecere denivelată)",
+   "x": -1890,
+   "z": 2925,
+   "lat": 46.998278,
+   "lon": 28.807691,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      248,
+      249,
+      118,
+      119
+     ],
+     "road": "Strada Miorița (R3), 2×3 lanes + sidewalks",
+     "deck": [
+      [
+       -1898.2,
+       2907.9,
+       121.5
+      ],
+      [
+       -1880.7,
+       2942.3,
+       120.2
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       2.5,
+       2.5
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Șoseaua Hâncești central through-lanes (trunk, OSM 709659783) in a walled cutting",
+       "y": 114.2,
+       "width": 24,
+       "clearance": 5.0
+      }
+     ],
+     "evidence": "img/s01z.jpg, s01w.jpg: Miorița is AT street level (crosswalks, at-grade junction with the Hâncești side roads); the central Hâncești carriageways dive under it between dark retaining walls with hedges, the side roads stay at grade. Deck = DEM is correct. Cutting depth 6.6 m (5.0 clearance + 1.2 deck + 0.4) is an ESTIMATE; wall/ramp extent ≈ ±190 m measured from where the walled strips end in s01w.jpg."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "cutting",
+     "road": "Șoseaua Hâncești central lanes",
+     "line": [
+      [
+       -1731.3,
+       2818.8,
+       119.7
+      ],
+      [
+       -1747.6,
+       2830.3,
+       119.4
+      ],
+      [
+       -1764.0,
+       2841.8,
+       118.9
+      ],
+      [
+       -1780.5,
+       2853.1,
+       118.3
+      ],
+      [
+       -1797.0,
+       2864.4,
+       117.6
+      ],
+      [
+       -1814.1,
+       2874.7,
+       116.8
+      ],
+      [
+       -1831.3,
+       2884.9,
+       116.1
+      ],
+      [
+       -1848.9,
+       2894.5,
+       115.2
+      ],
+      [
+       -1866.6,
+       2903.8,
+       114.4
+      ],
+      [
+       -1884.3,
+       2913.1,
+       114.2
+      ],
+      [
+       -1902.0,
+       2922.4,
+       114.2
+      ],
+      [
+       -1919.7,
+       2931.6,
+       114.4
+      ],
+      [
+       -1937.5,
+       2940.8,
+       115.3
+      ],
+      [
+       -1955.3,
+       2950.0,
+       116.1
+      ],
+      [
+       -1973.0,
+       2959.2,
+       116.9
+      ],
+      [
+       -1990.8,
+       2968.4,
+       117.7
+      ],
+      [
+       -2008.5,
+       2977.6,
+       118.5
+      ],
+      [
+       -2026.3,
+       2986.8,
+       119.1
+      ],
+      [
+       -2044.1,
+       2995.9,
+       119.8
+      ],
+      [
+       -2061.8,
+       3005.1,
+       120.3
+      ]
+     ],
+     "top_w": 24,
+     "side": "wall",
+     "slope": 0,
+     "evidence": "see bridge evidence; flat bottom ±25 m under the bridge, linear ramps (~4 %) to grade at ±190 m. Side roads (OSM 25208261/58609929 north, 28021139/236721718 south) stay at DEM."
+    }
+   ]
+  },
+  {
+   "id": "bacioii-m3-255",
+   "name": "Pasaj str. Băcioii Noi peste M3 (sud)",
+   "x": 2634,
+   "z": 9130,
+   "lat": 46.942161,
+   "lon": 28.867307,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      255
+     ],
+     "road": "Strada Băcioii Noi (2 lanes)",
+     "deck": [
+      [
+       2600.2,
+       9130.8,
+       97.8
+      ],
+      [
+       2668.3,
+       9128.6,
+       97.8
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "M3 Chișinău–Cimișlia (2×2 lanes)",
+       "y": 90.8,
+       "width": 26,
+       "clearance": 5.5
+      }
+     ],
+     "evidence": "img/s04.jpg/s05.jpg (sheetA): overpass of Băcioii Noi over the M3 with loop ramps; OSM layer 2. Deck top 7.0 m over the M3 is an ESTIMATE (no side imagery available). Game today: deck = DEM, so it crosses the M3 at grade."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "ramp",
+     "road": "Strada Băcioii Noi approach",
+     "line": [
+      [
+       2600.2,
+       9130.8,
+       97.8
+      ],
+      [
+       2580.2,
+       9130.4,
+       96.8
+      ],
+      [
+       2561.1,
+       9124.5,
+       96.0
+      ],
+      [
+       2543.4,
+       9115.4,
+       95.2
+      ],
+      [
+       2527.7,
+       9103.2,
+       94.6
+      ],
+      [
+       2513.3,
+       9089.2,
+       94.0
+      ],
+      [
+       2499.0,
+       9075.3,
+       92.7
+      ],
+      [
+       2470.3,
+       9047.4,
+       91.7
+      ],
+      [
+       2413.2,
+       8991.9,
+       90.5
+      ]
+     ],
+     "top_w": 16,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: fill height above DEM tapers linearly to 0 over 155 m (4.5 % ramp). DEM across the M3 shows no trough (Băcioii profile 90.4/90.5/90.7/91.0 across it), so M3 stays at grade and Băcioii is raised (embankments erased by the DEM grey-opening)."
+    },
+    {
+     "type": "ramp",
+     "road": "Strada Băcioii Noi approach",
+     "line": [
+      [
+       2668.3,
+       9128.6,
+       97.8
+      ],
+      [
+       2688.0,
+       9125.5,
+       97.5
+      ],
+      [
+       2707.0,
+       9119.4,
+       97.1
+      ],
+      [
+       2724.8,
+       9110.2,
+       96.7
+      ],
+      [
+       2742.5,
+       9100.9,
+       96.4
+      ],
+      [
+       2760.1,
+       9091.5,
+       95.9
+      ],
+      [
+       2777.8,
+       9082.1,
+       95.3
+      ],
+      [
+       2795.6,
+       9073.0,
+       94.7
+      ]
+     ],
+     "top_w": 16,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: fill height above DEM tapers linearly to 0 over 155 m (4.5 % ramp). DEM across the M3 shows no trough (Băcioii profile 90.4/90.5/90.7/91.0 across it), so M3 stays at grade and Băcioii is raised (embankments erased by the DEM grey-opening)."
+    }
+   ]
+  },
+  {
+   "id": "bacioii-m3-254",
+   "name": "Pasaj str. Băcioii Noi peste M3 (nord)",
+   "x": 2626,
+   "z": 8931,
+   "lat": 46.943961,
+   "lon": 28.867202,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      254
+     ],
+     "road": "Strada Băcioii Noi (2 lanes)",
+     "deck": [
+      [
+       2654.5,
+       8929.5,
+       100.5
+      ],
+      [
+       2596.8,
+       8931.8,
+       100.5
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "M3 Chișinău–Cimișlia (2×2 lanes)",
+       "y": 93.5,
+       "width": 26,
+       "clearance": 5.5
+      }
+     ],
+     "evidence": "img/s04.jpg/s05.jpg (sheetA): overpass of Băcioii Noi over the M3 with loop ramps; OSM layer 2. Deck top 7.0 m over the M3 is an ESTIMATE (no side imagery available). Game today: deck = DEM, so it crosses the M3 at grade."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "ramp",
+     "road": "Strada Băcioii Noi approach",
+     "line": [
+      [
+       2654.5,
+       8929.5,
+       100.5
+      ],
+      [
+       2674.4,
+       8931.1,
+       99.6
+      ],
+      [
+       2694.3,
+       8932.8,
+       98.8
+      ],
+      [
+       2712.9,
+       8940.4,
+       97.8
+      ],
+      [
+       2731.4,
+       8947.9,
+       96.9
+      ]
+     ],
+     "top_w": 16,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: fill height above DEM tapers linearly to 0 over 88 m (4.5 % ramp). Here the west approach runs down an 8 % slope, so a full 7 m raise cannot fit: split as Băcioii +4.0 m / M3 cut -3.0 m."
+    },
+    {
+     "type": "ramp",
+     "road": "Strada Băcioii Noi approach",
+     "line": [
+      [
+       2596.8,
+       8931.8,
+       100.5
+      ],
+      [
+       2577.2,
+       8936.0,
+       99.9
+      ],
+      [
+       2558.0,
+       8941.0,
+       99.2
+      ],
+      [
+       2540.0,
+       8949.8,
+       98.2
+      ],
+      [
+       2524.6,
+       8962.4,
+       97.0
+      ]
+     ],
+     "top_w": 16,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: fill height above DEM tapers linearly to 0 over 88 m (4.5 % ramp). Here the west approach runs down an 8 % slope, so a full 7 m raise cannot fit: split as Băcioii +4.0 m / M3 cut -3.0 m."
+    },
+    {
+     "type": "cutting",
+     "road": "M3 Chișinău–Cimișlia under Băcioii Noi",
+     "line": [
+      [
+       2624.7,
+       8751.2,
+       100.1
+      ],
+      [
+       2625.2,
+       8771.2,
+       99.1
+      ],
+      [
+       2625.7,
+       8791.2,
+       98.2
+      ],
+      [
+       2626.2,
+       8811.1,
+       97.3
+      ],
+      [
+       2626.7,
+       8831.1,
+       96.4
+      ],
+      [
+       2627.2,
+       8851.1,
+       95.5
+      ],
+      [
+       2627.8,
+       8871.1,
+       94.6
+      ],
+      [
+       2628.3,
+       8891.1,
+       94.3
+      ],
+      [
+       2628.8,
+       8911.1,
+       93.9
+      ],
+      [
+       2629.2,
+       8931.1,
+       93.5
+      ],
+      [
+       2629.6,
+       8951.1,
+       93.1
+      ],
+      [
+       2630.0,
+       8971.1,
+       92.7
+      ],
+      [
+       2630.4,
+       8991.1,
+       92.2
+      ],
+      [
+       2630.7,
+       9011.1,
+       92.2
+      ],
+      [
+       2631.1,
+       9031.1,
+       92.2
+      ],
+      [
+       2631.5,
+       9051.1,
+       92.0
+      ],
+      [
+       2631.9,
+       9071.1,
+       91.8
+      ],
+      [
+       2632.3,
+       9091.1,
+       91.6
+      ],
+      [
+       2632.6,
+       9111.1,
+       91.4
+      ]
+     ],
+     "top_w": 28,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: 3.0 m cut, flat ±60 m, tapering to grade at ±180 m."
+    }
+   ]
+  },
+  {
+   "id": "basarabia-isnovat",
+   "name": "Str. Basarabia peste Ișnovăț (Ialoveni)",
+   "x": -4359,
+   "z": 9374,
+   "lat": 46.939955,
+   "lon": 28.775154,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      227,
+      60
+     ],
+     "road": "Str. Basarabia",
+     "deck": [
+      [
+       -4414.9,
+       9299.6,
+       -16.2
+      ],
+      [
+       -4426.0,
+       9322.9,
+       -15.4
+      ],
+      [
+       -4437.1,
+       9346.2,
+       -16.8
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Ișnovăț",
+       "y": -19.0,
+       "width": 10,
+       "clearance": 2.8
+      }
+     ],
+     "evidence": "img/s02.jpg: 52 m crossing (OSM 41144144) of the Ișnovăț and its reedy floodplain; deck lift and bed depth are ESTIMATES (channel shared in site isnovat-channel). idx57/228 nearby = small dirt-road/footway culverts."
+    },
+    {
+     "data_idx": [
+      57,
+      228
+     ],
+     "evidence": "img/s02.jpg: idx228 = 13 m dirt-road crossing of a side drain, idx57 = 15 m footway over the Ișnovăț further east; culvert-class, keep at DEM (channel from isnovat-channel goes under idx57)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "l492-isnovat",
+   "name": "L492 Piatra Albă–Mileștii Mici peste Ișnovăț",
+   "x": -1459,
+   "z": 10788,
+   "lat": 46.927167,
+   "lon": 28.81337,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      247
+     ],
+     "road": "L492 Piatra Albă–Mileștii Mici",
+     "deck": [
+      [
+       -1462.5,
+       10814.2,
+       -18.4
+      ],
+      [
+       -1458.7,
+       10787.9,
+       -15.5
+      ],
+      [
+       -1454.8,
+       10761.5,
+       -17.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Ișnovăț",
+       "y": -21.0,
+       "width": 12,
+       "clearance": 4.7
+      }
+     ],
+     "evidence": "img/s06.jpg: 53 m bridge, OSM layer 2, wooded valley; deck lift/bed depth ESTIMATES."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "vieru-bostancea",
+   "name": "Str. Grigore Vieru (G71) peste Valea Bostancea",
+   "x": -5215,
+   "z": 8010,
+   "lat": 46.95229,
+   "lon": 28.763874,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      233,
+      71,
+      6
+     ],
+     "road": "Str. Grigore Vieru (G71)",
+     "deck": [
+      [
+       -5226.8,
+       8051.4,
+       -11.6
+      ],
+      [
+       -5235.9,
+       8045.3,
+       -10.8
+      ],
+      [
+       -5245.0,
+       8039.2,
+       -11.4
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Valea Bostancea",
+       "y": -13.5,
+       "width": 5,
+       "clearance": 1.9
+      }
+     ],
+     "evidence": "img/s08.jpg: 22 m road bridge + footbridge (idx71) side by side over the stream; idx6 = service culvert upstream. ESTIMATES."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "gagarin-isnovat",
+   "name": "Str. Iuri Gagarin (G104) peste Ișnovăț (Ialoveni)",
+   "x": -3655,
+   "z": 9717,
+   "lat": 46.936853,
+   "lon": 28.784432,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      229
+     ],
+     "road": "Str. Iuri Gagarin (G104)",
+     "deck": [
+      [
+       -3654.9,
+       9698.6,
+       -17.9
+      ],
+      [
+       -3655.0,
+       9716.9,
+       -16.9
+      ],
+      [
+       -3655.1,
+       9735.2,
+       -18.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Ișnovăț (canalised, concrete banks)",
+       "y": -21.0,
+       "width": 10,
+       "clearance": 3.3
+      }
+     ],
+     "evidence": "img/s11.jpg + s09 in cs0.jpg: in Ialoveni the Ișnovăț is a straight concrete-banked canal ~10-12 m wide. ESTIMATES."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "gagarin-stream",
+   "name": "Str. Iuri Gagarin (G104) peste pârâu",
+   "x": -3812,
+   "z": 10971,
+   "lat": 46.925512,
+   "lon": 28.782363,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      225
+     ],
+     "road": "Str. Iuri Gagarin (G104)",
+     "deck": [
+      [
+       -3807.3,
+       10957.1,
+       5.7
+      ],
+      [
+       -3811.9,
+       10971.2,
+       6.2
+      ],
+      [
+       -3816.5,
+       10985.3,
+       5.6
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "stream (OSM 169478734)",
+       "y": 3.1,
+       "width": 4,
+       "clearance": 2.4
+      }
+     ],
+     "evidence": "img/s14.jpg: 30 m crossing of a wooded ravine stream. ESTIMATES."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "ialoveni-access-isnovat",
+   "name": "Drumul de acces spre Ialoveni (G71) peste Ișnovăț",
+   "x": -6527,
+   "z": 7792,
+   "lat": 46.954262,
+   "lon": 28.746585,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      236
+     ],
+     "road": "Drumul de acces spre Ialoveni (G71)",
+     "deck": [
+      [
+       -6517.7,
+       7784.1,
+       -11.1
+      ],
+      [
+       -6526.7,
+       7791.5,
+       -10.8
+      ],
+      [
+       -6535.7,
+       7798.9,
+       -11.2
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Ișnovăț",
+       "y": -16.2,
+       "width": 8,
+       "clearance": 4.5
+      }
+     ],
+     "evidence": "img/s17.jpg: short box bridge with visible headwalls; road on a ~2 m embankment across the floodplain (light side slopes). ESTIMATES."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "raised_road",
+     "road": "G71 access road to Ialoveni",
+     "line": [
+      [
+       -6363.2,
+       7657.1,
+       -11.0
+      ],
+      [
+       -6382.5,
+       7673.0,
+       -11.3
+      ],
+      [
+       -6401.8,
+       7688.8,
+       -11.5
+      ],
+      [
+       -6421.1,
+       7704.7,
+       -11.6
+      ],
+      [
+       -6440.5,
+       7720.6,
+       -11.6
+      ],
+      [
+       -6459.8,
+       7736.5,
+       -11.5
+      ],
+      [
+       -6479.1,
+       7752.3,
+       -11.4
+      ],
+      [
+       -6498.4,
+       7768.2,
+       -11.3
+      ],
+      [
+       -6517.7,
+       7784.1,
+       -11.1
+      ],
+      [
+       -6527.0,
+       7792.0,
+       -11.2
+      ],
+      [
+       -6546.4,
+       7807.7,
+       -11.5
+      ],
+      [
+       -6565.8,
+       7823.5,
+       -11.7
+      ],
+      [
+       -6585.3,
+       7839.2,
+       -11.9
+      ],
+      [
+       -6604.7,
+       7855.0,
+       -11.9
+      ],
+      [
+       -6624.1,
+       7870.7,
+       -12.0
+      ],
+      [
+       -6643.5,
+       7886.5,
+       -12.0
+      ],
+      [
+       -6662.9,
+       7902.2,
+       -11.9
+      ],
+      [
+       -6682.3,
+       7918.0,
+       -11.8
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "ESTIMATE 2 m fill across the flat floodplain (DEM -13), tapering over 200 m each side; img/s17.jpg."
+    }
+   ]
+  },
+  {
+   "id": "dirt-road-isnovat",
+   "name": "Drum de pământ peste Ișnovăț",
+   "x": -2867,
+   "z": 10207,
+   "lat": 46.932421,
+   "lon": 28.794816,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      253
+     ],
+     "road": "Drum de pământ",
+     "deck": [
+      [
+       -2867.4,
+       10216.2,
+       -13.1
+      ],
+      [
+       -2866.9,
+       10207.1,
+       -12.6
+      ],
+      [
+       -2866.5,
+       10197.9,
+       -13.2
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Ișnovăț",
+       "y": -15.6,
+       "width": 8,
+       "clearance": 2.3
+      }
+     ],
+     "evidence": "img/sheetC.jpg s21: 18 m crossing of a dirt road. ESTIMATES."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "stefan-cel-mare-ialoveni",
+   "name": "Str. Ștefan cel Mare (G71, Ialoveni) peste pârâu",
+   "x": -2960,
+   "z": 9513,
+   "lat": 46.938698,
+   "lon": 28.79359,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      252,
+      24,
+      25,
+      137
+     ],
+     "road": "Str. Ștefan cel Mare (G71, Ialoveni)",
+     "deck": [
+      [
+       -2934.8,
+       9469.0,
+       0.0
+      ],
+      [
+       -2941.2,
+       9465.4,
+       0.4
+      ],
+      [
+       -2947.6,
+       9461.7,
+       0.1
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "intermittent stream (OSM 985024713)",
+       "y": -1.5,
+       "width": 3,
+       "clearance": 1.0
+      }
+     ],
+     "evidence": "img/sheetB.jpg s10: 15 m slab/culvert; idx24/25 = 9 m service culverts on Str. V. Zarzăr, idx137 sidewalk. Culvert-class."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "isnovat-channel",
+   "name": "Albia râului Ișnovăț (Ialoveni → Sîngera)",
+   "x": -4000,
+   "z": 9600,
+   "lat": 46.937911,
+   "lon": 28.779885,
+   "status": "missing_in_data",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": "",
+     "line": [
+      [
+       -6599.4,
+       7609.3,
+       -12.0
+      ],
+      [
+       -6571.6,
+       7638.0,
+       -13.3
+      ],
+      [
+       -6560.9,
+       7676.2,
+       -14.4
+      ],
+      [
+       -6551.3,
+       7715.1,
+       -15.2
+      ],
+      [
+       -6541.8,
+       7753.9,
+       -15.5
+      ],
+      [
+       -6533.5,
+       7790.5,
+       -15.7
+      ],
+      [
+       -6501.4,
+       7811.7,
+       -15.8
+      ],
+      [
+       -6466.9,
+       7830.8,
+       -16.0
+      ],
+      [
+       -6434.8,
+       7854.6,
+       -16.2
+      ],
+      [
+       -6402.7,
+       7878.5,
+       -16.4
+      ],
+      [
+       -6370.6,
+       7902.3,
+       -16.7
+      ],
+      [
+       -6338.5,
+       7926.2,
+       -16.9
+      ],
+      [
+       -6306.4,
+       7950.1,
+       -17.0
+      ],
+      [
+       -6273.4,
+       7972.6,
+       -17.1
+      ],
+      [
+       -6240.5,
+       7995.5,
+       -17.2
+      ],
+      [
+       -6208.4,
+       8019.2,
+       -17.4
+      ],
+      [
+       -6176.2,
+       8043.0,
+       -17.5
+      ],
+      [
+       -6144.0,
+       8066.8,
+       -17.6
+      ],
+      [
+       -6111.9,
+       8090.6,
+       -17.7
+      ],
+      [
+       -6080.2,
+       8114.9,
+       -17.7
+      ],
+      [
+       -6048.0,
+       8138.6,
+       -17.8
+      ],
+      [
+       -6015.7,
+       8162.3,
+       -18.0
+      ],
+      [
+       -5983.5,
+       8186.0,
+       -18.0
+      ],
+      [
+       -5951.3,
+       8209.7,
+       -18.1
+      ],
+      [
+       -5919.1,
+       8233.4,
+       -18.2
+      ],
+      [
+       -5886.8,
+       8257.1,
+       -18.2
+      ],
+      [
+       -5854.8,
+       8281.1,
+       -18.3
+      ],
+      [
+       -5822.7,
+       8305.0,
+       -18.3
+      ],
+      [
+       -5790.7,
+       8328.9,
+       -18.4
+      ],
+      [
+       -5758.6,
+       8352.8,
+       -18.4
+      ],
+      [
+       -5726.4,
+       8376.5,
+       -18.5
+      ],
+      [
+       -5694.1,
+       8400.2,
+       -18.5
+      ],
+      [
+       -5661.9,
+       8423.8,
+       -18.5
+      ],
+      [
+       -5629.6,
+       8447.5,
+       -18.4
+      ],
+      [
+       -5597.4,
+       8471.2,
+       -18.4
+      ],
+      [
+       -5565.2,
+       8494.9,
+       -18.4
+      ],
+      [
+       -5532.9,
+       8518.5,
+       -18.4
+      ],
+      [
+       -5500.7,
+       8542.2,
+       -18.5
+      ],
+      [
+       -5468.4,
+       8565.9,
+       -18.5
+      ],
+      [
+       -5436.2,
+       8589.6,
+       -18.5
+      ],
+      [
+       -5404.0,
+       8613.4,
+       -18.5
+      ],
+      [
+       -5371.8,
+       8637.1,
+       -18.6
+      ],
+      [
+       -5339.6,
+       8660.8,
+       -18.6
+      ],
+      [
+       -5307.4,
+       8684.5,
+       -18.7
+      ],
+      [
+       -5275.2,
+       8708.3,
+       -18.8
+      ],
+      [
+       -5243.0,
+       8732.0,
+       -18.9
+      ],
+      [
+       -5210.8,
+       8755.7,
+       -19.0
+      ],
+      [
+       -5178.6,
+       8779.4,
+       -19.0
+      ],
+      [
+       -5146.4,
+       8803.2,
+       -19.1
+      ],
+      [
+       -5114.2,
+       8826.8,
+       -19.3
+      ],
+      [
+       -5081.8,
+       8850.3,
+       -19.4
+      ],
+      [
+       -5049.5,
+       8873.9,
+       -19.5
+      ],
+      [
+       -5017.1,
+       8897.4,
+       -19.5
+      ],
+      [
+       -4984.8,
+       8920.9,
+       -19.6
+      ],
+      [
+       -4952.4,
+       8944.5,
+       -19.6
+      ],
+      [
+       -4920.1,
+       8968.0,
+       -19.6
+      ],
+      [
+       -4887.7,
+       8991.5,
+       -19.7
+      ],
+      [
+       -4855.4,
+       9015.1,
+       -19.7
+      ],
+      [
+       -4823.2,
+       9038.9,
+       -19.8
+      ],
+      [
+       -4791.1,
+       9062.7,
+       -19.8
+      ],
+      [
+       -4758.9,
+       9086.4,
+       -19.9
+      ],
+      [
+       -4726.7,
+       9110.2,
+       -19.9
+      ],
+      [
+       -4694.6,
+       9134.0,
+       -19.9
+      ],
+      [
+       -4662.4,
+       9157.7,
+       -19.8
+      ],
+      [
+       -4630.2,
+       9181.5,
+       -19.7
+      ],
+      [
+       -4598.7,
+       9206.1,
+       -19.7
+      ],
+      [
+       -4567.4,
+       9231.1,
+       -19.6
+      ],
+      [
+       -4535.4,
+       9255.0,
+       -19.4
+      ],
+      [
+       -4502.8,
+       9278.1,
+       -19.3
+      ],
+      [
+       -4470.2,
+       9301.4,
+       -19.2
+      ],
+      [
+       -4437.9,
+       9325.0,
+       -19.1
+      ],
+      [
+       -4405.8,
+       9348.8,
+       -19.1
+      ],
+      [
+       -4373.8,
+       9372.8,
+       -19.2
+      ],
+      [
+       -4341.8,
+       9396.8,
+       -19.2
+      ],
+      [
+       -4307.5,
+       9417.3,
+       -19.4
+      ],
+      [
+       -4272.7,
+       9437.1,
+       -19.6
+      ],
+      [
+       -4237.1,
+       9455.3,
+       -19.8
+      ],
+      [
+       -4200.9,
+       9472.2,
+       -20.2
+      ],
+      [
+       -4164.7,
+       9489.2,
+       -20.5
+      ],
+      [
+       -4128.4,
+       9506.2,
+       -20.6
+      ],
+      [
+       -4092.2,
+       9523.1,
+       -20.6
+      ],
+      [
+       -4055.9,
+       9539.9,
+       -20.6
+      ],
+      [
+       -4019.6,
+       9556.7,
+       -20.7
+      ],
+      [
+       -3983.3,
+       9573.4,
+       -20.7
+      ],
+      [
+       -3947.1,
+       9590.5,
+       -20.9
+      ],
+      [
+       -3910.7,
+       9607.0,
+       -21.0
+      ],
+      [
+       -3874.1,
+       9623.1,
+       -21.1
+      ],
+      [
+       -3837.4,
+       9639.2,
+       -21.2
+      ],
+      [
+       -3800.8,
+       9655.3,
+       -21.1
+      ],
+      [
+       -3764.2,
+       9671.3,
+       -21.0
+      ],
+      [
+       -3727.4,
+       9687.0,
+       -20.9
+      ],
+      [
+       -3690.6,
+       9702.7,
+       -20.7
+      ],
+      [
+       -3653.4,
+       9717.5,
+       -20.4
+      ],
+      [
+       -3619.9,
+       9738.5,
+       -20.1
+      ],
+      [
+       -3587.4,
+       9761.8,
+       -19.9
+      ],
+      [
+       -3553.9,
+       9783.7,
+       -19.7
+      ],
+      [
+       -3520.3,
+       9805.4,
+       -19.7
+      ],
+      [
+       -3486.4,
+       9826.6,
+       -19.6
+      ],
+      [
+       -3452.6,
+       9848.0,
+       -19.5
+      ],
+      [
+       -3416.4,
+       9864.5,
+       -19.6
+      ],
+      [
+       -3378.1,
+       9876.2,
+       -19.6
+      ],
+      [
+       -3343.3,
+       9895.7,
+       -19.6
+      ],
+      [
+       -3311.7,
+       9919.9,
+       -19.3
+      ],
+      [
+       -3281.7,
+       9946.4,
+       -19.0
+      ],
+      [
+       -3251.8,
+       9972.9,
+       -18.3
+      ],
+      [
+       -3221.7,
+       9999.2,
+       -17.7
+      ],
+      [
+       -3191.5,
+       10025.5,
+       -17.1
+      ],
+      [
+       -3161.4,
+       10051.8,
+       -17.0
+      ],
+      [
+       -3131.2,
+       10078.1,
+       -16.7
+      ],
+      [
+       -3099.0,
+       10101.7,
+       -16.4
+      ],
+      [
+       -3066.2,
+       10124.6,
+       -16.2
+      ],
+      [
+       -3033.4,
+       10147.6,
+       -15.6
+      ],
+      [
+       -2999.5,
+       10168.3,
+       -15.4
+      ],
+      [
+       -2961.8,
+       10181.7,
+       -15.6
+      ],
+      [
+       -2923.1,
+       10191.1,
+       -15.6
+      ],
+      [
+       -2884.0,
+       10199.4,
+       -15.6
+      ],
+      [
+       -2845.6,
+       10210.2,
+       -16.0
+      ],
+      [
+       -2806.3,
+       10217.6,
+       -17.0
+      ],
+      [
+       -2767.0,
+       10225.1,
+       -17.5
+      ],
+      [
+       -2727.8,
+       10233.4,
+       -17.9
+      ],
+      [
+       -2689.0,
+       10243.0,
+       -18.0
+      ],
+      [
+       -2651.6,
+       10257.1,
+       -18.3
+      ],
+      [
+       -2616.4,
+       10276.0,
+       -18.6
+      ],
+      [
+       -2578.0,
+       10284.3,
+       -18.8
+      ],
+      [
+       -2542.3,
+       10302.2,
+       -18.5
+      ],
+      [
+       -2502.8,
+       10308.2,
+       -18.6
+      ],
+      [
+       -2463.2,
+       10313.4,
+       -18.8
+      ],
+      [
+       -2428.8,
+       10332.9,
+       -18.8
+      ],
+      [
+       -2398.7,
+       10359.3,
+       -18.9
+      ],
+      [
+       -2370.7,
+       10387.8,
+       -19.0
+      ],
+      [
+       -2344.8,
+       10418.3,
+       -19.2
+      ],
+      [
+       -2321.8,
+       10451.0,
+       -19.2
+      ],
+      [
+       -2299.5,
+       10484.2,
+       -19.3
+      ],
+      [
+       -2270.0,
+       10510.9,
+       -19.7
+      ],
+      [
+       -2235.8,
+       10531.3,
+       -20.2
+      ],
+      [
+       -2200.1,
+       10549.4,
+       -20.6
+      ],
+      [
+       -2164.5,
+       10567.4,
+       -20.7
+      ],
+      [
+       -2128.8,
+       10585.5,
+       -20.4
+      ],
+      [
+       -2093.1,
+       10603.5,
+       -20.1
+      ],
+      [
+       -2057.4,
+       10621.6,
+       -20.2
+      ],
+      [
+       -2021.7,
+       10639.7,
+       -20.4
+      ],
+      [
+       -1986.0,
+       10657.7,
+       -20.7
+      ],
+      [
+       -1950.1,
+       10675.3,
+       -20.8
+      ],
+      [
+       -1917.6,
+       10698.3,
+       -20.7
+      ],
+      [
+       -1886.4,
+       10723.3,
+       -20.5
+      ],
+      [
+       -1855.2,
+       10748.4,
+       -20.2
+      ],
+      [
+       -1824.0,
+       10773.4,
+       -19.9
+      ],
+      [
+       -1792.8,
+       10798.4,
+       -19.8
+      ],
+      [
+       -1761.5,
+       10823.4,
+       -19.8
+      ],
+      [
+       -1730.3,
+       10848.3,
+       -20.3
+      ],
+      [
+       -1693.2,
+       10863.3,
+       -21.2
+      ],
+      [
+       -1655.0,
+       10869.7,
+       -21.8
+      ],
+      [
+       -1621.4,
+       10852.8,
+       -21.7
+      ],
+      [
+       -1591.5,
+       10827.9,
+       -20.8
+      ],
+      [
+       -1553.1,
+       10816.6,
+       -20.5
+      ],
+      [
+       -1514.8,
+       10805.2,
+       -20.4
+      ],
+      [
+       -1476.3,
+       10798.7,
+       -20.7
+      ],
+      [
+       -1437.3,
+       10807.8,
+       -21.1
+      ],
+      [
+       -1399.1,
+       10819.1,
+       -21.2
+      ],
+      [
+       -1361.9,
+       10833.8,
+       -21.0
+      ],
+      [
+       -1324.7,
+       10848.5,
+       -20.7
+      ],
+      [
+       -1287.5,
+       10863.2,
+       -20.4
+      ],
+      [
+       -1249.8,
+       10876.7,
+       -19.7
+      ],
+      [
+       -1211.6,
+       10888.5,
+       -18.8
+      ],
+      [
+       -1180.0,
+       10911.1,
+       -18.2
+      ],
+      [
+       -1158.6,
+       10944.3,
+       -18.3
+      ]
+     ],
+     "top_w": 6,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE bed = DEM-2.5 m, bottom ~6 m. The DEM (gaussian σ≈50 m) has no river channel at all, so every bridge over the Ișnovăț in sites 2,6,9,11,17,21,22,24,27,28 sits over flat ground. Through Ialoveni (x -4600…-3500) it is a straight concrete-banked canal ~10-12 m wide (img cs0 s09, s11) — use side \"wall\" there. Starts at the dam outlet culvert (-6599,7609)."
+    }
+   ]
+  },
+  {
+   "id": "bostancea-channel",
+   "name": "Albia pârâului Valea Bostancea",
+   "x": -5600,
+   "z": 7600,
+   "lat": 46.955998,
+   "lon": 28.758801,
+   "status": "missing_in_data",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": "",
+     "line": [
+      [
+       -5727.9,
+       6724.8,
+       -3.6
+      ],
+      [
+       -5709.7,
+       6760.4,
+       -4.5
+      ],
+      [
+       -5691.5,
+       6796.0,
+       -5.4
+      ],
+      [
+       -5673.3,
+       6831.6,
+       -6.1
+      ],
+      [
+       -5655.1,
+       6867.2,
+       -6.7
+      ],
+      [
+       -5636.9,
+       6902.9,
+       -7.0
+      ],
+      [
+       -5618.8,
+       6938.5,
+       -7.2
+      ],
+      [
+       -5600.6,
+       6974.2,
+       -7.4
+      ],
+      [
+       -5582.5,
+       7009.8,
+       -7.5
+      ],
+      [
+       -5564.4,
+       7045.5,
+       -7.6
+      ],
+      [
+       -5546.3,
+       7081.1,
+       -7.6
+      ],
+      [
+       -5528.1,
+       7116.8,
+       -7.6
+      ],
+      [
+       -5510.0,
+       7152.4,
+       -7.6
+      ],
+      [
+       -5492.2,
+       7188.3,
+       -7.7
+      ],
+      [
+       -5474.7,
+       7224.2,
+       -7.9
+      ],
+      [
+       -5457.2,
+       7260.2,
+       -8.0
+      ],
+      [
+       -5439.7,
+       7296.2,
+       -7.9
+      ],
+      [
+       -5422.3,
+       7332.2,
+       -7.9
+      ],
+      [
+       -5401.8,
+       7366.5,
+       -8.0
+      ],
+      [
+       -5380.5,
+       7400.3,
+       -8.2
+      ],
+      [
+       -5359.2,
+       7434.2,
+       -8.5
+      ],
+      [
+       -5337.8,
+       7468.0,
+       -8.7
+      ],
+      [
+       -5320.0,
+       7503.7,
+       -9.1
+      ],
+      [
+       -5305.0,
+       7540.7,
+       -9.5
+      ],
+      [
+       -5290.0,
+       7577.8,
+       -9.6
+      ],
+      [
+       -5275.0,
+       7614.9,
+       -9.6
+      ],
+      [
+       -5260.0,
+       7652.0,
+       -9.6
+      ],
+      [
+       -5245.0,
+       7689.0,
+       -9.6
+      ],
+      [
+       -5230.0,
+       7726.1,
+       -9.8
+      ],
+      [
+       -5215.0,
+       7763.2,
+       -10.2
+      ],
+      [
+       -5200.0,
+       7800.3,
+       -10.6
+      ],
+      [
+       -5185.0,
+       7837.4,
+       -11.1
+      ],
+      [
+       -5174.1,
+       7875.0,
+       -11.4
+      ],
+      [
+       -5175.2,
+       7914.5,
+       -11.6
+      ],
+      [
+       -5178.3,
+       7953.6,
+       -12.0
+      ],
+      [
+       -5198.0,
+       7988.5,
+       -12.2
+      ],
+      [
+       -5217.7,
+       8023.3,
+       -12.8
+      ],
+      [
+       -5239.9,
+       8056.5,
+       -13.6
+      ],
+      [
+       -5259.9,
+       8091.0,
+       -14.5
+      ],
+      [
+       -5277.4,
+       8126.9,
+       -15.2
+      ],
+      [
+       -5294.9,
+       8162.9,
+       -15.8
+      ],
+      [
+       -5312.4,
+       8198.9,
+       -16.1
+      ],
+      [
+       -5329.9,
+       8234.8,
+       -16.4
+      ],
+      [
+       -5347.4,
+       8270.8,
+       -16.6
+      ],
+      [
+       -5365.0,
+       8306.7,
+       -16.8
+      ],
+      [
+       -5382.5,
+       8342.7,
+       -16.9
+      ],
+      [
+       -5400.0,
+       8378.7,
+       -17.1
+      ],
+      [
+       -5417.5,
+       8414.6,
+       -17.2
+      ],
+      [
+       -5435.0,
+       8450.6,
+       -17.4
+      ],
+      [
+       -5452.5,
+       8486.6,
+       -17.5
+      ],
+      [
+       -5470.0,
+       8522.5,
+       -17.7
+      ]
+     ],
+     "top_w": 2,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE bed = DEM-1.8 m; stream under R3 (133 m culvert) and G. Vieru bridge (site 8)."
+    }
+   ]
+  },
+  {
+   "id": "ditch-footbridges-codru-3",
+   "name": "Podețe private peste șanț (16 buc.)",
+   "x": -5341,
+   "z": 7482,
+   "lat": 46.957065,
+   "lon": 28.762214,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      5,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92
+     ],
+     "evidence": "sheetC s03: 15 private 6-10 m footbridges over a backyard ditch + a service culvert (idx5)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "ditch-footbridges-codru-7",
+   "name": "Podețe private peste șanț (7 buc.)",
+   "x": -5575,
+   "z": 7025,
+   "lat": 46.961198,
+   "lon": 28.75913,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      73,
+      74,
+      75,
+      76,
+      77,
+      93,
+      94
+     ],
+     "evidence": "cs0 s07: private footbridges over the same ditch."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "isnovat-park-footbridges-ialoveni",
+   "name": "Pasarele peste canalul Ișnovăț (parc Ialoveni)",
+   "x": -3774,
+   "z": 10041,
+   "lat": 46.933923,
+   "lon": 28.782863,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      64,
+      65,
+      66
+     ],
+     "evidence": "img cs0 s09: footbridges over the concrete Ișnovăț canal; deck at bank level is right, needs the channel under (site isnovat-channel)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "pond-island-footbridge",
+   "name": "Pasarelă spre insula din iaz",
+   "x": -6787,
+   "z": 10083,
+   "lat": 46.933543,
+   "lon": 28.743159,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      55
+     ],
+     "evidence": "cs0 s12: footbridge to an island over a pond; deck ≈ water level +0.5."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "lake-shore-footbridge-179",
+   "name": "Pasarelă pe malul lacului",
+   "x": 1183,
+   "z": 2514,
+   "lat": 47.001995,
+   "lon": 28.848186,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      179
+     ],
+     "evidence": "cs0 s13: footway along a lake edge."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-15",
+   "name": "Podeț (144)",
+   "x": 2491,
+   "z": 5890,
+   "lat": 46.971463,
+   "lon": 28.865423,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      144
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s15): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "lake-footbridge-184",
+   "name": "Pasarelă lac",
+   "x": 1323,
+   "z": 2639,
+   "lat": 47.000864,
+   "lon": 28.850031,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      184
+     ],
+     "evidence": "cs0 s16: footway at a lake shore in woods."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "pond-footbridge-54",
+   "name": "Pasarelă peste iaz",
+   "x": -6360,
+   "z": 7154,
+   "lat": 46.960032,
+   "lon": 28.748786,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      54
+     ],
+     "evidence": "cs0 s18: footbridge across a small pond."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-19",
+   "name": "Podeț (35)",
+   "x": 67,
+   "z": -2249,
+   "lat": 47.04507,
+   "lon": 28.83348,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      35
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s19): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-20",
+   "name": "Podeț (21,132)",
+   "x": -2753,
+   "z": 2650,
+   "lat": 47.000765,
+   "lon": 28.796318,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      21,
+      132
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s20): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "isnovat-path-bridge-1",
+   "name": "Pasarelă peste Ișnovăț",
+   "x": -3928,
+   "z": 9596,
+   "lat": 46.937947,
+   "lon": 28.780834,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      63
+     ],
+     "evidence": "cs9 s22: path bridge over the Ișnovăț; deck at bank level, needs channel."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "pond-footbridge-62",
+   "name": "Pasarelă între iazuri",
+   "x": -4094,
+   "z": 9360,
+   "lat": 46.940081,
+   "lon": 28.778647,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      62
+     ],
+     "evidence": "cs9 s23: footway between fish ponds."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "isnovat-footbridge-2",
+   "name": "Pasarelă peste Ișnovăț",
+   "x": -1725,
+   "z": 10851,
+   "lat": 46.926597,
+   "lon": 28.809865,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      117
+     ],
+     "evidence": "cs9 s24: footbridge over open water channel; needs channel."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-25",
+   "name": "Podeț (115)",
+   "x": -981,
+   "z": 1095,
+   "lat": 47.014828,
+   "lon": 28.819669,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      115
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s25): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-26",
+   "name": "Podeț (58)",
+   "x": -4328,
+   "z": 8782,
+   "lat": 46.945309,
+   "lon": 28.775563,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      58
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s26): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "isnovat-footbridge-3",
+   "name": "Pasarelă peste Ișnovăț",
+   "x": -4599,
+   "z": 9202,
+   "lat": 46.94151,
+   "lon": 28.771992,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      59
+     ],
+     "evidence": "cs9 s27: footway over the channel; needs channel."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "isnovat-service-bridge",
+   "name": "Pod de serviciu peste canalul Ișnovăț",
+   "x": -3434,
+   "z": 9860,
+   "lat": 46.93556,
+   "lon": 28.787344,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      23
+     ],
+     "evidence": "cs9 s28: 11 m service bridge over the canal; needs channel."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-29",
+   "name": "Podeț (72)",
+   "x": -5116,
+   "z": 8823,
+   "lat": 46.944938,
+   "lon": 28.765179,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      72
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s29): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-30",
+   "name": "Podeț (121)",
+   "x": -1616,
+   "z": 2071,
+   "lat": 47.006001,
+   "lon": 28.811301,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      121
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s30): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-31",
+   "name": "Podeț (226)",
+   "x": -4248,
+   "z": 8356,
+   "lat": 46.949161,
+   "lon": 28.776617,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      226
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s31): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-32",
+   "name": "Podeț (27)",
+   "x": 2389,
+   "z": 6484,
+   "lat": 46.966091,
+   "lon": 28.864079,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      27
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s32): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-33",
+   "name": "Podeț (39)",
+   "x": 1132,
+   "z": 1791,
+   "lat": 47.008533,
+   "lon": 28.847514,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      39
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s33): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-34",
+   "name": "Podeț (1)",
+   "x": -6520,
+   "z": 3815,
+   "lat": 46.990229,
+   "lon": 28.746677,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      1
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s34): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-35",
+   "name": "Podeț (2)",
+   "x": -4505,
+   "z": 9076,
+   "lat": 46.94265,
+   "lon": 28.77323,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      2
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s35): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-36",
+   "name": "Podeț (18)",
+   "x": -1656,
+   "z": 3902,
+   "lat": 46.989442,
+   "lon": 28.810774,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      18
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s36): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-37",
+   "name": "Podeț (26)",
+   "x": -387,
+   "z": 5841,
+   "lat": 46.971906,
+   "lon": 28.827497,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      26
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s37): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-38",
+   "name": "Podeț (56)",
+   "x": -3976,
+   "z": 11003,
+   "lat": 46.925223,
+   "lon": 28.780202,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      56
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s38): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-39",
+   "name": "Podeț (116)",
+   "x": -923,
+   "z": 849,
+   "lat": 47.017052,
+   "lon": 28.820433,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      116
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s39): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-40",
+   "name": "Podeț (120)",
+   "x": -1788,
+   "z": 2210,
+   "lat": 47.004744,
+   "lon": 28.809035,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      120
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s40): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-41",
+   "name": "Podeț (138)",
+   "x": -3425,
+   "z": 10361,
+   "lat": 46.931029,
+   "lon": 28.787462,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      138
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s41): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-42",
+   "name": "Podeț (164)",
+   "x": 40,
+   "z": 2094,
+   "lat": 47.005793,
+   "lon": 28.833124,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      164
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s42): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-43",
+   "name": "Podeț (7)",
+   "x": -5496,
+   "z": 8546,
+   "lat": 46.947443,
+   "lon": 28.760171,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      7
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s43): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-44",
+   "name": "Podeț (17)",
+   "x": -723,
+   "z": -2238,
+   "lat": 47.04497,
+   "lon": 28.823069,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      17
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s44): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-45",
+   "name": "Podeț (135)",
+   "x": -2987,
+   "z": 2364,
+   "lat": 47.003351,
+   "lon": 28.793234,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      135
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s45): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-46",
+   "name": "Podeț (140)",
+   "x": -654,
+   "z": 5298,
+   "lat": 46.976817,
+   "lon": 28.823978,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      140
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s46): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-47",
+   "name": "Podeț (141)",
+   "x": -132,
+   "z": 6405,
+   "lat": 46.966806,
+   "lon": 28.830857,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      141
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s47): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-48",
+   "name": "Podeț (250)",
+   "x": -1485,
+   "z": 4086,
+   "lat": 46.987778,
+   "lon": 28.813028,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      250
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s48): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-49",
+   "name": "Podeț (61)",
+   "x": -4412,
+   "z": 8936,
+   "lat": 46.943916,
+   "lon": 28.774456,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      61
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s49): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-50",
+   "name": "Podeț (139)",
+   "x": -2964,
+   "z": 9885,
+   "lat": 46.935333,
+   "lon": 28.793537,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      139
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s50): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-51",
+   "name": "Podeț (142)",
+   "x": 334,
+   "z": 6472,
+   "lat": 46.9662,
+   "lon": 28.836998,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      142
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s51): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-52",
+   "name": "Podeț (143)",
+   "x": 410,
+   "z": 7704,
+   "lat": 46.955058,
+   "lon": 28.838,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      143
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s52): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-53",
+   "name": "Podeț (146)",
+   "x": 3164,
+   "z": 5932,
+   "lat": 46.971083,
+   "lon": 28.874291,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      146
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s53): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-54",
+   "name": "Podeț (131)",
+   "x": -2637,
+   "z": 2924,
+   "lat": 46.998287,
+   "lon": 28.797847,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      131
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s54): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-55",
+   "name": "Podeț (145)",
+   "x": 2479,
+   "z": 6273,
+   "lat": 46.967999,
+   "lon": 28.865265,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      145
+     ],
+     "evidence": "one Esri look (cs*.jpg / sheet*.jpg s55): short span over a ditch/stream or path, no structure visible; game culvert handling is fine."
+    }
+   ],
+   "earthworks": []
+  }
+ ]
+}

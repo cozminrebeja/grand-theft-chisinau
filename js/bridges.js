@@ -23,12 +23,13 @@ function bridgesInit(){
   if(typeof D==='undefined'||!D||(D.height&&typeof HM!=='undefined'&&!HM)){BR=null;return empty;}
   BR=empty;
   const dec2=f=>{const o=[];for(let i=0;i<f.length;i+=2)o.push([f[i]*.1,f[i+1]*.1]);return o;};
-  for(const [w,layer,flat,kind] of (D.bridges||[])){
-    const pts=dec2(flat);if(pts.length<2)continue;
+  const SPEC=D.bridge_spec||{};
+  (D.bridges||[]).forEach(([w,layer,flat,kind],bi)=>{
+    const pts=dec2(flat);if(pts.length<2)return;
     const cum=[0];for(let i=1;i<pts.length;i++)cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
-    const L=cum[cum.length-1];if(L<1)continue;
+    const L=cum[cum.length-1];if(L<1)return;
     const side=kind===0?(w>=9?2.6:1.8):kind===4?0.8:0.35;   // sidewalk/edge beam each side
-    const sp={pts,cum,L,w,side,kind,layer,prof:null,maxDepth:0,i:BR.spans.length};
+    const sp={pts,cum,L,w,side,kind,layer,prof:null,maxDepth:0,i:BR.spans.length,spec:SPEC[bi]||null};
     br_profile(sp);BR.spans.push(sp);
     // grid
     const pad=w/2+side+1;
@@ -36,23 +37,31 @@ function bridgesInit(){
       const x0=Math.floor((Math.min(a[0],b[0])-pad)/BR_CELL),x1=Math.floor((Math.max(a[0],b[0])+pad)/BR_CELL);
       const z0=Math.floor((Math.min(a[1],b[1])-pad)/BR_CELL),z1=Math.floor((Math.max(a[1],b[1])+pad)/BR_CELL);
       for(let gx=x0;gx<=x1;gx++)for(let gz=z0;gz<=z1;gz++){const k=gx*100000+gz;let c=BR.grid.get(k);if(!c){c=[];BR.grid.set(k,c);}c.push(sp.i,i);}}
-  }
+  });
   for(const [w,layer,flat,kind] of (D.tunnels||[])){const pts=dec2(flat);if(pts.length>=2)BR.tunnels.push({pts,w,kind});}
   return BR;
 }
 // point at distance s along a span
 function br_at(sp,s){const P=sp.pts,c=sp.cum;s=s<0?0:s>sp.L?sp.L:s;let i=1;while(i<c.length-1&&c[i]<s)i++;
   const l=c[i]-c[i-1]||1e-9,t=(s-c[i-1])/l;return [P[i-1][0]+(P[i][0]-P[i-1][0])*t,P[i-1][1]+(P[i][1]-P[i-1][1])*t,(P[i][0]-P[i-1][0])/l,(P[i][1]-P[i-1][1])/l];}
+// distance along a span of the point nearest to (x,z)
+function br_project(sp,x,z){let best=1e18,bs=0;const P=sp.pts;for(let i=0;i<P.length-1;i++){const a=P[i],b=P[i+1],dx=b[0]-a[0],dz=b[1]-a[1],l2=dx*dx+dz*dz||1e-9;
+  let t=((x-a[0])*dx+(z-a[1])*dz)/l2;t=t<0?0:t>1?1:t;const d=(a[0]+dx*t-x)**2+(a[1]+dz*t-z)**2;if(d<best){best=d;bs=sp.cum[i]+Math.sqrt(l2)*t;}}return bs;}
 function br_profile(sp){
   const n=Math.max(2,Math.ceil(sp.L/BR_STEP)+1),L=sp.L;
+  // audited deck (tools/data/bridges → world.json bridge_spec): piecewise-linear surface height through the measured points
+  const dk=sp.spec&&sp.spec.deck;
+  if(dk&&dk.length>=2){const ctl=dk.map(p=>[br_project(sp,p[0]*WS,p[1]*WS),p[2]*WS]).sort((a,b)=>a[0]-b[0]);
+    const prof=new Float32Array(n),g=new Float32Array(n);let md=0;
+    for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s);g[k]=groundY(p[0],p[1]);let j=1;while(j<ctl.length-1&&ctl[j][0]<s)j++;
+      const a=ctl[j-1],b=ctl[j],t=b[0]>a[0]?Math.min(1,Math.max(0,(s-a[0])/(b[0]-a[0]))):0;prof[k]=a[1]+(b[1]-a[1])*t;md=Math.max(md,prof[k]-g[k]);}
+    const st=sp.spec.structure||{};sp.prof=prof;sp.ground=g;sp.n=n;sp.maxDepth=md;sp.th=st.deck_depth||null;
+    sp.piers=(st.piers||[]).map(p=>br_project(sp,p[0]*WS,p[1]*WS)).filter(s=>s>1&&s<L-1);sp.pierType=st.pier_type||null;
+    sp.railing=st.railing||null;return;}
   const a=groundY(sp.pts[0][0],sp.pts[0][1]),b=groundY(sp.pts[sp.pts.length-1][0],sp.pts[sp.pts.length-1][1]);
   const g=new Float32Array(n),line=new Float32Array(n);
   let depth=0;
-  // humps (make_cuts.py): lift the deck over roads that pass underneath — sin² rise from each abutment to the crossing
-  const bump=new Float32Array(n);
-  for(const [hx,hz,H,R] of (D.humps||[])){let bs=0,bd=1e9;for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s),d=Math.hypot(p[0]-hx,p[1]-hz);if(d<bd){bd=d;bs=s;}}
-    if(bd>R||bs<2||bs>L-2)continue;for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),u=s<bs?Math.sin(Math.PI/2*s/bs):Math.sin(Math.PI/2*(L-s)/(L-bs));bump[k]=Math.max(bump[k],H*u*u);}}
-  for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s);g[k]=groundY(p[0],p[1]);line[k]=a+(b-a)*s/L+bump[k];depth=Math.max(depth,line[k]-g[k]);}
+  for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP),p=br_at(sp,s);g[k]=groundY(p[0],p[1]);line[k]=a+(b-a)*s/L;depth=Math.max(depth,line[k]-g[k]);}
   // clearance: real bridges (deep) keep their structure depth above ground; culverts barely lift
   const clr=depth>2?1.2:0.15;
   let env=new Float32Array(n);for(let k=0;k<n;k++){const s=Math.min(L,k*BR_STEP);const endFade=Math.min(1,Math.min(s,L-s)/6);env[k]=Math.max(line[k],g[k]+clr*endFade);}
@@ -110,7 +119,8 @@ function buildBridgesTile(t){
     // quick bbox reject
     let mnx=1e9,mxx=-1e9,mnz=1e9,mxz=-1e9;for(const p of sp.pts){if(p[0]<mnx)mnx=p[0];if(p[0]>mxx)mxx=p[0];if(p[1]<mnz)mnz=p[1];if(p[1]>mxz)mxz=p[1];}
     if(mxx<t.x0-1||mnx>t.x1+1||mxz<t.z0-1||mnz>t.z1+1)continue;
-    const deep=sp.maxDepth>=2, half=sp.w/2+sp.side, foot=sp.kind>=3, th=deep?(sp.L>60?1.5:1.0):0.45;
+    const deep=sp.maxDepth>=2, half=sp.w/2+sp.side, foot=sp.kind>=3, th=sp.th||(deep?(sp.L>60?1.5:1.0):0.45);
+    const metal=foot||sp.kind===4||sp.railing==='metal';
     const n=sp.n;
     for(let k=0;k<n-1;k++){
       const s0=Math.min(sp.L,k*BR_STEP),s1=Math.min(sp.L,(k+1)*BR_STEP);if(s1-s0<1e-3)continue;
@@ -126,7 +136,7 @@ function buildBridgesTile(t){
       if(deep||sp.maxDepth>.6){br_quad(B,dn(L0),L0,L1,dn(L1),BR_C.slab);br_quad(B,R0,dn(R0),dn(R1),R1,BR_C.slab);br_quad(B,dn(R0),dn(L0),dn(L1),dn(R1),BR_C.under);}
       // parapets / railings on both edges
       for(const sd of [1,-1]){const a=sd>0?L0:R0,b=sd>0?L1:R1;
-        if(foot||sp.kind===4){ // metal railing: top rail + post
+        if(metal){ // metal railing: top rail + post
           const ra=[a[0],a[1]+1.0,a[2]],rb=[b[0],b[1]+1.0,b[2]];br_wall(B,[ra,rb],.06,.06,BR_C.railT,BR_C.railT);
           br_wall(B,[[a[0],a[1]+.45,a[2]],[b[0],b[1]+.45,b[2]]],.04,.04,BR_C.rail,BR_C.rail);
           if(k%1===0)br_box(B,a[0],a[1]+.5,a[2],.07,1.0,.07,0,BR_C.rail);
@@ -140,9 +150,12 @@ function buildBridgesTile(t){
     }
     // piers every ~24 m where the deck is up high enough (positions by distance along span → deterministic, seam-safe)
     if(deep){const pitch=sp.L>200?30:24,np=Math.max(1,Math.floor(sp.L/pitch));
-      for(let q=1;q<=np;q++){const s=sp.L*q/(np+1);const p=br_at(sp,s);if(!inTile(p[0],p[1]))continue;
-        const yd=br_deck(sp,s)-th-(sp.L>40&&!foot?.7:0),g=groundY(p[0],p[1])-.5,hgt=yd-g;if(hgt<1.6||br_onUnderRoad(p))continue;any=true;
-        const ang=Math.atan2(p[2],p[3]);const cols=foot?[0]:half>5?[-.6,.6]:[0];
+      const PS=sp.piers?sp.piers:Array.from({length:np},(_,q)=>sp.L*(q+1)/(np+1));   // audited pier positions win
+      for(const s of PS){const p=br_at(sp,s);if(!inTile(p[0],p[1]))continue;
+        const yd=br_deck(sp,s)-th-(sp.L>40&&!foot?.7:0),g=groundY(p[0],p[1])-.5,hgt=yd-g;if(hgt<1.6||(!sp.piers&&br_onUnderRoad(p)))continue;any=true;   // no generated pier on a road passing under
+        const ang=Math.atan2(p[2],p[3]);
+        if(sp.pierType==='wall'&&!foot){br_box(B,p[0],g+hgt/2,p[1],half*2*.85,hgt,1.2,ang,BR_C.pier);br_box(B,p[0],yd-.45,p[1],(half*2)*.95,.9,1.6,ang,BR_C.pier);continue;}
+        const cols=foot?[0]:sp.pierType==='single_column'?[0]:sp.pierType==='twin_column'||half>5?[-.6,.6]:[0];
         for(const f of cols){const cx=p[0]-p[3]*half*f,cz=p[1]+p[2]*half*f;
           B.add(CYL(foot?.25:.65,foot?.25:.75,hgt,foot?8:12),M(cx,g+hgt/2,cz,0),BR_C.pier);}
         if(!foot)br_box(B,p[0],yd-.45,p[1],(half*2)*.95,.9,1.6,ang,BR_C.pier);  // pier cap beam across
@@ -162,6 +175,17 @@ function buildBridgesTile(t){
       else{const w=tn.w+1.6;br_box(B,a[0],y+5.4,a[1],w+1.2,1.2,1.2,ang,BR_C.portal);
         for(const sd of [-1,1])br_box(B,a[0]-uz*(w/2+.3)*sd,y+2.4,a[1]+ux*(w/2+.3)*sd,.6,4.8,1.2,ang,BR_C.portal);}
     }}
+  // retaining walls along embankments / cuttings (world.json walls[], tools/make_earthworks.py): concrete face from the
+  // natural ground (DEM) to the earthwork top, on both edges; segments belong to the tile holding their midpoint
+  for(const wl of (D.walls||[])){const L=wl.line;for(let i=0;i<L.length-1;i++){const a=L[i],b=L[i+1];
+    const n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/4));
+    for(let k=0;k<n;k++){const t0=k/n,t1=(k+1)/n,mx=a[0]+(b[0]-a[0])*(t0+t1)/2*WS,mz=a[1]+(b[1]-a[1])*(t0+t1)/2*WS;if(!inTile(mx,mz))continue;any=true;
+      const P0=[(a[0]+(b[0]-a[0])*t0)*WS,(a[1]+(b[1]-a[1])*t0)*WS,(a[2]+(b[2]-a[2])*t0)*WS],P1=[(a[0]+(b[0]-a[0])*t1)*WS,(a[1]+(b[1]-a[1])*t1)*WS,(a[2]+(b[2]-a[2])*t1)*WS];
+      const dx=P1[0]-P0[0],dz=P1[1]-P0[1],l=Math.hypot(dx,dz)||1,ox=-dz/l*wl.half*WS,oz=dx/l*wl.half*WS;
+      for(const sd of [1,-1]){const q0=[P0[0]+ox*sd,P0[1]+oz*sd],q1=[P1[0]+ox*sd,P1[1]+oz*sd];
+        const d0=groundDemY(q0[0],q0[1]),d1=groundDemY(q1[0],q1[1]);
+        const lo0=Math.min(d0,P0[2])-.5,lo1=Math.min(d1,P1[2])-.5,hi0=Math.max(d0,P0[2])+(wl.cut?.3:1.0),hi1=Math.max(d1,P1[2])+(wl.cut?.3:1.0);
+        br_quad(B,[q0[0],lo0,q0[1]],[q1[0],lo1,q1[1]],[q1[0],hi1,q1[1]],[q0[0],hi0,q0[1]],BR_C.parapet);}}}}
   if(!any)return;
   const m=B.mesh();m.castShadow=true;m.receiveShadow=true;m.name='bridges_'+t.key;t.group.add(m);
 }
@@ -171,33 +195,35 @@ function bridgesUnloadTile(t){}
 // The cut itself lives in groundY (mapcore rv_*); this draws the lining exactly on that profile.
 const RVC={bed:0x6c6a63,bank:0xa39f95,wall:0xb5ab98,floor:0x6a6a66,cope:0xbdb8ac,rail:0x2f3236};
 let rv_sm=null,rv_wmat=null;
-function rv_samples(){if(rv_sm)return rv_sm;rv_sm=[];if(typeof rv_dist!=='function')return rv_sm;if(!RV)rv_dist(0,0);
-  for(const L of RV.lines){const P=L.pts,S=[];for(let i=0;i<P.length-1;i++){const a=P[i],b=P[i+1],l=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(l/4));
-      for(let k=0;k<n;k++){const u=k/n;S.push([a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u,0,0,0,L.dep[i]+(L.dep[i+1]-L.dep[i])*u]);}}
-    const e=P[P.length-1];S.push([e[0],e[1],0,0,0,L.dep[L.dep.length-1]]);
+function rv_samples(){if(rv_sm)return rv_sm;rv_sm=[];if(typeof rv_init!=='function')return rv_sm;if(!RV)rv_init();
+  // sample = [x,z,nx,nz,water y,depth,rim half-width,slope run,bed y] every ~4 m along each LINED audited channel
+  for(const L of RV.lines){if(!L.lined)continue;const P=L.pts,S=[],li=(A,i,u)=>A[i]+(A[i+1]-A[i])*u;
+    for(let i=0;i<P.length-1;i++){const a=P[i],b=P[i+1],l=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(l/4));
+      for(let k=0;k<n;k++){const u=k/n,bed=li(L.bed,i,u);S.push([a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u,0,0,bed+L.wd,li(L.dep,i,u),li(L.hw,i,u),li(L.run,i,u),bed]);}}
+    const j=P.length-1;S.push([P[j][0],P[j][1],0,0,L.bed[j]+L.wd,L.dep[j],L.hw[j],L.run[j],L.bed[j]]);
     // unit left normal from central differences
     for(let i=0;i<S.length;i++){const a=S[Math.max(0,i-1)],b=S[Math.min(S.length-1,i+1)],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz)||1;S[i][2]=-dz/l;S[i][3]=dx/l;}
-    // water level: smoothed bed
-    const bed=S.map(p=>hmY(p[0],p[1])-p[5]);for(let i=0;i<S.length;i++){let m=0,c=0;for(let k=-3;k<=3;k++){const j=i+k;if(j<0||j>=S.length)continue;m+=bed[j];c++;}S[i][4]=m/c;}
-    rv_sm.push({hw:L.hw,run:L.run,water:L.water,S});}
+    rv_sm.push({water:L.water,S});}
   return rv_sm;}
 function buildRiversTile(t){const LS=rv_samples();if(!LS.length)return;
   const B=new Bk(br_mat,false),Wb=new Bk(rv_wmat||(rv_wmat=(typeof st_waterMat!=='undefined'&&st_waterMat)||new THREE.MeshPhongMaterial({color:0x3b6f7f,specular:0x99bbcc,shininess:80})),false);let any=false,anyW=false;
   const inTile=(x,z)=>x>=t.x0&&x<t.x1&&z>=t.z0&&z<t.z1;
   const roadAt=(x,z,m)=>{if(typeof nearestSeg!=='function')return false;const ns=nearestSeg(x,z,30,s=>s.r&&s.r.kind!==3);return ns&&ns.d<ns.s.r.w/2+m;};
-  for(const {hw,run,water,S} of LS){const hb=hw-run;
+  for(const {water,S} of LS){
     const cols=water?[RVC.cope,RVC.cope,RVC.bank,RVC.bed,RVC.bank,RVC.cope,RVC.cope]:[RVC.cope,RVC.cope,RVC.wall,RVC.floor,RVC.wall,RVC.cope,RVC.cope];
-    const sec=p=>{const dep=p[5],fl=water?0:.12;return [[hw+1.4,.12],[hw,.12],[hw,0],[hb,-dep-fl],[-hb,-dep-fl],[-hw,0],[-hw,.12],[-hw-1.4,.12]].map(([o,dy])=>{const x=p[0]+p[2]*o,z=p[1]+p[3]*o;return [x,hmY(x,z)+dy,z];});};
+    // cross-section on the audited profile: coping on natural ground at the rim, lining down the slope to the bed
+    const sec=p=>{const hw=p[6],hb=Math.max(.5,p[6]-p[7]),bed=p[8]-(water?0:.12);return [[hw+1.4,.12],[hw,.12],[hw,0],[hb,null],[-hb,null],[-hw,0],[-hw,.12],[-hw-1.4,.12]].map(([o,dy])=>{const x=p[0]+p[2]*o,z=p[1]+p[3]*o;return [x,dy===null?bed:hmY(x,z)+dy,z];});};
     let prev=null,prevP=null;
     for(let i=0;i<S.length;i++){const p=S[i],cur=sec(p);
       if(prev){const mx=(p[0]+prevP[0])/2,mz=(p[1]+prevP[1])/2,dep=(p[5]+prevP[5])/2;
         if(inTile(mx,mz)&&dep>.05){any=true;const road=roadAt(mx,mz,2.5),rim=dep>.6&&!(water&&road);
           for(let k=0;k<7;k++){if(!rim&&(k<2||k>4))continue;if(!water&&k===3&&dep<.3)continue;
             const a=prev[k],b=prev[k+1],c=cur[k+1],d=cur[k];br_quad(B,a,d,c,b,cols[k]);}
-          if(water){anyW=true;const wl0=prevP[4]+.55,wl1=p[4]+.55,ww=hb+.55/RV_DEP*run;const q=(P,o,y)=>[P[0]+P[2]*o,y,P[1]+P[3]*o];
-            br_quad(Wb,q(prevP,ww,wl0),q(p,ww,wl1),q(p,-ww,wl1),q(prevP,-ww,wl0),0xffffff);}
+          if(water){anyW=true;const wl0=prevP[4],wl1=p[4];   // waterline sits up the slope by water depth × slope
+            const ww=P=>Math.max(.5,P[6]-P[7])+(P[5]>.05?(P[4]-P[8])/P[5]*P[7]:0),w0=ww(prevP),w1=ww(p),q=(P,o,y)=>[P[0]+P[2]*o,y,P[1]+P[3]*o];
+            br_quad(Wb,q(prevP,w0,wl0),q(p,w1,wl1),q(p,-w1,wl1),q(prevP,-w0,wl0),0xffffff);}
           // railings along both rims (not where a road deck crosses)
-          if(rim)for(const sd of [1,-1]){const o=sd*(hw+1.0),a=[prevP[0]+prevP[2]*o,0,prevP[1]+prevP[3]*o],b=[p[0]+p[2]*o,0,p[1]+p[3]*o];
+          if(rim)for(const sd of [1,-1]){const o=sd*((prevP[6]+p[6])/2+1.0),a=[prevP[0]+prevP[2]*o,0,prevP[1]+prevP[3]*o],b=[p[0]+p[2]*o,0,p[1]+p[3]*o];
             if(!water&&roadAt((a[0]+b[0])/2,(a[2]+b[2])/2,.5))continue;
             a[1]=hmY(a[0],a[2])+.12;b[1]=hmY(b[0],b[2])+.12;
             br_wall(B,[[a[0],a[1]+1.0,a[2]],[b[0],b[1]+1.0,b[2]]],.07,.07,RVC.rail,RVC.rail);br_wall(B,[[a[0],a[1]+.5,a[2]],[b[0],b[1]+.5,b[2]]],.04,.04,RVC.rail,RVC.rail);

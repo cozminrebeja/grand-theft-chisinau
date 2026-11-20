@@ -1,0 +1,2580 @@
+{
+ "sites": [
+  {
+   "id": "gb_muncesti_overpass",
+   "name": "Pasajul str. Grădina Botanică peste șos. Muncești",
+   "x": 5150,
+   "z": 4891,
+   "lat": 46.98049,
+   "lon": 28.90045,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      281,
+      206,
+      211
+     ],
+     "road": "Strada Grădina Botanică (6 lanes, both carriageways on one deck; footways 206/211 on the deck edges)",
+     "deck": [
+      [
+       5119.7,
+       4910.8,
+       -33.0
+      ],
+      [
+       5151.3,
+       4892.0,
+       -33.01
+      ],
+      [
+       5181.4,
+       4870.8,
+       -33.61
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [
+       [
+        5133.7,
+        4903.0
+       ],
+       [
+        5149.8,
+        4893.0
+       ],
+       [
+        5166.4,
+        4881.8
+       ]
+      ],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       2.5,
+       2.5
+      ],
+      "colour": "#a9a59c",
+      "notes": "precast beam deck on rows of square columns (bents) across Muncești; pier rows at the Muncești median and both kerbs (positions from carriageway crossings, est. ±3 m); railing metal, painted light blue"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Șoseaua Muncești (both carriageways 17420/17419 + service road)",
+       "y": -39.0,
+       "width": 28,
+       "clearance": 4.8
+      }
+     ],
+     "evidence": "photosphere under the bridge on Muncești (46.98030,28.90073, alt 49 -> road -39.0) shows 4-span beam bridge, column bents, minibus ~2.7 m vs underside ≈5-5.5 m; deck photosphere (46.98060,28.90059, alt 54 -> deck -34.0). Today deck = DEM line -37.7→-40.0, i.e. ~5 m too low and level with Muncești. img/s4_sw_ov.png"
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Strada Grădina Botanică (west approach)",
+     "line": [
+      [
+       5009.0,
+       4957.0,
+       -32.0
+      ],
+      [
+       5059.0,
+       4940.0,
+       -32.68
+      ],
+      [
+       5090.0,
+       4925.0,
+       -33.0
+      ],
+      [
+       5120.0,
+       4911.0,
+       -33.0
+      ]
+     ],
+     "top_w": 30,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "GPS profile: -32.0 at grade (5011,4952) to -33.0 at abutment where DEM is -37.7 (fill ≈4.7 m)"
+    },
+    {
+     "type": "embankment",
+     "road": "Strada Grădina Botanică (between Muncești overpass and railway bridge)",
+     "line": [
+      [
+       5181.0,
+       4871.0,
+       -33.6
+      ],
+      [
+       5216.0,
+       4842.0,
+       -34.64
+      ],
+      [
+       5254.0,
+       4796.0,
+       -36.0
+      ],
+      [
+       5290.0,
+       4756.0,
+       -37.52
+      ],
+      [
+       5322.0,
+       4710.0,
+       -38.95
+      ],
+      [
+       5328.0,
+       4690.0,
+       -39.44
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "GPS (5254,4796)->-36.0 DEM -41.6; (5297,4740)->-38.0 DEM -43.0: fill 5-6 m. Carries both carriageways (17440/17454/17455) + service roads."
+    },
+    {
+     "type": "ramp",
+     "road": "ramp 17421 (Gr. Botanică NE-bound -> service road 17423 / Muncești)",
+     "line": [
+      [
+       5216,
+       4842,
+       -34.6
+      ],
+      [
+       5212,
+       4816,
+       -37.0
+      ],
+      [
+       5204,
+       4802,
+       -39.0
+      ],
+      [
+       5188,
+       4796,
+       -40.7
+      ],
+      [
+       5177,
+       4797,
+       -41.2
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "connects deck level -34.4 to service road at grade -41.2 (DEM); geometry from game road 17421"
+    },
+    {
+     "type": "ramp",
+     "road": "ramp 17424 (Gr. Botanică -> Muncești, SE quadrant)",
+     "line": [
+      [
+       5222,
+       4836,
+       -34.6
+      ],
+      [
+       5246,
+       4834,
+       -36.3
+      ],
+      [
+       5265,
+       4839,
+       -38.0
+      ],
+      [
+       5275,
+       4848,
+       -39.5
+      ],
+      [
+       5283,
+       4862,
+       -40.6
+      ],
+      [
+       5274,
+       4902,
+       -40.7
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "connects deck level to Muncești level; geometry from game road 17424/17434"
+    }
+   ]
+  },
+  {
+   "id": "gb_railway_bridge",
+   "name": "Podul str. Grădina Botanică peste calea ferată (Revaca–Chișinău)",
+   "x": 5374,
+   "z": 4631,
+   "lat": 46.98285,
+   "lon": 28.90342,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      283,
+      284,
+      212,
+      213
+     ],
+     "road": "Strada Grădina Botanică (two parallel decks, 3 lanes each + footways 212/213)",
+     "deck": [
+      [
+       5399.8,
+       4583.5,
+       -43.11
+      ],
+      [
+       5385.0,
+       4604.5,
+       -42.27
+      ],
+      [
+       5370.2,
+       4625.5,
+       -41.44
+      ],
+      [
+       5355.8,
+       4646.7,
+       -40.7
+      ],
+      [
+       5341.6,
+       4668.2,
+       -40.07
+      ],
+      [
+       5327.5,
+       4689.6,
+       -39.44
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        5391.7,
+        4594.9
+       ],
+       [
+        5381.9,
+        4608.8
+       ],
+       [
+        5369.8,
+        4626.0
+       ],
+       [
+        5358.5,
+        4642.5
+       ],
+       [
+        5347.5,
+        4659.2
+       ],
+       [
+        5336.5,
+        4675.9
+       ],
+       [
+        5345.7,
+        4684.6
+       ],
+       [
+        5355.3,
+        4670.5
+       ],
+       [
+        5367.1,
+        4653.1
+       ],
+       [
+        5378.3,
+        4636.6
+       ],
+       [
+        5389.5,
+        4620.0
+       ],
+       [
+        5400.7,
+        4603.5
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "mixed",
+      "sidewalks": [
+       2.2,
+       0
+      ],
+      "colour": "#a9a59c",
+      "notes": "twin decks (283 SW-bound, 284 NE-bound) separated by a concrete median barrier; metal outer railing; pier stations are estimates (~20 m spans, a pier between tracks I and II at s≈31)"
+     },
+     "under": [
+      {
+       "type": "rail",
+       "name": "Revaca–Chișinău tracks I & II (+ a third track)",
+       "y": -47.7,
+       "width": 25,
+       "clearance": 5.4
+      },
+      {
+       "type": "road",
+       "name": "service road 17453",
+       "y": -46.2,
+       "width": 4,
+       "clearance": 5.0
+      }
+     ],
+     "evidence": "deck photosphere 46.98278,28.90331 alt 47 -> deck -41.0 (DEM -46.8, i.e. +5.8 above ground; 6.7 above rails). Looking SE: deck above tree tops along the railway; concrete median barrier, metal outer railing. Today deck follows DEM -44.7→-48.5. img/s2_basarabiei_ov.png"
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Strada Grădina Botanică (between railway bridge and Bîc/Calea Basarabiei bridge, incl. T-junction with loop ramps)",
+     "line": [
+      [
+       5400.0,
+       4584.0,
+       -43.1
+      ],
+      [
+       5420.0,
+       4575.0,
+       -42.6
+      ],
+      [
+       5435.0,
+       4537.0,
+       -43.0
+      ],
+      [
+       5459.0,
+       4502.0,
+       -45.6
+      ]
+     ],
+     "top_w": 40,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "GPS (5435,4537)->-45.0, DEM -49.7: fill ≈4.7 m. Top is wide here: both carriageways + junction with ramps 17461/17462/17482. | DSM-corrected 2026-11-20 against Copernicus GLO-30 DSM (TanDEM-X 2011-15, 30 m): +2.0 m in the middle (DSM median +2.1, open ground), tapered to 0 over 40 m at both deck ends."
+    }
+   ]
+  },
+  {
+   "id": "gb_basarabiei_bic_bridge",
+   "name": "Podul str. Grădina Botanică peste str. Calea Basarabiei și râul Bîc",
+   "x": 5500,
+   "z": 4430,
+   "lat": 46.98467,
+   "lon": 28.90507,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      285,
+      287,
+      214,
+      215
+     ],
+     "road": "Strada Grădina Botanică (two parallel decks 285/287 + footways 214/215)",
+     "deck": [
+      [
+       5468.5,
+       4505.2,
+       -45.63
+      ],
+      [
+       5484.1,
+       4482.6,
+       -46.04
+      ],
+      [
+       5499.7,
+       4460.0,
+       -46.69
+      ],
+      [
+       5515.3,
+       4437.5,
+       -47.25
+      ],
+      [
+       5530.9,
+       4414.9,
+       -47.72
+      ],
+      [
+       5546.5,
+       4392.3,
+       -48.19
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [
+       [
+        5478.7,
+        4490.4
+       ],
+       [
+        5489.0,
+        4475.6
+       ],
+       [
+        5500.3,
+        4459.1
+       ],
+       [
+        5512.8,
+        4441.0
+       ],
+       [
+        5524.2,
+        4424.6
+       ],
+       [
+        5535.6,
+        4408.1
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "mixed",
+      "sidewalks": [
+       2.2,
+       2.2
+      ],
+      "colour": "#a9a59c",
+      "notes": "two parallel decks; pier stations estimated (~20 m spans; one pier between the Calea Basarabiei carriageways at s≈36, Bîc channel spanned at s≈100-112)"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Calea Basarabiei (17463/17483)",
+       "y": -51.6,
+       "width": 24,
+       "clearance": 4.3
+      },
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -55.6,
+       "width": 12,
+       "clearance": 7.0
+      }
+     ],
+     "evidence": "deck photospheres 46.98423,28.90475 alt 42 -> -46.0 and 46.98454,28.90506 alt 41 -> -47.0; at-grade Calea Basarabiei pano 46.98501,28.90411 alt 36 -> -50.2 (DEM -52.1, +1.9 = camera). Bîc water level is an estimate (bank -52.6 minus ~3 m). img/s2_ne_ov.png"
+    },
+    {
+     "data_idx": [
+      286
+     ],
+     "road": "link road 17480 (Lunca Bîcului -> old Calea Basarabiei), primary_link",
+     "deck": [
+      [
+       5500.0,
+       4350.0,
+       -52.4
+      ],
+      [
+       5486.0,
+       4368.0,
+       -52.3
+      ],
+      [
+       5472.0,
+       4386.0,
+       -52.2
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#a9a59c",
+      "notes": "low river bridge at road grade; deck ≈ DEM (data geometry OK)"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -55.6,
+       "width": 12,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "OSM 25739720 primary_link bridge layer 2 over waterway Bîc (866681350). Deck level not measured: assumed at the surrounding grade (-52.3)."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Strada Grădina Botanică / Lunca Bâcului (NE approach)",
+     "line": [
+      [
+       5546.0,
+       4392.0,
+       -48.19
+      ],
+      [
+       5568.0,
+       4351.0,
+       -48.98
+      ],
+      [
+       5599.0,
+       4300.0,
+       -50.0
+      ],
+      [
+       5629.0,
+       4257.0,
+       -50.0
+      ],
+      [
+       5649.0,
+       4223.0,
+       -50.0
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "GPS (5599,4300)->-50.0 DEM -52.2; (5649,4223)->-50.0 DEM -51.6 (≈ grade, fill tapers out)"
+    },
+    {
+     "type": "ramp",
+     "road": "west ramp 17467 (Calea Basarabiei -> Gr. Botanică SW-bound)",
+     "line": [
+      [
+       5333,
+       4359,
+       -50.8
+      ],
+      [
+       5360,
+       4418,
+       -50.2
+      ],
+      [
+       5385,
+       4466,
+       -48.6
+      ],
+      [
+       5407,
+       4510,
+       -46.7
+      ],
+      [
+       5414,
+       4541,
+       -44.6
+      ],
+      [
+       5411,
+       4568,
+       -43.6
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "rises from Calea Basarabiei at grade to the GB deck level at the T-junction (geometry game road 17467)"
+    },
+    {
+     "type": "ramp",
+     "road": "east loop 17461/17485/17488 (Gr. Botanică -> Calea Basarabiei)",
+     "line": [
+      [
+       5420,
+       4575,
+       -43.7
+      ],
+      [
+       5450,
+       4571,
+       -44.2
+      ],
+      [
+       5471,
+       4575,
+       -44.8
+      ],
+      [
+       5505,
+       4595,
+       -47.0
+      ],
+      [
+       5538,
+       4615,
+       -49.2
+      ],
+      [
+       5558,
+       4619,
+       -50.4
+      ],
+      [
+       5579,
+       4607,
+       -51.4
+      ],
+      [
+       5585,
+       4587,
+       -52.1
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "loop ramp descends from the T-junction on the embankment to Calea Basarabiei at grade; visible as raised loop in Esri imagery"
+    },
+    {
+     "type": "ramp",
+     "road": "connector 17482",
+     "line": [
+      [
+       5471,
+       4575,
+       -44.8
+      ],
+      [
+       5458,
+       4544,
+       -45.2
+      ],
+      [
+       5455,
+       4525,
+       -45.4
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "on top of the embankment between the T-junction and the NE-bound carriageway"
+    }
+   ]
+  },
+  {
+   "id": "r2_tighina_viaduct",
+   "name": "Viaductul de pe Șoseaua Chișinău–Tighina (R2) peste valea Ișnovățului, Sîngera/Revaca",
+   "x": 10808,
+   "z": 11620,
+   "lat": 46.91964,
+   "lon": 28.97502,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      258
+     ],
+     "road": "Șoseaua Chișinău-Tighina (R2), 2 lanes + shoulders",
+     "deck": [
+      [
+       10591.3,
+       11586.5,
+       -47.2
+      ],
+      [
+       10679.7,
+       11628.7,
+       -48.0
+      ],
+      [
+       10781.5,
+       11648.5,
+       -52.0
+      ],
+      [
+       10904.4,
+       11637.7,
+       -55.0
+      ],
+      [
+       11028.8,
+       11586.6,
+       -54.0
+      ],
+      [
+       11156.1,
+       11522.3,
+       -52.0
+      ],
+      [
+       11213.9,
+       11493.1,
+       -51.5
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.5,
+      "piers": [
+       [
+        10608.2,
+        11597.3
+       ],
+       [
+        10637.6,
+        11612.2
+       ],
+       [
+        10668.1,
+        11624.6
+       ],
+       [
+        10699.5,
+        11634.7
+       ],
+       [
+        10731.7,
+        11642.1
+       ],
+       [
+        10764.3,
+        11646.7
+       ],
+       [
+        10797.2,
+        11649.3
+       ],
+       [
+        10830.2,
+        11648.5
+       ],
+       [
+        10863.0,
+        11645.4
+       ],
+       [
+        10895.5,
+        11639.8
+       ],
+       [
+        10927.3,
+        11631.1
+       ],
+       [
+        10958.3,
+        11619.8
+       ],
+       [
+        10988.6,
+        11606.7
+       ],
+       [
+        11018.1,
+        11592.0
+       ],
+       [
+        11047.6,
+        11577.1
+       ],
+       [
+        11077.1,
+        11562.2
+       ],
+       [
+        11106.5,
+        11547.4
+       ],
+       [
+        11136.0,
+        11532.5
+       ],
+       [
+        11165.4,
+        11517.6
+       ],
+       [
+        11194.9,
+        11502.7
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "metal",
+      "sidewalks": [
+       0.8,
+       0.8
+      ],
+      "colour": "#a9a59c",
+      "notes": "continuous multi-span beam viaduct; expansion joints visible every ≈33 m in Esri imagery (img/s1_mid.jpg) -> piers every ~33 m (stations est.); steel guardrail + metal parapet railing, no footways; lamp posts on the south edge"
+     },
+     "under": [
+      {
+       "type": "valley",
+       "name": "Ișnovăț floodplain (fields, shrubs)",
+       "y": -58.3,
+       "width": 550,
+       "clearance": 3.0
+      },
+      {
+       "type": "road",
+       "name": "Strada Florilor (dead-ends under / beside the viaduct)",
+       "y": -51.5,
+       "width": 5.5,
+       "clearance": 3.0
+      },
+      {
+       "type": "river",
+       "name": "Ișnovăț",
+       "y": -60.3,
+       "width": 6,
+       "clearance": 7.5
+      },
+      {
+       "type": "road",
+       "name": "Strada Chișinău (N–S, not in game road data)",
+       "y": -58.0,
+       "width": 7,
+       "clearance": 5.0
+      }
+     ],
+     "evidence": "8 photospheres on the deck (alt 42/40/36/33/34/36/37/35 at x=10464..11447) -> deck profile sags from -46 (W) to -55 (x≈10900) and crests -51 near the east end (over Str. Chișinău / Ișnovăț). Pano looking N at x=10903: shrub tops just below the railing (deck ≈4-5 m above floodplain). Today the deck is the straight DEM line -49.0 -> -58.0 nudged above ground: east half sits ~0.3-1.5 m above the floodplain instead of 4-8 m. OSM way 37710075 bridge=viaduct layer 2 (669 m). The DEM floodplain may include shrub canopy (real ground possibly 1-2 m lower)."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Șoseaua Chișinău-Tighina (west approach)",
+     "line": [
+      [
+       10394,
+       11336,
+       -48.6
+      ],
+      [
+       10446,
+       11419,
+       -46.6
+      ],
+      [
+       10504,
+       11504,
+       -46.5
+      ],
+      [
+       10552,
+       11555,
+       -46.9
+      ],
+      [
+       10591,
+       11586,
+       -47.2
+      ]
+     ],
+     "top_w": 18,
+     "side": "slope",
+     "slope": 2,
+     "evidence": "pano 46.92124,28.97049 alt 42 -> -46.0 where DEM -49.1: ≈3 m fill (est. ±1.5 m)"
+    },
+    {
+     "type": "embankment",
+     "road": "Șoseaua Chișinău-Tighina (east approach, continues beyond the game road data)",
+     "line": [
+      [
+       11214,
+       11493,
+       -51.5
+      ],
+      [
+       11283,
+       11458,
+       -51.0
+      ],
+      [
+       11304,
+       11448,
+       -51.2
+      ],
+      [
+       11447,
+       11374,
+       -53.0
+      ],
+      [
+       11530,
+       11330,
+       -53.5
+      ]
+     ],
+     "top_w": 18,
+     "side": "slope",
+     "slope": 2,
+     "evidence": "panos 46.92111,28.98128 alt 37 -> -51.0 (DEM -57.9, fill ≈7 m) and 46.92187,28.98344 alt 35 -> -53.0 (DEM -57.5). A ramp loop from Str. Chișinău (N–S road, not in game data) climbs onto this embankment at ≈(11380,11360) (img/s1_east.jpg)."
+    },
+    {
+     "type": "channel",
+     "road": "râul Ișnovăț (under the viaduct east end)",
+     "line": [
+      [
+       11189,
+       11429,
+       -60.4
+      ],
+      [
+       11159,
+       11520,
+       -60.3
+      ],
+      [
+       11143,
+       11638,
+       -60.2
+      ],
+      [
+       11180,
+       11818,
+       -59.2
+      ],
+      [
+       11186,
+       11864,
+       -59.1
+      ],
+      [
+       11165,
+       11943,
+       -59.0
+      ]
+     ],
+     "top_w": 5,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "OSM waterway Ișnovăț 59536433; DEM has no channel (-58.3 flat). Depth ≈2 m below floodplain = estimate"
+    }
+   ]
+  },
+  {
+   "id": "dacia_muncesti_flyover",
+   "name": "Pasajul bd. Dacia (sens spre centru) peste șos. Muncești (sens spre aeroport/Tighina)",
+   "x": 9365,
+   "z": 10139,
+   "lat": 46.93304,
+   "lon": 28.956,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      257
+     ],
+     "road": "Bulevardul Dacia westbound carriageway (8291)",
+     "deck": [
+      [
+       9392.0,
+       10150.0,
+       -31.1
+      ],
+      [
+       9371.0,
+       10142.0,
+       -30.0
+      ],
+      [
+       9338.0,
+       10128.0,
+       -28.4
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       0,
+       0.8
+      ],
+      "colour": "#a9a59c",
+      "notes": "single-carriageway flyover, abutment walls on both sides of Muncești; span ≈25 m (est.)"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Șoseaua Muncești SE-bound (8304) in a cutting",
+       "y": -36.5,
+       "width": 10.5,
+       "clearance": 5.3
+      }
+     ],
+     "evidence": "INFERRED (no imagery of the structure: Esri tile cloudy, no photospheres on it). Dacia westbound follows the natural hill grade (DEM along 8291 smooth, ~5 %), so deck ≈ DEM there; DEM along Muncești 8304 shows a 3-5 m bump exactly at the crossing (-31.1 at 9398 vs -33.6 / -36.8 either side) = the spur/bridge, so Muncești runs in a cutting under it. Today deck = DEM line -32.7/-28.3 and Muncești climbs over the bump — no clearance at all."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "cutting",
+     "road": "Șoseaua Muncești SE-bound (8304)",
+     "line": [
+      [
+       9299,
+       10044,
+       -33.6
+      ],
+      [
+       9340,
+       10100,
+       -35.2
+      ],
+      [
+       9371,
+       10142,
+       -36.5
+      ],
+      [
+       9424,
+       10207,
+       -37.4
+      ],
+      [
+       9485,
+       10257,
+       -38.2
+      ],
+      [
+       9530,
+       10290,
+       -38.8
+      ],
+      [
+       9579,
+       10335,
+       -39.0
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "inferred from DEM bump + required clearance; continuous ~1.5 % descent between the at-grade ends (9299 DEM -33.6, 9579 DEM -39.0). Low confidence (±2 m)."
+    }
+   ]
+  },
+  {
+   "id": "muncesti_bic_bridge",
+   "name": "Podul șos. Muncești peste râul Bîc",
+   "x": 6944,
+   "z": 7277,
+   "lat": 46.95892,
+   "lon": 28.92411,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      256
+     ],
+     "road": "Șoseaua Muncești",
+     "deck": [
+      [
+       6948.4,
+       7283.5,
+       -51.0
+      ],
+      [
+       6940.6,
+       7268.8,
+       -51.0
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.9,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.5,
+       1.5
+      ],
+      "colour": "#a9a59c",
+      "notes": "short single-span river bridge, trees on both banks"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -55.0,
+       "width": 10,
+       "clearance": 3.0
+      }
+     ],
+     "evidence": "photospheres 46.95895,28.92415 alt 37 and 46.95968,28.92358 alt 38 -> road -51.0/-50.0 (≈1 m above DEM). Deck geometry fine; what is wrong is the river: DEM has no channel here, so the Bîc water sits at road level. Channel depth estimate (≈4 m below deck)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_channel_downstream",
+   "name": "Albia râului Bîc în aval de Botanica (Lunca Bîcului – Muncești – Revaca – Sîngera)",
+   "x": 7500,
+   "z": 7500,
+   "lat": 46.955,
+   "lon": 28.93,
+   "status": "wrong",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": "râul Bîc (water surface level)",
+     "line": [
+      [
+       5508.0,
+       4387.7,
+       -55.72
+      ],
+      [
+       5550.8,
+       4433.4,
+       -55.83
+      ],
+      [
+       5584.9,
+       4484.8,
+       -56.27
+      ],
+      [
+       5625.1,
+       4537.0,
+       -56.67
+      ],
+      [
+       5668.6,
+       4593.8,
+       -57.05
+      ],
+      [
+       5706.5,
+       4644.7,
+       -57.37
+      ],
+      [
+       5741.7,
+       4695.1,
+       -57.7
+      ],
+      [
+       5772.6,
+       4748.4,
+       -57.83
+      ],
+      [
+       5817.3,
+       4813.0,
+       -57.85
+      ],
+      [
+       5859.8,
+       4868.7,
+       -57.71
+      ],
+      [
+       5902.6,
+       4929.6,
+       -57.74
+      ],
+      [
+       5945.4,
+       4987.4,
+       -57.98
+      ],
+      [
+       5984.9,
+       5041.0,
+       -58.08
+      ],
+      [
+       6028.2,
+       5105.9,
+       -57.98
+      ],
+      [
+       6069.7,
+       5159.5,
+       -57.9
+      ],
+      [
+       6114.1,
+       5222.8,
+       -58.04
+      ],
+      [
+       6160.4,
+       5289.0,
+       -58.33
+      ],
+      [
+       6220.0,
+       5369.5,
+       -58.56
+      ],
+      [
+       6252.7,
+       5430.6,
+       -58.73
+      ],
+      [
+       6287.9,
+       5479.4,
+       -58.8
+      ],
+      [
+       6369.6,
+       5623.8,
+       -58.68
+      ],
+      [
+       6432.1,
+       5744.6,
+       -58.38
+      ],
+      [
+       6489.4,
+       5833.4,
+       -58.46
+      ],
+      [
+       6563.6,
+       5926.8,
+       -58.5
+      ],
+      [
+       6870.5,
+       6277.1,
+       -59.21
+      ],
+      [
+       7107.9,
+       6551.9,
+       -59.61
+      ],
+      [
+       7220.6,
+       6700.6,
+       -59.93
+      ],
+      [
+       7396.1,
+       6929.8,
+       -60.45
+      ],
+      [
+       7427.0,
+       6987.9,
+       -60.6
+      ],
+      [
+       7437.9,
+       7068.7,
+       -60.53
+      ],
+      [
+       7463.2,
+       7244.9,
+       -60.44
+      ],
+      [
+       7480.2,
+       7453.5,
+       -60.1
+      ],
+      [
+       7508.4,
+       7559.3,
+       -60.12
+      ],
+      [
+       7526.9,
+       7618.8,
+       -60.1
+      ],
+      [
+       7642.2,
+       7866.2,
+       -59.53
+      ],
+      [
+       7715.3,
+       7939.0,
+       -60.08
+      ],
+      [
+       7943.0,
+       8166.1,
+       -61.17
+      ],
+      [
+       8034.2,
+       8199.9,
+       -61.5
+      ],
+      [
+       8086.3,
+       8246.7,
+       -61.5
+      ],
+      [
+       8191.2,
+       8367.3,
+       -61.52
+      ],
+      [
+       8354.9,
+       8559.7,
+       -61.8
+      ],
+      [
+       8673.6,
+       8839.6,
+       -61.82
+      ],
+      [
+       8719.1,
+       8879.5,
+       -61.68
+      ],
+      [
+       8769.8,
+       8924.0,
+       -61.49
+      ],
+      [
+       8841.2,
+       9011.4,
+       -61.34
+      ],
+      [
+       8841.8,
+       9094.3,
+       -61.15
+      ],
+      [
+       8855.9,
+       9165.6,
+       -60.92
+      ],
+      [
+       8962.0,
+       9242.6,
+       -61.1
+      ],
+      [
+       9314.6,
+       9388.8,
+       -61.32
+      ],
+      [
+       9581.9,
+       9593.7,
+       -62.75
+      ],
+      [
+       9615.4,
+       9652.2,
+       -63.01
+      ],
+      [
+       9614.5,
+       9773.1,
+       -63.07
+      ],
+      [
+       9877.5,
+       9949.3,
+       -63.0
+      ],
+      [
+       9957.0,
+       10002.7,
+       -62.85
+      ],
+      [
+       10044.6,
+       10061.3,
+       -62.67
+      ],
+      [
+       10224.2,
+       10179.0,
+       -63.37
+      ],
+      [
+       10364.5,
+       10313.2,
+       -63.7
+      ],
+      [
+       10441.5,
+       10356.6,
+       -63.8
+      ],
+      [
+       10639.0,
+       10449.9,
+       -63.64
+      ],
+      [
+       10845.9,
+       10531.1,
+       -63.58
+      ],
+      [
+       11136.7,
+       10601.6,
+       -63.3
+      ],
+      [
+       11205.2,
+       10610.2,
+       -63.23
+      ],
+      [
+       11265.3,
+       10617.7,
+       -63.2
+      ],
+      [
+       11338.8,
+       10603.9,
+       -63.2
+      ],
+      [
+       11411.9,
+       10592.8,
+       -63.07
+      ],
+      [
+       11473.5,
+       10606.7,
+       -63.0
+      ],
+      [
+       11580.4,
+       10601.9,
+       -63.07
+      ]
+     ],
+     "top_w": 10,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "OSM waterways 866681350/129516008/129516006/25315669. DEM along the river vs ±30 m differs by ≤0.5 m everywhere (channel absent from the 20 m DEM). Line y = lowest DEM within 25 m minus 3.0 m (ESTIMATE: regulated channel ~15-20 m wide between tree-lined banks in Esri imagery; footbridge decks sit ~1 m above banks). Bottom width 10 m, banks 1:1.5."
+    }
+   ]
+  },
+  {
+   "id": "bic_crossing_149",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 6557,
+   "z": 5920,
+   "lat": 46.9712,
+   "lon": 28.91901,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      149
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       6546.6,
+       5927.3,
+       -55.1
+      ],
+      [
+       6567.8,
+       5911.9,
+       -54.99
+      ]
+     ],
+     "structure": {
+      "type": "truss",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -58.5,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_151",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 6785,
+   "z": 6175,
+   "lat": 46.96889,
+   "lon": 28.92201,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      151
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       6777.3,
+       6181.5,
+       -55.68
+      ],
+      [
+       6792.8,
+       6167.6,
+       -55.47
+      ]
+     ],
+     "structure": {
+      "type": "truss",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -59.08,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_153",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 7000,
+   "z": 6432,
+   "lat": 46.96656,
+   "lon": 28.92484,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      153
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       6988.9,
+       6441.2,
+       -56.21
+      ],
+      [
+       7011.4,
+       6422.8,
+       -55.93
+      ]
+     ],
+     "structure": {
+      "type": "truss",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -59.61,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_157",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 7434,
+   "z": 7021,
+   "lat": 46.96124,
+   "lon": 28.93056,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      157
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       7426.1,
+       7021.8,
+       -56.97
+      ],
+      [
+       7442.0,
+       7019.4,
+       -57.1
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -60.5,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_160",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 8199,
+   "z": 8372,
+   "lat": 46.94902,
+   "lon": 28.94064,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      160
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       8207.4,
+       8365.5,
+       -58.08
+      ],
+      [
+       8190.8,
+       8378.3,
+       -57.99
+      ]
+     ],
+     "structure": {
+      "type": "truss",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -61.48,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_159",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 7916,
+   "z": 9387,
+   "lat": 46.93983,
+   "lon": 28.93691,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      159
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       7911.9,
+       9391.0,
+       -32.89
+      ],
+      [
+       7920.0,
+       9383.5,
+       -33.83
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -37.23,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_29",
+   "name": "Pod de serviciu peste râul Bîc",
+   "x": 7554,
+   "z": 7681,
+   "lat": 46.95527,
+   "lon": 28.93215,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      29
+     ],
+     "road": "service road",
+     "deck": [
+      [
+       7548.4,
+       7684.2,
+       -56.14
+      ],
+      [
+       7560.6,
+       7677.2,
+       -56.35
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -59.75,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_46",
+   "name": "Pod de serviciu peste râul Bîc",
+   "x": 5821,
+   "z": 4722,
+   "lat": 46.98203,
+   "lon": 28.9093,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      46
+     ],
+     "road": "service road",
+     "deck": [
+      [
+       5825.6,
+       4726.9,
+       -54.81
+      ],
+      [
+       5815.9,
+       4716.1,
+       -54.75
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -58.21,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic_crossing_152",
+   "name": "Pasarelă pietonală peste râul Bîc",
+   "x": 6739,
+   "z": 6689,
+   "lat": 46.96424,
+   "lon": 28.92141,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      152
+     ],
+     "road": "footway",
+     "deck": [
+      [
+       6735.3,
+       6692.9,
+       -54.88
+      ],
+      [
+       6743.2,
+       6685.3,
+       -55.16
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7d7a74"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -58.56,
+       "width": 10,
+       "clearance": 2.5
+      }
+     ],
+     "evidence": "Esri top-down (img/sheet_*.png): single-span crossing of the tree-lined Bîc channel; deck at bank level. Data geometry OK; needs the Bîc channel earthwork (bic_channel_downstream) under it. #152 sits in cloud: unverified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_49_50_219_220_221_222",
+   "name": "Podeț / trecere mică",
+   "x": 9774,
+   "z": -1493,
+   "lat": 47.03823,
+   "lon": 28.96139,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      49,
+      50,
+      219,
+      220,
+      221,
+      222
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_30_31_32_33",
+   "name": "Podeț / trecere mică",
+   "x": 7809,
+   "z": 9856,
+   "lat": 46.93559,
+   "lon": 28.9355,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      30,
+      31,
+      32,
+      33
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "4 service spans at the edges of a ground-level parking lot (Bd. Dacia/airport area) – ditch culverts"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_161",
+   "name": "Podeț / trecere mică",
+   "x": 8847,
+   "z": 9099,
+   "lat": 46.94244,
+   "lon": 28.94918,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      161
+     ],
+     "structure": {
+      "type": "slab"
+     },
+     "evidence": "39 m path bridge beside the Mereni–Revaca rail bridge over a stream (dark/shaded tile): low footbridge, deck at bank level"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_47",
+   "name": "Podeț / trecere mică",
+   "x": 7419,
+   "z": 4283,
+   "lat": 46.986,
+   "lon": 28.93037,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      47
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "service road, cloud-covered tile: unverified, treat as culvert"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_52_53",
+   "name": "Podeț / trecere mică",
+   "x": 8674,
+   "z": 4171,
+   "lat": 46.98701,
+   "lon": 28.9469,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      52,
+      53
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_208_282",
+   "name": "Podeț / trecere mică",
+   "x": 5308,
+   "z": -1133,
+   "lat": 47.03497,
+   "lon": 28.90255,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      208,
+      282
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_209_210",
+   "name": "Podeț / trecere mică",
+   "x": 5211,
+   "z": -1918,
+   "lat": 47.04208,
+   "lon": 28.90126,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      209,
+      210
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_216_217",
+   "name": "Podeț / trecere mică",
+   "x": 8301,
+   "z": 4804,
+   "lat": 46.98129,
+   "lon": 28.94198,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      216,
+      217
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_162",
+   "name": "Podeț / trecere mică",
+   "x": 9040,
+   "z": 9275,
+   "lat": 46.94085,
+   "lon": 28.95173,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      162
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "footbridge over a stream (dark tile) – at grade"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_280",
+   "name": "Podeț / trecere mică",
+   "x": 4683,
+   "z": 3548,
+   "lat": 46.99265,
+   "lon": 28.89431,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      280
+     ],
+     "structure": {
+      "type": "slab"
+     },
+     "evidence": "Str. Varnița 15.6 m over the Ciocana stream/canal – short road bridge at grade"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_148",
+   "name": "Podeț / trecere mică",
+   "x": 4164,
+   "z": 5150,
+   "lat": 46.97815,
+   "lon": 28.88748,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      148
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "footbridge at a Botanical Garden lake inlet – at grade"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_155_156",
+   "name": "Podeț / trecere mică",
+   "x": 7275,
+   "z": 8032,
+   "lat": 46.95209,
+   "lon": 28.92846,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      155,
+      156
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_147",
+   "name": "Podeț / trecere mică",
+   "x": 4019,
+   "z": 5484,
+   "lat": 46.97514,
+   "lon": 28.88556,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      147
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "footbridge at a Botanical Garden lake dam – at grade"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_207",
+   "name": "Podeț / trecere mică",
+   "x": 5097,
+   "z": -2828,
+   "lat": 47.05031,
+   "lon": 28.89977,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      207
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_224",
+   "name": "Podeț / trecere mică",
+   "x": 8388,
+   "z": 4646,
+   "lat": 46.98271,
+   "lon": 28.94313,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      224
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_28",
+   "name": "Podeț / trecere mică",
+   "x": 5069,
+   "z": 11394,
+   "lat": 46.92169,
+   "lon": 28.89939,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      28
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_51",
+   "name": "Podeț / trecere mică",
+   "x": 10231,
+   "z": -871,
+   "lat": 47.03261,
+   "lon": 28.96741,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      51
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_223",
+   "name": "Podeț / trecere mică",
+   "x": 8514,
+   "z": 4504,
+   "lat": 46.98399,
+   "lon": 28.9448,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      223
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_48",
+   "name": "Podeț / trecere mică",
+   "x": 9537,
+   "z": -4869,
+   "lat": 47.06876,
+   "lon": 28.95827,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      48
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_218",
+   "name": "Podeț / trecere mică",
+   "x": 6069,
+   "z": -2001,
+   "lat": 47.04283,
+   "lon": 28.91257,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      218
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_150",
+   "name": "Podeț / trecere mică",
+   "x": 6756,
+   "z": 8317,
+   "lat": 46.94951,
+   "lon": 28.92162,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      150
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_154",
+   "name": "Podeț / trecere mică",
+   "x": 7140,
+   "z": 7576,
+   "lat": 46.95622,
+   "lon": 28.92669,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      154
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_158",
+   "name": "Podeț / trecere mică",
+   "x": 7981,
+   "z": 9631,
+   "lat": 46.93763,
+   "lon": 28.93777,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      158
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert_163",
+   "name": "Podeț / trecere mică",
+   "x": 10354,
+   "z": 10769,
+   "lat": 46.92734,
+   "lon": 28.96904,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      163
+     ],
+     "structure": {
+      "type": "culvert"
+     },
+     "evidence": "small crossing of a ditch/stream; deck at grade (Esri contact sheet img/sheet_*.png)"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "missing_outside_road_data",
+   "name": "Structuri reale lipsă (în afara rețelei de drumuri din joc)",
+   "x": 11400,
+   "z": 10600,
+   "lat": 46.928,
+   "lon": 28.983,
+   "status": "missing_in_data",
+   "bridges": [
+    {
+     "data_idx": [],
+     "road": "Sîngera–Floreni (L454) over the Bîc",
+     "polyline": [
+      [
+       11433,
+       10578
+      ],
+      [
+       11416,
+       10609
+      ]
+     ],
+     "evidence": "OSM 30070167 bridge layer 2, 35 m; no game road here"
+    },
+    {
+     "data_idx": [],
+     "road": "Strada Chișinău (Sîngera) over the Ișnovăț",
+     "polyline": [
+      [
+       11155,
+       11856
+      ],
+      [
+       11193,
+       11856
+      ]
+     ],
+     "evidence": "OSM 80290136, 38 m; road not in game data"
+    },
+    {
+     "data_idx": [],
+     "road": "Strada Chișinău under the Mereni–Revaca railway bridge",
+     "polyline": [
+      [
+       11169,
+       11696
+      ]
+     ],
+     "evidence": "OSM rail bridge 28584853 (66 m) over the N–S road; visible in img/s1_east.jpg"
+    },
+    {
+     "data_idx": [],
+     "road": "M5 Centura Chișinăului bridge (Tiraspol–Bălți)",
+     "polyline": [
+      [
+       12444,
+       -4931
+      ]
+     ],
+     "evidence": "OSM 37289012, 177 m, layer 2 – outside the game road data"
+    },
+    {
+     "data_idx": [],
+     "road": "railway bridges over the Bîc (not rendered: game has no rail)",
+     "polyline": [
+      [
+       5586,
+       4824
+      ],
+      [
+       5520,
+       4861
+      ],
+      [
+       6250,
+       6177
+      ],
+      [
+       6537,
+       6537
+      ],
+      [
+       6986,
+       7251
+      ],
+      [
+       8869,
+       9094
+      ],
+      [
+       11270,
+       10251
+      ]
+     ],
+     "evidence": "OSM 90399286/90399201/90399234/90399215/847382884/46737208/855257985; only matters if rail is added"
+    }
+   ],
+   "earthworks": []
+  }
+ ]
+}

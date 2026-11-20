@@ -1,0 +1,7594 @@
+{
+ "sites": [
+  {
+   "id": "balcani-bic-rail-viaduct",
+   "name": "Șoseaua Balcani (M1/E581) twin viaducts over Drum de acces Pruncu + Bîc channel (SW) and Visterniceni-Ghidighici railway (NE), Calea Ieșilor/Pruncu interchange",
+   "x": -3970,
+   "z": -3349,
+   "lat": 47.05501,
+   "lon": 28.78028,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      243
+     ],
+     "road": "Șoseaua Balcani, NW (eastbound) carriageway - SW bridge",
+     "deck": [
+      [
+       -4034.0,
+       -3283.5,
+       -34.1
+      ],
+      [
+       -4018.0,
+       -3296.8,
+       -33.6
+      ],
+      [
+       -3970.5,
+       -3336.7,
+       -30.8
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        -4028.7,
+        -3287.7
+       ],
+       [
+        -4004.3,
+        -3308.4
+       ],
+       [
+        -3985.9,
+        -3323.9
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "metal",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Drum de acces Pruncu",
+       "y": -40.3,
+       "width": 7,
+       "clearance": 5.6
+      },
+      {
+       "type": "river",
+       "name": "Bîc (concrete-lined regulated channel)",
+       "y": -43.8,
+       "width": 22,
+       "clearance": 8.9
+      }
+     ],
+     "evidence": "Data spans match OSM man_made=bridge outlines 1144610339-342 (deck extents) and current Google satellite (twin decks, paved conical abutment slopes in the gap between the SW and NE bridges, regulated concrete-lined Bîc channel + Drum de acces Pruncu passing under the SW bridge, railway under the NE bridge). Esri img/s0.jpg (old, single deck) and img/s0wide.jpg (construction of the channel). Heights: no Google 3D/Street-View-car coverage under the bridge; deck derived from clearance rules + DEM where approaches meet natural ground: junction with Calea Ieșilor/Pruncu ramps at grade at s=-300 (DEM -37.3), road under at DEM -40.3 needs >=5.5 m clearance + 1.3 m deck -> deck >= -33.5; rail (DEM along rail -35.3 interpolated) needs 6.5 m + 1.3 -> deck >= -27.7 at s=60; NE approach meets hillside DEM at s~200 (-21.4). Grade 4.5% between. ESTIMATE +-1.5 m. A user photosphere on the gap embankment reports alt 54 m (=-32.2 game, deck-road ~-34) vs this profile -30.4: GPS altitude, low weight. s = metres along axis (-4034,-3284)->(-3896,-3401) from centre (-3965,-3342.5). Pier positions ESTIMATED."
+    },
+    {
+     "data_idx": [
+      246
+     ],
+     "road": "Șoseaua Balcani, SE carriageway - SW bridge",
+     "deck": [
+      [
+       -4005.5,
+       -3330.0,
+       -32.2
+      ],
+      [
+       -4029.2,
+       -3310.0,
+       -33.6
+      ],
+      [
+       -4051.1,
+       -3291.3,
+       -34.3
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        -4039.8,
+        -3300.8
+       ],
+       [
+        -4020.0,
+        -3317.7
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "metal",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Drum de acces Pruncu",
+       "y": -40.3,
+       "width": 7,
+       "clearance": 5.6
+      },
+      {
+       "type": "river",
+       "name": "Bîc (concrete-lined regulated channel)",
+       "y": -43.8,
+       "width": 22,
+       "clearance": 8.9
+      }
+     ],
+     "evidence": "Same structure family as idx 243; see its evidence."
+    },
+    {
+     "data_idx": [
+      244
+     ],
+     "road": "Șoseaua Balcani, NW carriageway - NE bridge over railway",
+     "deck": [
+      [
+       -3942.6,
+       -3360.2,
+       -29.2
+      ],
+      [
+       -3918.9,
+       -3380.9,
+       -27.8
+      ],
+      [
+       -3896.3,
+       -3400.8,
+       -26.4
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        -3930.4,
+        -3371.2
+       ],
+       [
+        -3911.4,
+        -3387.5
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "metal",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "rail",
+       "name": "Visterniceni - Ghidighici (CFM, not rendered in game)",
+       "y": -35.5,
+       "width": 6,
+       "clearance": 6.6
+      },
+      {
+       "type": "path",
+       "name": "service track along railway (road 3169)",
+       "y": -35.0,
+       "width": 3.5,
+       "clearance": 7.0
+      }
+     ],
+     "evidence": "Rail crossing at s~60; see idx 243 evidence."
+    },
+    {
+     "data_idx": [
+      245
+     ],
+     "road": "Șoseaua Balcani, SE carriageway - NE bridge over railway",
+     "deck": [
+      [
+       -3911.1,
+       -3410.7,
+       -26.6
+      ],
+      [
+       -3930.2,
+       -3394.3,
+       -27.8
+      ],
+      [
+       -3952.1,
+       -3375.5,
+       -29.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        -3941.7,
+        -3384.6
+       ],
+       [
+        -3922.6,
+        -3400.7
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "metal",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "rail",
+       "name": "Visterniceni - Ghidighici (CFM, not rendered in game)",
+       "y": -35.5,
+       "width": 6,
+       "clearance": 6.6
+      },
+      {
+       "type": "path",
+       "name": "service track along railway (road 3169)",
+       "y": -35.0,
+       "width": 3.5,
+       "clearance": 7.0
+      }
+     ],
+     "evidence": "See idx 243 evidence."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Șoseaua Balcani (both carriageways, SW approach from Calea Ieșilor/Pruncu junction)",
+     "line": [
+      [
+       -4199,
+       -3156,
+       -37.3
+      ],
+      [
+       -4171,
+       -3183,
+       -36.7
+      ],
+      [
+       -4138,
+       -3206,
+       -36.2
+      ],
+      [
+       -4107,
+       -3231,
+       -35.6
+      ],
+      [
+       -4076,
+       -3258,
+       -35.0
+      ],
+      [
+       -4054.3,
+       -3277.7,
+       -34.5
+      ],
+      [
+       -4042.8,
+       -3287.4,
+       -34.2
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Fill from 0 m at the at-grade junction (s=-300) to ~5.5 m at the SW abutments (DEM -39.7). Carriageways 17 m apart, each 11.2 m. Paved cones at abutments. ESTIMATE."
+    },
+    {
+     "type": "embankment",
+     "road": "Șoseaua Balcani (between SW and NE bridges)",
+     "line": [
+      [
+       -4000.1,
+       -3323.6,
+       -32.2
+      ],
+      [
+       -3976.5,
+       -3343.7,
+       -30.8
+      ],
+      [
+       -3962.7,
+       -3355.3,
+       -30.0
+      ],
+      [
+       -3946.7,
+       -3368.9,
+       -29.1
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Gap between data spans (NW carriageway s=-8..29, SE carriageway s=-39..31) is fill with paved conical slopes (visible on Google satellite). Fill ~8-10 m over DEM -39/-37. ESTIMATE."
+    },
+    {
+     "type": "embankment",
+     "road": "Șoseaua Balcani (NE approach up the hillside)",
+     "line": [
+      [
+       -3901.7,
+       -3407.0,
+       -26.4
+      ],
+      [
+       -3886.5,
+       -3420.0,
+       -25.5
+      ],
+      [
+       -3880,
+       -3427,
+       -24.6
+      ],
+      [
+       -3865,
+       -3440,
+       -23.7
+      ],
+      [
+       -3835,
+       -3467,
+       -22.5
+      ],
+      [
+       -3820,
+       -3481,
+       -21.4
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Fill ~4 m at NE abutment (DEM -29.7 at s=100) tapering to 0 at s~200 where the road meets the hillside. ESTIMATE."
+    },
+    {
+     "type": "channel",
+     "road": "Bîc regulated channel (new concrete-lined trapezoid, built ~2024-25) under the SW bridge",
+     "line": [
+      [
+       -4185.9,
+       -3545.6,
+       -44.3
+      ],
+      [
+       -4172.6,
+       -3524.0,
+       -44.3
+      ],
+      [
+       -4161.2,
+       -3505.2,
+       -44.3
+      ],
+      [
+       -4149.7,
+       -3486.3,
+       -44.3
+      ],
+      [
+       -4138.3,
+       -3467.4,
+       -44.3
+      ],
+      [
+       -4126.9,
+       -3448.6,
+       -44.3
+      ],
+      [
+       -4115.4,
+       -3429.8,
+       -44.3
+      ],
+      [
+       -4104.0,
+       -3410.9,
+       -44.3
+      ],
+      [
+       -4092.4,
+       -3393.9,
+       -44.3
+      ],
+      [
+       -4080.8,
+       -3376.8,
+       -44.3
+      ],
+      [
+       -4069.2,
+       -3362.7,
+       -44.3
+      ],
+      [
+       -4049.8,
+       -3340.8,
+       -44.3
+      ],
+      [
+       -4030.3,
+       -3318.9,
+       -44.3
+      ],
+      [
+       -4014.1,
+       -3300.7,
+       -44.3
+      ],
+      [
+       -3997.8,
+       -3282.5,
+       -44.3
+      ],
+      [
+       -3981.6,
+       -3264.3,
+       -44.3
+      ],
+      [
+       -3959.9,
+       -3244.4,
+       -44.3
+      ],
+      [
+       -3938.2,
+       -3224.5,
+       -44.3
+      ],
+      [
+       -3922.3,
+       -3210.9,
+       -44.3
+      ],
+      [
+       -3906.5,
+       -3197.4,
+       -44.5
+      ],
+      [
+       -3887.9,
+       -3182.6,
+       -44.7
+      ],
+      [
+       -3869.2,
+       -3167.8,
+       -45.0
+      ],
+      [
+       -3850.6,
+       -3153.0,
+       -45.3
+      ],
+      [
+       -3832.2,
+       -3138.2,
+       -45.5
+      ],
+      [
+       -3813.7,
+       -3123.3,
+       -45.6
+      ],
+      [
+       -3795.2,
+       -3108.5,
+       -45.8
+      ],
+      [
+       -3776.8,
+       -3093.7,
+       -45.9
+      ]
+     ],
+     "top_w": 8,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Google satellite labels the light concrete strip passing under the bridge as the Bîc; Esri img/s0wide.jpg shows it under construction NW of the bridge. Bottom = DEM-3.5 m, monotonic downstream. Depth/width ESTIMATE.",
+     "lined": true
+    }
+   ]
+  },
+  {
+   "id": "r6-bucovinei-overpass",
+   "name": "R6 Chișinău–Orhei (E584) twin overpass over the Bucovinei link/loop road (Chișinău Arena interchange)",
+   "x": 2030,
+   "z": -5087,
+   "lat": 47.07074,
+   "lon": 28.85935,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      274
+     ],
+     "road": "R6 southbound (west) carriageway",
+     "polyline": [
+      [
+       2027.4,
+       -5108
+      ],
+      [
+       2014.5,
+       -5058
+      ]
+     ],
+     "deck": [
+      [
+       2027.4,
+       -5108,
+       49.7
+      ],
+      [
+       2024.3,
+       -5096,
+       49.2
+      ],
+      [
+       2020.7,
+       -5082,
+       48.6
+      ],
+      [
+       2018.1,
+       -5072,
+       48.3
+      ],
+      [
+       2014.5,
+       -5058,
+       47.9
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        2024.3,
+        -5096
+       ],
+       [
+        2018.1,
+        -5072
+       ]
+      ],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a8a49b"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Bucovinei link / loop ramp (road 13250)",
+       "y": 42.0,
+       "width": 9,
+       "clearance": 5.5
+      }
+     ],
+     "evidence": "Street View (photo path Aug 2025) from the road under, 75 m W (47.07085,28.85840) and 85 m E (47.07046,28.86049): classic precast-beam twin overpass, 3 spans, piers at the road edges, abutments on grassed/paved cone slopes; the road under runs in a CUTTING (banks rise to deck level beside it), nearly at grade 85 m east, ~3 m cut 75 m west where the loop ramp climbs. Esri tiles img/s1_ov.jpg: deck joints at z~-5108,-5096,-5072,-5058 (real deck ~50 m; data spans 68 m reach ~8 m past each abutment), deck width 2x~17 m. R6 kept at DEM+0.4 (DEM is smooth along R6, no fill evident); road under = deck - 5.5 clearance - 1.3 deck. ESTIMATE +-1 m. polyline = data span trimmed to the real abutments."
+    },
+    {
+     "data_idx": [
+      273
+     ],
+     "road": "R6 northbound (east) carriageway",
+     "polyline": [
+      [
+       2030.5,
+       -5058
+      ],
+      [
+       2043.4,
+       -5108
+      ]
+     ],
+     "deck": [
+      [
+       2030.5,
+       -5058,
+       47.8
+      ],
+      [
+       2034.2,
+       -5072,
+       48.2
+      ],
+      [
+       2036.7,
+       -5082,
+       48.6
+      ],
+      [
+       2040.3,
+       -5096,
+       49.1
+      ],
+      [
+       2043.4,
+       -5108,
+       49.7
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        2040.3,
+        -5096
+       ],
+       [
+        2034.2,
+        -5072
+       ]
+      ],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.0,
+       1.0
+      ],
+      "colour": "#a8a49b"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Bucovinei link / loop ramp (road 13250)",
+       "y": 42.0,
+       "width": 9,
+       "clearance": 5.5
+      }
+     ],
+     "evidence": "Street View (photo path Aug 2025) from the road under, 75 m W (47.07085,28.85840) and 85 m E (47.07046,28.86049): classic precast-beam twin overpass, 3 spans, piers at the road edges, abutments on grassed/paved cone slopes; the road under runs in a CUTTING (banks rise to deck level beside it), nearly at grade 85 m east, ~3 m cut 75 m west where the loop ramp climbs. Esri tiles img/s1_ov.jpg: deck joints at z~-5108,-5096,-5072,-5058 (real deck ~50 m; data spans 68 m reach ~8 m past each abutment), deck width 2x~17 m. R6 kept at DEM+0.4 (DEM is smooth along R6, no fill evident); road under = deck - 5.5 clearance - 1.3 deck. ESTIMATE +-1 m. polyline = data span trimmed to the real abutments."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "cutting",
+     "road": "Bucovinei link under R6 (road 13250, continues E as Str. Bucovinei, W as loop ramp up to R6)",
+     "line": [
+      [
+       2160,
+       -5050,
+       45.4
+      ],
+      [
+       2120,
+       -5059,
+       45.0
+      ],
+      [
+       2080,
+       -5069,
+       43.4
+      ],
+      [
+       2036,
+       -5080,
+       42.0
+      ],
+      [
+       1999,
+       -5089,
+       43.6
+      ],
+      [
+       1958,
+       -5099,
+       46.8
+      ],
+      [
+       1929,
+       -5112,
+       50.6
+      ],
+      [
+       1916,
+       -5127,
+       52.7
+      ]
+     ],
+     "top_w": 12,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Bottom (road surface) line; ~6.5 m below DEM under the bridge, 3 m at the W Street View camera, ~1 m at the E camera, 0 where it meets DEM at both ends. Abutment cones under the deck ends (slope 1.5)."
+    }
+   ]
+  },
+  {
+   "id": "balcani-ungheni-road-overpass",
+   "name": "Șoseaua Balcani (M1) overpass over the Ungheni–Chișinău road (Calea Trușenilor junction)",
+   "x": -4945,
+   "z": -3287,
+   "lat": 47.05445,
+   "lon": 28.76744,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      242
+     ],
+     "road": "Șoseaua Balcani - Centura Chișinăului (single carriageway, 2 lanes)",
+     "deck": [
+      [
+       -4974.0,
+       -3288.0,
+       12.6
+      ],
+      [
+       -4950.0,
+       -3287.4,
+       12.5
+      ],
+      [
+       -4919.0,
+       -3286.0,
+       12.4
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [
+       [
+        -4959,
+        -3287.7
+       ],
+       [
+        -4935,
+        -3286.7
+       ]
+      ],
+      "pier_type": "single_column",
+      "railing": "metal",
+      "sidewalks": [
+       0.75,
+       0.75
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Ungheni-Chișinău (road 1182)",
+       "y": 6.1,
+       "width": 11.2,
+       "clearance": 5.3
+      }
+     ],
+     "evidence": "Street View (photo path, Aug 2025) from the road under, 40 m NW (47.05473,28.76700): 3-span beam bridge, stone-paved conical slope at the E abutment, W abutment set into a treed bank; road under at grade (fields level with it) -> Balcani on an embankment ~6.5 m high at the bridge. Deck extents match OSM man_made=bridge 1144610343 and data span 242. Esri img/s2_ov.jpg. Street View on the Balcani 110 m E (47.05423,28.76887) looking W: road climbs to a crest at the bridge. Deck = road-under DEM 6.1 + 5.3 + 1.2. ESTIMATE +-1 m; pier positions estimated."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Șoseaua Balcani W approach",
+     "line": [
+      [
+       -4974,
+       -3288,
+       12.6
+      ],
+      [
+       -5000,
+       -3286,
+       12.7
+      ],
+      [
+       -5034,
+       -3280,
+       12.8
+      ],
+      [
+       -5066,
+       -3268,
+       13.0
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Fill ~5 m at W abutment (DEM 7.5) to ~0.4 m at x=-5066 (DEM 12.6). ESTIMATE."
+    },
+    {
+     "type": "embankment",
+     "road": "Șoseaua Balcani E approach",
+     "line": [
+      [
+       -4919,
+       -3286,
+       12.4
+      ],
+      [
+       -4869,
+       -3273,
+       9.4
+      ],
+      [
+       -4825,
+       -3257,
+       6.6
+      ],
+      [
+       -4778,
+       -3236,
+       3.5
+      ],
+      [
+       -4730,
+       -3218,
+       0.4
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Fill ~7.7 m at E abutment (DEM 4.7) descending at ~6% to meet DEM near x=-4730. Grade ASSUMED (Street View shows a clear climb to the bridge); low confidence on fill height away from the bridge."
+    }
+   ]
+  },
+  {
+   "id": "durlesti-valea-morilor-south-paths",
+   "name": "Footpaths over the Durlești stream S of Valea Morilor lake",
+   "x": -1961,
+   "z": 887,
+   "lat": 47.01671,
+   "lon": 28.80675,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      126
+     ],
+     "deck": [
+      [
+       -1925.0,
+       887.2,
+       -12.5
+      ],
+      [
+       -1926.5,
+       854.4,
+       -11.6
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -14.3,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s03_ov.jpg: paved park paths, no visible structure; stream crossings are culverts/short slabs."
+    },
+    {
+     "data_idx": [
+      127
+     ],
+     "deck": [
+      [
+       -1976.9,
+       809.2,
+       -6.4
+      ],
+      [
+       -1975.1,
+       817.1,
+       -6.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -8.7,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s03_ov.jpg: paved park paths, no visible structure; stream crossings are culverts/short slabs."
+    },
+    {
+     "data_idx": [
+      129
+     ],
+     "deck": [
+      [
+       -1978.8,
+       981.1,
+       -6.8
+      ],
+      [
+       -1984.9,
+       975.4,
+       -6.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -8.7,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s03_ov.jpg: paved park paths, no visible structure; stream crossings are culverts/short slabs."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "la-izvor-metal-footbridge",
+   "name": "Metal pedestrian/cycle bridge over the La Izvor lake (Parcul La Izvor)",
+   "x": -2747,
+   "z": -2630,
+   "lat": 47.04852,
+   "lon": 28.7964,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      106
+     ],
+     "deck": [
+      [
+       -2764.2,
+       -2640.6,
+       -41.7
+      ],
+      [
+       -2746.8,
+       -2630.4,
+       -41.1
+      ],
+      [
+       -2729.3,
+       -2620.2,
+       -42.5
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "La Izvor lake (flat water surface ~1.5 m below deck)",
+       "y": -44.0,
+       "width": 40,
+       "clearance": 1.2
+      }
+     ],
+     "evidence": "OSM 89611111 footway bridge surface=metal layer 2; Esri img/s04_ov.jpg shows a slender ~40 m deck across a lake arm. Deck stays ~1.5 m over the lake (DEM ends -41.7/-42.5): current straight profile is fine; render as a light steel footbridge (rail railing), add a slight 0.6 m camber."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "la-izvor-concrete-footbridge",
+   "name": "Concrete pedestrian bridge across the La Izvor lake between two paved plazas",
+   "x": -3112,
+   "z": -2411,
+   "lat": 47.04654,
+   "lon": 28.79159,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      102
+     ],
+     "deck": [
+      [
+       -3126.3,
+       -2398.0,
+       -44.9
+      ],
+      [
+       -3097.5,
+       -2424.9,
+       -45.1
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "La Izvor lake (flat water surface ~1.5 m below deck)",
+       "y": -46.6,
+       "width": 40,
+       "clearance": 1.2
+      }
+     ],
+     "evidence": "OSM 37851771 footway bridge surface=concrete layer 2; Esri img/s05_ov.jpg: 4-5 m wide deck between square paved landings, low over the water. Current flat profile OK."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "ion-pruncul-bic-bridge",
+   "name": "Strada Ion Pruncul road bridge over the Bîc (Ghidighici industrial area)",
+   "x": -4429,
+   "z": -4243,
+   "lat": 47.0631,
+   "lon": 28.77423,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      241
+     ],
+     "deck": [
+      [
+       -4426.7,
+       -4225.0,
+       -37.6
+      ],
+      [
+       -4432.1,
+       -4260.6,
+       -37.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -40.1,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 32452833 tertiary bridge layer 2; Esri img/s06_ov.jpg: ~36 m concrete deck ~9 m wide crossing the treed Bîc banks. Deck at DEM ends is plausible but the river channel is not in the DEM: Bîc bed must sit ~2.5 m below (see bic channel earthwork). Low beam/slab bridge, concrete parapets."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "driveway-deck-ion-creanga",
+   "name": "Driveway deck between buildings off Str. Ion Creangă",
+   "x": -3387,
+   "z": -10,
+   "lat": 47.02483,
+   "lon": 28.78797,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      22
+     ],
+     "deck": [
+      [
+       -3394.3,
+       -25.6,
+       36.0
+      ],
+      [
+       -3379.2,
+       4.6,
+       34.5
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [],
+     "evidence": "OSM 907622151 service=driveway bridge layer 1; Esri img/s07_ov.jpg: light concrete ramp/podium between building blocks, nothing passes under in imagery. UNVERIFIED purpose; keep low flat deck."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "caucaz-drain-culverts",
+   "name": "Drain culverts near Str. Caucaz",
+   "x": -4963,
+   "z": 856,
+   "lat": 47.01699,
+   "lon": 28.76719,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      69
+     ],
+     "deck": [
+      [
+       -4959.1,
+       885.5,
+       37.7
+      ],
+      [
+       -4952.7,
+       886.4,
+       37.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 36.9,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s08_ov.jpg: drainage ditch under tree cover; road/paths cross on culverts."
+    },
+    {
+     "data_idx": [
+      70
+     ],
+     "deck": [
+      [
+       -4956.9,
+       845.7,
+       36.9
+      ],
+      [
+       -4948.5,
+       843.8,
+       36.7
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 35.9,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s08_ov.jpg: drainage ditch under tree cover; road/paths cross on culverts."
+    },
+    {
+     "data_idx": [
+      231
+     ],
+     "deck": [
+      [
+       -4981.3,
+       847.1,
+       37.6
+      ],
+      [
+       -4980.1,
+       830.0,
+       37.5
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 36.7,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s08_ov.jpg: drainage ditch under tree cover; road/paths cross on culverts."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "codreanu-durlesti-bridge",
+   "name": "Str. Gheorghe Codreanu over the Durlești stream (+ adjacent footbridge)",
+   "x": -2894,
+   "z": 598,
+   "lat": 47.01932,
+   "lon": 28.79446,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      134
+     ],
+     "deck": [
+      [
+       -2890.0,
+       596.8,
+       -4.9
+      ],
+      [
+       -2893.8,
+       605.0,
+       -5.1
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -6.9,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 894446062 residential bridge layer 1, 910499569 footway; Esri img/s09_ov.jpg: 22 m crossing at a junction, stream channel ~2 m deep below. Short slab; needs the Durlești channel cut."
+    },
+    {
+     "data_idx": [
+      251
+     ],
+     "deck": [
+      [
+       -2891.9,
+       585.8,
+       -4.6
+      ],
+      [
+       -2901.7,
+       605.7,
+       -5.1
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -6.9,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 894446062 residential bridge layer 1, 910499569 footway; Esri img/s09_ov.jpg: 22 m crossing at a junction, stream channel ~2 m deep below. Short slab; needs the Durlești channel cut."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "decebal-durlesti-canal-crossings",
+   "name": "Str. Decebal crossings of the concrete-lined Durlești canal (Durlești)",
+   "x": -5146,
+   "z": -888,
+   "lat": 47.03276,
+   "lon": 28.76479,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      238
+     ],
+     "deck": [
+      [
+       -5199.0,
+       -938.1,
+       28.8
+      ],
+      [
+       -5192.8,
+       -944.6,
+       28.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": 27.0,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 914464174 living_street bridges layer 1; Esri img/s10_ov.jpg: straight concrete-lined trapezoidal canal ~6-8 m wide along the street, three short slab crossings 9-12 m. Canal bottom ~2 m below street (ESTIMATE)."
+    },
+    {
+     "data_idx": [
+      239
+     ],
+     "deck": [
+      [
+       -5143.8,
+       -892.6,
+       27.4
+      ],
+      [
+       -5149.8,
+       -885.9,
+       27.4
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": 25.6,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 914464174 living_street bridges layer 1; Esri img/s10_ov.jpg: straight concrete-lined trapezoidal canal ~6-8 m wide along the street, three short slab crossings 9-12 m. Canal bottom ~2 m below street (ESTIMATE)."
+    },
+    {
+     "data_idx": [
+      240
+     ],
+     "deck": [
+      [
+       -5098.9,
+       -828.8,
+       26.6
+      ],
+      [
+       -5090.7,
+       -837.7,
+       26.6
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": 24.8,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 914464174 living_street bridges layer 1; Esri img/s10_ov.jpg: straight concrete-lined trapezoidal canal ~6-8 m wide along the street, three short slab crossings 9-12 m. Canal bottom ~2 m below street (ESTIMATE)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "rosiori-durlesti-footbridge",
+   "name": "Footbridge over the Durlești stream ravine near Str. Roșiori",
+   "x": -3302,
+   "z": 355,
+   "lat": 47.02152,
+   "lon": 28.78909,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      136
+     ],
+     "deck": [
+      [
+       -3293.4,
+       343.9,
+       4.6
+      ],
+      [
+       -3309.5,
+       366.9,
+       3.5
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": 1.7,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 895219285 footway bridge layer 1; Esri img/s11_ov.jpg: ~28 m narrow deck over a treed stream ravine."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "plamadeala-valea-morilor-bridge",
+   "name": "Str. Alexandru Plămădeală pedestrian bridge at the W end of Valea Morilor lake",
+   "x": -1600,
+   "z": 468,
+   "lat": 47.0205,
+   "lon": 28.81151,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      288
+     ],
+     "deck": [
+      [
+       -1587.5,
+       461.8,
+       -16.2
+      ],
+      [
+       -1612.4,
+       474.4,
+       -15.5
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -18.0,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 220882689 pedestrian bridge layer 1 (lit, segregated cycleway); Esri img/s12_ov.jpg: ~6 m wide promenade deck where the Durlești enters the lake. Low; current profile OK."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "forest-footpaths-culverts-s-valea-morilor",
+   "name": "Forest footpaths over small streams",
+   "x": -1563,
+   "z": 1145,
+   "lat": 47.01438,
+   "lon": 28.812,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      122
+     ],
+     "deck": [
+      [
+       -1556.7,
+       1184.9,
+       11.5
+      ],
+      [
+       -1547.3,
+       1184.4,
+       11.3
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": 10.1,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s13_ov.jpg: dense canopy, no visible structure."
+    },
+    {
+     "data_idx": [
+      124
+     ],
+     "deck": [
+      [
+       -1566.2,
+       1101.1,
+       -0.1
+      ],
+      [
+       -1581.4,
+       1109.0,
+       1.2
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -1.3,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s13_ov.jpg: dense canopy, no visible structure."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic-driveway-bridge-nw",
+   "name": "Driveway bridge over the Bîc (NW industrial zone)",
+   "x": -6058,
+   "z": -5243,
+   "lat": 47.07215,
+   "lon": 28.75277,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      0
+     ],
+     "deck": [
+      [
+       -6051.8,
+       -5253.9,
+       -35.4
+      ],
+      [
+       -6063.5,
+       -5231.8,
+       -34.9
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -37.9,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 782784284 driveway bridge layer 1; Esri img/s14_ov.jpg: ~25 m light deck over the Bîc."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site15",
+   "name": "Small crossing over Durlești (site 15)",
+   "x": -2573,
+   "z": 738,
+   "lat": 47.01806,
+   "lon": 28.79869,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      20
+     ],
+     "deck": [
+      [
+       -2519.2,
+       752.1,
+       -4.9
+      ],
+      [
+       -2523.3,
+       762.8,
+       -4.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -6.7,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s15_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      133
+     ],
+     "deck": [
+      [
+       -2626.8,
+       724.0,
+       -5.1
+      ],
+      [
+       -2621.4,
+       712.4,
+       -4.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -6.9,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s15_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site16",
+   "name": "Small crossing over Bîc (site 16)",
+   "x": -3739,
+   "z": -3075,
+   "lat": 47.05254,
+   "lon": 28.78332,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      98
+     ],
+     "deck": [
+      [
+       -3778.9,
+       -3088.2,
+       -42.3
+      ],
+      [
+       -3774.0,
+       -3096.7,
+       -42.4
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -44.9,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s16_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      99
+     ],
+     "deck": [
+      [
+       -3704.1,
+       -3050.0,
+       -42.2
+      ],
+      [
+       -3700.5,
+       -3063.8,
+       -42.3
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -44.8,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s16_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site17",
+   "name": "Small crossing over Bîc (site 17)",
+   "x": -2069,
+   "z": -2899,
+   "lat": 47.05095,
+   "lon": 28.80533,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      11
+     ],
+     "deck": [
+      [
+       -2069.4,
+       -2887.3,
+       -44.9
+      ],
+      [
+       -2069.3,
+       -2910.5,
+       -45.1
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -47.6,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s17_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site18",
+   "name": "Small crossing over Durlești (site 18)",
+   "x": -2326,
+   "z": 812,
+   "lat": 47.01739,
+   "lon": 28.80194,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      19
+     ],
+     "deck": [
+      [
+       -2367.6,
+       804.3,
+       -5.8
+      ],
+      [
+       -2372.5,
+       818.0,
+       -5.5
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -7.6,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s18_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      130
+     ],
+     "deck": [
+      [
+       -2281.9,
+       808.3,
+       -6.6
+      ],
+      [
+       -2282.1,
+       817.0,
+       -6.7
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -8.5,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s18_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site19",
+   "name": "Small crossing over Bîc (site 19)",
+   "x": -4199,
+   "z": -3561,
+   "lat": 47.05693,
+   "lon": 28.77726,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      97
+     ],
+     "deck": [
+      [
+       -4208.5,
+       -3554.9,
+       -40.3
+      ],
+      [
+       -4190.1,
+       -3566.9,
+       -40.3
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -42.8,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s19_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site20",
+   "name": "Small crossing over Durlești (site 20)",
+   "x": -2062,
+   "z": -1828,
+   "lat": 47.04127,
+   "lon": 28.80542,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      12
+     ],
+     "deck": [
+      [
+       -2066.3,
+       -1836.2,
+       -36.2
+      ],
+      [
+       -2075.4,
+       -1834.8,
+       -36.2
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -38.0,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s20_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      13
+     ],
+     "deck": [
+      [
+       -2051.5,
+       -1825.5,
+       -36.2
+      ],
+      [
+       -2055.4,
+       -1817.5,
+       -36.2
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -38.0,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s20_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site21",
+   "name": "Small crossing over unnamed stream (site 21)",
+   "x": -1995,
+   "z": -2382,
+   "lat": 47.04627,
+   "lon": 28.8063,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      14
+     ],
+     "deck": [
+      [
+       -1973.0,
+       -2315.2,
+       -41.6
+      ],
+      [
+       -1964.0,
+       -2315.1,
+       -41.7
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -42.9,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s21_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      107
+     ],
+     "deck": [
+      [
+       -2026.6,
+       -2448.2,
+       -41.8
+      ],
+      [
+       -2017.9,
+       -2449.6,
+       -41.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -43.1,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s21_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "driveway-deck-buiucani",
+   "name": "Driveway deck between buildings (Buiucani)",
+   "x": -1984,
+   "z": -854,
+   "lat": 47.03246,
+   "lon": 28.80645,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      15
+     ],
+     "deck": [
+      [
+       -1977.5,
+       -860.5,
+       -20.2
+      ],
+      [
+       -1991.3,
+       -848.3,
+       -19.1
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [],
+     "evidence": "OSM 907487484 service=driveway bridge layer 1; Esri img/s22_ov.jpg: deck alongside a building in a courtyard, nothing visible under. UNVERIFIED; keep low flat deck."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site23",
+   "name": "Small crossing over Bîc (site 23)",
+   "x": -1684,
+   "z": -2851,
+   "lat": 47.05051,
+   "lon": 28.81041,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      110
+     ],
+     "deck": [
+      [
+       -1704.2,
+       -2824.0,
+       -45.8
+      ],
+      [
+       -1700.0,
+       -2817.6,
+       -45.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -48.4,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s23_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      111
+     ],
+     "deck": [
+      [
+       -1666.4,
+       -2877.2,
+       -45.6
+      ],
+      [
+       -1665.1,
+       -2885.1,
+       -45.6
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -48.1,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s23_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site24",
+   "name": "Small crossing over Durlești (site 24)",
+   "x": -3639,
+   "z": 166,
+   "lat": 47.02323,
+   "lon": 28.78464,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      3
+     ],
+     "deck": [
+      [
+       -3642.6,
+       172.2,
+       12.2
+      ],
+      [
+       -3635.7,
+       159.1,
+       12.5
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": 10.4,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s24_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site25",
+   "name": "Small crossing over unnamed stream (site 25)",
+   "x": -3091,
+   "z": -2196,
+   "lat": 47.04459,
+   "lon": 28.79187,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      103
+     ],
+     "deck": [
+      [
+       -3094.0,
+       -2133.8,
+       -37.1
+      ],
+      [
+       -3094.7,
+       -2142.5,
+       -37.4
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -38.6,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s25_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      104
+     ],
+     "deck": [
+      [
+       -3084.1,
+       -2254.2,
+       -41.4
+      ],
+      [
+       -3089.9,
+       -2252.2,
+       -41.3
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -42.6,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s25_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site26",
+   "name": "Small crossing over drain/ditch (site 26)",
+   "x": -1662,
+   "z": -862,
+   "lat": 47.03252,
+   "lon": 28.8107,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      108
+     ],
+     "deck": [
+      [
+       -1665.1,
+       -850.9,
+       -31.5
+      ],
+      [
+       -1670.1,
+       -856.2,
+       -31.5
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": -32.3,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s26_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    },
+    {
+     "data_idx": [
+      109
+     ],
+     "deck": [
+      [
+       -1653.5,
+       -867.7,
+       -31.7
+      ],
+      [
+       -1658.4,
+       -871.9,
+       -31.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": -32.6,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s26_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site27",
+   "name": "Small crossing over drain/ditch (site 27)",
+   "x": -4864,
+   "z": 483,
+   "lat": 47.02037,
+   "lon": 28.7685,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      230
+     ],
+     "deck": [
+      [
+       -4870.2,
+       479.7,
+       29.4
+      ],
+      [
+       -4858.2,
+       485.7,
+       29.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 28.6,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s27_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site28",
+   "name": "Small crossing over unnamed stream (site 28)",
+   "x": 364,
+   "z": -2733,
+   "lat": 47.04945,
+   "lon": 28.83739,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      38
+     ],
+     "deck": [
+      [
+       369.5,
+       -2735.9,
+       -29.5
+      ],
+      [
+       358.9,
+       -2731.1,
+       -29.5
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -30.7,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s28_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site29",
+   "name": "Small crossing over Durlești (site 29)",
+   "x": -3925,
+   "z": 71,
+   "lat": 47.02408,
+   "lon": 28.78087,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      4
+     ],
+     "deck": [
+      [
+       -3920.8,
+       67.9,
+       10.9
+      ],
+      [
+       -3929.5,
+       75.0,
+       11.0
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": 9.1,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s29_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site30",
+   "name": "Small crossing over unnamed stream (site 30)",
+   "x": 3341,
+   "z": -4134,
+   "lat": 47.06212,
+   "lon": 28.87663,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      199
+     ],
+     "deck": [
+      [
+       3346.8,
+       -4132.5,
+       26.0
+      ],
+      [
+       3336.0,
+       -4135.2,
+       24.6
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": 23.4,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s30_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site31",
+   "name": "Small crossing over Bîc (site 31)",
+   "x": -5306,
+   "z": -4833,
+   "lat": 47.06844,
+   "lon": 28.76267,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      9
+     ],
+     "deck": [
+      [
+       -5310.4,
+       -4829.9,
+       -37.4
+      ],
+      [
+       -5302.6,
+       -4836.2,
+       -37.5
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -40.0,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s31_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "rail-underbridge-track-bic-valley",
+   "name": "Visterniceni–Ghidighici railway bridge over a dirt track (data span is the track/service line on it)",
+   "x": -2144,
+   "z": -3103,
+   "lat": 47.05279,
+   "lon": 28.80434,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      10
+     ],
+     "deck": [
+      [
+       -2149.4,
+       -3103.4,
+       -44.0
+      ],
+      [
+       -2139.4,
+       -3102.4,
+       -44.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [],
+     "evidence": "OSM 742353980 rail bridge layer 1 and 965343732 track bridge; Esri img/s32_ov.jpg: short rail underbridge with parapets, a dirt track passes under N-S. Railways are not rendered in game; the 10 m kind-1 span sits on the rail embankment. Low priority."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site33",
+   "name": "Small crossing over unnamed stream (site 33)",
+   "x": -3963,
+   "z": -1768,
+   "lat": 47.04072,
+   "lon": 28.78037,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      96
+     ],
+     "deck": [
+      [
+       -3964.5,
+       -1772.8,
+       20.7
+      ],
+      [
+       -3961.5,
+       -1763.5,
+       21.0
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": 19.5,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s33_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site34",
+   "name": "Small crossing over Bîc (site 34)",
+   "x": -3314,
+   "z": -3036,
+   "lat": 47.05219,
+   "lon": 28.78893,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      101
+     ],
+     "deck": [
+      [
+       -3313.6,
+       -3040.8,
+       -42.8
+      ],
+      [
+       -3313.6,
+       -3031.0,
+       -42.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -45.4,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s34_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site35",
+   "name": "Small crossing over drain/ditch (site 35)",
+   "x": -4894,
+   "z": 1290,
+   "lat": 47.01306,
+   "lon": 28.7681,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      232
+     ],
+     "deck": [
+      [
+       -4889.9,
+       1288.7,
+       52.9
+      ],
+      [
+       -4899.1,
+       1291.2,
+       53.0
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 52.1,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s35_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site36",
+   "name": "Small crossing over unnamed stream (site 36)",
+   "x": -5834,
+   "z": -1465,
+   "lat": 47.03798,
+   "lon": 28.75572,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      8
+     ],
+     "deck": [
+      [
+       -5836.4,
+       -1461.4,
+       36.7
+      ],
+      [
+       -5831.2,
+       -1468.2,
+       36.4
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": 35.2,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s36_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site37",
+   "name": "Small crossing over unnamed stream (site 37)",
+   "x": -3633,
+   "z": -1930,
+   "lat": 47.04219,
+   "lon": 28.78472,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      100
+     ],
+     "deck": [
+      [
+       -3629.6,
+       -1927.2,
+       -17.5
+      ],
+      [
+       -3636.3,
+       -1933.2,
+       -18.0
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": -19.2,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s37_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site38",
+   "name": "Small crossing over Bîc (site 38)",
+   "x": -2786,
+   "z": -2959,
+   "lat": 47.05149,
+   "lon": 28.79588,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      105
+     ],
+     "deck": [
+      [
+       -2785.0,
+       -2963.7,
+       -44.0
+      ],
+      [
+       -2786.9,
+       -2954.9,
+       -43.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -46.5,
+       "width": 8,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s38_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site39",
+   "name": "Small crossing over Durlești (site 39)",
+   "x": -1606,
+   "z": 209,
+   "lat": 47.02284,
+   "lon": 28.81143,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      123
+     ],
+     "deck": [
+      [
+       -1610.5,
+       208.8,
+       -17.6
+      ],
+      [
+       -1602.4,
+       210.0,
+       -17.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -19.6,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s39_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site40",
+   "name": "Small crossing over unnamed stream (site 40)",
+   "x": -5602,
+   "z": -1284,
+   "lat": 47.03635,
+   "lon": 28.75878,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      237
+     ],
+     "deck": [
+      [
+       -5598.4,
+       -1282.2,
+       31.8
+      ],
+      [
+       -5605.1,
+       -1286.8,
+       31.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "concrete_parapet"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": 30.6,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s40_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site41",
+   "name": "Small crossing over drain/ditch (site 41)",
+   "x": -4758,
+   "z": 98,
+   "lat": 47.02384,
+   "lon": 28.76989,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      67
+     ],
+     "deck": [
+      [
+       -4757.8,
+       101.7,
+       24.3
+      ],
+      [
+       -4758.7,
+       95.2,
+       24.4
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 23.5,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s41_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site42",
+   "name": "Small crossing over drain/ditch (site 42)",
+   "x": -4792,
+   "z": 250,
+   "lat": 47.02247,
+   "lon": 28.76944,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      68
+     ],
+     "deck": [
+      [
+       -4789.2,
+       250.8,
+       25.1
+      ],
+      [
+       -4795.7,
+       248.8,
+       25.2
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": 24.3,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s42_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site43",
+   "name": "Small crossing over Durlești (site 43)",
+   "x": -1564,
+   "z": -423,
+   "lat": 47.02856,
+   "lon": 28.81199,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      113
+     ],
+     "deck": [
+      [
+       -1567.4,
+       -422.0,
+       -27.8
+      ],
+      [
+       -1560.6,
+       -424.2,
+       -27.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -29.7,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s43_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "glass-canopy-walkway",
+   "name": "Covered walkway at a building entrance (Str. Grigore Alexandrescu)",
+   "x": -1928,
+   "z": 467,
+   "lat": 47.02051,
+   "lon": 28.80719,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      125
+     ],
+     "deck": [
+      [
+       -1929.5,
+       469.7,
+       -4.5
+      ],
+      [
+       -1925.9,
+       463.7,
+       -4.8
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [],
+     "evidence": "OSM 1018286046 footway bridge layer 1; Esri img/s44_ov.jpg: glass canopy passage at a building, not a real bridge."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "steps-bridge-durlesti",
+   "name": "Steps crossing a ditch (near Str. Ghioceilor)",
+   "x": -2115,
+   "z": 719,
+   "lat": 47.01823,
+   "lon": 28.80473,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      128
+     ],
+     "deck": [
+      [
+       -2113.2,
+       715.7,
+       -0.6
+      ],
+      [
+       -2115.9,
+       722.6,
+       -0.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "drain/ditch",
+       "y": -1.7,
+       "width": 1.5,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 1025138164 steps bridge; Esri img/s45_ov.jpg."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "culvert-site46",
+   "name": "Small crossing over unnamed stream (site 46)",
+   "x": -6004,
+   "z": -1547,
+   "lat": 47.03872,
+   "lon": 28.75348,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      95
+     ],
+     "deck": [
+      [
+       -6004.4,
+       -1544.0,
+       41.5
+      ],
+      [
+       -6003.1,
+       -1550.0,
+       41.1
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream",
+       "y": 39.9,
+       "width": 2,
+       "clearance": null
+      }
+     ],
+     "evidence": "Esri img/s46_ov.jpg: track/path/driveway over a stream/ditch under tree cover; no structure taller than ~1 m visible; OSM bridge layer 1."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "podul-indragostitilor",
+   "name": "Podul Îndrăgostiților footbridge, Valea Morilor park",
+   "x": -1553,
+   "z": -610,
+   "lat": 47.03024,
+   "lon": 28.81213,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      112
+     ],
+     "deck": [
+      [
+       -1553.5,
+       -612.7,
+       -30.0
+      ],
+      [
+       -1552.3,
+       -606.7,
+       -29.9
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Durlești",
+       "y": -31.8,
+       "width": 4,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 891058323 footway bridge layer 1 name=Podul Îndrăgostiților; Esri img/s47_ov.jpg: short park footbridge over the Durlești. Current low profile OK."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic-channel-northwest",
+   "name": "Bîc river channel, Ghidighici reservoir outflow → Calea Ieșilor → La Izvor (NW reach)",
+   "x": -3900,
+   "z": -3400,
+   "lat": 47.0555,
+   "lon": 28.7814,
+   "status": "wrong",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -6452.4,
+       -5461.2,
+       -36.7
+      ],
+      [
+       -6442.4,
+       -5455.6,
+       -36.7
+      ],
+      [
+       -6436.9,
+       -5450.7,
+       -36.8
+      ],
+      [
+       -6425.0,
+       -5433.5,
+       -36.8
+      ],
+      [
+       -6421.0,
+       -5429.7,
+       -36.8
+      ],
+      [
+       -6415.3,
+       -5426.4,
+       -36.8
+      ],
+      [
+       -6387.3,
+       -5418.5,
+       -36.9
+      ],
+      [
+       -6377.9,
+       -5414.9,
+       -36.9
+      ],
+      [
+       -6355.1,
+       -5403.3,
+       -36.9
+      ],
+      [
+       -6332.4,
+       -5391.7,
+       -36.9
+      ],
+      [
+       -6313.1,
+       -5381.9,
+       -37.1
+      ],
+      [
+       -6293.9,
+       -5372.1,
+       -37.2
+      ],
+      [
+       -6274.6,
+       -5362.3,
+       -37.3
+      ],
+      [
+       -6255.4,
+       -5352.5,
+       -37.5
+      ],
+      [
+       -6236.1,
+       -5342.7,
+       -37.7
+      ],
+      [
+       -6217.7,
+       -5333.8,
+       -37.7
+      ],
+      [
+       -6199.3,
+       -5324.8,
+       -37.7
+      ],
+      [
+       -6180.9,
+       -5315.9,
+       -37.7
+      ],
+      [
+       -6162.5,
+       -5307.0,
+       -37.7
+      ],
+      [
+       -6144.1,
+       -5298.0,
+       -37.7
+      ],
+      [
+       -6125.7,
+       -5289.1,
+       -37.7
+      ],
+      [
+       -6108.9,
+       -5278.8,
+       -37.7
+      ],
+      [
+       -6087.1,
+       -5261.7,
+       -37.7
+      ],
+      [
+       -6070.0,
+       -5248.2,
+       -37.7
+      ],
+      [
+       -6065.3,
+       -5245.9,
+       -37.7
+      ],
+      [
+       -6059.8,
+       -5244.1,
+       -37.7
+      ],
+      [
+       -6048.1,
+       -5243.0,
+       -37.9
+      ],
+      [
+       -6044.7,
+       -5242.1,
+       -37.9
+      ],
+      [
+       -6041.7,
+       -5240.2,
+       -38.0
+      ],
+      [
+       -6034.9,
+       -5233.6,
+       -38.0
+      ],
+      [
+       -6032.8,
+       -5232.4,
+       -38.0
+      ],
+      [
+       -6025.3,
+       -5229.4,
+       -38.1
+      ],
+      [
+       -6022.4,
+       -5227.8,
+       -38.2
+      ],
+      [
+       -6005.9,
+       -5212.7,
+       -38.4
+      ],
+      [
+       -6002.7,
+       -5210.6,
+       -38.4
+      ],
+      [
+       -5982.6,
+       -5200.6,
+       -38.7
+      ],
+      [
+       -5971.0,
+       -5192.5,
+       -38.8
+      ],
+      [
+       -5960.0,
+       -5182.6,
+       -38.8
+      ],
+      [
+       -5948.2,
+       -5169.3,
+       -38.8
+      ],
+      [
+       -5933.1,
+       -5149.9,
+       -38.8
+      ],
+      [
+       -5918.0,
+       -5130.4,
+       -38.9
+      ],
+      [
+       -5908.5,
+       -5120.0,
+       -38.9
+      ],
+      [
+       -5893.7,
+       -5106.4,
+       -38.9
+      ],
+      [
+       -5879.0,
+       -5092.8,
+       -39.0
+      ],
+      [
+       -5864.2,
+       -5079.3,
+       -39.0
+      ],
+      [
+       -5849.5,
+       -5065.7,
+       -39.2
+      ],
+      [
+       -5834.7,
+       -5052.1,
+       -39.3
+      ],
+      [
+       -5827.4,
+       -5047.3,
+       -39.3
+      ],
+      [
+       -5818.8,
+       -5044.0,
+       -39.3
+      ],
+      [
+       -5806.4,
+       -5042.4,
+       -39.4
+      ],
+      [
+       -5799.7,
+       -5040.7,
+       -39.4
+      ],
+      [
+       -5778.8,
+       -5031.6,
+       -39.5
+      ],
+      [
+       -5757.8,
+       -5022.5,
+       -39.6
+      ],
+      [
+       -5736.9,
+       -5013.4,
+       -39.6
+      ],
+      [
+       -5731.4,
+       -5011.9,
+       -39.6
+      ],
+      [
+       -5720.3,
+       -5009.4,
+       -39.6
+      ],
+      [
+       -5715.1,
+       -5007.7,
+       -39.6
+      ],
+      [
+       -5692.6,
+       -4997.9,
+       -39.6
+      ],
+      [
+       -5672.0,
+       -4989.0,
+       -39.6
+      ],
+      [
+       -5651.3,
+       -4980.2,
+       -39.7
+      ],
+      [
+       -5625.5,
+       -4968.9,
+       -39.7
+      ],
+      [
+       -5599.6,
+       -4957.6,
+       -39.7
+      ],
+      [
+       -5577.9,
+       -4949.9,
+       -39.7
+      ],
+      [
+       -5550.5,
+       -4941.0,
+       -39.7
+      ],
+      [
+       -5537.6,
+       -4936.2,
+       -39.7
+      ],
+      [
+       -5501.8,
+       -4919.6,
+       -39.7
+      ],
+      [
+       -5481.7,
+       -4910.9,
+       -39.7
+      ],
+      [
+       -5461.7,
+       -4902.2,
+       -39.7
+      ],
+      [
+       -5441.6,
+       -4893.5,
+       -39.7
+      ],
+      [
+       -5420.5,
+       -4884.6,
+       -39.7
+      ],
+      [
+       -5399.4,
+       -4875.6,
+       -39.7
+      ],
+      [
+       -5365.0,
+       -4860.7,
+       -39.7
+      ],
+      [
+       -5345.0,
+       -4849.9,
+       -39.8
+      ],
+      [
+       -5325.0,
+       -4839.2,
+       -39.8
+      ],
+      [
+       -5316.3,
+       -4835.9,
+       -39.9
+      ],
+      [
+       -5307.6,
+       -4833.4,
+       -39.9
+      ],
+      [
+       -5305.5,
+       -4831.9,
+       -39.9
+      ],
+      [
+       -5304.2,
+       -4829.6,
+       -39.9
+      ],
+      [
+       -5299.1,
+       -4821.9,
+       -39.9
+      ],
+      [
+       -5295.1,
+       -4818.6,
+       -39.9
+      ],
+      [
+       -5288.9,
+       -4815.5,
+       -39.9
+      ],
+      [
+       -5262.2,
+       -4805.6,
+       -40.0
+      ],
+      [
+       -5235.6,
+       -4795.8,
+       -40.0
+      ],
+      [
+       -5209.8,
+       -4785.6,
+       -40.0
+      ],
+      [
+       -5184.0,
+       -4775.3,
+       -40.0
+      ],
+      [
+       -5159.1,
+       -4767.3,
+       -40.0
+      ],
+      [
+       -5139.6,
+       -4762.1,
+       -40.0
+      ],
+      [
+       -5120.1,
+       -4756.9,
+       -40.0
+      ],
+      [
+       -5100.6,
+       -4751.7,
+       -40.0
+      ],
+      [
+       -5074.6,
+       -4744.1,
+       -40.0
+      ],
+      [
+       -5048.6,
+       -4736.5,
+       -40.0
+      ],
+      [
+       -5019.5,
+       -4726.9,
+       -40.0
+      ],
+      [
+       -4994.1,
+       -4716.3,
+       -40.0
+      ],
+      [
+       -4974.1,
+       -4704.9,
+       -40.0
+      ],
+      [
+       -4954.2,
+       -4693.4,
+       -40.0
+      ],
+      [
+       -4933.5,
+       -4677.1,
+       -40.0
+      ],
+      [
+       -4912.8,
+       -4660.9,
+       -40.0
+      ],
+      [
+       -4892.1,
+       -4644.6,
+       -40.0
+      ],
+      [
+       -4877.6,
+       -4635.0,
+       -40.0
+      ],
+      [
+       -4844.1,
+       -4620.7,
+       -40.0
+      ],
+      [
+       -4827.0,
+       -4609.2,
+       -40.0
+      ],
+      [
+       -4805.4,
+       -4589.8,
+       -40.0
+      ],
+      [
+       -4793.9,
+       -4573.0,
+       -40.0
+      ],
+      [
+       -4782.4,
+       -4556.1,
+       -40.0
+      ],
+      [
+       -4772.6,
+       -4536.0,
+       -40.0
+      ],
+      [
+       -4762.9,
+       -4515.9,
+       -40.0
+      ],
+      [
+       -4753.1,
+       -4495.8,
+       -40.0
+      ],
+      [
+       -4743.3,
+       -4475.7,
+       -40.0
+      ],
+      [
+       -4734.3,
+       -4456.0,
+       -40.0
+      ],
+      [
+       -4725.3,
+       -4436.4,
+       -40.0
+      ],
+      [
+       -4716.3,
+       -4416.7,
+       -40.0
+      ],
+      [
+       -4707.3,
+       -4397.0,
+       -40.0
+      ],
+      [
+       -4698.3,
+       -4377.4,
+       -40.0
+      ],
+      [
+       -4689.3,
+       -4357.7,
+       -40.0
+      ],
+      [
+       -4686.9,
+       -4347.8,
+       -40.0
+      ],
+      [
+       -4686.4,
+       -4337.2,
+       -40.0
+      ],
+      [
+       -4690.1,
+       -4316.7,
+       -40.0
+      ],
+      [
+       -4693.8,
+       -4296.2,
+       -40.0
+      ],
+      [
+       -4692.3,
+       -4287.7,
+       -40.0
+      ],
+      [
+       -4687.2,
+       -4280.3,
+       -40.0
+      ],
+      [
+       -4679.0,
+       -4275.7,
+       -40.0
+      ],
+      [
+       -4658.2,
+       -4269.9,
+       -40.0
+      ],
+      [
+       -4637.5,
+       -4264.1,
+       -40.0
+      ],
+      [
+       -4615.9,
+       -4259.6,
+       -40.0
+      ],
+      [
+       -4594.2,
+       -4255.1,
+       -40.0
+      ],
+      [
+       -4564.2,
+       -4254.4,
+       -40.0
+      ],
+      [
+       -4552.8,
+       -4255.6,
+       -40.0
+      ],
+      [
+       -4540.7,
+       -4259.2,
+       -40.0
+      ],
+      [
+       -4535.2,
+       -4259.7,
+       -40.0
+      ],
+      [
+       -4529.3,
+       -4258.7,
+       -40.0
+      ],
+      [
+       -4514.1,
+       -4248.4,
+       -40.0
+      ],
+      [
+       -4508.0,
+       -4247.0,
+       -40.0
+      ],
+      [
+       -4500.4,
+       -4247.5,
+       -40.0
+      ],
+      [
+       -4485.6,
+       -4250.4,
+       -40.0
+      ],
+      [
+       -4482.3,
+       -4250.7,
+       -40.0
+      ],
+      [
+       -4479.3,
+       -4250.4,
+       -40.0
+      ],
+      [
+       -4470.8,
+       -4247.6,
+       -40.0
+      ],
+      [
+       -4465.6,
+       -4246.9,
+       -40.0
+      ],
+      [
+       -4449.8,
+       -4244.7,
+       -40.0
+      ],
+      [
+       -4422.3,
+       -4241.0,
+       -40.0
+      ],
+      [
+       -4416.4,
+       -4239.2,
+       -40.0
+      ],
+      [
+       -4403.2,
+       -4231.6,
+       -40.2
+      ],
+      [
+       -4392.1,
+       -4221.0,
+       -40.4
+      ],
+      [
+       -4369.1,
+       -4193.7,
+       -40.9
+      ],
+      [
+       -4349.5,
+       -4172.3,
+       -41.3
+      ],
+      [
+       -4329.8,
+       -4150.9,
+       -41.7
+      ],
+      [
+       -4320.8,
+       -4139.6,
+       -42.0
+      ],
+      [
+       -4304.6,
+       -4119.3,
+       -42.4
+      ],
+      [
+       -4298.6,
+       -4107.0,
+       -42.7
+      ],
+      [
+       -4290.9,
+       -4078.8,
+       -43.2
+      ],
+      [
+       -4290.4,
+       -4069.7,
+       -43.2
+      ],
+      [
+       -4292.0,
+       -4057.1,
+       -43.3
+      ],
+      [
+       -4295.9,
+       -4033.6,
+       -43.3
+      ],
+      [
+       -4299.7,
+       -4010.1,
+       -43.3
+      ],
+      [
+       -4300.8,
+       -3996.8,
+       -43.3
+      ],
+      [
+       -4300.8,
+       -3980.7,
+       -43.3
+      ],
+      [
+       -4297.8,
+       -3955.4,
+       -43.3
+      ],
+      [
+       -4294.9,
+       -3930.2,
+       -43.3
+      ],
+      [
+       -4291.9,
+       -3904.9,
+       -43.3
+      ],
+      [
+       -4290.4,
+       -3881.2,
+       -43.3
+      ],
+      [
+       -4288.9,
+       -3857.6,
+       -43.3
+      ],
+      [
+       -4287.4,
+       -3834.0,
+       -43.3
+      ],
+      [
+       -4285.9,
+       -3810.3,
+       -43.3
+      ],
+      [
+       -4282.8,
+       -3786.7,
+       -43.3
+      ],
+      [
+       -4279.7,
+       -3763.1,
+       -43.3
+      ],
+      [
+       -4276.6,
+       -3739.4,
+       -43.3
+      ],
+      [
+       -4273.5,
+       -3715.8,
+       -43.3
+      ],
+      [
+       -4267.8,
+       -3693.6,
+       -43.3
+      ],
+      [
+       -4258.2,
+       -3670.8,
+       -43.3
+      ],
+      [
+       -4246.8,
+       -3650.3,
+       -43.3
+      ],
+      [
+       -4235.4,
+       -3629.8,
+       -43.3
+      ],
+      [
+       -4223.9,
+       -3609.2,
+       -43.3
+      ],
+      [
+       -4212.5,
+       -3588.7,
+       -43.3
+      ],
+      [
+       -4199.2,
+       -3567.1,
+       -43.3
+      ],
+      [
+       -4185.9,
+       -3545.6,
+       -43.3
+      ],
+      [
+       -4172.6,
+       -3524.0,
+       -43.3
+      ],
+      [
+       -4161.2,
+       -3505.2,
+       -43.3
+      ],
+      [
+       -4149.7,
+       -3486.3,
+       -43.3
+      ],
+      [
+       -4138.3,
+       -3467.4,
+       -43.3
+      ],
+      [
+       -4126.9,
+       -3448.6,
+       -43.3
+      ],
+      [
+       -4115.4,
+       -3429.8,
+       -43.3
+      ],
+      [
+       -4104.0,
+       -3410.9,
+       -43.3
+      ],
+      [
+       -4092.4,
+       -3393.9,
+       -44.0
+      ],
+      [
+       -4080.8,
+       -3376.8,
+       -44.0
+      ],
+      [
+       -4069.2,
+       -3362.7,
+       -44.0
+      ],
+      [
+       -4049.8,
+       -3340.8,
+       -44.0
+      ],
+      [
+       -4030.3,
+       -3318.9,
+       -44.0
+      ],
+      [
+       -4014.1,
+       -3300.7,
+       -44.0
+      ],
+      [
+       -3997.8,
+       -3282.5,
+       -44.0
+      ],
+      [
+       -3981.6,
+       -3264.3,
+       -44.0
+      ],
+      [
+       -3959.9,
+       -3244.4,
+       -44.0
+      ],
+      [
+       -3938.2,
+       -3224.5,
+       -44.1
+      ],
+      [
+       -3922.3,
+       -3210.9,
+       -44.1
+      ],
+      [
+       -3906.5,
+       -3197.4,
+       -44.1
+      ],
+      [
+       -3887.9,
+       -3182.6,
+       -44.1
+      ],
+      [
+       -3869.2,
+       -3167.8,
+       -44.1
+      ],
+      [
+       -3850.6,
+       -3153.0,
+       -44.3
+      ],
+      [
+       -3832.2,
+       -3138.2,
+       -44.5
+      ],
+      [
+       -3813.7,
+       -3123.3,
+       -44.6
+      ],
+      [
+       -3795.2,
+       -3108.5,
+       -44.8
+      ],
+      [
+       -3776.8,
+       -3093.7,
+       -44.9
+      ],
+      [
+       -3761.2,
+       -3083.7,
+       -44.9
+      ],
+      [
+       -3740.1,
+       -3073.3,
+       -44.9
+      ],
+      [
+       -3719.1,
+       -3063.0,
+       -44.9
+      ],
+      [
+       -3703.1,
+       -3056.8,
+       -44.9
+      ],
+      [
+       -3688.8,
+       -3051.2,
+       -44.9
+      ],
+      [
+       -3665.0,
+       -3045.8,
+       -44.9
+      ],
+      [
+       -3641.2,
+       -3040.3,
+       -44.9
+      ],
+      [
+       -3627.0,
+       -3037.8,
+       -44.9
+      ],
+      [
+       -3612.2,
+       -3039.1,
+       -44.9
+      ],
+      [
+       -3584.1,
+       -3045.6,
+       -44.9
+      ],
+      [
+       -3556.1,
+       -3052.1,
+       -44.9
+      ],
+      [
+       -3539.2,
+       -3054.7,
+       -44.9
+      ],
+      [
+       -3524.1,
+       -3055.9,
+       -44.9
+      ],
+      [
+       -3499.3,
+       -3053.4,
+       -44.9
+      ],
+      [
+       -3474.6,
+       -3050.9,
+       -44.9
+      ],
+      [
+       -3449.8,
+       -3048.5,
+       -45.0
+      ],
+      [
+       -3425.0,
+       -3046.0,
+       -45.0
+      ],
+      [
+       -3403.7,
+       -3044.0,
+       -45.0
+      ],
+      [
+       -3382.5,
+       -3042.0,
+       -45.1
+      ],
+      [
+       -3361.2,
+       -3039.9,
+       -45.1
+      ],
+      [
+       -3340.0,
+       -3037.9,
+       -45.2
+      ],
+      [
+       -3318.7,
+       -3035.9,
+       -45.3
+      ],
+      [
+       -3291.8,
+       -3032.1,
+       -45.5
+      ],
+      [
+       -3264.8,
+       -3028.3,
+       -45.8
+      ],
+      [
+       -3230.6,
+       -3019.5,
+       -46.2
+      ],
+      [
+       -3210.7,
+       -3015.4,
+       -46.3
+      ],
+      [
+       -3190.9,
+       -3011.3,
+       -46.4
+      ],
+      [
+       -3171.0,
+       -3007.2,
+       -46.5
+      ],
+      [
+       -3150.1,
+       -3003.6,
+       -46.6
+      ],
+      [
+       -3129.2,
+       -3000.1,
+       -46.6
+      ],
+      [
+       -3108.2,
+       -2996.5,
+       -46.6
+      ],
+      [
+       -3087.3,
+       -2992.9,
+       -46.6
+      ],
+      [
+       -3065.4,
+       -2989.3,
+       -46.6
+      ],
+      [
+       -3043.5,
+       -2985.8,
+       -46.6
+      ],
+      [
+       -3021.6,
+       -2982.2,
+       -46.6
+      ],
+      [
+       -3011.1,
+       -2981.3,
+       -46.6
+      ],
+      [
+       -2995.6,
+       -2980.0,
+       -46.6
+      ],
+      [
+       -2987.5,
+       -2978.7,
+       -46.6
+      ],
+      [
+       -2951.4,
+       -2969.5,
+       -46.6
+      ],
+      [
+       -2936.5,
+       -2966.7,
+       -46.6
+      ],
+      [
+       -2918.8,
+       -2964.6,
+       -46.6
+      ],
+      [
+       -2890.2,
+       -2963.2,
+       -46.6
+      ],
+      [
+       -2850.7,
+       -2963.3,
+       -46.6
+      ],
+      [
+       -2824.7,
+       -2965.0,
+       -46.6
+      ],
+      [
+       -2818.3,
+       -2964.9,
+       -46.6
+      ],
+      [
+       -2789.8,
+       -2959.4,
+       -46.6
+      ],
+      [
+       -2781.9,
+       -2957.3,
+       -46.6
+      ],
+      [
+       -2768.3,
+       -2952.3,
+       -46.6
+      ],
+      [
+       -2762.2,
+       -2951.3,
+       -46.6
+      ],
+      [
+       -2753.0,
+       -2952.2,
+       -46.6
+      ],
+      [
+       -2718.6,
+       -2958.1,
+       -46.6
+      ],
+      [
+       -2710.2,
+       -2961.3,
+       -46.7
+      ],
+      [
+       -2693.9,
+       -2968.7,
+       -46.9
+      ],
+      [
+       -2683.9,
+       -2970.4,
+       -46.9
+      ],
+      [
+       -2673.2,
+       -2970.7,
+       -47.0
+      ],
+      [
+       -2656.2,
+       -2969.0,
+       -47.0
+      ],
+      [
+       -2640.6,
+       -2966.9,
+       -47.1
+      ],
+      [
+       -2626.9,
+       -2964.0,
+       -47.1
+      ],
+      [
+       -2607.4,
+       -2958.1,
+       -47.3
+      ],
+      [
+       -2599.9,
+       -2956.9,
+       -47.3
+      ],
+      [
+       -2579.1,
+       -2955.2,
+       -47.4
+      ],
+      [
+       -2572.0,
+       -2953.4,
+       -47.4
+      ],
+      [
+       -2548.3,
+       -2943.5,
+       -47.4
+      ],
+      [
+       -2540.2,
+       -2942.0,
+       -47.4
+      ],
+      [
+       -2528.7,
+       -2942.0,
+       -47.4
+      ],
+      [
+       -2512.0,
+       -2943.3,
+       -47.4
+      ],
+      [
+       -2503.9,
+       -2942.8,
+       -47.4
+      ],
+      [
+       -2484.7,
+       -2938.7,
+       -47.4
+      ],
+      [
+       -2480.4,
+       -2938.4,
+       -47.4
+      ],
+      [
+       -2467.3,
+       -2939.1,
+       -47.4
+      ],
+      [
+       -2435.7,
+       -2944.4,
+       -47.4
+      ],
+      [
+       -2403.7,
+       -2950.2,
+       -47.4
+      ],
+      [
+       -2395.7,
+       -2950.3,
+       -47.4
+      ],
+      [
+       -2386.2,
+       -2948.9,
+       -47.4
+      ],
+      [
+       -2354.9,
+       -2940.6,
+       -47.4
+      ],
+      [
+       -2340.5,
+       -2938.7,
+       -47.4
+      ],
+      [
+       -2318.8,
+       -2936.2,
+       -47.4
+      ],
+      [
+       -2297.0,
+       -2933.8,
+       -47.4
+      ],
+      [
+       -2279.5,
+       -2933.2,
+       -47.4
+      ],
+      [
+       -2254.2,
+       -2933.7,
+       -47.4
+      ],
+      [
+       -2245.6,
+       -2932.8,
+       -47.5
+      ],
+      [
+       -2208.7,
+       -2922.9,
+       -47.5
+      ],
+      [
+       -2200.3,
+       -2921.6,
+       -47.5
+      ],
+      [
+       -2187.8,
+       -2920.9,
+       -47.5
+      ],
+      [
+       -2179.2,
+       -2919.0,
+       -47.5
+      ],
+      [
+       -2163.8,
+       -2911.8,
+       -47.5
+      ],
+      [
+       -2156.1,
+       -2909.0,
+       -47.5
+      ],
+      [
+       -2123.9,
+       -2902.6,
+       -47.5
+      ],
+      [
+       -2114.3,
+       -2901.5,
+       -47.5
+      ],
+      [
+       -2084.6,
+       -2902.1,
+       -47.5
+      ],
+      [
+       -2062.8,
+       -2900.8,
+       -47.5
+      ],
+      [
+       -2037.9,
+       -2899.4,
+       -47.5
+      ],
+      [
+       -2013.1,
+       -2897.9,
+       -47.5
+      ],
+      [
+       -1988.2,
+       -2896.5,
+       -47.5
+      ],
+      [
+       -1967.5,
+       -2895.4,
+       -47.5
+      ],
+      [
+       -1946.8,
+       -2894.3,
+       -47.6
+      ],
+      [
+       -1926.1,
+       -2893.2,
+       -47.6
+      ],
+      [
+       -1897.2,
+       -2891.2,
+       -47.7
+      ],
+      [
+       -1877.3,
+       -2888.3,
+       -47.8
+      ],
+      [
+       -1857.5,
+       -2885.4,
+       -47.8
+      ],
+      [
+       -1837.7,
+       -2882.5,
+       -47.9
+      ],
+      [
+       -1817.8,
+       -2879.6,
+       -47.9
+      ],
+      [
+       -1805.6,
+       -2878.8,
+       -48.0
+      ],
+      [
+       -1769.7,
+       -2880.5,
+       -48.1
+      ],
+      [
+       -1758.6,
+       -2880.3,
+       -48.1
+      ],
+      [
+       -1727.2,
+       -2874.6,
+       -48.2
+      ],
+      [
+       -1717.4,
+       -2874.1,
+       -48.2
+      ],
+      [
+       -1708.2,
+       -2875.5,
+       -48.2
+      ],
+      [
+       -1696.3,
+       -2879.9,
+       -48.2
+      ],
+      [
+       -1683.1,
+       -2882.7,
+       -48.2
+      ],
+      [
+       -1669.3,
+       -2882.9,
+       -48.2
+      ],
+      [
+       -1653.7,
+       -2879.0,
+       -48.2
+      ],
+      [
+       -1632.6,
+       -2871.7,
+       -48.2
+      ],
+      [
+       -1611.4,
+       -2864.4,
+       -48.2
+      ],
+      [
+       -1584.5,
+       -2852.2,
+       -48.2
+      ],
+      [
+       -1557.6,
+       -2840.1,
+       -48.2
+      ]
+     ],
+     "top_w": 6,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "OSM river Bîc ways 1304335244+1304335245 resampled 20 m. The DEM (ground-filtered 20-30 m) has no river bed: every Bîc crossing in this area (sites 0,6,14,16,17,19,23,31,34,38) sits flat on the banks. Bottom = DEM-2.5 m (DEM-3.5 m along the new concrete channel at the Balcani viaduct), forced monotonic downstream. Depth/width ESTIMATE (natural banked river 6-10 m wide with treed banks in Esri imagery)."
+    }
+   ]
+  },
+  {
+   "id": "durlesti-stream-channel",
+   "name": "Durlești stream channel (Durlești → Buiucani → Valea Morilor → Bîc)",
+   "x": -3000,
+   "z": 0,
+   "lat": 47.0248,
+   "lon": 28.7943,
+   "status": "wrong",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -5595.3,
+       -1291.6,
+       30.2
+      ],
+      [
+       -5590.4,
+       -1292.5,
+       30.2
+      ],
+      [
+       -5570.5,
+       -1287.1,
+       30.2
+      ],
+      [
+       -5542.4,
+       -1278.7,
+       30.1
+      ],
+      [
+       -5532.1,
+       -1275.6,
+       30.1
+      ],
+      [
+       -5511.3,
+       -1264.7,
+       29.9
+      ],
+      [
+       -5493.9,
+       -1251.4,
+       29.5
+      ],
+      [
+       -5476.6,
+       -1233.8,
+       29.2
+      ],
+      [
+       -5459.4,
+       -1216.3,
+       28.9
+      ],
+      [
+       -5442.5,
+       -1200.0,
+       28.7
+      ],
+      [
+       -5425.6,
+       -1183.7,
+       28.5
+      ],
+      [
+       -5399.8,
+       -1156.0,
+       28.4
+      ],
+      [
+       -5385.3,
+       -1141.6,
+       28.3
+      ],
+      [
+       -5370.8,
+       -1127.2,
+       28.1
+      ],
+      [
+       -5345.5,
+       -1096.8,
+       27.7
+      ],
+      [
+       -5320.8,
+       -1073.3,
+       27.3
+      ],
+      [
+       -5294.5,
+       -1045.5,
+       27.0
+      ],
+      [
+       -5281.5,
+       -1031.6,
+       27.0
+      ],
+      [
+       -5259.9,
+       -1009.3,
+       27.0
+      ],
+      [
+       -5253.4,
+       -1002.5,
+       27.0
+      ],
+      [
+       -5249.4,
+       -995.2,
+       27.0
+      ],
+      [
+       -5228.1,
+       -973.4,
+       27.0
+      ],
+      [
+       -5212.9,
+       -958.2,
+       27.0
+      ],
+      [
+       -5197.6,
+       -943.1,
+       27.0
+      ],
+      [
+       -5192.2,
+       -937.3,
+       26.8
+      ],
+      [
+       -5177.8,
+       -921.6,
+       26.5
+      ],
+      [
+       -5150.8,
+       -893.9,
+       25.7
+      ],
+      [
+       -5144.0,
+       -885.8,
+       25.5
+      ],
+      [
+       -5130.9,
+       -873.7,
+       25.3
+      ],
+      [
+       -5113.6,
+       -854.7,
+       25.0
+      ],
+      [
+       -5099.2,
+       -840.3,
+       24.8
+      ],
+      [
+       -5080.8,
+       -816.2,
+       24.7
+      ],
+      [
+       -5066.6,
+       -802.1,
+       24.6
+      ],
+      [
+       -5052.3,
+       -787.9,
+       24.6
+      ],
+      [
+       -5038.1,
+       -773.8,
+       24.6
+      ],
+      [
+       -5024.8,
+       -758.7,
+       24.6
+      ],
+      [
+       -5011.5,
+       -743.7,
+       24.6
+      ],
+      [
+       -4998.2,
+       -728.6,
+       24.6
+      ],
+      [
+       -4981.0,
+       -709.8,
+       24.6
+      ],
+      [
+       -4963.8,
+       -691.0,
+       24.6
+      ],
+      [
+       -4938.4,
+       -674.6,
+       24.4
+      ],
+      [
+       -4920.1,
+       -655.7,
+       24.0
+      ],
+      [
+       -4901.9,
+       -636.8,
+       23.9
+      ],
+      [
+       -4875.8,
+       -607.7,
+       23.8
+      ],
+      [
+       -4849.5,
+       -579.7,
+       23.7
+      ],
+      [
+       -4835.1,
+       -565.8,
+       23.7
+      ],
+      [
+       -4820.6,
+       -551.9,
+       23.4
+      ],
+      [
+       -4806.1,
+       -538.0,
+       23.1
+      ],
+      [
+       -4791.7,
+       -524.1,
+       22.9
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 914464179,823186513; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -4385.0,
+       -155.9,
+       17.1
+      ],
+      [
+       -4381.5,
+       -154.7,
+       17.0
+      ],
+      [
+       -4350.8,
+       -143.3,
+       16.7
+      ],
+      [
+       -4339.6,
+       -136.2,
+       16.4
+      ],
+      [
+       -4322.3,
+       -131.9,
+       16.3
+      ],
+      [
+       -4309.4,
+       -130.0,
+       16.2
+      ],
+      [
+       -4301.4,
+       -131.9,
+       16.2
+      ],
+      [
+       -4289.1,
+       -133.2,
+       16.2
+      ],
+      [
+       -4282.6,
+       -131.7,
+       16.2
+      ],
+      [
+       -4277.8,
+       -131.6,
+       16.2
+      ],
+      [
+       -4267.6,
+       -113.9,
+       15.6
+      ],
+      [
+       -4263.1,
+       -105.3,
+       15.2
+      ],
+      [
+       -4261.1,
+       -102.7,
+       15.1
+      ],
+      [
+       -4250.2,
+       -95.1,
+       14.7
+      ],
+      [
+       -4249.5,
+       -88.7,
+       14.5
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 914464170; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -4248.6,
+       -63.2,
+       13.9
+      ],
+      [
+       -4241.8,
+       -58.5,
+       13.8
+      ],
+      [
+       -4238.0,
+       -55.7,
+       13.7
+      ],
+      [
+       -4235.0,
+       -51.5,
+       13.6
+      ],
+      [
+       -4233.7,
+       -43.7,
+       13.6
+      ],
+      [
+       -4233.0,
+       -32.6,
+       13.6
+      ],
+      [
+       -4231.1,
+       -27.1,
+       13.6
+      ],
+      [
+       -4227.3,
+       -23.1,
+       13.6
+      ],
+      [
+       -4222.3,
+       -20.0,
+       13.5
+      ],
+      [
+       -4206.7,
+       -17.8,
+       13.0
+      ],
+      [
+       -4178.5,
+       -15.2,
+       12.4
+      ],
+      [
+       -4161.9,
+       -14.1,
+       12.2
+      ],
+      [
+       -4147.9,
+       -11.7,
+       12.0
+      ],
+      [
+       -4124.7,
+       -6.4,
+       11.7
+      ],
+      [
+       -4116.6,
+       -6.3,
+       11.7
+      ],
+      [
+       -4108.2,
+       -6.4,
+       11.6
+      ],
+      [
+       -4096.1,
+       -3.9,
+       11.5
+      ],
+      [
+       -4086.4,
+       -2.6,
+       11.4
+      ],
+      [
+       -4081.1,
+       -0.9,
+       11.3
+      ],
+      [
+       -4068.6,
+       5.1,
+       11.1
+      ],
+      [
+       -4061.6,
+       6.8,
+       11.0
+      ],
+      [
+       -4053.8,
+       6.9,
+       11.0
+      ],
+      [
+       -4037.4,
+       8.3,
+       10.9
+      ],
+      [
+       -4031.6,
+       9.9,
+       10.8
+      ],
+      [
+       -4025.6,
+       12.3,
+       10.7
+      ],
+      [
+       -3997.0,
+       30.4,
+       10.2
+      ],
+      [
+       -3972.0,
+       43.2,
+       9.7
+      ],
+      [
+       -3945.1,
+       58.0,
+       9.4
+      ],
+      [
+       -3934.8,
+       64.1,
+       9.3
+      ],
+      [
+       -3925.7,
+       70.5,
+       9.1
+      ],
+      [
+       -3921.0,
+       74.8,
+       9.0
+      ],
+      [
+       -3917.4,
+       80.7,
+       9.0
+      ],
+      [
+       -3912.5,
+       85.5,
+       9.0
+      ],
+      [
+       -3907.2,
+       89.8,
+       9.0
+      ],
+      [
+       -3901.3,
+       92.7,
+       8.9
+      ],
+      [
+       -3892.1,
+       95.5,
+       8.8
+      ],
+      [
+       -3883.2,
+       92.6,
+       8.7
+      ],
+      [
+       -3869.0,
+       84.1,
+       8.5
+      ],
+      [
+       -3856.5,
+       74.6,
+       8.5
+      ],
+      [
+       -3851.0,
+       72.0,
+       8.5
+      ],
+      [
+       -3847.0,
+       71.3,
+       8.5
+      ],
+      [
+       -3835.3,
+       73.6,
+       8.5
+      ],
+      [
+       -3809.4,
+       77.9,
+       8.5
+      ],
+      [
+       -3783.4,
+       82.2,
+       8.5
+      ],
+      [
+       -3776.5,
+       84.0,
+       8.5
+      ],
+      [
+       -3768.7,
+       89.3,
+       8.5
+      ],
+      [
+       -3754.9,
+       102.9,
+       8.5
+      ],
+      [
+       -3737.4,
+       116.2,
+       8.5
+      ],
+      [
+       -3727.6,
+       121.9,
+       8.5
+      ],
+      [
+       -3711.6,
+       129.6,
+       8.5
+      ],
+      [
+       -3690.5,
+       140.4,
+       8.5
+      ],
+      [
+       -3669.4,
+       151.3,
+       8.5
+      ],
+      [
+       -3658.6,
+       156.3,
+       8.5
+      ],
+      [
+       -3647.4,
+       160.4,
+       8.5
+      ],
+      [
+       -3634.9,
+       163.7,
+       8.5
+      ],
+      [
+       -3623.1,
+       167.1,
+       8.5
+      ],
+      [
+       -3616.2,
+       169.0,
+       8.5
+      ],
+      [
+       -3611.2,
+       172.9,
+       8.5
+      ],
+      [
+       -3605.7,
+       178.1,
+       8.5
+      ],
+      [
+       -3597.4,
+       185.6,
+       8.5
+      ],
+      [
+       -3587.6,
+       191.1,
+       8.5
+      ],
+      [
+       -3576.0,
+       196.1,
+       8.5
+      ],
+      [
+       -3560.5,
+       200.6,
+       8.5
+      ],
+      [
+       -3551.6,
+       205.8,
+       8.4
+      ],
+      [
+       -3535.3,
+       221.7,
+       7.7
+      ],
+      [
+       -3526.1,
+       229.5,
+       7.4
+      ],
+      [
+       -3517.3,
+       234.2,
+       7.2
+      ],
+      [
+       -3506.5,
+       237.7,
+       7.0
+      ],
+      [
+       -3494.5,
+       238.0,
+       7.0
+      ],
+      [
+       -3485.8,
+       238.8,
+       7.0
+      ],
+      [
+       -3478.5,
+       241.1,
+       7.0
+      ],
+      [
+       -3458.4,
+       252.5,
+       6.8
+      ],
+      [
+       -3438.3,
+       263.9,
+       6.3
+      ],
+      [
+       -3418.2,
+       275.3,
+       6.0
+      ],
+      [
+       -3400.2,
+       289.7,
+       5.3
+      ],
+      [
+       -3388.2,
+       299.4,
+       4.8
+      ],
+      [
+       -3383.4,
+       303.0,
+       4.7
+      ],
+      [
+       -3377.5,
+       304.4,
+       4.6
+      ],
+      [
+       -3368.6,
+       306.8,
+       4.4
+      ],
+      [
+       -3362.3,
+       310.2,
+       4.3
+      ],
+      [
+       -3344.4,
+       323.9,
+       3.5
+      ],
+      [
+       -3326.5,
+       337.6,
+       2.8
+      ],
+      [
+       -3308.6,
+       351.3,
+       2.2
+      ],
+      [
+       -3294.7,
+       364.4,
+       1.7
+      ],
+      [
+       -3288.8,
+       368.3,
+       1.6
+      ],
+      [
+       -3283.1,
+       370.2,
+       1.6
+      ],
+      [
+       -3272.0,
+       373.5,
+       1.6
+      ],
+      [
+       -3260.1,
+       379.4,
+       1.5
+      ],
+      [
+       -3241.4,
+       389.4,
+       1.5
+      ],
+      [
+       -3222.8,
+       399.5,
+       1.3
+      ],
+      [
+       -3196.7,
+       414.8,
+       1.0
+      ],
+      [
+       -3183.8,
+       425.6,
+       0.6
+      ],
+      [
+       -3176.0,
+       435.3,
+       0.2
+      ],
+      [
+       -3161.5,
+       453.1,
+       -0.4
+      ],
+      [
+       -3149.4,
+       466.8,
+       -0.9
+      ],
+      [
+       -3135.4,
+       482.4,
+       -1.5
+      ],
+      [
+       -3119.0,
+       498.9,
+       -2.1
+      ],
+      [
+       -3113.0,
+       503.2,
+       -2.3
+      ],
+      [
+       -3107.1,
+       505.4,
+       -2.5
+      ],
+      [
+       -3099.5,
+       505.8,
+       -2.7
+      ],
+      [
+       -3083.1,
+       500.5,
+       -3.2
+      ],
+      [
+       -3062.7,
+       498.7,
+       -3.5
+      ],
+      [
+       -3036.2,
+       502.1,
+       -3.8
+      ],
+      [
+       -3018.2,
+       508.7,
+       -4.1
+      ],
+      [
+       -3012.9,
+       513.3,
+       -4.3
+      ],
+      [
+       -3004.8,
+       521.6,
+       -4.7
+      ],
+      [
+       -2998.4,
+       524.5,
+       -4.8
+      ],
+      [
+       -2985.5,
+       525.0,
+       -4.9
+      ],
+      [
+       -2974.7,
+       523.5,
+       -4.9
+      ],
+      [
+       -2968.7,
+       524.7,
+       -4.9
+      ],
+      [
+       -2962.6,
+       527.9,
+       -5.0
+      ],
+      [
+       -2956.4,
+       536.1,
+       -5.3
+      ],
+      [
+       -2943.9,
+       551.8,
+       -5.8
+      ],
+      [
+       -2931.4,
+       567.5,
+       -6.2
+      ],
+      [
+       -2921.2,
+       579.4,
+       -6.4
+      ],
+      [
+       -2912.7,
+       586.1,
+       -6.5
+      ],
+      [
+       -2902.2,
+       593.8,
+       -6.7
+      ],
+      [
+       -2890.2,
+       602.2,
+       -6.8
+      ],
+      [
+       -2871.7,
+       611.8,
+       -6.9
+      ],
+      [
+       -2853.2,
+       621.4,
+       -6.9
+      ],
+      [
+       -2844.7,
+       625.8,
+       -6.9
+      ],
+      [
+       -2824.6,
+       634.1,
+       -6.9
+      ],
+      [
+       -2804.4,
+       642.4,
+       -6.9
+      ],
+      [
+       -2784.3,
+       650.7,
+       -6.9
+      ],
+      [
+       -2764.1,
+       659.0,
+       -7.0
+      ],
+      [
+       -2744.0,
+       667.3,
+       -7.0
+      ],
+      [
+       -2723.8,
+       675.6,
+       -7.0
+      ],
+      [
+       -2703.7,
+       683.9,
+       -7.0
+      ],
+      [
+       -2683.5,
+       692.2,
+       -7.0
+      ],
+      [
+       -2663.4,
+       700.5,
+       -7.0
+      ],
+      [
+       -2643.2,
+       708.8,
+       -7.0
+      ],
+      [
+       -2623.1,
+       717.1,
+       -7.0
+      ],
+      [
+       -2605.2,
+       725.1,
+       -7.0
+      ],
+      [
+       -2582.3,
+       736.8,
+       -7.0
+      ],
+      [
+       -2549.4,
+       750.8,
+       -7.0
+      ],
+      [
+       -2527.5,
+       759.4,
+       -7.0
+      ],
+      [
+       -2506.5,
+       767.0,
+       -7.0
+      ],
+      [
+       -2485.6,
+       774.5,
+       -7.0
+      ],
+      [
+       -2464.6,
+       782.1,
+       -7.0
+      ],
+      [
+       -2443.7,
+       789.6,
+       -7.0
+      ],
+      [
+       -2422.7,
+       797.2,
+       -7.0
+      ],
+      [
+       -2395.1,
+       805.2,
+       -7.1
+      ],
+      [
+       -2367.6,
+       813.3,
+       -7.5
+      ],
+      [
+       -2345.3,
+       813.4,
+       -7.8
+      ],
+      [
+       -2323.1,
+       813.5,
+       -8.1
+      ],
+      [
+       -2300.8,
+       813.6,
+       -8.3
+      ],
+      [
+       -2278.5,
+       813.7,
+       -8.5
+      ],
+      [
+       -2256.0,
+       813.1,
+       -8.5
+      ],
+      [
+       -2233.5,
+       812.4,
+       -8.5
+      ],
+      [
+       -2210.9,
+       811.8,
+       -8.5
+      ],
+      [
+       -2188.4,
+       811.2,
+       -8.5
+      ],
+      [
+       -2165.9,
+       810.5,
+       -8.5
+      ],
+      [
+       -2143.4,
+       809.9,
+       -8.5
+      ],
+      [
+       -2122.5,
+       815.5,
+       -8.5
+      ],
+      [
+       -2101.6,
+       821.1,
+       -8.5
+      ],
+      [
+       -2076.8,
+       821.7,
+       -8.5
+      ],
+      [
+       -2052.0,
+       822.3,
+       -8.5
+      ],
+      [
+       -2028.8,
+       821.6,
+       -8.5
+      ],
+      [
+       -2005.6,
+       820.9,
+       -8.5
+      ],
+      [
+       -1972.8,
+       813.2,
+       -8.6
+      ],
+      [
+       -1967.8,
+       815.3,
+       -8.9
+      ],
+      [
+       -1962.8,
+       818.9,
+       -9.4
+      ],
+      [
+       -1959.2,
+       824.5,
+       -9.9
+      ],
+      [
+       -1957.4,
+       831.2,
+       -10.4
+      ],
+      [
+       -1951.4,
+       863.7,
+       -12.1
+      ],
+      [
+       -1949.1,
+       868.2,
+       -12.4
+      ],
+      [
+       -1946.1,
+       870.7,
+       -12.6
+      ],
+      [
+       -1941.6,
+       871.5,
+       -13.0
+      ],
+      [
+       -1924.0,
+       870.6,
+       -14.1
+      ],
+      [
+       -1899.7,
+       869.2,
+       -15.7
+      ],
+      [
+       -1875.4,
+       867.7,
+       -17.2
+      ],
+      [
+       -1848.6,
+       867.0,
+       -18.5
+      ],
+      [
+       -1821.7,
+       866.3,
+       -19.3
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 77344803,1339959027; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -1609.0,
+       216.6,
+       -19.2
+      ],
+      [
+       -1607.0,
+       209.7,
+       -19.5
+      ],
+      [
+       -1597.5,
+       176.5,
+       -21.1
+      ],
+      [
+       -1593.4,
+       167.7,
+       -21.6
+      ],
+      [
+       -1587.4,
+       157.3,
+       -22.1
+      ],
+      [
+       -1574.9,
+       136.4,
+       -22.9
+      ],
+      [
+       -1562.3,
+       115.5,
+       -23.5
+      ],
+      [
+       -1549.8,
+       94.6,
+       -23.9
+      ],
+      [
+       -1537.3,
+       73.7,
+       -24.1
+      ],
+      [
+       -1523.5,
+       44.8,
+       -24.4
+      ],
+      [
+       -1528.6,
+       29.0,
+       -24.8
+      ],
+      [
+       -1546.2,
+       14.2,
+       -25.3
+      ],
+      [
+       -1552.9,
+       0.8,
+       -25.6
+      ],
+      [
+       -1559.2,
+       1.5,
+       -25.6
+      ],
+      [
+       -1573.1,
+       -22.7,
+       -26.0
+      ],
+      [
+       -1588.8,
+       -30.9,
+       -26.0
+      ],
+      [
+       -1590.8,
+       -37.2,
+       -26.1
+      ],
+      [
+       -1587.9,
+       -40.9,
+       -26.2
+      ],
+      [
+       -1587.8,
+       -46.9,
+       -26.3
+      ],
+      [
+       -1593.6,
+       -51.3,
+       -26.3
+      ],
+      [
+       -1590.6,
+       -60.3,
+       -26.6
+      ],
+      [
+       -1583.4,
+       -62.6,
+       -26.7
+      ],
+      [
+       -1579.0,
+       -71.5,
+       -26.9
+      ],
+      [
+       -1577.1,
+       -75.4,
+       -26.9
+      ],
+      [
+       -1575.0,
+       -78.1,
+       -27.0
+      ],
+      [
+       -1568.5,
+       -78.5,
+       -27.1
+      ],
+      [
+       -1565.2,
+       -92.7,
+       -27.3
+      ],
+      [
+       -1567.9,
+       -112.5,
+       -27.5
+      ],
+      [
+       -1576.3,
+       -141.0,
+       -27.8
+      ],
+      [
+       -1574.2,
+       -152.9,
+       -27.9
+      ],
+      [
+       -1570.3,
+       -154.0,
+       -28.0
+      ],
+      [
+       -1564.2,
+       -151.7,
+       -28.0
+      ],
+      [
+       -1562.1,
+       -155.4,
+       -28.0
+      ],
+      [
+       -1562.1,
+       -168.9,
+       -28.1
+      ],
+      [
+       -1564.2,
+       -178.9,
+       -28.2
+      ],
+      [
+       -1562.8,
+       -187.1,
+       -28.3
+      ],
+      [
+       -1553.6,
+       -191.2,
+       -28.3
+      ],
+      [
+       -1544.8,
+       -209.1,
+       -28.4
+      ],
+      [
+       -1536.8,
+       -205.2,
+       -28.4
+      ],
+      [
+       -1505.2,
+       -215.8,
+       -28.5
+      ],
+      [
+       -1505.6,
+       -229.9,
+       -28.5
+      ],
+      [
+       -1502.1,
+       -231.7,
+       -28.5
+      ],
+      [
+       -1496.1,
+       -231.3,
+       -28.5
+      ],
+      [
+       -1490.2,
+       -237.2,
+       -28.6
+      ],
+      [
+       -1492.1,
+       -247.4,
+       -28.6
+      ],
+      [
+       -1504.8,
+       -251.7,
+       -28.7
+      ],
+      [
+       -1509.3,
+       -258.6,
+       -28.7
+      ],
+      [
+       -1516.0,
+       -263.4,
+       -28.7
+      ],
+      [
+       -1517.5,
+       -269.5,
+       -28.7
+      ],
+      [
+       -1517.1,
+       -275.3,
+       -28.7
+      ],
+      [
+       -1521.1,
+       -304.6,
+       -28.8
+      ],
+      [
+       -1523.1,
+       -309.2,
+       -28.9
+      ],
+      [
+       -1532.2,
+       -317.1,
+       -28.9
+      ],
+      [
+       -1535.7,
+       -318.8,
+       -28.9
+      ],
+      [
+       -1538.9,
+       -318.8,
+       -28.9
+      ],
+      [
+       -1541.6,
+       -317.5,
+       -28.9
+      ],
+      [
+       -1552.2,
+       -319.4,
+       -28.9
+      ],
+      [
+       -1554.1,
+       -321.7,
+       -28.9
+      ],
+      [
+       -1555.3,
+       -326.1,
+       -28.9
+      ],
+      [
+       -1556.0,
+       -340.1,
+       -28.9
+      ],
+      [
+       -1558.7,
+       -349.5,
+       -28.9
+      ],
+      [
+       -1560.8,
+       -353.8,
+       -29.0
+      ],
+      [
+       -1566.6,
+       -362.8,
+       -29.0
+      ],
+      [
+       -1566.5,
+       -366.4,
+       -29.0
+      ],
+      [
+       -1563.1,
+       -370.0,
+       -29.1
+      ],
+      [
+       -1556.6,
+       -366.8,
+       -29.1
+      ],
+      [
+       -1554.2,
+       -368.7,
+       -29.1
+      ],
+      [
+       -1552.3,
+       -374.0,
+       -29.2
+      ],
+      [
+       -1554.2,
+       -378.6,
+       -29.2
+      ],
+      [
+       -1558.5,
+       -384.0,
+       -29.2
+      ],
+      [
+       -1559.6,
+       -386.7,
+       -29.3
+      ],
+      [
+       -1554.1,
+       -397.9,
+       -29.4
+      ],
+      [
+       -1555.7,
+       -409.6,
+       -29.6
+      ],
+      [
+       -1566.7,
+       -428.7,
+       -29.7
+      ],
+      [
+       -1575.5,
+       -455.5,
+       -30.0
+      ],
+      [
+       -1575.6,
+       -472.4,
+       -30.2
+      ],
+      [
+       -1582.6,
+       -473.8,
+       -30.2
+      ],
+      [
+       -1604.8,
+       -474.6,
+       -30.2
+      ],
+      [
+       -1617.4,
+       -479.8,
+       -30.2
+      ],
+      [
+       -1614.7,
+       -494.0,
+       -30.2
+      ],
+      [
+       -1613.4,
+       -499.5,
+       -30.3
+      ],
+      [
+       -1610.6,
+       -511.3,
+       -30.4
+      ],
+      [
+       -1617.8,
+       -516.3,
+       -30.5
+      ],
+      [
+       -1616.3,
+       -528.9,
+       -30.6
+      ],
+      [
+       -1619.9,
+       -533.1,
+       -30.7
+      ],
+      [
+       -1618.0,
+       -549.5,
+       -30.8
+      ],
+      [
+       -1603.9,
+       -566.2,
+       -31.1
+      ],
+      [
+       -1589.6,
+       -574.0,
+       -31.2
+      ],
+      [
+       -1588.5,
+       -591.4,
+       -31.5
+      ],
+      [
+       -1588.3,
+       -594.8,
+       -31.5
+      ],
+      [
+       -1583.2,
+       -598.1,
+       -31.6
+      ],
+      [
+       -1563.1,
+       -598.7,
+       -31.6
+      ],
+      [
+       -1556.2,
+       -604.5,
+       -31.7
+      ],
+      [
+       -1551.2,
+       -612.3,
+       -31.8
+      ],
+      [
+       -1540.3,
+       -615.3,
+       -31.8
+      ],
+      [
+       -1530.7,
+       -623.4,
+       -31.8
+      ],
+      [
+       -1537.0,
+       -638.8,
+       -31.9
+      ],
+      [
+       -1533.7,
+       -647.9,
+       -32.0
+      ],
+      [
+       -1522.3,
+       -662.6,
+       -32.1
+      ],
+      [
+       -1518.0,
+       -664.9,
+       -32.1
+      ],
+      [
+       -1505.9,
+       -656.5,
+       -32.1
+      ],
+      [
+       -1499.5,
+       -669.7,
+       -32.1
+      ],
+      [
+       -1488.1,
+       -680.8,
+       -32.1
+      ],
+      [
+       -1476.8,
+       -679.5,
+       -32.1
+      ],
+      [
+       -1466.3,
+       -680.4,
+       -32.1
+      ],
+      [
+       -1465.9,
+       -697.4,
+       -32.1
+      ],
+      [
+       -1472.6,
+       -709.2,
+       -32.1
+      ],
+      [
+       -1469.4,
+       -721.0,
+       -32.1
+      ],
+      [
+       -1473.3,
+       -728.1,
+       -32.1
+      ],
+      [
+       -1472.4,
+       -733.7,
+       -32.1
+      ],
+      [
+       -1464.6,
+       -737.2,
+       -32.1
+      ],
+      [
+       -1464.0,
+       -744.0,
+       -32.1
+      ],
+      [
+       -1471.1,
+       -747.1,
+       -32.2
+      ],
+      [
+       -1480.6,
+       -747.5,
+       -32.2
+      ],
+      [
+       -1483.6,
+       -752.8,
+       -32.2
+      ],
+      [
+       -1481.8,
+       -761.9,
+       -32.3
+      ],
+      [
+       -1470.8,
+       -778.7,
+       -32.4
+      ],
+      [
+       -1474.5,
+       -816.3,
+       -32.8
+      ],
+      [
+       -1475.9,
+       -825.0,
+       -32.9
+      ],
+      [
+       -1480.6,
+       -824.8,
+       -32.9
+      ],
+      [
+       -1485.1,
+       -827.3,
+       -32.9
+      ],
+      [
+       -1487.8,
+       -832.2,
+       -33.0
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 30694281; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -1489.9,
+       -838.9,
+       -33.1
+      ],
+      [
+       -1494.0,
+       -842.4,
+       -33.1
+      ],
+      [
+       -1519.0,
+       -839.1,
+       -33.1
+      ],
+      [
+       -1544.0,
+       -835.9,
+       -33.1
+      ],
+      [
+       -1553.0,
+       -846.7,
+       -33.2
+      ],
+      [
+       -1554.3,
+       -851.3,
+       -33.2
+      ],
+      [
+       -1554.3,
+       -856.1,
+       -33.3
+      ],
+      [
+       -1558.6,
+       -864.3,
+       -33.3
+      ],
+      [
+       -1560.5,
+       -868.6,
+       -33.4
+      ],
+      [
+       -1560.2,
+       -873.1,
+       -33.4
+      ],
+      [
+       -1558.1,
+       -880.6,
+       -33.5
+      ],
+      [
+       -1557.6,
+       -884.3,
+       -33.5
+      ],
+      [
+       -1559.2,
+       -888.1,
+       -33.6
+      ],
+      [
+       -1562.1,
+       -891.0,
+       -33.6
+      ],
+      [
+       -1565.6,
+       -892.1,
+       -33.6
+      ],
+      [
+       -1579.6,
+       -894.2,
+       -33.6
+      ],
+      [
+       -1583.6,
+       -897.1,
+       -33.7
+      ],
+      [
+       -1586.6,
+       -901.1,
+       -33.7
+      ],
+      [
+       -1587.4,
+       -905.4,
+       -33.8
+      ],
+      [
+       -1587.4,
+       -911.5,
+       -33.8
+      ],
+      [
+       -1588.4,
+       -917.4,
+       -33.9
+      ],
+      [
+       -1590.6,
+       -921.4,
+       -33.9
+      ],
+      [
+       -1593.3,
+       -924.1,
+       -33.9
+      ],
+      [
+       -1597.3,
+       -924.6,
+       -34.0
+      ],
+      [
+       -1606.4,
+       -924.9,
+       -34.0
+      ],
+      [
+       -1609.9,
+       -925.4,
+       -34.0
+      ],
+      [
+       -1613.1,
+       -928.1,
+       -34.0
+      ],
+      [
+       -1614.3,
+       -929.3,
+       -34.1
+      ],
+      [
+       -1617.2,
+       -932.4,
+       -34.1
+      ],
+      [
+       -1620.7,
+       -937.4,
+       -34.2
+      ],
+      [
+       -1622.8,
+       -941.9,
+       -34.2
+      ],
+      [
+       -1630.6,
+       -966.5,
+       -34.5
+      ],
+      [
+       -1635.3,
+       -975.6,
+       -34.6
+      ],
+      [
+       -1645.4,
+       -1006.8,
+       -35.0
+      ],
+      [
+       -1646.5,
+       -1015.0,
+       -35.1
+      ],
+      [
+       -1651.0,
+       -1050.0,
+       -35.5
+      ],
+      [
+       -1678.5,
+       -1065.7,
+       -35.5
+      ],
+      [
+       -1691.2,
+       -1078.6,
+       -35.5
+      ],
+      [
+       -1702.5,
+       -1087.4,
+       -35.5
+      ],
+      [
+       -1708.1,
+       -1103.0,
+       -35.5
+      ],
+      [
+       -1721.7,
+       -1120.2,
+       -35.5
+      ],
+      [
+       -1727.7,
+       -1130.0,
+       -35.5
+      ],
+      [
+       -1729.6,
+       -1138.4,
+       -35.5
+      ],
+      [
+       -1731.3,
+       -1146.7,
+       -35.5
+      ],
+      [
+       -1731.5,
+       -1153.1,
+       -35.5
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 848170229,721041703; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -1996.0,
+       -1534.7,
+       -36.4
+      ],
+      [
+       -1998.5,
+       -1557.8,
+       -36.8
+      ],
+      [
+       -2001.0,
+       -1580.9,
+       -37.1
+      ],
+      [
+       -2003.4,
+       -1604.1,
+       -37.4
+      ],
+      [
+       -2005.9,
+       -1627.2,
+       -37.6
+      ],
+      [
+       -2008.4,
+       -1650.3,
+       -37.7
+      ],
+      [
+       -2012.2,
+       -1671.6,
+       -37.8
+      ],
+      [
+       -2016.1,
+       -1692.8,
+       -37.9
+      ],
+      [
+       -2019.9,
+       -1714.1,
+       -37.9
+      ],
+      [
+       -2023.7,
+       -1735.3,
+       -37.9
+      ],
+      [
+       -2027.5,
+       -1756.6,
+       -37.9
+      ],
+      [
+       -2031.4,
+       -1777.8,
+       -37.9
+      ],
+      [
+       -2035.2,
+       -1799.1,
+       -37.9
+      ],
+      [
+       -2036.8,
+       -1807.3,
+       -37.9
+      ],
+      [
+       -2040.6,
+       -1813.3,
+       -37.9
+      ],
+      [
+       -2044.9,
+       -1816.8,
+       -38.0
+      ],
+      [
+       -2061.2,
+       -1825.8,
+       -38.0
+      ],
+      [
+       -2065.7,
+       -1828.4,
+       -38.0
+      ],
+      [
+       -2069.1,
+       -1831.7,
+       -38.0
+      ],
+      [
+       -2071.0,
+       -1835.9,
+       -38.0
+      ],
+      [
+       -2072.4,
+       -1842.9,
+       -38.0
+      ],
+      [
+       -2077.6,
+       -1871.9,
+       -38.2
+      ],
+      [
+       -2080.3,
+       -1879.3,
+       -38.2
+      ],
+      [
+       -2092.9,
+       -1893.9,
+       -38.3
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 944142472; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       -2079.0,
+       -2185.6,
+       -41.9
+      ],
+      [
+       -2076.4,
+       -2208.2,
+       -41.9
+      ],
+      [
+       -2073.9,
+       -2230.7,
+       -41.9
+      ],
+      [
+       -2071.3,
+       -2253.3,
+       -41.9
+      ],
+      [
+       -2068.4,
+       -2274.1,
+       -41.9
+      ],
+      [
+       -2065.4,
+       -2294.9,
+       -41.9
+      ],
+      [
+       -2062.5,
+       -2315.7,
+       -42.1
+      ],
+      [
+       -2059.5,
+       -2336.5,
+       -42.2
+      ],
+      [
+       -2056.6,
+       -2357.3,
+       -42.4
+      ],
+      [
+       -2051.8,
+       -2380.4,
+       -42.6
+      ],
+      [
+       -2047.1,
+       -2403.4,
+       -42.8
+      ],
+      [
+       -2042.3,
+       -2426.5,
+       -43.2
+      ],
+      [
+       -2035.7,
+       -2433.0,
+       -43.3
+      ],
+      [
+       -2029.2,
+       -2444.6,
+       -43.5
+      ],
+      [
+       -2022.7,
+       -2445.6,
+       -43.6
+      ],
+      [
+       -2022.2,
+       -2455.3,
+       -43.7
+      ],
+      [
+       -2020.1,
+       -2458.5,
+       -43.8
+      ],
+      [
+       -2017.7,
+       -2466.6,
+       -43.9
+      ],
+      [
+       -2006.0,
+       -2486.7,
+       -44.3
+      ],
+      [
+       -2001.0,
+       -2491.9,
+       -44.4
+      ],
+      [
+       -1995.3,
+       -2496.2,
+       -44.6
+      ],
+      [
+       -1995.7,
+       -2500.0,
+       -44.6
+      ],
+      [
+       -1993.0,
+       -2502.4,
+       -44.7
+      ],
+      [
+       -1988.3,
+       -2506.6,
+       -44.8
+      ],
+      [
+       -1980.8,
+       -2513.5,
+       -44.9
+      ],
+      [
+       -1980.5,
+       -2515.4,
+       -45.0
+      ],
+      [
+       -1981.5,
+       -2517.6,
+       -45.0
+      ],
+      [
+       -1982.8,
+       -2520.2,
+       -45.0
+      ],
+      [
+       -1982.7,
+       -2522.7,
+       -45.1
+      ],
+      [
+       -1978.7,
+       -2527.3,
+       -45.1
+      ],
+      [
+       -1974.5,
+       -2528.8,
+       -45.2
+      ],
+      [
+       -1967.6,
+       -2530.4,
+       -45.2
+      ],
+      [
+       -1961.5,
+       -2534.0,
+       -45.2
+      ],
+      [
+       -1959.6,
+       -2536.9,
+       -45.3
+      ],
+      [
+       -1960.8,
+       -2543.8,
+       -45.3
+      ],
+      [
+       -1959.1,
+       -2548.4,
+       -45.4
+      ],
+      [
+       -1944.3,
+       -2565.5,
+       -45.5
+      ],
+      [
+       -1940.0,
+       -2573.7,
+       -45.6
+      ],
+      [
+       -1936.2,
+       -2578.1,
+       -45.6
+      ],
+      [
+       -1933.9,
+       -2579.1,
+       -45.6
+      ],
+      [
+       -1928.6,
+       -2578.9,
+       -45.6
+      ],
+      [
+       -1925.9,
+       -2580.3,
+       -45.6
+      ],
+      [
+       -1919.7,
+       -2591.0,
+       -45.6
+      ],
+      [
+       -1919.7,
+       -2600.1,
+       -45.7
+      ],
+      [
+       -1918.3,
+       -2603.0,
+       -45.7
+      ],
+      [
+       -1915.9,
+       -2604.7,
+       -45.7
+      ],
+      [
+       -1910.0,
+       -2606.0,
+       -45.7
+      ],
+      [
+       -1901.1,
+       -2612.0,
+       -45.7
+      ],
+      [
+       -1885.9,
+       -2629.4,
+       -45.7
+      ],
+      [
+       -1885.0,
+       -2634.3,
+       -45.8
+      ],
+      [
+       -1885.9,
+       -2637.0,
+       -45.8
+      ],
+      [
+       -1881.1,
+       -2640.3,
+       -45.8
+      ],
+      [
+       -1869.6,
+       -2650.5,
+       -45.9
+      ],
+      [
+       -1862.9,
+       -2661.4,
+       -45.9
+      ],
+      [
+       -1857.8,
+       -2667.7,
+       -45.9
+      ],
+      [
+       -1852.2,
+       -2680.1,
+       -46.0
+      ],
+      [
+       -1847.3,
+       -2684.9,
+       -46.1
+      ],
+      [
+       -1842.5,
+       -2692.7,
+       -46.1
+      ],
+      [
+       -1838.3,
+       -2696.5,
+       -46.2
+      ],
+      [
+       -1833.7,
+       -2706.5,
+       -46.3
+      ],
+      [
+       -1806.0,
+       -2731.7,
+       -46.5
+      ],
+      [
+       -1802.9,
+       -2741.1,
+       -46.6
+      ],
+      [
+       -1784.8,
+       -2759.9,
+       -46.7
+      ],
+      [
+       -1780.6,
+       -2770.1,
+       -46.8
+      ],
+      [
+       -1759.7,
+       -2788.8,
+       -47.1
+      ],
+      [
+       -1744.7,
+       -2797.9,
+       -47.2
+      ],
+      [
+       -1734.5,
+       -2807.3,
+       -47.3
+      ],
+      [
+       -1721.9,
+       -2813.5,
+       -47.5
+      ],
+      [
+       -1707.7,
+       -2816.8,
+       -47.6
+      ],
+      [
+       -1699.9,
+       -2821.4,
+       -47.7
+      ],
+      [
+       -1677.7,
+       -2833.2,
+       -47.7
+      ],
+      [
+       -1655.5,
+       -2845.0,
+       -47.7
+      ],
+      [
+       -1633.0,
+       -2852.4,
+       -47.7
+      ],
+      [
+       -1611.4,
+       -2864.4,
+       -47.7
+      ]
+     ],
+     "top_w": 3,
+     "side": "slope",
+     "slope": 1.2,
+     "evidence": "OSM Durlești stream ways 72657194; bottom = DEM-1.8 m monotonic downstream (ESTIMATE); concrete-lined trapezoid in Durlești (Str. Decebal, site 10), natural ravine in Buiucani/Valea Morilor. Culverted reaches (OSM tunnel=culvert) and the Valea Morilor / flooded-canal lake reaches are omitted."
+    }
+   ]
+  }
+ ]
+}

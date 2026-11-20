@@ -1,0 +1,457 @@
+{
+ "roads": [
+  {
+   "name": "Bulevardul Moscova",
+   "x": 2349,
+   "z": -2797,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 (primary default). OSM lanes=6; satellite curb-to-curb ~20.5 m at (2420,-3100) and (2530,-3500), 3+3 lanes, single carriageway with solid centre line."
+  },
+  {
+   "name": "Bulevardul Moscova",
+   "x": 2307,
+   "z": -2639,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 (primary default). OSM lanes=6; satellite curb-to-curb ~20.5 m at (2420,-3100) and (2530,-3500), 3+3 lanes, single carriageway with solid centre line."
+  },
+  {
+   "name": "Bulevardul Moscova",
+   "x": 2250,
+   "z": -2420,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 (primary default). OSM lanes=6; satellite curb-to-curb ~20.5 m at (2420,-3100) and (2530,-3500), 3+3 lanes, single carriageway with solid centre line."
+  },
+  {
+   "name": "Bulevardul Moscova",
+   "x": 2430,
+   "z": -3110,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 (primary default). OSM lanes=6; satellite curb-to-curb ~20.5 m at (2420,-3100) and (2530,-3500), 3+3 lanes, single carriageway with solid centre line."
+  },
+  {
+   "name": "Bulevardul Moscova",
+   "x": 2536,
+   "z": -3511,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 (primary default). OSM lanes=6; satellite curb-to-curb ~20.5 m at (2420,-3100) and (2530,-3500), 3+3 lanes, single carriageway with solid centre line."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 2950,
+   "z": -1950,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6; satellite ~20 m, 3+3 lanes at (3200,-1830)."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 3270,
+   "z": -1825,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6; satellite ~20 m, 3+3 lanes at (3200,-1830)."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 3600,
+   "z": -1700,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6; satellite ~20 m, 3+3 lanes at (3200,-1830)."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 2787,
+   "z": -2007,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6; satellite ~20 m, 3+3 lanes at (3200,-1830)."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 2286,
+   "z": -2153,
+   "w": 17.1,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6 but satellite at (2380,-2125) shows ~16-17 m: 2 travel lanes + kerbside parking north, ~3 lanes south. 17.1 keeps 2 lanes/dir."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 2381,
+   "z": -2126,
+   "w": 17.1,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6 but satellite at (2380,-2125) shows ~16-17 m: 2 travel lanes + kerbside parking north, ~3 lanes south. 17.1 keeps 2 lanes/dir."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 2582,
+   "z": -2068,
+   "w": 17.1,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6 but satellite at (2380,-2125) shows ~16-17 m: 2 travel lanes + kerbside parking north, ~3 lanes south. 17.1 keeps 2 lanes/dir."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 2720,
+   "z": -2028,
+   "w": 17.1,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6 but satellite at (2380,-2125) shows ~16-17 m: 2 travel lanes + kerbside parking north, ~3 lanes south. 17.1 keeps 2 lanes/dir."
+  },
+  {
+   "name": "Bulevardul Renașterii Naționale",
+   "x": 1607,
+   "z": -1817,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 between dual-carriageway (2x10.5) sections. OSM lanes=6; satellite at (1610,-1800) ~21 m single carriageway with centre line."
+  },
+  {
+   "name": "Bulevardul Renașterii Naționale",
+   "x": 1480,
+   "z": -1471,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 between dual-carriageway (2x10.5) sections. OSM lanes=6; satellite at (1610,-1800) ~21 m single carriageway with centre line."
+  },
+  {
+   "name": "Bulevardul Renașterii Naționale",
+   "x": 1407,
+   "z": -1398,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 between dual-carriageway (2x10.5) sections. OSM lanes=6; satellite at (1610,-1800) ~21 m single carriageway with centre line."
+  },
+  {
+   "name": "Bulevardul Renașterii Naționale",
+   "x": 1341,
+   "z": -1332,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 between dual-carriageway (2x10.5) sections. OSM lanes=6; satellite at (1610,-1800) ~21 m single carriageway with centre line."
+  },
+  {
+   "name": "Bulevardul Renașterii Naționale",
+   "x": 1371,
+   "z": -2170,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way pieces w=14 between dual-carriageway (2x10.5) sections. OSM lanes=6; satellite at (1610,-1800) ~21 m single carriageway with centre line."
+  },
+  {
+   "name": "Strada Bogdan-Voievod",
+   "x": 1838,
+   "z": -2069,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "Two-way w=14. OSM lanes=6 (11 ways); satellite at (1810,-2027) shows ~3 lanes/dir."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": 312,
+   "z": -1973,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "East end, two-way w=14. OSM lanes=6; satellite (150,-2080) shows wide 3+3 approach to the roundabout."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": 606,
+   "z": -1878,
+   "w": 20.4,
+   "ow": 0,
+   "reason": "East end, two-way w=14. OSM lanes=6; satellite (150,-2080) shows wide 3+3 approach to the roundabout."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -3289,
+   "z": -3763,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -2647,
+   "z": -3561,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -2279,
+   "z": -3445,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -2074,
+   "z": -3382,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -1700,
+   "z": -3300,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -1335,
+   "z": -3150,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -1000,
+   "z": -2950,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Petricani",
+   "x": -560,
+   "z": -2620,
+   "w": 10,
+   "ow": 0,
+   "reason": "Two-way w=14 from untagged primary default (OSM primary, no lanes/width). Satellite curb-to-curb ~8.5-9 m at (-1400,-3100) and ~10 m at (-400,-2500); 1 lane each way."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 178,
+   "z": -4281,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 405,
+   "z": -3835,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 500,
+   "z": -3645,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 641,
+   "z": -3354,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 698,
+   "z": -3226,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 735,
+   "z": -3054,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 769,
+   "z": -2881,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 816,
+   "z": -2647,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 891,
+   "z": -2260,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 879,
+   "z": -1980,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  },
+  {
+   "name": "Strada Nicolae Dimo",
+   "x": 3103,
+   "z": -3586,
+   "w": 8,
+   "ow": 0,
+   "reason": "Two-way w=11 (secondary default). OSM lanes=1-2; satellite at (2980,-3000) ~7-8 m, 1+1 lanes."
+  },
+  {
+   "name": "Strada Nicolae Dimo",
+   "x": 2958,
+   "z": -2873,
+   "w": 8,
+   "ow": 0,
+   "reason": "Two-way w=11 (secondary default). OSM lanes=1-2; satellite at (2980,-3000) ~7-8 m, 1+1 lanes."
+  },
+  {
+   "name": "Strada Nicolae Dimo",
+   "x": 2889,
+   "z": -2656,
+   "w": 8,
+   "ow": 0,
+   "reason": "Two-way w=11 (secondary default). OSM lanes=1-2; satellite at (2980,-3000) ~7-8 m, 1+1 lanes."
+  },
+  {
+   "name": "Strada Nicolae Dimo",
+   "x": 2788,
+   "z": -2264,
+   "w": 8,
+   "ow": 0,
+   "reason": "Two-way w=11 (secondary default). OSM lanes=1-2; satellite at (2980,-3000) ~7-8 m, 1+1 lanes."
+  },
+  {
+   "name": "Strada Nicolae Dimo",
+   "x": 2641,
+   "z": -1739,
+   "w": 8,
+   "ow": 0,
+   "reason": "Two-way w=11 (secondary default). OSM lanes=1-2; satellite at (2980,-3000) ~7-8 m, 1+1 lanes."
+  },
+  {
+   "name": "Strada Calea Orheiului",
+   "x": null,
+   "z": null,
+   "w": 10.5,
+   "ow": null,
+   "reason": "Dual carriageway pieces w=11.2 (untagged trunk x0.75). OSM trunk lanes=3 oneway; satellite at (1500,-3500) each carriageway ~9-10 m. Keep ow of each piece, only change w."
+  },
+  {
+   "name": "Strada Doina",
+   "x": 843,
+   "z": -2510,
+   "w": 8,
+   "ow": 0,
+   "reason": "w=11 (secondary default). OSM lanes=1-2; satellite at (650,-3300) ~7.5 m asphalt, 1+1 lanes through private-house sector."
+  }
+ ],
+ "buildings": [
+  {
+   "x": 2317,
+   "z": -3161,
+   "h": 28,
+   "reason": "untagged random 15; 9-storey slab next to tagged 9f blocks, same shadow length (sat 2420,-3100)"
+  },
+  {
+   "x": 2468,
+   "z": -3109,
+   "h": 29.4,
+   "reason": "random 10; north end section of the 29.4/9f white slab, same height on satellite"
+  },
+  {
+   "x": 2441,
+   "z": -3001,
+   "h": 29.4,
+   "reason": "random 10; section of same 9f slab"
+  },
+  {
+   "x": 2432,
+   "z": -2963,
+   "h": 29.4,
+   "reason": "random 10; south end of same 9f slab"
+  },
+  {
+   "x": 2401,
+   "z": -3155,
+   "h": 8,
+   "reason": "random 13; flat-roof ~2-storey commercial block on Bd. Moscova, short shadow"
+  },
+  {
+   "x": 2369,
+   "z": -3038,
+   "h": 7,
+   "reason": "random 13; 1-2 storey building, short shadow"
+  },
+  {
+   "x": 2356,
+   "z": -2991,
+   "h": 8,
+   "reason": "random 13; ~2-storey commercial block"
+  },
+  {
+   "x": 2569,
+   "z": -3533,
+   "h": 4,
+   "reason": "random 13; 1-storey yellow-roof shop annex at foot of 9f slab (Bd. Moscova north)"
+  },
+  {
+   "x": 1163,
+   "z": -4447,
+   "h": 17.2,
+   "reason": "random 19; north end section of a 17.2/5f slab (sat 1100,-4350)"
+  },
+  {
+   "x": 697,
+   "z": -3284,
+   "h": 9,
+   "reason": "random 28 + panel style on a private house in Doina sector; satellite shows 2-3 storey house"
+  },
+  {
+   "x": 1296,
+   "z": -2450,
+   "h": 12,
+   "reason": "'Grand Premium Mercedes-Benz Center' random 31 + panel style; car showroom, low flat roof on satellite"
+  }
+ ],
+ "rules": [
+  {
+   "desc": "Private houses at 10/13 m",
+   "match": "untagged building (no floors), 120<=area<400 m2, h in {10,13} (pipeline random pick), >=6 neighbours within 75 m with median area <200 m2 and no neighbour with floors>=4 or panel style",
+   "change": "h -> 6.5 if h==10, 7.5 if h==13 (1-2 storeys). 1068 buildings in Râșcani match; verified on satellite at Doina (650,-3300): 27 hits there, all 1-2 storey pitched-roof houses. house_rule_hits.json lists them."
+  },
+  {
+   "desc": "Random heights on panel blocks",
+   "match": "untagged buildings area>=400 m2 (1190 in sector, 92% of all buildings lack floors) get random {10,13,16,19,28,31}",
+   "change": "Not auto-fixable reliably: industrial sheds in Petricani have the same shape. Suggest: slab (MRR length>=40 m, width 10-16 m) with h in {10,13} AND >=2 floors-tagged residential blocks (floors>=5) within 100 m -> h=17.2 (min 5 storeys). Unverified at scale."
+  },
+  {
+   "desc": "OSM lanes tag mismatch to watch if pipeline is re-run",
+   "match": "Strada Kiev (OSM primary lanes=2 two-way), Strada Doina/N. Dimo (lanes=1 two-way)",
+   "change": "DEFW would give 7.2 / 3.9 m. Satellite: Kiev ~15 m 2+2 (keep 14), Doina/Dimo ~7.5-8 m. Treat two-way lanes<=2 on primary as per-direction or floor to 7.5 m."
+  }
+ ]
+}

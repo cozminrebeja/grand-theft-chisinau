@@ -30,7 +30,7 @@ function world_rectDist(i,j,x,z){const T=WORLD.T,x0=i*T,z0=j*T;const dx=Math.max
 const world_packs=new Map();
 async function worldFetchTile(key){
   if(D.packs){const [i,j]=key.split('_').map(Number);const pk='p_'+Math.floor(i/D.packs)+'_'+Math.floor(j/D.packs);
-    let pr=world_packs.get(pk);if(!pr){pr=fetch(WORLD.base+'packs/'+pk+'.json').then(r=>{if(!r.ok)throw new Error('pack '+pk+' '+r.status);return r.json();});world_packs.set(pk,pr);pr.catch(()=>world_packs.delete(pk));}
+    let pr=world_packs.get(pk);if(!pr){pr=fetch(WORLD.base+'packs/'+pk+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error('pack '+pk+' '+r.status);return r.json();});world_packs.set(pk,pr);pr.catch(()=>world_packs.delete(pk));}
     const P=await pr;const t=P[key];if(!t)throw new Error('tile '+key+' missing in '+pk);return scaleTileData(t);}
   const r=await fetch(WORLD.base+'tiles/'+key+'.json');if(!r.ok)throw new Error('tile '+key+' '+r.status);return scaleTileData(await r.json());}
 function worldMakeTile(key,data,lod='near'){const [i,j]=key.split('_').map(Number);const T=WORLD.T;
@@ -160,6 +160,9 @@ function world_farInit(){
   if(camera.far<WORLD.viewDist+300){camera.far=WORLD.viewDist+300;camera.updateProjectionMatrix();}
   // ENV owns fog; if it hasn't been adapted to the streaming radius yet, stretch it so far-LOD tiles are visible through the haze
   if(WORLD.mode==='stream'&&scene.fog&&scene.fog.far<WORLD.loadR){scene.fog.near=Math.max(scene.fog.near,260);scene.fog.far=WORLD.loadR+400;WORLD.fogAdjusted=true;}
+  world_cityInit().then(ok=>{if(!ok)world_farBoxes();});}
+// fallback when world/city/ is missing or fails to load: coarse boxes from far.json
+function world_farBoxes(){
   fetch(WORLD.base+'far.json').then(r=>r.ok?r.json():null).then(F=>{if(!F||!F.boxes||!F.boxes.length)return;F.boxes=F.boxes.map(b=>[b[0]*WS,b[1]*WS,b[2]*WS,b[3]]);
     const SZ=2000,groups=new Map();
     for(const b of F.boxes){const k=Math.floor(b[0]/SZ)+'_'+Math.floor(b[1]/SZ);let a=groups.get(k);if(!a){a=[];groups.set(k,a);}a.push(b);}
@@ -182,7 +185,46 @@ function world_farInit(){
       g.setIndex(I.length>65535?new THREE.Uint32BufferAttribute(I,1):new THREE.Uint16BufferAttribute(I,1));g.computeBoundingSphere();
       const m=new THREE.Mesh(g,mat);m.matrixAutoUpdate=false;m.castShadow=m.receiveShadow=false;m.userData.noShadow=true;root.add(m);}
     scene.add(root);world_far={root,U};}).catch(()=>{});}
-function world_farUpdate(){if(world_far)world_far.U.uP.value.set(world_px,world_pz);}
+function world_farUpdate(){if(world_far)world_far.U.uP.value.set(world_px,world_pz);world_cityUpdate();}
+// ---------- whole-city low-detail layer (built in Blender by tools/make_city_lod.py → world/city/) ----------
+// buildings.glb: every footprint extruded, UV = tile index (i+.5,j+.5); a tile's buildings are discarded once that tile is
+// 'ready' (its detailed buildings are showing). ground.webp: roads/water/parks drawn onto the distant terrain.
+let world_city=null;
+const world_script=src=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s);});
+async function world_cityInit(){try{
+  const meta=await fetch(WORLD.base+'city/city.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null);if(!meta)return false;
+  const CDN='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/';
+  if(!THREE.GLTFLoader)await world_script(CDN+'GLTFLoader.js');if(!THREE.DRACOLoader)await world_script(CDN+'DRACOLoader.js');
+  // ground texture → distant terrain (premultiplied so transparent edges don't darken when filtered)
+  if(world_terr){const G=meta.ground;new THREE.TextureLoader().load(WORLD.base+G.image+'?v='+meta.v,tex=>{tex.premultiplyAlpha=true;
+    tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());const U=world_terr.U;U.uGround.value=tex;U.uG0.value.set(G.x0*WS,G.z0*WS);U.uGS.value=G.size*WS;});}
+  const T=WORLD.T,[X0,X1,Z0,Z1]=D.bounds,mx0=Math.floor(X0/WS/T)-1,mz0=Math.floor(Z0/WS/T)-1,mw=Math.ceil(X1/WS/T)-mx0+2,mh=Math.ceil(Z1/WS/T)-mz0+2;
+  const mdata=new Uint8Array(mw*mh*4),mtex=new THREE.DataTexture(mdata,mw,mh,THREE.RGBAFormat);mtex.magFilter=mtex.minFilter=THREE.NearestFilter;mtex.needsUpdate=true;
+  const U={uCMask:{value:mtex},uCM0:{value:new THREE.Vector2(mx0,mz0)},uCMS:{value:new THREE.Vector2(mw,mh)}};
+  const mat=new THREE.MeshPhongMaterial({vertexColors:true,flatShading:true,shininess:0,specular:0,side:THREE.DoubleSide});
+  mat.onBeforeCompile=sh=>{Object.assign(sh.uniforms,U);
+    sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec2 vTile;').replace('#include <begin_vertex>','#include <begin_vertex>\nvTile=uv;');
+    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vTile;uniform sampler2D uCMask;uniform vec2 uCM0,uCMS;')
+      .replace('void main() {','void main() {\n if(texture2D(uCMask,(floor(vTile)+0.5-uCM0)/uCMS).r>0.5)discard;');};
+  mat.customProgramCacheKey=()=>'world_city1';
+  const loader=new THREE.GLTFLoader(),draco=new THREE.DRACOLoader();draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');loader.setDRACOLoader(draco);
+  const gltf=await new Promise((ok,no)=>loader.load(WORLD.base+meta.buildings+'?v='+meta.v,ok,undefined,no));draco.dispose();
+  const root=gltf.scene;root.name='world_city';root.scale.setScalar(WS);
+  const meshes=[];root.traverse(o=>{if(o.isMesh){o.material=mat;o.castShadow=o.receiveShadow=false;o.userData.noShadow=true;meshes.push(o);}});
+  scene.add(root);root.updateMatrixWorld(true);
+  for(const m of meshes){m.geometry.computeBoundingBox();m.userData.box=m.geometry.boundingBox.clone().applyMatrix4(m.matrixWorld);}
+  world_city={root,meshes,mdata,mtex,mx0,mz0,mw,mh,sig:'',t:0,fog0:scene.fog?[scene.fog.near,scene.fog.far]:null,far0:camera.far};return true;
+}catch(e){console.error('city layer',e);return false;}}
+function world_cityUpdate(){const C=world_city;if(!C)return;
+  // fog opens up with camera altitude so the whole city reads from above; street level keeps ENV's fog
+  if(C.fog0&&scene.fog){const alt=Math.max(0,camera.position.y-groundY(camera.position.x,camera.position.z)-30);scene.fog.near=C.fog0[0]+alt*6;scene.fog.far=C.fog0[1]+alt*12;
+    const cf=Math.max(C.far0,scene.fog.far+500);if(Math.abs(cf-camera.far)>50){camera.far=cf;camera.updateProjectionMatrix();}}
+  // skip chunks entirely beyond the fog (at street level that's most of the city)
+  const fr=scene.fog?scene.fog.far:camera.far,cp=camera.position;
+  for(const m of C.meshes){const b=m.userData.box,dx=Math.max(b.min.x-cp.x,0,cp.x-b.max.x),dz=Math.max(b.min.z-cp.z,0,cp.z-b.max.z);m.visible=dx*dx+dz*dz<fr*fr;}
+  C.t-=1/60;if(C.t>0)return;C.t=.25;
+  let sig='';const keys=[];for(const t of WORLD.tiles.values())if(t.state==='ready'){keys.push(t);sig+=t.key+',';}
+  if(sig===C.sig)return;C.sig=sig;C.mdata.fill(0);for(const t of keys){const i=t.i-C.mx0,j=t.j-C.mz0;if(i<0||j<0||i>=C.mw||j>=C.mh)continue;C.mdata[(j*C.mw+i)*4]=255;}C.mtex.needsUpdate=true;}
 // ---------------- distant terrain (whole heightmap extent, coarse) ----------------
 // Shows Chișinău's real relief to the horizon. Fragments inside tiles that build their own detailed ground are discarded via a
 // per-tile mask: a tile is masked when t.state==='ready' and t.hasTerrain===true (set by the STREETS/ground builder for tiles whose
@@ -201,15 +243,18 @@ function world_terrainInit(){if(!HM||world_terr)return;
   // tile mask (1 = tile has its own detailed ground)
   const T=WORLD.T,mx0=Math.floor(x0/T),mz0=Math.floor(z0/T),mw=Math.ceil((x0+(nx-1)*c)/T)-mx0+1,mh=Math.ceil((z0+(nz-1)*c)/T)-mz0+1;
   const mdata=new Uint8Array(mw*mh*4),mtex=new THREE.DataTexture(mdata,mw,mh,THREE.RGBAFormat);mtex.magFilter=mtex.minFilter=THREE.NearestFilter;mtex.needsUpdate=true;
-  const U={uMask:{value:mtex},uM0:{value:new THREE.Vector2(mx0*T,mz0*T)},uMS:{value:new THREE.Vector2(mw*T,mh*T)}};
+  const U={uMask:{value:mtex},uM0:{value:new THREE.Vector2(mx0*T,mz0*T)},uMS:{value:new THREE.Vector2(mw*T,mh*T)},
+    uGround:{value:new THREE.DataTexture(new Uint8Array(4),1,1,THREE.RGBAFormat)},uG0:{value:new THREE.Vector2()},uGS:{value:1}}; // ground set by world_cityInit
+  U.uGround.value.needsUpdate=true;
   const mat=new THREE.MeshLambertMaterial({vertexColors:true});
   mat.onBeforeCompile=sh=>{Object.assign(sh.uniforms,U);
     sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec2 vTW;').replace('#include <project_vertex>','#include <project_vertex>\nvTW=(modelMatrix*vec4(transformed,1.0)).xz;');
-    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vTW;uniform sampler2D uMask;uniform vec2 uM0,uMS;')
-      .replace('void main() {','void main() {\n if(texture2D(uMask,(vTW-uM0)/uMS).r>0.5)discard;');};
-  mat.customProgramCacheKey=()=>'world_terr1';
+    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec2 vTW;uniform sampler2D uMask,uGround;uniform vec2 uM0,uMS,uG0;uniform float uGS;')
+      .replace('void main() {','void main() {\n if(texture2D(uMask,(vTW-uM0)/uMS).r>0.5)discard;')
+      .replace('#include <color_fragment>','#include <color_fragment>\n {vec2 gu=(vTW-uG0)/uGS;if(gu.x>0.0&&gu.y>0.0&&gu.x<1.0&&gu.y<1.0){vec4 g=texture2D(uGround,vec2(gu.x,1.0-gu.y));diffuseColor.rgb=diffuseColor.rgb*(1.0-g.a)+g.rgb;}}');};
+  mat.customProgramCacheKey=()=>'world_terr2';
   const m=new THREE.Mesh(g,mat);m.name='world_terrain';m.matrixAutoUpdate=false;m.frustumCulled=false;m.receiveShadow=true;m.castShadow=false;m.userData.noShadow=false;scene.add(m);
-  world_terr={m,mdata,mtex,mx0,mz0,mw,mh,sig:'',t:0};}
+  world_terr={m,mdata,mtex,mx0,mz0,mw,mh,sig:'',t:0,U};}
 function world_terrainUpdate(dt){const W=world_terr;if(!W)return;W.t-=dt||0;if(W.t>0)return;W.t=.25;
   let sig='';const keys=[];for(const t of WORLD.tiles.values())if(t.state==='ready'&&t.hasTerrain===true){keys.push(t);sig+=t.key+',';}
   if(sig===W.sig)return;W.sig=sig;W.mdata.fill(0);for(const t of keys){const i=t.i-W.mx0,j=t.j-W.mz0;if(i<0||j<0||i>=W.mw||j>=W.mh)continue;W.mdata[(j*W.mw+i)*4]=255;}W.mtex.needsUpdate=true;}

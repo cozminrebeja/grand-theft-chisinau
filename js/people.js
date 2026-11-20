@@ -5,7 +5,7 @@
 // One material with a small shader patch: every vertex carries a colour SLOT (skin/top/bottom/hair/shoe/accent…)
 // and a FEATURE bit (hair style, cap, headscarf, skirt, coat, backpack, bag, phone…). Each instance carries its
 // palette + a feature mask, so a single draw call per part renders dozens of different outfits.
-const PEDN=90;
+const PEDN=50;
 const SHIRTS=[0xc0392b,0x2c3e50,0x27ae60,0x8e44ad,0xecf0f1,0x34495e,0xd35400,0x16a085,0x7f8c8d,0xf1c40f,0x2980b9,0x6d4c41,0x111111],PANTS=[0x2c3e50,0x1b1b1b,0x34495e,0x5d4037,0x3b4a6b,0x6b6b6b],SKIN=[0xe8c3a0,0xd9a77f,0xf0d2b6,0xc69072];
 
 // ---------- feature bits & colour slots ----------

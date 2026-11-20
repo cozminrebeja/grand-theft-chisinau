@@ -7,7 +7,7 @@ const blobMat=new THREE.MeshBasicMaterial({map:blobTex,transparent:true,depthWri
 let D=null,BX0=0,BX1=0,BZ0=0,BZ1=0;
 // ---- world scale: the real city is shrunk horizontally+vertically by WS so driving distances feel game-sized;
 // vehicles, people, street furniture and building floor heights keep real-world size (so they read ~1/WS bigger). ----
-const WS=0.8;
+const WS=1; // 1:1 real scale — at 0.8 roads/footprints shrank but cars, people and floor heights did not, skewing every proportion
 const ws_flat=a=>{if(a)for(let i=0;i<a.length;i++)a[i]*=WS;return a;};
 function scaleWorldData(W){if(W._ws)return W;W._ws=true;
   for(const r of W.r||[]){r[1]*=WS;ws_flat(r[6]);}
@@ -17,9 +17,6 @@ function scaleWorldData(W){if(W._ws)return W;W._ws=true;
   if(W.bounds)W.bounds=W.bounds.map(v=>v*WS);
   for(const d of W.districts||[])ws_flat(d[1]);
   for(const b of (W.bridges||[]).concat(W.tunnels||[])){b[0]*=WS;ws_flat(b[2]);}
-  for(const r of W.rivers||[]){r[0]*=WS;ws_flat(r[1]);}
-  for(const c of W.cuts||[]){c[0]*=WS;c[2]*=WS;ws_flat(c[3]);}
-  for(const h of W.humps||[]){h[0]*=WS;h[1]*=WS;h[3]*=WS;}
   if(W.tile)W.tile*=WS;
   if(W.height){const h=W.height;h.x0*=WS;h.z0*=WS;h.cell*=WS;h.scale*=WS;}
   if(W.map){W.map.mpp*=WS;W.map.x0*=WS;W.map.z0*=WS;}
@@ -85,31 +82,52 @@ function landmarkSkipped(x,z){for(const s of LANDMARK_SKIP)if(Math.hypot(x-s.x,z
 // groundY(x,z): terrain height in metres relative to the Arc de Triumf ground (Arc = 0). 0 everywhere if no heightmap.
 let HM=null;
 async function initHeight(){const m=D&&D.height;if(!m)return;try{const r=await fetch((typeof WORLD!=='undefined'&&WORLD.base?WORLD.base:'world/')+m.file.replace(/^world\//,''));if(!r.ok)throw new Error(r.status);
-  let buf;if(/\.json$/.test(m.file)){const j=await r.json();const bs=atob(j.b64);const u=new Uint8Array(bs.length);for(let i=0;i<bs.length;i++)u[i]=bs.charCodeAt(i);buf=u.buffer;}else buf=await r.arrayBuffer();HM={a:new Int16Array(buf),x0:m.x0,z0:m.z0,c:m.cell,nx:m.nx,nz:m.nz,s:m.scale};}catch(e){console.error('heightmap',e);HM=null;}}
-function groundY(x,z){return hmY(x,z)+rv_off(x,z);}
-function hmY(x,z){if(!HM)return 0;let fx=(x-HM.x0)/HM.c,fz=(z-HM.z0)/HM.c;fx=fx<0?0:fx>HM.nx-1.001?HM.nx-1.001:fx;fz=fz<0?0:fz>HM.nz-1.001?HM.nz-1.001:fz;
+  let buf;if(/\.json$/.test(m.file)){const j=await r.json();const bs=atob(j.b64);const u=new Uint8Array(bs.length);for(let i=0;i<bs.length;i++)u[i]=bs.charCodeAt(i);buf=u.buffer;}else buf=await r.arrayBuffer();HM={a:new Int16Array(buf),x0:m.x0,z0:m.z0,c:m.cell,nx:m.nx,nz:m.nz,s:m.scale};}catch(e){console.error('heightmap',e);HM=null;}
+  await initEarthworks();}
+// DEM only (natural ground, no earthworks) — for retaining-wall feet and anything that must ignore embankments
+function groundDemY(x,z){if(!HM)return 0;let fx=(x-HM.x0)/HM.c,fz=(z-HM.z0)/HM.c;fx=fx<0?0:fx>HM.nx-1.001?HM.nx-1.001:fx;fz=fz<0?0:fz>HM.nz-1.001?HM.nz-1.001:fz;
   const i=fx|0,j=fz|0,u=fx-i,v=fz-j,a=HM.a,n=HM.nx,k=j*n+i;return ((a[k]*(1-u)+a[k+1]*u)*(1-v)+(a[k+n]*(1-u)+a[k+n+1]*u)*v)*HM.s;}
-// ---- channels carved into groundY: rivers (Bîc) and road cuts under grade-separated bridges ----
-// world.json `rivers`: [[w, flat dm]]  → concrete trapezoid, RV_DEP deep, banks RV_RUN wide, water on the bed
-// world.json `cuts`:   [[hw, depth, centre_s, flat dm]] → steep retaining walls; full depth within CUT_FULL of the crossing, 0 at both ends
-const RV_DEP=4.8,RV_RUN=3.4,RV_C=16,CUT_RUN=.8,CUT_FULL=12;let RV=null;
-function rv_addLine(L){RV.lines.push(L);const p=L.pts;
-  for(let i=0;i<p.length-1;i++){const a=p[i],b=p[i+1],dx=b[0]-a[0],dz=b[1]-a[1],hw=L.hw;const s={ax:a[0],az:a[1],dx,dz,l2:dx*dx+dz*dz||1e-9,hw,run:L.run,d0:L.dep[i],d1:L.dep[i+1]};
-    const x0=Math.floor((Math.min(a[0],b[0])-hw-1)/RV_C),x1=Math.floor((Math.max(a[0],b[0])+hw+1)/RV_C),z0=Math.floor((Math.min(a[1],b[1])-hw-1)/RV_C),z1=Math.floor((Math.max(a[1],b[1])+hw+1)/RV_C);
-    for(let gi=x0;gi<=x1;gi++)for(let gj=z0;gj<=z1;gj++){const k=gi*65536+gj;let c=RV.grid.get(k);if(!c){c=[];RV.grid.set(k,c);}c.push(s);}}}
+// ---- earthworks (world/earth.json, tools/make_earthworks.py): the DEM has no embankments, ramps, raised roads, cuttings or the Bîc
+// channel. A sparse 2 m raster stores the final ground height (dm) where they change it; corners outside fall back to the DEM. ----
+let EW=null;const EW_NO=-32768;
+async function initEarthworks(){try{const r=await fetch((typeof WORLD!=='undefined'&&WORLD.base?WORLD.base:'world/')+'earth.json.gz',{cache:'no-cache'});if(!r.ok)return;
+  let buf=await r.arrayBuffer();const u8=new Uint8Array(buf);   // gzip bytes unless the server already decoded them
+  if(u8[0]===0x1f&&u8[1]===0x8b)buf=await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+  const E=JSON.parse(new TextDecoder().decode(buf));
+  const b=new Map();for(const k in E.blocks){const [bi,bj]=k.split('_').map(Number);const s=atob(E.blocks[k]),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);b.set(bi*65536+bj,new Int16Array(u.buffer));}
+  EW={c:E.cell*WS,bs:E.bs,b,s:.1*WS};}catch(e){console.error('earthworks',e);EW=null;}}
+// river water surface (world.json rivers[], from the audited channels): height of the nearest river line within its half-width, else null
+let RVW=null;
+function riverLevelAt(x,z){if(!D||!D.rivers||!D.rivers.length)return null;
+  if(!RVW){RVW=new Map();D.rivers.forEach((r,ri)=>{const L=r.line;for(let i=0;i<L.length-1;i++){const a=L[i],b=L[i+1],pad=r.half+12;
+      for(let gx=Math.floor((Math.min(a[0],b[0])*WS-pad)/64);gx<=Math.floor((Math.max(a[0],b[0])*WS+pad)/64);gx++)
+        for(let gz=Math.floor((Math.min(a[1],b[1])*WS-pad)/64);gz<=Math.floor((Math.max(a[1],b[1])*WS+pad)/64);gz++){const k=gx*65536+gz;let c=RVW.get(k);if(!c)RVW.set(k,c=[]);c.push(ri,i);}}});}
+  const c=RVW.get(Math.floor(x/64)*65536+Math.floor(z/64));if(!c)return null;let best=null,bd=1e9;
+  for(let q=0;q<c.length;q+=2){const r=D.rivers[c[q]],a=r.line[c[q+1]],b=r.line[c[q+1]+1],ax=a[0]*WS,az=a[1]*WS,dx=b[0]*WS-ax,dz=b[1]*WS-az,l2=dx*dx+dz*dz||1e-9;
+    let t=((x-ax)*dx+(z-az)*dz)/l2;t=t<0?0:t>1?1:t;const d=Math.hypot(ax+dx*t-x,az+dz*t-z);if(d<r.half+12&&d<bd){bd=d;best=(a[2]+(b[2]-a[2])*t)*WS;}}
+  return best;}
+// ---- channels (world.json channels[], tools/make_earthworks.py): audited river/stream beds, already carved into groundY by
+// earth.json.gz. RV.lines feed the concrete lining renderer (bridges.js buildRiversTile, lined channels only) and the finer
+// ground grid on channel tiles (streets.js). Per point: bed y, rim half-width hw = bottom/2 + slope·depth, run = slope·depth. ----
+const RV_C=16;let RV=null;
+function hmY(x,z){return groundDemY(x,z);}   // natural (uncarved) ground, as the lining renderer expects
 function rv_init(){RV={lines:[],grid:new Map()};if(!D)return RV;
-  for(const [w,f] of D.rivers||[]){const p=dec(f);if(p.length>=2)rv_addLine({hw:w/2,run:RV_RUN,pts:p,dep:p.map(()=>RV_DEP),water:true});}
-  for(const [hw,dep,sc,f] of D.cuts||[]){const p=dec(f);if(p.length<2)continue;let c=0;const cum=p.map((q,i)=>i?(c+=Math.hypot(q[0]-p[i-1][0],q[1]-p[i-1][1])):0);const len=c;
-    const d=cum.map(s=>{const half=s<sc?sc:len-sc,r=Math.abs(s-sc);if(r<=CUT_FULL)return dep;const u=Math.max(0,1-(r-CUT_FULL)/Math.max(1,half-CUT_FULL));return dep*u*u*(3-2*u);});
-    rv_addLine({hw,run:CUT_RUN,pts:p,dep:d,water:false,cut:true});}
+  for(const c of D.channels||[]){const pts=c.line.map(p=>[p[0]*WS,p[1]*WS]),bed=c.line.map(p=>p[2]*WS);if(pts.length<2)continue;
+    const dep=pts.map((p,i)=>Math.max(0,groundDemY(p[0],p[1])-bed[i])),run=dep.map(d=>d*c.slope),hw=run.map(r=>c.w*WS/2+r);
+    const L={pts,bed,dep,run,hw,lined:!!c.lined,wd:(c.wd||.4)*WS,water:c.water!==false};RV.lines.push(L);
+    for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],dx=b[0]-a[0],dz=b[1]-a[1],h=Math.max(hw[i],hw[i+1]);const s={ax:a[0],az:a[1],dx,dz,l2:dx*dx+dz*dz||1e-9,hw:h,lined:L.lined};
+      const x0=Math.floor((Math.min(a[0],b[0])-h-1)/RV_C),x1=Math.floor((Math.max(a[0],b[0])+h+1)/RV_C),z0=Math.floor((Math.min(a[1],b[1])-h-1)/RV_C),z1=Math.floor((Math.max(a[1],b[1])+h+1)/RV_C);
+      for(let gi=x0;gi<=x1;gi++)for(let gj=z0;gj<=z1;gj++){const k=gi*65536+gj;let q=RV.grid.get(k);if(!q){q=[];RV.grid.set(k,q);}q.push(s);}}}
   return RV;}
-// signed distance to the nearest channel rim (<0 inside a channel); 1e9 when none is near
-function rv_dist(x,z){if(!RV){if(!D)return 1e9;rv_init();}const c=RV.grid.get(Math.floor(x/RV_C)*65536+Math.floor(z/RV_C));if(!c)return 1e9;let best=1e9;
-  for(const s of c){let t=((x-s.ax)*s.dx+(z-s.az)*s.dz)/s.l2;t=t<0?0:t>1?1:t;const d=Math.hypot(x-s.ax-s.dx*t,z-s.az-s.dz*t)-s.hw;if(d<best)best=d;}return best;}
-// height offset (<=0) of the carved channels at (x,z)
-function rv_off(x,z){if(!RV){if(!D)return 0;rv_init();}const c=RV.grid.get(Math.floor(x/RV_C)*65536+Math.floor(z/RV_C));if(!c)return 0;let o=0;
-  for(const s of c){let t=((x-s.ax)*s.dx+(z-s.az)*s.dz)/s.l2;t=t<0?0:t>1?1:t;const e=Math.hypot(x-s.ax-s.dx*t,z-s.az-s.dz*t)-s.hw;if(e>=0)continue;
-    const dep=s.d0+(s.d1-s.d0)*t,v=e<=-s.run?-dep:dep*e/s.run;if(v<o)o=v;}return o;}
+// signed distance to the nearest channel rim (<0 inside a channel); 1e9 when none is near. lined=true: concrete-lined only
+function rv_dist(x,z,lined){if(!RV){if(!D)return 1e9;rv_init();}const c=RV.grid.get(Math.floor(x/RV_C)*65536+Math.floor(z/RV_C));if(!c)return 1e9;let best=1e9;
+  for(const s of c){if(lined&&!s.lined)continue;let t=((x-s.ax)*s.dx+(z-s.az)*s.dz)/s.l2;t=t<0?0:t>1?1:t;const d=Math.hypot(x-s.ax-s.dx*t,z-s.az-s.dz*t)-s.hw;if(d<best)best=d;}return best;}
+function ew_cell(i,j){const bi=Math.floor(i/EW.bs),bj=Math.floor(j/EW.bs),B=EW.b.get(bi*65536+bj);if(!B)return NaN;const v=B[(j-bj*EW.bs)*EW.bs+(i-bi*EW.bs)];return v===EW_NO?NaN:v*EW.s;}
+function groundY(x,z){const d=groundDemY(x,z);if(!EW)return d;const fx=x/EW.c,fz=z/EW.c,i=Math.floor(fx),j=Math.floor(fz);
+  const bs=EW.bs,ii=i-Math.floor(i/bs)*bs,jj=j-Math.floor(j/bs)*bs;   // fast path: no block here and all 4 corners inside it
+  if(ii<bs-1&&jj<bs-1&&!EW.b.has(Math.floor(i/bs)*65536+Math.floor(j/bs)))return d;
+  let a=ew_cell(i,j),b=ew_cell(i+1,j),c=ew_cell(i,j+1),e=ew_cell(i+1,j+1);if(a!==a&&b!==b&&c!==c&&e!==e)return d;
+  if(a!==a)a=d;if(b!==b)b=d;if(c!==c)c=d;if(e!==e)e=d;const u=fx-i,v=fz-j;return (a*(1-u)+b*u)*(1-v)+(c*(1-u)+e*u)*v;}
 // unit surface normal [nx,ny,nz] (finite differences over ~4 m)
 function groundNormal(x,z){const e=4,dx=groundY(x+e,z)-groundY(x-e,z),dz=groundY(x,z+e)-groundY(x,z-e);const nx=-dx/(2*e),nz=-dz/(2*e),l=Math.hypot(nx,1,nz);return [nx/l,1/l,nz/l];}
 // min/max ground height under a ring of [x,z] points (plus centroid)

@@ -1,0 +1,1861 @@
+{
+ "area": "bic-east",
+ "frame": "x east, z south, y metres, Arc de Triumf ground = 0 (GE/MSL ≈ y+86.2)",
+ "sites": [
+  {
+   "id": "podul-ismail",
+   "name": "Podul Ismail (str. Ismail viaduct over str. Albișoara and the Chișinău–Ungheni railway)",
+   "x": 1835,
+   "z": 290,
+   "lat": 47.022108,
+   "lon": 28.856778,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      272,
+      191,
+      182,
+      190
+     ],
+     "road": "Strada Ismail",
+     "deck": [
+      [
+       1653.9,
+       334.6,
+       -39.6
+      ],
+      [
+       1691.9,
+       322.2,
+       -38.6
+      ],
+      [
+       1730.8,
+       312.8,
+       -38.0
+      ],
+      [
+       1789.2,
+       299.2,
+       -38.2
+      ],
+      [
+       1847.7,
+       285.7,
+       -38.5
+      ],
+      [
+       1867.2,
+       281.2,
+       -38.9
+      ],
+      [
+       1993.8,
+       251.8,
+       -44.6
+      ],
+      [
+       2017.2,
+       246.4,
+       -45.5
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.5,
+      "piers": [
+       [
+        1676.7,
+        327.2
+       ],
+       [
+        1699.6,
+        320.0
+       ],
+       [
+        1723.0,
+        314.6
+       ],
+       [
+        1746.4,
+        309.2
+       ],
+       [
+        1769.8,
+        303.7
+       ],
+       [
+        1793.1,
+        298.3
+       ],
+       [
+        1799.0,
+        297.0
+       ],
+       [
+        1852.6,
+        284.6
+       ],
+       [
+        1863.3,
+        282.1
+       ],
+       [
+        1886.7,
+        276.7
+       ],
+       [
+        1910.0,
+        271.2
+       ],
+       [
+        1933.4,
+        265.8
+       ],
+       [
+        1956.8,
+        260.4
+       ],
+       [
+        1980.2,
+        255.0
+       ],
+       [
+        2003.6,
+        249.6
+       ]
+      ],
+      "pier_type": "twin_column",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       2.2,
+       1.0
+      ],
+      "colour": "#a9a59c",
+      "built": 1968,
+      "note": "OSM man_made=bridge polygon 709699448 'Podul Ismail' (bridge=viaduct, bridge:structure=beam, layer 2) covers the WHOLE 374 m data span → it is a viaduct end to end, not an embankment; pier positions are an estimate at ~24 m pitch, leaving clear spans over Albișoara (s≈80-95) and the 3-4 tracks (s≈155-200). North sidewalk = data 191 (2.2 m); 182 and 190 are the two staircases (OSM steps 114274975 / 114274970) from the north sidewalk down to ground at the railway: 182 runs (1764,294)→(1777,291), 190 (1846,274)→(1836,277). They must be stairs from deck level (~-38) down to ground (~-45.5), NOT flat 2.2 m decks."
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Albișoara (2×2 lanes, one-way pair, OSM 310944146/808580474)",
+       "y": -44.3,
+       "width": 16,
+       "clearance": 5.2
+      },
+      {
+       "type": "rail",
+       "name": "Chișinău–Ungheni main line + sidings (3-4 tracks, 1520 mm, not electrified per OSM)",
+       "y": -46.1,
+       "width": 40,
+       "clearance": 6.0
+      }
+     ],
+     "evidence": "ge_ismail_from_S.jpg, ge_ismail_full_SSE.jpg, ge_ismail_over_rails_lookS.jpg, ge_ismail_rails_lookS_far.jpg, ge_ismail_east_low.jpg (Google Earth 3D): continuous slab deck, high over Albișoara + rails, deck visibly only ~2-4 m above the yards near x≈1950 then lands at grade at x≈2017. OSM steps of 13 m horizontal from north sidewalk to ground beside the railway ⇒ ~7-7.5 m rise (30° stair). Heights: DEM anchors at both ends (-39.6 west junction with Ismail/Gr. Ureche, -45.5 east), crest from clearance rules (5 m road, ~6 m over non-electrified rail) + 1.5 m deck; crest -38.0…-38.5 is an ESTIMATE ±1 m. Today's game deck is a straight line -39.6→-45.5: only ~2 m soffit clearance over Albișoara and ~2.5 m over the tracks (cars/peds clip the deck)."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "ramp",
+     "road": "Strada Ismail east approach (in data as bridge)",
+     "line": [
+      [
+       1867.2,
+       281.2,
+       -38.9
+      ],
+      [
+       1993.8,
+       251.8,
+       -44.6
+      ],
+      [
+       2017.2,
+       246.4,
+       -45.5
+      ]
+     ],
+     "top_w": 19,
+     "side": "wall",
+     "slope": 0,
+     "evidence": "Not an earthwork: listed so the lead knows the 4.4 % east descent is on the viaduct itself (OSM bridge polygon to x=2019). No embankments at either end: west end meets Ismail at natural ground (DEM -39.6, hillside rising west), east end at DEM -45.5 flat. Do NOT raise terrain here."
+    }
+   ]
+  },
+  {
+   "id": "ismail-basarabiei-bic",
+   "name": "Bîc crossings at Calea Moșilor / Ismail / Calea Basarabiei junction",
+   "x": 2190,
+   "z": 250,
+   "lat": 47.02247,
+   "lon": 28.861456,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      270,
+      188
+     ],
+     "road": "Strada Ismail (westbound, 2 lanes) + north sidewalk",
+     "deck": [
+      [
+       2192.0,
+       205.8,
+       -47.3
+      ],
+      [
+       2188.1,
+       206.7,
+       -46.7
+      ],
+      [
+       2166.6,
+       211.4,
+       -46.4
+      ],
+      [
+       2145.0,
+       216.1,
+       -46.7
+      ],
+      [
+       2141.1,
+       217.0,
+       -47.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       2.2,
+       0
+      ],
+      "colour": "#b9b4aa",
+      "note": "two parallel decks (plus sidewalk decks 186/188 alongside); white-painted concrete balustrade (balusters) on a low concrete curb seen in Street View. Pier layout not visible (canopy); likely 1-3 short spans on wall piers — estimate."
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -50.8,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -47.2,
+       "bed_y": -51.2
+      }
+     ],
+     "evidence": "sv_ismail_bic_bridge_balustrade.jpg (Google Street View pano Sep/Oct 2025 on the bridge, road essentially level), ov_j.jpg / ov_moshilor.jpg (Esri top-down + data). Deck is ~flush with the street: crest = bank + 0.8 m (ESTIMATE)."
+    },
+    {
+     "data_idx": [
+      269,
+      186
+     ],
+     "road": "Strada Ismail link (eastbound, OSM 1391890298) + south sidewalk",
+     "deck": [
+      [
+       2142.7,
+       222.4,
+       -47.1
+      ],
+      [
+       2146.6,
+       221.5,
+       -46.7
+      ],
+      [
+       2169.9,
+       216.3,
+       -46.4
+      ],
+      [
+       2190.6,
+       211.7,
+       -46.7
+      ],
+      [
+       2194.5,
+       210.8,
+       -47.3
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       0,
+       2.2
+      ],
+      "colour": "#b9b4aa",
+      "note": "two parallel decks (plus sidewalk decks 186/188 alongside); white-painted concrete balustrade (balusters) on a low concrete curb seen in Street View. Pier layout not visible (canopy); likely 1-3 short spans on wall piers — estimate."
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -50.8,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -47.2,
+       "bed_y": -51.2
+      }
+     ],
+     "evidence": "sv_ismail_bic_bridge_balustrade.jpg (Google Street View pano Sep/Oct 2025 on the bridge, road essentially level), ov_j.jpg / ov_moshilor.jpg (Esri top-down + data). Deck is ~flush with the street: crest = bank + 0.8 m (ESTIMATE)."
+    },
+    {
+     "data_idx": [
+      268,
+      187
+     ],
+     "road": "Calea Basarabiei → Varnița link (OSM 25300681, 2 lanes one-way) + south sidewalk 187",
+     "deck": [
+      [
+       2224.4,
+       312.0,
+       -47.6
+      ],
+      [
+       2227.5,
+       309.5,
+       -47.0
+      ],
+      [
+       2229.4,
+       308.1,
+       -46.7
+      ],
+      [
+       2238.0,
+       301.4,
+       -47.0
+      ],
+      [
+       2241.1,
+       298.9,
+       -47.4
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.8,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       2.0,
+       2.2
+      ],
+      "colour": "#b3aea4"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -51.1,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -47.5,
+       "bed_y": -51.5
+      }
+     ],
+     "evidence": "ov_j.jpg; OSM 25300681 + man_made=bridge 709699452 (97 m perimeter ⇒ ~21×27 m incl. both sidewalks). Railing type not seen (estimate)."
+    },
+    {
+     "data_idx": [],
+     "road": "north sidewalk of the Calea Basarabiei Bîc bridge (OSM footway 1413509441, footway=sidewalk)",
+     "polyline": [
+      [
+       2234.0,
+       290.0
+      ],
+      [
+       2217.0,
+       302.0
+      ]
+     ],
+     "deck": [
+      [
+       2234.0,
+       290.0,
+       -47.4
+      ],
+      [
+       2230.7,
+       292.3,
+       -47.0
+      ],
+      [
+       2222.5,
+       298.1,
+       -46.7
+      ],
+      [
+       2220.3,
+       299.7,
+       -47.0
+      ],
+      [
+       2217.0,
+       302.0,
+       -47.6
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.6,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#b3aea4"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -51.1,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -47.5,
+       "bed_y": -51.5
+      }
+     ],
+     "evidence": "MISSING in data: OSM 1413509441 bridge=yes layer 1, 21 m, ~13 m north of span 268 (Esri ov_j.jpg)."
+    },
+    {
+     "data_idx": [],
+     "road": "rail yard siding (OSM 34129862, 1 track, service=yard, not electrified)",
+     "polyline": [
+      [
+       2181.0,
+       262.0
+      ],
+      [
+       2204.0,
+       249.0
+      ]
+     ],
+     "deck": [
+      [
+       2181.0,
+       262.0,
+       -47.5
+      ],
+      [
+       2184.5,
+       260.0,
+       -46.8
+      ],
+      [
+       2193.7,
+       254.8,
+       -46.5
+      ],
+      [
+       2200.5,
+       251.0,
+       -46.8
+      ],
+      [
+       2204.0,
+       249.0,
+       -47.4
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.0,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#6b665e"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -51.0,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -47.4,
+       "bed_y": -51.4
+      }
+     ],
+     "evidence": "MISSING in data (world.json has no rail bridges at all, kind 4 unused). OSM railway bridge 34129862 across the Bîc between the Ismail and Calea Basarabiei bridges; tracks visible crossing the tree belt diagonally in ov_j.jpg / ov_moshilor.jpg. Heights estimate."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": null,
+     "line": [
+      [
+       2107.3,
+       116.3,
+       -50.1
+      ],
+      [
+       2133.7,
+       158.8,
+       -50.3
+      ],
+      [
+       2160.1,
+       201.3,
+       -51.1
+      ],
+      [
+       2186.5,
+       243.7,
+       -51.4
+      ],
+      [
+       2213.2,
+       286.0,
+       -51.5
+      ],
+      [
+       2243.0,
+       326.1,
+       -51.6
+      ],
+      [
+       2272.9,
+       366.2,
+       -51.6
+      ]
+     ],
+     "top_w": 8.0,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "local excerpt of the Bîc channel (full reach in site 'bic-channel-east'). Today the river is level with the roads (DEM -47.3 everywhere here) so the 52 m Ismail bridge and the 21 m Basarabiei bridge cross nothing. ESTIMATE (channel hidden by continuous tree canopy in all imagery; dims from typical canalised Bîc section + bridge lengths)",
+     "lined": true
+    }
+   ]
+  },
+  {
+   "id": "malldova-ramp",
+   "name": "MallDova car-park loop ramp over Bd. Decebal",
+   "x": 2012,
+   "z": 2233,
+   "lat": 47.004536,
+   "lon": 28.85911,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      42
+     ],
+     "road": "MallDova parking ramp (service=parking_aisle, layer 2)",
+     "deck": [
+      [
+       2026.9,
+       2264.5,
+       -20.5
+      ],
+      [
+       2007.9,
+       2259.2,
+       -19.9
+      ],
+      [
+       1993.3,
+       2234.3,
+       -18.0
+      ],
+      [
+       2006.8,
+       2208.9,
+       -16.2
+      ],
+      [
+       2020.9,
+       2204.4,
+       -15.6
+      ],
+      [
+       2050.4,
+       2203.5,
+       -15.4
+      ],
+      [
+       2080.4,
+       2202.6,
+       -15.3
+      ]
+     ],
+     "structure": {
+      "type": "box_girder",
+      "deck_depth": 1.0,
+      "piers": [
+       [
+        1994.0,
+        2241.0
+       ],
+       [
+        2000.0,
+        2253.0
+       ],
+       [
+        1999.0,
+        2216.0
+       ],
+       [
+        2011.0,
+        2206.0
+       ],
+       [
+        2040.0,
+        2204.0
+       ],
+       [
+        2060.0,
+        2203.5
+       ]
+      ],
+      "pier_type": "single_column",
+      "railing": "concrete_parapet",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#c9c4b9"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Bulevardul Decebal (≈20 m, 6 lanes)",
+       "y": -22.0,
+       "width": 30,
+       "clearance": 5.5
+      },
+      {
+       "type": "valley",
+       "name": "grass loop interior",
+       "y": -24.5,
+       "width": 30,
+       "clearance": null
+      }
+     ],
+     "evidence": "ge_malldova_ramp.jpg (Google Earth 3D): single-lane loop ramp on the west side of Decebal with shadow under it, straight elevated leg crossing Decebal into the mall's upper parking. DEM falls west into the loop (-25) while the ramp climbs, so today's straight-line deck (-20.5→-19.0) runs through/at ground and leaves no clearance over Decebal (DEM -22.6…-20.2). Heights: start on grade (DEM), ≥5.5 m clearance over Decebal + 1 m structure ⇒ ≈-15.5; mall end level ≈-15.3 — ESTIMATE ±1.5 m."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "gara-pasarela",
+   "name": "Pedestrian bridge over the Chișinău railway station tracks",
+   "x": 2298,
+   "z": 1495,
+   "lat": 47.01121,
+   "lon": 28.862879,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      185
+     ],
+     "road": "footbridge (OSM 25521770 + 851666676)",
+     "deck": [
+      [
+       2243.5,
+       1542.5,
+       -38.0
+      ],
+      [
+       2351.5,
+       1447.9,
+       -38.0
+      ]
+     ],
+     "structure": {
+      "type": "truss",
+      "deck_depth": 1.0,
+      "piers": [
+       [
+        2258.5,
+        1529.3
+       ],
+       [
+        2277.4,
+        1512.8
+       ],
+       [
+        2296.2,
+        1496.4
+       ],
+       [
+        2315.0,
+        1479.9
+       ],
+       [
+        2333.8,
+        1463.4
+       ]
+      ],
+      "pier_type": "single_column",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#8a8f94",
+      "note": "stair towers at both ends (OSM steps 846617744 at (2331,1465) east; west end at (2244,1542) on the station side) – render stairs/landings, not a ramp to the ground."
+     },
+     "under": [
+      {
+       "type": "rail",
+       "name": "station throat, ~12 tracks, not electrified",
+       "y": -45.0,
+       "width": 95,
+       "clearance": 6.0
+      }
+     ],
+     "evidence": "ge_station_footbridge.jpg (Google Earth 3D): long thin elevated walkway crossing all tracks well above wagon roofs (freight wagons ≈4 m). os3.jpg (Esri+OSM rails). Today's deck slopes -43.0→-45.9 at ~1 m above the tracks. Flat deck at rail+7 m = -38.0 is an ESTIMATE (±1 m); structure type (steel truss/girder) estimate."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "tabacaria-veche-bic",
+   "name": "Podul de pe str. Tăbăcăria Veche peste Bîc",
+   "x": 2640,
+   "z": 864,
+   "lat": 47.016917,
+   "lon": 28.867386,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      279
+     ],
+     "road": "Strada Tăbăcăria Veche (OSM 32513868, tertiary)",
+     "deck": [
+      [
+       2622.5,
+       870.5,
+       -49.3
+      ],
+      [
+       2626.3,
+       869.1,
+       -49.0
+      ],
+      [
+       2638.2,
+       864.8,
+       -48.7
+      ],
+      [
+       2653.7,
+       859.3,
+       -49.0
+      ],
+      [
+       2657.5,
+       857.9,
+       -49.4
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.5,
+       1.5
+      ],
+      "colour": "#b3aea4"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -53.1,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -49.5,
+       "bed_y": -53.5
+      }
+     ],
+     "evidence": "sv_tabacaria_railing.jpg (Street View Sep 2025: brown/grey steel vertical-bar railing on a concrete curb, sidewalk, road level); ov4.jpg. Deck ≈ street level; the error in game is the missing channel under it (crest = bank+0.8, ESTIMATE)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "varnita-bic",
+   "name": "Bridge over the Bîc at str. Varnița / Calea Basarabiei (unnamed tertiary, OSM 181476645)",
+   "x": 3203,
+   "z": 1667,
+   "lat": 47.009655,
+   "lon": 28.874805,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      278
+     ],
+     "road": "unnamed tertiary link Varnița ↔ Calea Basarabiei (OSM 181476645)",
+     "deck": [
+      [
+       3183.7,
+       1678.1,
+       -49.8
+      ],
+      [
+       3187.1,
+       1676.0,
+       -49.4
+      ],
+      [
+       3200.7,
+       1667.9,
+       -49.1
+      ],
+      [
+       3218.0,
+       1657.5,
+       -49.4
+      ],
+      [
+       3221.4,
+       1655.4,
+       -49.9
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.9,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       1.5,
+       1.5
+      ],
+      "colour": "#b3aea4"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -53.5,
+       "width": 6.0,
+       "clearance": null,
+       "bank_y": -49.9,
+       "bed_y": -53.9
+      }
+     ],
+     "evidence": "sv_278_railing.jpg (Street View Sep 2025: brown-painted steel railing on cracked concrete sidewalk slabs, tree crowns of the channel at/below railing height); os7.jpg. Deck ≈ street level; the error in game is the missing channel under it (crest = bank+0.8, ESTIMATE)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "mosilor-footbridge-bic",
+   "name": "Footbridge over the Bîc beside Calea Moșilor",
+   "x": 1606,
+   "z": -744,
+   "lat": 47.031459,
+   "lon": 28.85376,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      193
+     ],
+     "road": "footway (OSM 778068467)",
+     "deck": [
+      [
+       1599.2,
+       -739.1,
+       -45.0
+      ],
+      [
+       1601.7,
+       -741.1,
+       -44.8
+      ],
+      [
+       1604.9,
+       -743.7,
+       -44.5
+      ],
+      [
+       1609.3,
+       -747.3,
+       -44.8
+      ],
+      [
+       1611.8,
+       -749.3,
+       -45.1
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -48.2,
+       "width": 4.0,
+       "clearance": null,
+       "bank_y": -45.1,
+       "bed_y": -48.6
+      }
+     ],
+     "evidence": "ov0.jpg (Esri+OSM), 16 m span across the canopy-covered channel. Deck heights estimate."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "macilor-tiganca",
+   "name": "str. Macilor + footways over the Țîganca",
+   "x": 2649,
+   "z": -968,
+   "lat": 47.033485,
+   "lon": 28.867505,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      277,
+      202,
+      203
+     ],
+     "deck": [],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "Țîganca stream (open, 2-4 m wide, in shallow ditch); OSM 777352737 residential bridge 16 m, footways 781578418/777352745. os8.jpg. Render flush with road, low parapet; dip the stream bed ~1.5 m (estimate) if streams are carved."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "riscani-park-tiganca",
+   "name": "Footbridges over the Țîganca in Râșcani park",
+   "x": 2922,
+   "z": -2278,
+   "lat": 47.045332,
+   "lon": 28.871102,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      200,
+      201
+     ],
+     "deck": [],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "OSM footway bridges over Țîganca stream in woodland, 13-14 m. os10.jpg. Small footbridges ~1 m over a ~2 m deep stream gully (estimate)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "tiganca-ditch-footway",
+   "name": "Footway over the Țîganca ditch",
+   "x": 2138,
+   "z": -676,
+   "lat": 47.030844,
+   "lon": 28.860771,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      192
+     ],
+     "deck": [],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "ditch/culvert (OSM 913876593 tunnel=culvert nearby). os14.jpg"
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "haltei-malina-mica",
+   "name": "str. Haltei over Malina Mică",
+   "x": 2043,
+   "z": 1111,
+   "lat": 47.014683,
+   "lon": 28.859519,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      271
+     ],
+     "deck": [],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "Malina Mică stream at the mouth of its culvert (OSM 224117005 tunnel). os15.jpg. Flush."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "valea-trandafirilor-footbridge",
+   "name": "Footbridge over the Valea Trandafirilor stream",
+   "x": 1778,
+   "z": 2754,
+   "lat": 46.999824,
+   "lon": 28.856027,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      183
+     ],
+     "deck": [],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "OSM 33530699 footway bridge 47 m, layer 1, over the stream in the park woodland (os6.jpg, canopy). DEM -1.7…-2.9 along it shows no ravine; real dip not visible – keep deck ≈ ground +1 m (estimate)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "railway-side-footway",
+   "name": "Footway beside the railway at str. Albișoara",
+   "x": 1801,
+   "z": 477,
+   "lat": 47.020417,
+   "lon": 28.85633,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      189
+     ],
+     "deck": [],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "9 m footway (OSM 35468837 bridge=yes) along the tracks, nothing mapped under it (drain). os16.jpg. Flush."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "path-stream-rail",
+   "name": "Path over a stream by the railway (Botanica)",
+   "x": 3968,
+   "z": 3674,
+   "lat": 46.991504,
+   "lon": 28.884886,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      205
+     ],
+     "deck": [],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "8 m path over a small stream (OSM 778928618). os17.jpg. Flush culvert."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "industrial-footway",
+   "name": "Footway in industrial yard off Varnița",
+   "x": 2630,
+   "z": 581,
+   "lat": 47.019476,
+   "lon": 28.867254,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      204
+     ],
+     "deck": [],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "17 m footway, no water/road/rail under it in OSM; Esri (os12.jpg) hazy industrial yard. Likely a ramp/loading-dock walkway – render flush."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "tiganca-service-culverts",
+   "name": "Service roads over the buried Țîganca",
+   "x": 2315,
+   "z": -687,
+   "lat": 47.030944,
+   "lon": 28.863103,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      43,
+      44
+     ],
+     "deck": [],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "9 m service bridges where yards cross the Țîganca underground canal (OSM 777352728 tunnel=flooded). os11.jpg. Flush, no structure."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "botanica-podium-ramps",
+   "name": "Service driveways at the Botanica youth centre podium",
+   "x": 2194,
+   "z": 4424,
+   "lat": 46.984721,
+   "lon": 28.861509,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      40,
+      41
+     ],
+     "deck": [],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "Two service 'bridges' (68 m, 47 m) hug the octagonal building (Centrul Municipal de Tineret Botanica) – GE 3D shows a raised podium/terraces around it, ramps not distinct. Treat as driveways ~1-2 m above street (estimate); no clearance under them."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "ciocana-drive-through-loop",
+   "name": "Covered drive-through loop off str. Alecu Russo",
+   "x": 2645,
+   "z": -2111,
+   "lat": 47.043822,
+   "lon": 28.867452,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      45
+     ],
+     "deck": [],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9a968e"
+     },
+     "under": [],
+     "evidence": "OSM 777556746/777556747/851510237 service=drive-through, covered, layer 1 – a building-integrated ramp loop (os5.jpg). Both ends at grade; low priority, not verified in 3D."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "cfm-bridges-botanica",
+   "name": "Twin railway bridges (tracks I and II) over a stream, Botanica",
+   "x": 4352,
+   "z": 3877,
+   "lat": 46.989668,
+   "lon": 28.889947,
+   "status": "missing_in_data",
+   "bridges": [
+    {
+     "data_idx": [],
+     "road": "CFM main line track I",
+     "polyline": [
+      [
+       4342.0,
+       3869.0
+      ],
+      [
+       4364.0,
+       3882.0
+      ]
+     ],
+     "deck": [
+      [
+       4342.0,
+       3869.0,
+       -48.1
+      ],
+      [
+       4364.0,
+       3882.0,
+       -48.2
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#6b665e"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream (OSM 945284542)",
+       "y": null,
+       "width": 3,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 205403977 ('I') and 51112244 ('II'), bridge=yes layer 1, 25 m each, plus man_made=bridge 846079276/846896163. Not inspected visually; world.json has no rail bridges. Heights = DEM (rail is on grade/embankment here – not verified)."
+    },
+    {
+     "data_idx": [],
+     "road": "CFM main line track II",
+     "polyline": [
+      [
+       4340.0,
+       3873.0
+      ],
+      [
+       4362.0,
+       3886.0
+      ]
+     ],
+     "deck": [
+      [
+       4340.0,
+       3873.0,
+       -48.0
+      ],
+      [
+       4362.0,
+       3886.0,
+       -48.1
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#6b665e"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "unnamed stream (OSM 945284542)",
+       "y": null,
+       "width": 3,
+       "clearance": null
+      }
+     ],
+     "evidence": "OSM 205403977 ('I') and 51112244 ('II'), bridge=yes layer 1, 25 m each, plus man_made=bridge 846079276/846896163. Not inspected visually; world.json has no rail bridges. Heights = DEM (rail is on grade/embankment here – not verified)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic-channel-east",
+   "name": "Bîc canal, Calea Moșilor → Calea Basarabiei → Botanica (no bridge)",
+   "x": 2400,
+   "z": 500,
+   "lat": 47.020209,
+   "lon": 28.864223,
+   "status": "missing_in_data",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": null,
+     "name": "Bîc (canalised), Calea Moșilor reach",
+     "line": [
+      [
+       1471.8,
+       -799.7,
+       -48.5
+      ],
+      [
+       1521.7,
+       -798.4,
+       -48.5
+      ],
+      [
+       1566.3,
+       -777.5,
+       -48.5
+      ],
+      [
+       1603.8,
+       -744.6,
+       -48.6
+      ],
+      [
+       1634.5,
+       -705.6,
+       -48.7
+      ],
+      [
+       1659.3,
+       -662.2,
+       -48.9
+      ],
+      [
+       1683.3,
+       -618.3,
+       -49.2
+      ],
+      [
+       1705.8,
+       -573.7,
+       -49.6
+      ],
+      [
+       1726.8,
+       -528.3,
+       -49.9
+      ],
+      [
+       1748.2,
+       -483.2,
+       -50.0
+      ],
+      [
+       1767.7,
+       -437.1,
+       -50.1
+      ],
+      [
+       1787.9,
+       -391.5,
+       -50.1
+      ],
+      [
+       1813.4,
+       -348.6,
+       -50.1
+      ],
+      [
+       1840.2,
+       -306.4,
+       -50.1
+      ],
+      [
+       1867.0,
+       -264.2,
+       -50.1
+      ],
+      [
+       1893.8,
+       -222.0,
+       -50.1
+      ],
+      [
+       1920.6,
+       -179.7,
+       -50.1
+      ],
+      [
+       1947.4,
+       -137.5,
+       -50.1
+      ],
+      [
+       1974.3,
+       -95.3,
+       -50.1
+      ],
+      [
+       2001.1,
+       -53.1,
+       -50.1
+      ],
+      [
+       2027.9,
+       -10.9,
+       -50.1
+      ],
+      [
+       2054.6,
+       31.3,
+       -50.1
+      ],
+      [
+       2080.9,
+       73.8,
+       -50.1
+      ],
+      [
+       2107.3,
+       116.3,
+       -50.1
+      ],
+      [
+       2133.7,
+       158.8,
+       -50.3
+      ],
+      [
+       2160.1,
+       201.3,
+       -51.1
+      ]
+     ],
+     "top_w": 6.0,
+     "side": "slope",
+     "slope": 1.5,
+     "depth_below_bank": 3.5,
+     "top_width_bank_to_bank": 16.5,
+     "water_depth": 0.4,
+     "water_width": 4.0,
+     "evidence": "centreline = OSM waterway=river ways 758119273+407921884+866681351. DEM shows NO dip across the river (cross-sections ±60 m flat to ±0.3 m), so the channel is entirely missing. Bed y = monotonic smoothed DEM along the centreline (bank top) minus depth. Footbridge 193 is only 16 m long → bank-to-bank ≤16-17 m here. ESTIMATE (channel hidden by continuous tree canopy in all imagery; dims from typical canalised Bîc section + bridge lengths)",
+     "lined": true
+    },
+    {
+     "type": "channel",
+     "road": null,
+     "name": "Bîc (canalised), Ismail → Calea Basarabiei → Botanica reach",
+     "line": [
+      [
+       2160.1,
+       201.3,
+       -51.1
+      ],
+      [
+       2191.8,
+       252.2,
+       -51.4
+      ],
+      [
+       2225.1,
+       302.0,
+       -51.5
+      ],
+      [
+       2260.9,
+       350.2,
+       -51.6
+      ],
+      [
+       2296.8,
+       398.3,
+       -51.7
+      ],
+      [
+       2332.6,
+       446.4,
+       -51.8
+      ],
+      [
+       2368.4,
+       494.6,
+       -52.0
+      ],
+      [
+       2404.2,
+       542.7,
+       -52.3
+      ],
+      [
+       2440.0,
+       590.8,
+       -52.8
+      ],
+      [
+       2475.8,
+       639.0,
+       -53.2
+      ],
+      [
+       2511.4,
+       687.3,
+       -53.4
+      ],
+      [
+       2546.2,
+       736.2,
+       -53.5
+      ],
+      [
+       2581.0,
+       785.1,
+       -53.5
+      ],
+      [
+       2615.8,
+       833.9,
+       -53.5
+      ],
+      [
+       2650.6,
+       882.8,
+       -53.5
+      ],
+      [
+       2685.4,
+       931.7,
+       -53.5
+      ],
+      [
+       2720.3,
+       980.5,
+       -53.5
+      ],
+      [
+       2755.1,
+       1029.3,
+       -53.5
+      ],
+      [
+       2790.0,
+       1078.2,
+       -53.5
+      ],
+      [
+       2824.7,
+       1127.1,
+       -53.5
+      ],
+      [
+       2859.5,
+       1176.0,
+       -53.5
+      ],
+      [
+       2894.2,
+       1224.9,
+       -53.5
+      ],
+      [
+       2929.0,
+       1273.8,
+       -53.5
+      ],
+      [
+       2963.7,
+       1322.7,
+       -53.5
+      ],
+      [
+       2998.5,
+       1371.7,
+       -53.5
+      ],
+      [
+       3033.2,
+       1420.6,
+       -53.5
+      ],
+      [
+       3067.9,
+       1469.6,
+       -53.5
+      ],
+      [
+       3102.6,
+       1518.5,
+       -53.5
+      ],
+      [
+       3137.5,
+       1567.3,
+       -53.5
+      ],
+      [
+       3170.2,
+       1617.6,
+       -53.7
+      ],
+      [
+       3200.9,
+       1669.1,
+       -53.9
+      ],
+      [
+       3236.5,
+       1717.2,
+       -54.2
+      ],
+      [
+       3261.7,
+       1771.5,
+       -54.5
+      ],
+      [
+       3286.7,
+       1825.9,
+       -54.6
+      ],
+      [
+       3317.8,
+       1877.2,
+       -54.7
+      ],
+      [
+       3344.3,
+       1930.8,
+       -54.8
+      ],
+      [
+       3370.1,
+       1984.8,
+       -54.8
+      ],
+      [
+       3398.1,
+       2037.8,
+       -54.8
+      ],
+      [
+       3421.7,
+       2092.9,
+       -54.8
+      ],
+      [
+       3446.5,
+       2147.4,
+       -54.8
+      ],
+      [
+       3487.1,
+       2191.5,
+       -54.8
+      ],
+      [
+       3525.7,
+       2237.3,
+       -54.8
+      ],
+      [
+       3565.1,
+       2281.8,
+       -54.9
+      ],
+      [
+       3598.5,
+       2330.4,
+       -54.9
+      ],
+      [
+       3636.5,
+       2375.6,
+       -54.9
+      ],
+      [
+       3668.4,
+       2426.3,
+       -54.9
+      ],
+      [
+       3694.9,
+       2479.9,
+       -54.9
+      ],
+      [
+       3735.7,
+       2522.3,
+       -54.9
+      ],
+      [
+       3769.0,
+       2572.1,
+       -55.0
+      ],
+      [
+       3805.7,
+       2619.5,
+       -55.2
+      ],
+      [
+       3843.2,
+       2666.3,
+       -55.6
+      ],
+      [
+       3874.7,
+       2717.1,
+       -55.9
+      ],
+      [
+       3901.6,
+       2770.2,
+       -56.1
+      ],
+      [
+       3935.7,
+       2819.4,
+       -56.2
+      ],
+      [
+       3975.0,
+       2862.4,
+       -56.3
+      ],
+      [
+       3981.1,
+       2870.3,
+       -56.3
+      ]
+     ],
+     "top_w": 8.0,
+     "side": "slope",
+     "slope": 1.5,
+     "depth_below_bank": 4.0,
+     "top_width_bank_to_bank": 20.0,
+     "water_depth": 0.4,
+     "water_width": 6.0,
+     "evidence": "same method; road bridges here are 21–52 m long (268: 21 m, 279: 37 m, 278: 44 m, Ismail 269/270: 52 m oblique) → bank-to-bank ~20 m. Tree belt along both banks is 35–50 m wide (Esri ov1/ov3/ov4/ov5/ov6.jpg), keep it wooded. Ends at s=4.5 km (x≈3980,z≈2870); southeast agent continues. ESTIMATE (channel hidden by continuous tree canopy in all imagery; dims from typical canalised Bîc section + bridge lengths)",
+     "lined": true
+    }
+   ]
+  }
+ ]
+}

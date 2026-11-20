@@ -1,0 +1,4624 @@
+{
+ "roads": [
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2073.0,
+   "z": 2497.7,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2077.1,
+   "z": 2548.7,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2082.5,
+   "z": 2607.4,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2080.4,
+   "z": 2673.1,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2076.3,
+   "z": 2732.0,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2072.0,
+   "z": 2791.8,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2067.8,
+   "z": 2851.7,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2100.7,
+   "z": 1727.0,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2093.9,
+   "z": 1784.6,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2086.8,
+   "z": 1843.2,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2079.5,
+   "z": 1902.7,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2071.2,
+   "z": 1968.7,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2063.9,
+   "z": 2027.3,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2057.0,
+   "z": 2085.9,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2050.1,
+   "z": 2159.2,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2048.6,
+   "z": 2217.2,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2050.1,
+   "z": 2275.2,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2055.6,
+   "z": 2333.9,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2062.0,
+   "z": 2393.6,
+   "w": 20,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=1899/2302/2680: curb-to-curb 19.5-21 m, 3+3 lanes with painted median (OSM lanes=6 only near z1820-1934, lanes=2 elsewhere is wrong). Data 14 gives 2+2."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2034.2,
+   "z": 3265.8,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2028.3,
+   "z": 3325.5,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2022.5,
+   "z": 3384.2,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2016.7,
+   "z": 3443.9,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2010.8,
+   "z": 3502.7,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2060.0,
+   "z": 2987.4,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2054.8,
+   "z": 3046.9,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2049.2,
+   "z": 3106.6,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2043.6,
+   "z": 3166.4,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Decebal",
+   "x": 2064.7,
+   "z": 2897.1,
+   "w": 16.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat z=3078: ~17 m, 2+2 wide lanes with double centre line. Data 14."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 701.0,
+   "z": 2178.3,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 696.4,
+   "z": 2237.1,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 698.4,
+   "z": 2294.0,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 724.0,
+   "z": 2355.9,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 721.9,
+   "z": 2124.3,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 731.9,
+   "z": 2454.4,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 746.7,
+   "z": 2512.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 761.4,
+   "z": 2568.7,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 777.2,
+   "z": 2626.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 792.1,
+   "z": 2683.7,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1009.4,
+   "z": 3335.7,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 981.5,
+   "z": 3284.9,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 958.0,
+   "z": 3231.9,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 925.0,
+   "z": 3119.7,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 909.7,
+   "z": 3061.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 894.4,
+   "z": 3003.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 879.1,
+   "z": 2945.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 863.8,
+   "z": 2887.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 848.6,
+   "z": 2830.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 833.3,
+   "z": 2773.6,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1026.2,
+   "z": 3385.0,
+   "w": 13.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "Viaduct + bridge section (trunk, OSM lanes=4 per carriageway). Sat: each carriageway ~12.5-13 m with 4 lanes. Data 11.2 draws 3."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1128.4,
+   "z": 3492.9,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1170.1,
+   "z": 3536.1,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1211.7,
+   "z": 3579.3,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1252.8,
+   "z": 3621.6,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1294.7,
+   "z": 3664.5,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1104.9,
+   "z": 3444.1,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1048.2,
+   "z": 3409.1,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1028.7,
+   "z": 3364.3,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1362.6,
+   "z": 3735.1,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1403.4,
+   "z": 3777.8,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1445.0,
+   "z": 3821.0,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1486.6,
+   "z": 3864.3,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1528.1,
+   "z": 3907.5,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1569.7,
+   "z": 3950.7,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1611.3,
+   "z": 3994.0,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1652.9,
+   "z": 4037.2,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1694.5,
+   "z": 4080.5,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1736.1,
+   "z": 4123.7,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1777.7,
+   "z": 4167.0,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1818.2,
+   "z": 4209.9,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Bulevardul Dacia",
+   "x": 1875.5,
+   "z": 4270.6,
+   "w": 10.5,
+   "ow": 1,
+   "from_w": 11.2,
+   "reason": "OSM lanes=3 per carriageway; sat (1332,3682) ~10 m, 3 lanes. Data 11.2 (trunk default*0.75). Lane count unchanged."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1532.7,
+   "z": 5998.5,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1934.8,
+   "z": 6565.7,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1895.7,
+   "z": 6522.9,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1855.4,
+   "z": 6478.5,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1816.8,
+   "z": 6436.0,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1777.1,
+   "z": 6392.4,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1738.5,
+   "z": 6350.5,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1698.6,
+   "z": 6306.9,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1659.5,
+   "z": 6265.5,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1624.4,
+   "z": 6220.1,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1600.5,
+   "z": 6167.3,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1577.8,
+   "z": 6112.9,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1556.9,
+   "z": 6058.2,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2157.1,
+   "z": 6808.4,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2117.2,
+   "z": 6764.9,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2077.1,
+   "z": 6721.6,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2038.0,
+   "z": 6678.8,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 1999.5,
+   "z": 6636.7,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2442.9,
+   "z": 7488.1,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2427.3,
+   "z": 7432.2,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2411.4,
+   "z": 7375.4,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2395.7,
+   "z": 7319.6,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2380.1,
+   "z": 7264.8,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2364.1,
+   "z": 7208.0,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2347.9,
+   "z": 7151.2,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2331.7,
+   "z": 7094.5,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2314.3,
+   "z": 7038.2,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2292.3,
+   "z": 6984.5,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2263.2,
+   "z": 6934.4,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2227.2,
+   "z": 6887.8,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2499.5,
+   "z": 7727.3,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2487.0,
+   "z": 7668.6,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2475.9,
+   "z": 7611.7,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Strada Drumul Băcioiului",
+   "x": 2461.0,
+   "z": 7554.6,
+   "w": 8,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1817,6436) 7.5 m, (2400,7330) 8.5 m: 2-lane suburban road. OSM trunk lanes=1. Data 15 = trunk default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7026.8,
+   "z": 7436.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6999.3,
+   "z": 7384.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6973.6,
+   "z": 7333.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6947.6,
+   "z": 7282.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6920.0,
+   "z": 7230.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6892.2,
+   "z": 7178.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6865.0,
+   "z": 7126.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6837.4,
+   "z": 7072.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6810.2,
+   "z": 7020.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6783.1,
+   "z": 6968.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6755.9,
+   "z": 6915.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6726.8,
+   "z": 6865.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6692.0,
+   "z": 6819.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6652.8,
+   "z": 6778.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6611.4,
+   "z": 6737.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6571.5,
+   "z": 6698.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6533.2,
+   "z": 6655.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6495.0,
+   "z": 6612.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6458.2,
+   "z": 6568.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6420.4,
+   "z": 6523.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6383.8,
+   "z": 6477.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6347.7,
+   "z": 6431.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6311.3,
+   "z": 6383.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6276.1,
+   "z": 6336.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6244.2,
+   "z": 6286.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6215.0,
+   "z": 6235.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6186.5,
+   "z": 6183.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6157.6,
+   "z": 6131.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6128.8,
+   "z": 6078.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6100.1,
+   "z": 6026.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6070.9,
+   "z": 5974.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6041.7,
+   "z": 5922.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 6013.1,
+   "z": 5870.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5984.2,
+   "z": 5817.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5955.2,
+   "z": 5765.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5926.2,
+   "z": 5712.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5897.3,
+   "z": 5660.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5868.3,
+   "z": 5607.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5839.4,
+   "z": 5555.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5810.4,
+   "z": 5502.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5781.4,
+   "z": 5450.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5752.5,
+   "z": 5397.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5723.5,
+   "z": 5344.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5693.2,
+   "z": 5295.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5650.9,
+   "z": 5256.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5603.5,
+   "z": 5219.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5557.0,
+   "z": 5183.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5509.7,
+   "z": 5146.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5464.1,
+   "z": 5110.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5417.8,
+   "z": 5076.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5369.8,
+   "z": 5043.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5320.3,
+   "z": 5011.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7092.8,
+   "z": 7559.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7065.0,
+   "z": 7507.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7138.9,
+   "z": 7649.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7181.0,
+   "z": 7730.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7353.9,
+   "z": 8061.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7326.4,
+   "z": 8008.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7299.0,
+   "z": 7956.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7271.0,
+   "z": 7903.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7243.6,
+   "z": 7850.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7216.3,
+   "z": 7798.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7500.5,
+   "z": 8344.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7472.9,
+   "z": 8290.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7445.3,
+   "z": 8237.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7417.6,
+   "z": 8184.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7390.5,
+   "z": 8132.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9130.3,
+   "z": 9836.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9084.6,
+   "z": 9797.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9039.0,
+   "z": 9758.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8994.5,
+   "z": 9721.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8949.4,
+   "z": 9683.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8903.6,
+   "z": 9644.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8857.8,
+   "z": 9605.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8812.4,
+   "z": 9568.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8767.1,
+   "z": 9530.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8721.1,
+   "z": 9491.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8675.1,
+   "z": 9453.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8630.4,
+   "z": 9414.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8585.4,
+   "z": 9376.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8539.3,
+   "z": 9338.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8493.3,
+   "z": 9299.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8447.3,
+   "z": 9261.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8401.9,
+   "z": 9223.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8356.6,
+   "z": 9185.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8310.6,
+   "z": 9147.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8265.5,
+   "z": 9109.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8219.7,
+   "z": 9070.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8173.9,
+   "z": 9031.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8128.8,
+   "z": 8993.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8084.6,
+   "z": 8956.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 8040.4,
+   "z": 8918.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7994.7,
+   "z": 8879.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7949.5,
+   "z": 8841.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7904.1,
+   "z": 8804.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7859.7,
+   "z": 8766.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7813.9,
+   "z": 8727.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7768.9,
+   "z": 8689.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7723.0,
+   "z": 8651.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7678.3,
+   "z": 8612.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7637.8,
+   "z": 8571.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7601.8,
+   "z": 8524.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7571.2,
+   "z": 8475.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 7542.5,
+   "z": 8422.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9796.3,
+   "z": 10508.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9838.1,
+   "z": 10552.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9879.1,
+   "z": 10594.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9920.2,
+   "z": 10636.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9957.9,
+   "z": 10680.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 9993.2,
+   "z": 10728.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10026.2,
+   "z": 10776.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10058.4,
+   "z": 10826.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10090.7,
+   "z": 10875.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10130.7,
+   "z": 10936.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10163.9,
+   "z": 10986.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10197.1,
+   "z": 11036.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10256.4,
+   "z": 11125.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10289.6,
+   "z": 11175.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10333.9,
+   "z": 11243.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10366.5,
+   "z": 11293.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 10394.1,
+   "z": 11336.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2456.7,
+   "z": 1886.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2415.3,
+   "z": 1844.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2373.2,
+   "z": 1802.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2330.5,
+   "z": 1762.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2283.8,
+   "z": 1726.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2234.3,
+   "z": 1696.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2566.5,
+   "z": 2034.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2531.1,
+   "z": 1987.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2497.9,
+   "z": 1939.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2687.3,
+   "z": 2240.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2657.5,
+   "z": 2189.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2627.5,
+   "z": 2138.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2597.1,
+   "z": 2086.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3014.9,
+   "z": 2759.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2979.5,
+   "z": 2711.8,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2945.9,
+   "z": 2664.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2913.8,
+   "z": 2615.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2884.8,
+   "z": 2566.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2836.2,
+   "z": 2481.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2804.1,
+   "z": 2432.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2773.2,
+   "z": 2381.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2742.5,
+   "z": 2331.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 2712.2,
+   "z": 2281.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3211.9,
+   "z": 2997.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3176.3,
+   "z": 2949.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3141.0,
+   "z": 2902.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3102.7,
+   "z": 2857.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3064.0,
+   "z": 2814.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3254.3,
+   "z": 3054.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3866.7,
+   "z": 3753.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3833.5,
+   "z": 3704.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3800.2,
+   "z": 3655.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3765.1,
+   "z": 3610.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3719.5,
+   "z": 3572.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3674.6,
+   "z": 3535.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3628.6,
+   "z": 3499.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3583.7,
+   "z": 3460.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3540.9,
+   "z": 3421.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3499.7,
+   "z": 3379.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3463.3,
+   "z": 3334.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3427.4,
+   "z": 3286.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3391.5,
+   "z": 3238.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3355.5,
+   "z": 3190.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3319.6,
+   "z": 3142.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3283.6,
+   "z": 3093.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4017.7,
+   "z": 3950.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3975.4,
+   "z": 3913.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3942.4,
+   "z": 3865.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 3901.9,
+   "z": 3806.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4362.2,
+   "z": 4257.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4317.3,
+   "z": 4222.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4274.8,
+   "z": 4181.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4233.6,
+   "z": 4137.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4193.2,
+   "z": 4094.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4154.2,
+   "z": 4051.7,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4113.6,
+   "z": 4008.9,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4069.7,
+   "z": 3977.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4488.4,
+   "z": 4329.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4436.3,
+   "z": 4299.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4600.4,
+   "z": 4393.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4548.9,
+   "z": 4364.3,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4676.1,
+   "z": 4441.6,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4862.8,
+   "z": 4637.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4824.5,
+   "z": 4592.1,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4785.7,
+   "z": 4546.4,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4746.8,
+   "z": 4502.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4926.5,
+   "z": 4710.2,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 5009.6,
+   "z": 4790.0,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Șoseaua Muncești",
+   "x": 4965.8,
+   "z": 4750.5,
+   "w": 10,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2640,2159) 8.5 m, (3596,3471) 10.5 m, (8362,9191) ~10 m with edge lines: 1+1 lanes. OSM primary lanes=1 (7.7 km). Data 14 = primary default, draws 2+2."
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1152.9,
+   "z": 5554.3,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1122.4,
+   "z": 5503.8,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1093.1,
+   "z": 5452.7,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1063.0,
+   "z": 5401.9,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1034.8,
+   "z": 5350.0,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1006.3,
+   "z": 5297.3,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 981.3,
+   "z": 5245.0,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 957.1,
+   "z": 5190.1,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1193.9,
+   "z": 5609.8,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1388.6,
+   "z": 5795.1,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1345.1,
+   "z": 5756.8,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1300.4,
+   "z": 5716.8,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Strada Grenoble",
+   "x": 1256.5,
+   "z": 5677.3,
+   "w": 10.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1067,5409) 10.5 m with centre line, 1+1. OSM trunk lanes=1. Data 15 trunk default draws 2+2. (Grenoble north, 14 m 2+2, verified OK.)"
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1709.0,
+   "z": 5117.8,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1666.5,
+   "z": 5158.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1623.9,
+   "z": 5199.6,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1581.4,
+   "z": 5240.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1539.0,
+   "z": 5281.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1496.3,
+   "z": 5322.2,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1452.8,
+   "z": 5363.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1411.0,
+   "z": 5403.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1368.8,
+   "z": 5443.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1325.6,
+   "z": 5485.1,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1283.1,
+   "z": 5526.1,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1240.5,
+   "z": 5566.9,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1198.6,
+   "z": 5605.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2219.4,
+   "z": 4629.4,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2176.1,
+   "z": 4670.9,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2133.5,
+   "z": 4711.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2090.9,
+   "z": 4752.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2049.0,
+   "z": 4792.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2005.7,
+   "z": 4834.2,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1963.1,
+   "z": 4875.0,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1919.8,
+   "z": 4916.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1877.9,
+   "z": 4956.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1834.6,
+   "z": 4998.2,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1792.0,
+   "z": 5039.0,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 1750.0,
+   "z": 5079.1,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2383.4,
+   "z": 4473.0,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2340.7,
+   "z": 4513.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2298.0,
+   "z": 4554.4,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2256.2,
+   "z": 4594.6,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2468.9,
+   "z": 4391.4,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2425.5,
+   "z": 4432.8,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2610.2,
+   "z": 4256.7,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2566.8,
+   "z": 4298.1,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2523.4,
+   "z": 4339.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2885.2,
+   "z": 3994.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2841.8,
+   "z": 4035.9,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2800.2,
+   "z": 4076.4,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2756.7,
+   "z": 4117.6,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2713.1,
+   "z": 4158.9,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Bulevardul Cuza-Vodă",
+   "x": 2670.3,
+   "z": 4199.5,
+   "w": 12.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (1996,4843) ~11 m, (2483,4378) 12-13 m, (1600,5230) ~11 m. OSM lanes=2. Lane count (2/dir) unchanged; narrower carriageway."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1584.4,
+   "z": 5803.5,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1635.0,
+   "z": 5771.2,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1684.1,
+   "z": 5742.3,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1734.8,
+   "z": 5714.2,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1786.5,
+   "z": 5687.8,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1837.2,
+   "z": 5664.1,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1890.7,
+   "z": 5641.7,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 1946.0,
+   "z": 5621.1,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2001.2,
+   "z": 5603.5,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2057.0,
+   "z": 5587.6,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2113.4,
+   "z": 5574.0,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2170.3,
+   "z": 5563.0,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2228.1,
+   "z": 5554.3,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2286.7,
+   "z": 5547.8,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2344.6,
+   "z": 5543.7,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2427.8,
+   "z": 5541.9,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2487.8,
+   "z": 5542.8,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2546.8,
+   "z": 5544.2,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2606.7,
+   "z": 5546.3,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2665.7,
+   "z": 5548.3,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2725.7,
+   "z": 5550.5,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2784.6,
+   "z": 5552.8,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2840.6,
+   "z": 5554.0,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2899.5,
+   "z": 5550.6,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 2956.4,
+   "z": 5539.9,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 3010.7,
+   "z": 5519.7,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Valea Crucii",
+   "x": 3064.0,
+   "z": 5494.5,
+   "w": 11.5,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (2014,5600) 11.5 m, OSM primary lanes=2. Data 14 primary default draws 2+2."
+  },
+  {
+   "name": "Strada Grădina Botanică",
+   "x": 5008.9,
+   "z": 4957.2,
+   "w": 22,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (5158,4887) ~24 m with narrow median, OSM lanes=6. Data 14 draws 2+2."
+  },
+  {
+   "name": "Strada Grădina Botanică",
+   "x": 5063.5,
+   "z": 4937.8,
+   "w": 22,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (5158,4887) ~24 m with narrow median, OSM lanes=6. Data 14 draws 2+2."
+  },
+  {
+   "name": "Strada Grădina Botanică",
+   "x": 5116.0,
+   "z": 4912.8,
+   "w": 22,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (5158,4887) ~24 m with narrow median, OSM lanes=6. Data 14 draws 2+2."
+  },
+  {
+   "name": "Strada Grădina Botanică",
+   "x": 5165.4,
+   "z": 4882.5,
+   "w": 22,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (5158,4887) ~24 m with narrow median, OSM lanes=6. Data 14 draws 2+2."
+  },
+  {
+   "name": "Strada Grădina Botanică",
+   "x": 5211.3,
+   "z": 4845.5,
+   "w": 22,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (5158,4887) ~24 m with narrow median, OSM lanes=6. Data 14 draws 2+2."
+  },
+  {
+   "name": "Strada Grădina Botanică",
+   "x": 5262.3,
+   "z": 4793.3,
+   "w": 22,
+   "ow": 0,
+   "from_w": 14,
+   "reason": "Sat (5158,4887) ~24 m with narrow median, OSM lanes=6. Data 14 draws 2+2."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 946.0,
+   "z": 5165.8,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 989.3,
+   "z": 5125.7,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1031.8,
+   "z": 5084.8,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1074.8,
+   "z": 5043.0,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1117.6,
+   "z": 5001.3,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1160.0,
+   "z": 4960.4,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1203.8,
+   "z": 4919.3,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1246.6,
+   "z": 4878.8,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1290.0,
+   "z": 4837.3,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1333.3,
+   "z": 4795.8,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1410.6,
+   "z": 4721.4,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1453.2,
+   "z": 4680.6,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1496.0,
+   "z": 4639.8,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1538.7,
+   "z": 4599.1,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1582.1,
+   "z": 4557.7,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1625.6,
+   "z": 4516.3,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1669.0,
+   "z": 4474.9,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1712.0,
+   "z": 4434.1,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1786.9,
+   "z": 4362.9,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1830.4,
+   "z": 4321.5,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Bulevardul Traian",
+   "x": 1875.5,
+   "z": 4270.6,
+   "w": 13.5,
+   "ow": 0,
+   "from_w": 15,
+   "reason": "Sat (1496,4640) 12 m, (1300,4830) 14.5 m. 2+2. Data 15 trunk default (lane count unchanged)."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1709.0,
+   "z": 5117.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1749.6,
+   "z": 5159.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1791.3,
+   "z": 5202.3,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1834.4,
+   "z": 5239.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1887.3,
+   "z": 5259.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1939.2,
+   "z": 5261.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1995.9,
+   "z": 5249.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2054.3,
+   "z": 5236.0,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2110.7,
+   "z": 5222.5,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2168.2,
+   "z": 5209.1,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2225.8,
+   "z": 5196.4,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2283.4,
+   "z": 5183.5,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2340.9,
+   "z": 5170.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2398.4,
+   "z": 5157.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2454.9,
+   "z": 5144.7,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2511.5,
+   "z": 5131.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2570.1,
+   "z": 5118.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 2626.7,
+   "z": 5106.5,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 912.9,
+   "z": 4276.7,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 940.5,
+   "z": 4320.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 982.1,
+   "z": 4362.7,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1024.1,
+   "z": 4405.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1065.2,
+   "z": 4447.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1114.1,
+   "z": 4499.0,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1154.3,
+   "z": 4540.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1193.4,
+   "z": 4581.7,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1263.3,
+   "z": 4655.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1303.6,
+   "z": 4697.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1345.1,
+   "z": 4740.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1408.3,
+   "z": 4805.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1448.7,
+   "z": 4847.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1490.9,
+   "z": 4889.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1532.4,
+   "z": 4931.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1573.1,
+   "z": 4974.5,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1614.1,
+   "z": 5018.3,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Independenței",
+   "x": 1654.4,
+   "z": 5061.4,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (1442,4841) 9.5 m, (2415,5154) 9 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 546.0,
+   "z": 4640.9,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 514.8,
+   "z": 4692.1,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 483.6,
+   "z": 4743.4,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 583.3,
+   "z": 4579.2,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 620.6,
+   "z": 4519.8,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 795.9,
+   "z": 4256.2,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 759.1,
+   "z": 4297.1,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 726.0,
+   "z": 4345.9,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 695.2,
+   "z": 4396.2,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Petru Ungureanu",
+   "x": 663.9,
+   "z": 4447.4,
+   "w": 7,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (690,4406) ~6.5-7 m. Data 11 secondary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2573.2,
+   "z": 2714.4,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2523.5,
+   "z": 2748.1,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2631.8,
+   "z": 2674.3,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2457.8,
+   "z": 2793.7,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2408.6,
+   "z": 2827.7,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2350.9,
+   "z": 2867.8,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2271.8,
+   "z": 2920.9,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2223.5,
+   "z": 2954.7,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2175.3,
+   "z": 2988.7,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2866.0,
+   "z": 2533.1,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2812.9,
+   "z": 2558.8,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2762.1,
+   "z": 2588.7,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Minsk",
+   "x": 2698.9,
+   "z": 2630.0,
+   "w": 6.5,
+   "ow": 0,
+   "from_w": 9,
+   "reason": "Sat (2573,2714) ~6-6.5 m. Data 9 tertiary default."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2654.5,
+   "z": 3756.4,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2620.1,
+   "z": 3711.0,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2586.1,
+   "z": 3662.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2553.0,
+   "z": 3615.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2519.5,
+   "z": 3566.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2486.0,
+   "z": 3518.1,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2885.2,
+   "z": 3994.5,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2844.0,
+   "z": 3952.3,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2802.3,
+   "z": 3909.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2760.5,
+   "z": 3866.0,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2719.5,
+   "z": 3823.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3022.3,
+   "z": 4134.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2980.2,
+   "z": 4093.3,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 2940.3,
+   "z": 4051.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3238.0,
+   "z": 4360.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3197.3,
+   "z": 4317.5,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3156.5,
+   "z": 4274.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3116.9,
+   "z": 4233.7,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3075.4,
+   "z": 4190.4,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3466.3,
+   "z": 4600.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3426.6,
+   "z": 4557.0,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3385.9,
+   "z": 4514.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3345.6,
+   "z": 4472.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3304.8,
+   "z": 4429.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3914.2,
+   "z": 5064.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3872.1,
+   "z": 5022.2,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3831.0,
+   "z": 4979.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3791.1,
+   "z": 4936.4,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3750.4,
+   "z": 4893.6,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3709.8,
+   "z": 4850.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3668.9,
+   "z": 4808.3,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3628.0,
+   "z": 4765.8,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3587.0,
+   "z": 4723.3,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3546.1,
+   "z": 4680.9,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  },
+  {
+   "name": "Strada Sarmizegetusa",
+   "x": 3505.1,
+   "z": 4638.4,
+   "w": 9.5,
+   "ow": 0,
+   "from_w": 11,
+   "reason": "Sat (3120,4236) ~9.5 m. Data 11 secondary default. Lanes unchanged."
+  }
+ ],
+ "buildings": [
+  {
+   "x": 2599.2,
+   "z": 5489.3,
+   "h": 28,
+   "reason": "48 m glass fallback; Soviet stepped panel block, shadow ~12 m vs 25 m for a 17-storey nearby -> ~9 storeys. Use style 1."
+  },
+  {
+   "x": 2026,
+   "z": 4618,
+   "h": 16,
+   "reason": "Data 30 m but floors=5; sat: 5-storey khrushchyovka like tagged neighbour."
+  },
+  {
+   "x": 2063,
+   "z": 4847,
+   "h": 16,
+   "reason": "Data 30 m but floors=5; sat: 5-storey block."
+  },
+  {
+   "x": 1998,
+   "z": 4077,
+   "h": 19,
+   "reason": "Data 30 m but floors=6; sat: low-rise industrial building."
+  },
+  {
+   "x": 2014,
+   "z": 4000,
+   "h": 19,
+   "reason": "Data 30 m but floors=6 (same complex as 1998,4077)."
+  },
+  {
+   "x": 2191,
+   "z": 3255,
+   "h": 28,
+   "reason": "Data 36 m but floors=9; sat: long 9-storey block."
+  },
+  {
+   "x": 4484,
+   "z": 5981,
+   "h": 23,
+   "reason": "Institutul de Genetica: data 40 m, glass, but floors=7 (OSM levels 7)."
+  },
+  {
+   "x": 2696.8,
+   "z": 2150.7,
+   "h": 6,
+   "reason": "Fallback 28 m panel; sat: 1-2 storey depot shed in bus yard."
+  },
+  {
+   "x": 3064.4,
+   "z": 4022.6,
+   "h": 13,
+   "reason": "Fallback 28 m panel; sat: L-shaped 3-4 storey school."
+  },
+  {
+   "x": 2559.8,
+   "z": 3881.9,
+   "h": 10,
+   "reason": "Fallback 19 m; sat: ~3-storey building, short shadow."
+  },
+  {
+   "x": 2344.5,
+   "z": 3628.4,
+   "h": 9,
+   "reason": "Fallback 13 m; part of single-storey factory hall roof."
+  },
+  {
+   "x": 3539.5,
+   "z": 4849.0,
+   "h": 9,
+   "reason": "Fallback 19 m on 9967 m2 single-storey industrial/warehouse hall."
+  },
+  {
+   "x": 3312.4,
+   "z": 3494.3,
+   "h": 7,
+   "reason": "Fallback 16 m; sat: 2-storey private house."
+  },
+  {
+   "x": 2420.7,
+   "z": 2519.3,
+   "h": 6.5,
+   "reason": "Fallback 10 m; private-house plot."
+  },
+  {
+   "x": 2773.3,
+   "z": 2779.5,
+   "h": 6.5,
+   "reason": "Fallback 10 m; 1-2 storey private house."
+  },
+  {
+   "x": 3407.7,
+   "z": 3998.8,
+   "h": 7,
+   "reason": "Fallback 13 m; 2-storey private house."
+  },
+  {
+   "x": 2467.4,
+   "z": 2863.7,
+   "h": 6.5,
+   "reason": "Fallback 10 m; private house."
+  },
+  {
+   "x": 5460.6,
+   "z": 4898.9,
+   "h": 5,
+   "reason": "Fallback 10 m; low commercial shed."
+  },
+  {
+   "x": 1919.0,
+   "z": 5304.0,
+   "h": 6,
+   "reason": "Fallback 10 m; 1-2 storey annex."
+  }
+ ],
+ "rules": [
+  {
+   "desc": "Private houses / sheds too tall: fallback for untagged class=yes 120-400 m2 picks 10 or 13 m (3-4 storeys). 6/6 satellite samples were 1-2 storey houses or sheds.",
+   "match": "Botanica ring; no extra.floors; 120<=footprint area<400 m2; h in {10,13}; style 0 (1062 buildings)",
+   "change": "h = seeded choice of [4,5,6.5,7] (same as house fallback)"
+  },
+  {
+   "desc": "Glass style assigned at random (50%) to h>=40 m; in Botanica all 39 are residential towers (16-storey panel blocks, Sky House, 20-storey Dacia towers).",
+   "match": "Botanica ring; style 2",
+   "change": "style 1 (panel); keep h"
+  },
+  {
+   "desc": "Non-residential fallback heights too tall: untagged buildings >=400 m2 get h from [13,16,19,28,31]; sampled 28/31 and 19 m ones were schools (3-4 storeys), depots, single-storey industrial halls.",
+   "match": "Botanica ring; no extra.floors; area>=400; h in {19,28,31} (380 buildings: 172x19, 175x28, 33x31)",
+   "change": "cap h at 13 unless the footprint is a known residential block (8 of 11 sampled large untagged buildings were over-height; 1 unknown)."
+  },
+  {
+   "desc": "Overture height contradicts floors: h > floors*3.2+6.",
+   "match": "extra.floors present and h > floors*3.2+6 (7 in Botanica, listed in buildings[] except Sigma 50/13 office which is plausible)",
+   "change": "h = floors*3.0+1.2"
+  },
+  {
+   "desc": "Pipeline ignores OSM lanes outside the centre extract; class defaults apply (trunk 15, primary 14). In Botanica suburban 2-lane trunk/primary roads (OSM lanes=1 or 2, two-way) render as 2+2 and are 3-5 m too wide.",
+   "match": "two-way kind 0 pieces with w in {14,15} whose OSM way is trunk/primary with lanes<=2 (Muncesti, Drumul Baciioului, Grenoble south, Valea Crucii)",
+   "change": "w = 10.5 (1+1). Exceptions verified on satellite: Decebal (z<2944 is 3+3 ~20 m; 2944-3531 ~17 m), Cuza-Voda ~12.5 and Traian ~13.5 are 2+2."
+  },
+  {
+   "desc": "OSM lanes values in Botanica are not reliable on their own: lanes=1 is used on two-way roads that have 1 lane per direction; Decebal tagged lanes=2 is really 3+3/2+2.",
+   "match": "any automated lanes->width rule",
+   "change": "treat two-way lanes=1 as 2 total; do not reduce Decebal/Cuza-Voda/Traian below the values above."
+  }
+ ],
+ "notes": {
+  "method": "OSM Overpass (526 trunk-tertiary ways, 7519 buildings, 1160 with levels) vs world.json/packs; Esri imagery ~0.27 m/px resampled into road-aligned strips with 1 m ruler (img/*_s.jpg, montages img/m1..m12.jpg); building overlays img/b*_o.jpg, img/bsample_*.jpg.",
+  "apply": "Each road point has from_w = original data width; apply only to pieces with that name AND that w (protects same-named links/service roads). Near Decebal z~2944 and Dacia z~3360 neighbouring points differ: use nearest point.",
+  "verified_ok": "Dacia primary 10.5 oneway pair (2290,4680; 3200,5559; 4231,6521); Decebal z>3531 14; Grenoble north 14 (2+2, 13.5 m); Gradina Botanica 2-lane part 14 (~13 m); Hristo Botev 11 (~10.5); Burebista 11; Titulescu/Zelinski 6.8 oneway; Padurii 11; Calea Basarabiei oneway 10.5; Sarmizegetusa oneway 8.2.",
+  "unverified": "Str. Trandafirilor (tree canopy at 3 points); Kaufland/33-11 blocks near (2112,3793) are construction sites in imagery (imagery older than OSM).",
+  "heights_ok": "952/966 OSM-levels-matched buildings within +-4 m; footprints align with imagery within ~1-2 m. Viaduct shows ~8 m imagery parallax (elevated), not a data error.",
+  "global_note": "floors*3.2+0.6 makes 9-storey 29.4 m and 16-storey 51.8 m vs typical ~27/~46; consider floors*2.9+1.2 for style-1 residential (all sectors)."
+ }
+}

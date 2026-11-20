@@ -1,0 +1,342 @@
+{
+ "roads": [
+  {
+   "name": "Strada Ismail",
+   "x": 800,
+   "z": 1170,
+   "w": 16,
+   "ow": 0,
+   "reason": "Ismail Ștefan cel Mare→București block: data 7.2 (OSM lanes=2/3, wrong); satellite curb-to-curb 14 m @(799,1169), ~18 m @(854,1114), 4-6 lane markings"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 880,
+   "z": 1090,
+   "w": 16,
+   "ow": 0,
+   "reason": "Ismail Ștefan cel Mare→București block: data 7.2 (OSM lanes=2/3, wrong); satellite curb-to-curb 14 m @(799,1169), ~18 m @(854,1114), 4-6 lane markings"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 950,
+   "z": 1025,
+   "w": 16,
+   "ow": 0,
+   "reason": "Ismail Ștefan cel Mare→București block: data 7.2 (OSM lanes=2/3, wrong); satellite curb-to-curb 14 m @(799,1169), ~18 m @(854,1114), 4-6 lane markings"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 706,
+   "z": 1265,
+   "w": 16.5,
+   "ow": 0,
+   "reason": "Ismail București→Hâncești: data 14 (DEFW primary), OSM lanes:forward/backward 3/2; satellite 15.5 m @(557,1417), ~18 m incl. parking @(420,1565)"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 602,
+   "z": 1371,
+   "w": 16.5,
+   "ow": 0,
+   "reason": "Ismail București→Hâncești: data 14 (DEFW primary), OSM lanes:forward/backward 3/2; satellite 15.5 m @(557,1417), ~18 m incl. parking @(420,1565)"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 500,
+   "z": 1476,
+   "w": 16.5,
+   "ow": 0,
+   "reason": "Ismail București→Hâncești: data 14 (DEFW primary), OSM lanes:forward/backward 3/2; satellite 15.5 m @(557,1417), ~18 m incl. parking @(420,1565)"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 411,
+   "z": 1574,
+   "w": 16.5,
+   "ow": 0,
+   "reason": "Ismail București→Hâncești: data 14 (DEFW primary), OSM lanes:forward/backward 3/2; satellite 15.5 m @(557,1417), ~18 m incl. parking @(420,1565)"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 365,
+   "z": 1623,
+   "w": 16.5,
+   "ow": 0,
+   "reason": "Ismail București→Hâncești: data 14 (DEFW primary), OSM lanes:forward/backward 3/2; satellite 15.5 m @(557,1417), ~18 m incl. parking @(420,1565)"
+  },
+  {
+   "name": "Strada Ismail",
+   "x": 1860,
+   "z": 284,
+   "w": 15.6,
+   "ow": 0,
+   "reason": "Ismail east end: data 13.8 (OSM lanes=4); satellite ~16.5 m, 4 lanes"
+  },
+  {
+   "name": "Strada București",
+   "x": -1093,
+   "z": -388,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -942,
+   "z": -242,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -834,
+   "z": -136,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -722,
+   "z": -27,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -615,
+   "z": 77,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -502,
+   "z": 184,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -343,
+   "z": 338,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -173,
+   "z": 505,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": -67,
+   "z": 611,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": 33,
+   "z": 709,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": 142,
+   "z": 818,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": 271,
+   "z": 944,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": 432,
+   "z": 1100,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada București",
+   "x": 553,
+   "z": 1218,
+   "w": 10,
+   "ow": 0,
+   "reason": "București: data 7.2 = OSM lanes=2×3.3+0.6, no parking; satellite ~10 m curb-to-curb with parked cars both sides @(271,944),(431,1099); keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada Alexei Mateevici",
+   "x": -686,
+   "z": 743,
+   "w": 10.5,
+   "ow": 0,
+   "reason": "Mateevici two-way primary: data 7.2 (OSM lanes=2); satellite ~12.5 m incl. parking lane @(-686,743); 10.5 keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada Alexei Mateevici",
+   "x": -963,
+   "z": 372,
+   "w": 10.5,
+   "ow": 0,
+   "reason": "Mateevici two-way primary: data 7.2 (OSM lanes=2); satellite ~12.5 m incl. parking lane @(-686,743); 10.5 keeps 1 lane/dir"
+  },
+  {
+   "name": "Strada Sfatul Țării",
+   "x": -363,
+   "z": -487,
+   "w": 6.5,
+   "ow": 0,
+   "reason": "two-way secondary w=3.9 from OSM lanes=1; satellite ~7 m @(-499,-357); 3.9 two-way is impassable"
+  },
+  {
+   "name": "Strada Sfatul Țării",
+   "x": -499,
+   "z": -357,
+   "w": 6.5,
+   "ow": 0,
+   "reason": "two-way secondary w=3.9 from OSM lanes=1; satellite ~7 m @(-499,-357); 3.9 two-way is impassable"
+  },
+  {
+   "name": "Strada Sfatul Țării",
+   "x": -757,
+   "z": -107,
+   "w": 6.5,
+   "ow": 0,
+   "reason": "two-way secondary w=3.9 from OSM lanes=1; satellite ~7 m @(-499,-357); 3.9 two-way is impassable"
+  },
+  {
+   "name": "Strada Sfatul Țării",
+   "x": -924,
+   "z": 57,
+   "w": 4.9,
+   "ow": 1,
+   "reason": "oneway piece w=3.9 (OSM lanes=1) → 4.9 (still 1 lane)"
+  },
+  {
+   "name": "Strada Bulgară",
+   "x": 540,
+   "z": 824,
+   "w": 6.5,
+   "ow": 0,
+   "reason": "two-way w=3.9 (OSM lanes=1); satellite ~6 m lane + angled parking @(540,824)"
+  },
+  {
+   "name": "Strada Bulgară",
+   "x": 523,
+   "z": 840,
+   "w": 6.5,
+   "ow": 0,
+   "reason": "two-way w=3.9 (OSM lanes=1); satellite ~6 m lane + angled parking @(540,824)"
+  }
+ ],
+ "buildings": [
+  {
+   "x": 1001,
+   "z": 850,
+   "h": 18,
+   "reason": "Centrul Comercial Unic: untagged random 31 m footprint duplicates the OSM 5-floor 18 m footprint at (1007,848); real 5 storeys"
+  },
+  {
+   "x": 158,
+   "z": 107,
+   "h": 18,
+   "reason": "Gemeni dept. store: untagged random 31 (style panel); 4-5 storey store, small facade lean on satellite"
+  },
+  {
+   "x": 189,
+   "z": 275,
+   "h": 16,
+   "reason": "Sala cu Orgă: untagged random 28; 2-storey neoclassical (former bank) with high ceilings"
+  },
+  {
+   "x": 534,
+   "z": 189,
+   "h": 16,
+   "reason": "Filarmonica Națională: untagged random 31; satellite shows pitched-roof historic building, 2-3 storeys"
+  },
+  {
+   "x": -264,
+   "z": 284,
+   "h": 15,
+   "reason": "Teatrul Licurici: untagged random 31; low cross-shaped flat-roof theatre between 7.5/10 m neighbours"
+  },
+  {
+   "x": -195,
+   "z": 317,
+   "h": 15,
+   "reason": "Muzeul Național de Artă: untagged random 28 over whole complex; red-tile 2-storey mansion + hall"
+  },
+  {
+   "x": 247,
+   "z": 531,
+   "h": 14,
+   "reason": "Teatrul Luceafărul: untagged random 28; ~3-storey theatre"
+  },
+  {
+   "x": -168,
+   "z": 429,
+   "h": 18,
+   "reason": "Biserica Sf. Teodora de la Sihla (blue domes on satellite): untagged random 28 with panel style; should be church style 4, ~18 m to dome"
+  },
+  {
+   "x": -586,
+   "z": -358,
+   "h": 13,
+   "reason": "Baza Auto a Parlamentului: untagged random 31; garage with ramp (rounded end), ~3-4 levels"
+  },
+  {
+   "x": 1854,
+   "z": 1185,
+   "h": 10,
+   "reason": "untagged random 48 m; satellite shows long gable-roof 2-3 storey building"
+  },
+  {
+   "x": 140,
+   "z": 231,
+   "h": 12,
+   "reason": "Primăria (City Hall): 2 floors × 3.2 = 7.6; historic high-ceiling floors ≈ 4.5 m + attic (tower not modelled) — low confidence"
+  }
+ ],
+ "rules": [
+  {
+   "desc": "Two-way drivable streets with w<5 (OSM lanes=1 on a two-way street → 3.9 m): physically ~6-7 m curb-to-curb",
+   "match": "kind==0 && ow==0 && w<5 (Centru ring: 1968 m, e.g. Sfatul Țării, Bulgară, Universității, Anton Crihan, Iorga, Corobceanu)",
+   "change": "w=6.5 (1 lane/dir)"
+  },
+  {
+   "desc": "One-way drivable streets w<=3.9 (OSM lanes=1 oneway): add parking/margin, keep 1 lane",
+   "match": "kind==0 && ow!=0 && w<4.5 (Centru ring ~1800 m: Bulgară, 31 August 1989 Pușkin–Bănulescu block, Gheorghe Tudor…)",
+   "change": "w=4.9 (round(4.9/3.3)=1 lane)"
+  },
+  {
+   "desc": "Untagged non-apartment buildings ≥400 m² randomly get 28/31 m (and style 1 panel since h≥22) in build_city.py; in the historic core 9 of 10 sampled such buildings are 2-5 storey public/historic buildings",
+   "match": "building has no extra.floors && h in {28,31} (97 in Centru ring, ~230 in core box x,z∈[-1500,1700])",
+   "change": "pipeline: drop 28/31 from the random choices for untagged non-apartment classes (A<1500:[10,13,16,19], else [13,16,19]); post-hoc: set h=16, style 0"
+  },
+  {
+   "desc": "Untagged 'apartments' A>500 can randomly get 48 m (16 storeys); of 3 checked one is a 2-3 storey gable-roof building, one a construction pit, one a plausible tall block",
+   "match": "no extra.floors && h==48 (7 in Centru ring)",
+   "change": "drop 48 from untagged apartment choices (keep 15/16.5/28/31) — 16-storey only with OSM levels"
+  }
+ ]
+}

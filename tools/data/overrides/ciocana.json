@@ -1,0 +1,260 @@
+{
+ "roads": [
+  {
+   "name": "Strada Alecu Russo",
+   "x": 3895,
+   "z": -1535,
+   "w": 20,
+   "ow": 0,
+   "reason": "Two-way section bridge->Mircea cel Batran: OSM primary lanes=6; satellite shows 3+3 lanes, curb-to-curb ~18-20 m (profile at 3999,-1468). Data 14 draws only 2+2."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 3990,
+   "z": -1472,
+   "w": 20,
+   "ow": 0,
+   "reason": "Two-way section bridge->Mircea cel Batran: OSM primary lanes=6; satellite shows 3+3 lanes, curb-to-curb ~18-20 m (profile at 3999,-1468). Data 14 draws only 2+2."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 4090,
+   "z": -1410,
+   "w": 20,
+   "ow": 0,
+   "reason": "Two-way section bridge->Mircea cel Batran: OSM primary lanes=6; satellite shows 3+3 lanes, curb-to-curb ~18-20 m (profile at 3999,-1468). Data 14 draws only 2+2."
+  },
+  {
+   "name": "Strada Alecu Russo",
+   "x": 4150,
+   "z": -1372,
+   "w": 20,
+   "ow": 0,
+   "reason": "Two-way section bridge->Mircea cel Batran: OSM primary lanes=6; satellite shows 3+3 lanes, curb-to-curb ~18-20 m (profile at 3999,-1468). Data 14 draws only 2+2."
+  },
+  {
+   "name": "Strada Mihail Sadoveanu",
+   "x": 3602,
+   "z": -1922,
+   "w": 15,
+   "ow": 0,
+   "reason": "Satellite: solid centre line with 2+2 lanes, asphalt ~15-16 m at (3602,-1922) and (3461,-980). Data 11 (class default) draws 1+1. OSM lanes=1 here is wrong."
+  },
+  {
+   "name": "Strada Mihail Sadoveanu",
+   "x": 3461,
+   "z": -980,
+   "w": 15,
+   "ow": 0,
+   "reason": "Satellite: solid centre line with 2+2 lanes, asphalt ~15-16 m at (3602,-1922) and (3461,-980). Data 11 (class default) draws 1+1. OSM lanes=1 here is wrong."
+  },
+  {
+   "name": "Strada Mihail Sadoveanu",
+   "x": 3520,
+   "z": -690,
+   "w": 15,
+   "ow": 0,
+   "reason": "Satellite: solid centre line with 2+2 lanes, asphalt ~15-16 m at (3602,-1922) and (3461,-980). Data 11 (class default) draws 1+1. OSM lanes=1 here is wrong."
+  },
+  {
+   "name": "Strada Uzinelor",
+   "x": 3697,
+   "z": 1868,
+   "w": 9,
+   "ow": 0,
+   "reason": "East segment Otovasca->Lunca Bacului: brightness profiles give ~8.5-9 m dark asphalt at 3 points, 1+1 lanes; OSM lanes=2. Data 14 (primary default) draws 2+2."
+  },
+  {
+   "name": "Strada Uzinelor",
+   "x": 4198,
+   "z": 2256,
+   "w": 9,
+   "ow": 0,
+   "reason": "East segment Otovasca->Lunca Bacului: brightness profiles give ~8.5-9 m dark asphalt at 3 points, 1+1 lanes; OSM lanes=2. Data 14 (primary default) draws 2+2."
+  },
+  {
+   "name": "Strada Uzinelor",
+   "x": 4479,
+   "z": 2563,
+   "w": 9,
+   "ow": 0,
+   "reason": "East segment Otovasca->Lunca Bacului: brightness profiles give ~8.5-9 m dark asphalt at 3 points, 1+1 lanes; OSM lanes=2. Data 14 (primary default) draws 2+2."
+  },
+  {
+   "name": "Strada Uzinelor",
+   "x": 4770,
+   "z": 2840,
+   "w": 9,
+   "ow": 0,
+   "reason": "East segment Otovasca->Lunca Bacului: brightness profiles give ~8.5-9 m dark asphalt at 3 points, 1+1 lanes; OSM lanes=2. Data 14 (primary default) draws 2+2."
+  },
+  {
+   "name": "Strada Uzinelor",
+   "x": 3007,
+   "z": 925,
+   "w": 11,
+   "ow": 0,
+   "reason": "West segment near Otovasca: asphalt ~10.5-11.5 m (profile), OSM lanes=2; data 14 too wide."
+  }
+ ],
+ "buildings": [
+  {
+   "x": 4299.1,
+   "z": -3865.3,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=13 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4201.2,
+   "z": -3959.5,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=16 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4250.7,
+   "z": -3950.8,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=19 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4302.6,
+   "z": -3935.9,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=31 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4143.3,
+   "z": -3975.6,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=16 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4383.3,
+   "z": -4488.4,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=28 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4366.2,
+   "z": -4448.5,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=28 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4389.1,
+   "z": -4280.4,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=13 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4383.0,
+   "z": -4239.2,
+   "h": 1.5,
+   "reason": "'Rezervor subteran' (OSM man_made=reservoir_covered, Str. Studentilor 14 water works). Data h=19 m random bin; satellite shows grassed earth mound. Should be ~1-2 m (or removed)."
+  },
+  {
+   "x": 4316.9,
+   "z": -3235.5,
+   "h": 11,
+   "reason": "Kaufland hypermarket: data 31 m (random bin, panel style). Single-storey hypermarket ~10-12 m (imagery still shows the lot under construction)."
+  },
+  {
+   "x": 4657.9,
+   "z": -2694.2,
+   "h": 29.4,
+   "reason": "OSM apartments, no levels -> random 16.5 m. Satellite: same roof/balcony pattern and shadow length (~11-12 m) as adjacent tagged 9-storey blocks -> 9 storeys."
+  },
+  {
+   "x": 4654.5,
+   "z": -2643.0,
+   "h": 29.4,
+   "reason": "OSM apartments, no levels -> random 16.5 m. Satellite: same roof/balcony pattern and shadow length (~11-12 m) as adjacent tagged 9-storey blocks -> 9 storeys."
+  },
+  {
+   "x": 4704.2,
+   "z": -2569.0,
+   "h": 16,
+   "reason": "One continuous block split into sections with random heights 6.5/7.5/13 (data h=6.5). Shadow ~5.8 m vs 10.8 m for the 9-storey block in the same image -> ~5 storeys."
+  },
+  {
+   "x": 4737.0,
+   "z": -2568.9,
+   "h": 16,
+   "reason": "One continuous block split into sections with random heights 6.5/7.5/13 (data h=7.5). Shadow ~5.8 m vs 10.8 m for the 9-storey block in the same image -> ~5 storeys."
+  },
+  {
+   "x": 4769.6,
+   "z": -2567.5,
+   "h": 16,
+   "reason": "One continuous block split into sections with random heights 6.5/7.5/13 (data h=13). Shadow ~5.8 m vs 10.8 m for the 9-storey block in the same image -> ~5 storeys."
+  },
+  {
+   "x": 4126,
+   "z": -2695,
+   "h": 16,
+   "reason": "Data 28 m (random bin). Shadow ~5.4 m vs ~10.8 m for 9-storey blocks in the same imagery -> ~5 storeys (OSM building=kindergarten)."
+  },
+  {
+   "x": 4172,
+   "z": -2675,
+   "h": 7,
+   "reason": "Kindergarten-type building with playground, data 13 m random; very short shadow -> ~2 storeys (medium confidence)."
+  },
+  {
+   "x": 3529.7,
+   "z": 1343.2,
+   "h": 9,
+   "reason": "Industrial hall (Uzinelor zone), untagged, data 28 m random bin; satellite shows single-storey hall with no visible long shadow."
+  },
+  {
+   "x": 3497.6,
+   "z": 1356.3,
+   "h": 9,
+   "reason": "Industrial hall (Uzinelor zone), untagged, data 28 m random bin; satellite shows single-storey hall with no visible long shadow."
+  },
+  {
+   "x": 3540.8,
+   "z": 1430.5,
+   "h": 9,
+   "reason": "Industrial hall (Uzinelor zone), untagged, data 31 m random bin; satellite shows single-storey hall with no visible long shadow."
+  },
+  {
+   "x": 4453.5,
+   "z": -4991.4,
+   "h": 1,
+   "reason": "OSM building=garage, parking=multi-storey, layer=-1 (underground). Data renders 13 m above ground. OSM-only, not satellite-checked."
+  }
+ ],
+ "rules": [
+  {
+   "desc": "Covered/underground reservoirs rendered as tall blocks",
+   "match": "OSM man_made=reservoir_covered or building with layer<0 / name 'Rezervor subteran' (pipeline: Overture building with no height/levels)",
+   "change": "h=1.5 (or skip). 9 cases in Ciocana, 13-31 m now."
+  },
+  {
+   "desc": "Untagged industrial halls get random 16/19/28/31 m",
+   "match": "building without height/num_floors, A>=400, OSM building in (industrial,warehouse) or centroid in landuse=industrial/garages; current h in {16,19,28,31}",
+   "change": "h=9 if A<1500 else 11 (single-storey halls). 391 buildings in Ciocana (262 at >=19 m). Verified on the Uzinelor zone (3450,1350): halls of 28-31 m with no visible long shadows."
+  },
+  {
+   "desc": "Private houses rendered as 3-4 storey blocks",
+   "match": "building without height/num_floors, 120<=A<400, OSM building=yes or untagged, >=8 buildings <300 m2 within 60 m (private-house area); current h in {10,13}",
+   "change": "h=rand([5,6.5,7]). 386 buildings in Ciocana. Verified NE of Uzinelor (4479,2563): pitched-roof 1-2 storey houses at 10/13 m."
+  },
+  {
+   "desc": "Multi-section blocks get a different random height per section",
+   "match": "adjacent untagged building parts (shared wall, same orientation)",
+   "change": "give every section one height (from a tagged neighbour if present, else max). Example: 4704..4770,-2568."
+  },
+  {
+   "desc": "Two-way roads with OSM lanes>=5 drawn too narrow",
+   "match": "kind 0, ow 0, OSM lanes>=5 (pipeline ignores OSM lanes outside the centre extract)",
+   "change": "w = lanes*3.3+0.6. Verified on Alecu Russo (6 lanes, ~19 m). Also Lunca Bacului (OSM lanes=6, data 14), not satellite-checked. Do NOT apply OSM lanes blindly: lanes=2 on Mesterul Manole and lanes=1 on Sadoveanu are wrong (3 and 2+2 visible)."
+  },
+  {
+   "desc": "Floor height of tagged Soviet blocks",
+   "match": "buildings with num_floors and no height (pipeline h = 3.2*lv+0.6/1.2)",
+   "change": "optional global: h = 2.8*lv+1.8 (5->15.8, 9->27, 16->46.6) to match typical panel blocks; current 17.2/29.4/51.8 are ~8-12% tall. Not shadow-verified."
+  }
+ ]
+}

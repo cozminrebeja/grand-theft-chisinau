@@ -5,7 +5,7 @@ function hook(name,...a){const f=window[name]||(typeof globalThis[name]==='funct
 // steering value for vehicle animation: player uses input, AI derives from heading change
 async function main(){
 await progress('SE ÎNCARCĂ HARTA…');
-initMap(await (await fetch(WORLD.base+'world.json')).json());
+initMap(await (await fetch(WORLD.base+'world.json',{cache:'no-cache'})).json());
 if(D.attribution){const o=$('osm');if(o)o.innerHTML='Hartă: '+D.attribution.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace('OpenStreetMap contributors','<a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>');}
 await initHeight();
 await progress('CONSTRUIM ORAȘUL…');
@@ -34,13 +34,13 @@ function spawnAI(type,kind,near){const list=kind==='trolley'?wiredEdges:edges;if
 function respawnAI(v){v.rcd=(v.rcd||0);if(performance.now()<v.rcd)return;v.rcd=performance.now()+1500;const kind=v.ai.kind,list=kind==='trolley'?wiredEdges:edges;const e=randEdgeNear(player.x,player.z,160,420,list,60);if(!e)return;const ds=dirsFor(e,kind);if(!ds.length)return;
   placeAgent(v.ai,e,mpick(ds),Math.random()*.8+.1);v.x=v.ai.x;v.z=v.ai.z;v.h=Math.atan2(v.ai.hx,v.ai.hz);v.speed=v.v0*.5;v.ai.dead=false;v.stuck=0;}
 const near0={x:player.x,z:player.z,min:20,max:500};
-const MIX=[['taxi',24],['yaris',6],['logan',14],['lada',12],['suv',7],['rutiera',12],['police',3]];
+const MIX=[['taxi',10],['yaris',4],['logan',7],['lada',6],['suv',4],['rutiera',6],['police',2]]; // ponytail: thinned traffic, map accuracy over density
 for(const [t,n] of MIX)for(let i=0;i<n;i++)spawnAI(t,'car',near0);
-for(let i=0;i<11;i++)spawnAI('trolley','trolley',{x:player.x,z:player.z,min:30,max:900});
+for(let i=0;i<7;i++)spawnAI('trolley','trolley',{x:player.x,z:player.z,min:30,max:900});
 // parked cars (half on the kerb, Chișinău style) — kept around the player, recycled as you move through the city
 if(SAVE&&SAVE.car&&SPEC[SAVE.car]){const v=makeVehicle(SAVE.car,player.x,player.z,player.h,SAVE.paint);
   if(v){v.mode='player';v.ai=null;v.driver=false;player.car=v;player.mode='car';player.m.visible=false;}}
-const PARK_N=75;
+const PARK_N=40;
 function parkSpawn(minR,maxR){const e=randEdgeNear(player.x,player.z,minR,maxR,edges,20);if(!e||e.w>12||e.len<25)return false;const P=e.pts;const s=Math.floor(Math.random()*(P.length-1));
   const a=P[s],b=P[s+1],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz);if(l<12)return false;const t=mr(.25,.75),side=Math.random()<.5?1:-1;const nx=-dz/l*side,nz=dx/l*side;const o=e.w/2+.55;
   const x=a[0]+dx*t+nx*o,z=a[1]+dz*t+nz*o;if(pushOut(x,z,2.2)||vehicles.some(v=>Math.abs(v.x-x)<6&&Math.abs(v.z-z)<6))return false;

@@ -1,0 +1,38 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+Open-world browser game set in real Chișinău, Moldova. three.js **r128** from CDN, plain classic scripts, **no build step, no package manager, no tests/linter**. Deployed by GitHub Pages from `main` (root) to `fun.rebeja.co` (`CNAME`). Pushing `main` deploys the game.
+
+## Run
+```bash
+python3 -m http.server 8000   # open http://localhost:8000 (file:// fails: the game fetches JSON)
+```
+Debug handle in the browser console: `window.__dbg` (scene, player, renderer, camera, vehicles, peds, WORLD, toggleCar…). `__dbg.camOverride=[x,y,z,tx,ty,tz]` freezes the camera; `__dbg.renderer.info.render` gives triangles and draw calls.
+
+`tools/shot.py` is a Playwright screenshot/error harness, but it is stale: it expects `dev/`, `test.html` and `/usr/bin/google-chrome`, and none of those exist here. Fix the paths before relying on it.
+
+## Architecture
+- `index.html` loads `js/*.js` **in order** as classic scripts sharing **one global lexical scope**. Re-declaring a top-level name anywhere is a SyntaxError that kills the whole game. New top-level identifiers in a module take that module's prefix (`env_`, `fac_`, `st_`, `veg_`, `lm_`, `veh_`, `ppl_`, `fx_`, `world_`…).
+- **Cache busting:** every `<script src="js/...?v=YYYYMMDDx">` tag carries the same version string. Bump all of them when changing JS, or deployed clients keep stale scripts.
+- Load order and roles: `core` (utils, `Bk` merged-geometry builder, shared materials) → `env` (renderer, scene, camera, sky, post-processing via `assets/env/`) → `mapcore` (map data `D`, world scale, collision grid `addPoly`/`pushOut`/`solidAt`, terrain `groundY`) → `bridges` (`surfaceY`, `onBridge`) → `facades` (buildings) → `streets` (roads, `nearestSeg`, trolleybus wires/stops) → `traffic` (road graph, A*) → `world` (tile streaming) → `vegetation`, `landmarks`, `vehicles`, `people`, `fx`, `radio`, `bemol`/`bemol_terrace` (fuel stations), `linella`/`linella_store` (walk-in supermarkets), `airport`, `mapicons` → `game` (input, HUD, minimap, AI, main loop `main()`).
+- **Coordinates:** metres, x = east, z = south (north = −z), y up, origin = Arc de Triumf. The data is stored in real metres (dm integers). `mapcore.js` can rescale the map at load time with `WS` (`scaleWorldData`/`scaleTileData`), but it is **1 (true scale) on purpose**: at 0.8, roads and footprints shrank while vehicles, people and floor heights did not, which broke every proportion and dropped lanes. New world data fields still need scaling there.
+- **Height:** objects stand on `groundY(x,z)`. Anything that moves (vehicles, player, peds, markers) must use `surfaceY(x,z,refY)` so it follows bridge decks. Long flat ground geometry must be subdivided to ~6–8 m before sampling so it drapes. Collision is 2D. A building's `P.h` is measured above its base `P.y0`.
+- **Streaming (`js/world.js`):** `world/world.json` is loaded once (global road network, names, POIs, stops, districts, bridges, heightmap meta, `packs`). Tiles are 500 m (pre-scale) and arrive bundled in `world/packs/p_I_J.json` (4×4 tiles per pack). Per tile, world.js calls `buildBuildingsTile(t)` → `buildStreetsTile(t)` → `buildVegetationTile(t)` → `buildTransitTile(t)`, all meshes go under `t.group`, and collision goes through `addPoly(rings,h,t)`. On unload it disposes geometries and calls the optional `*UnloadTile(t)` hooks. It does **not** dispose materials, so materials and textures must be shared module globals. Per-tile randomness must be seeded from the tile key so reloaded tiles look the same. Building is time-sliced (~40 ms per module per dense tile).
+- Per frame: AI → peds → player → `fxUpdate` → camera → `envUpdate` → `worldUpdate` → `renderVehicles` → `envRender`.
+- **Perf budget:** ≤ ~1.2M triangles and ≤ ~250 draw calls in a typical street view. Use merged buckets (`Bk`/`bk`) and InstancedMesh. Prefer procedural canvas/geometry assets.
+
+## Data pipeline
+`world/` is generated output and is committed: `world.json`, `packs/`, `height.json` (base64 Int16 DEM), `map.png`, `far.json`, `city/`. It comes from `tools/data/*.py` (Overture Maps + OSM + Copernicus DEM), and `tools/pack_tiles.py` bundles `world/tiles/` into packs. These scripts were written for the original build machine and need path fixes before reuse. Keep the OSM/Overture/Copernicus attribution.
+
+`build_city.py` only reads OSM lanes/width/levels inside the centre extract; elsewhere roads get class-default widths and untagged buildings random heights. Two post-steps fix that and must be re-run, in order, after any data regeneration:
+```bash
+python3 tools/apply_overrides.py world   # satellite/OSM audit fixes per sector (tools/data/overrides/*.json) + citywide fallback rules; idempotent
+python3 tools/make_earthworks.py world   # bridges & earthworks audit (tools/data/bridges/*.json) → world/earth.json.gz + world.json bridge_spec/walls/rivers; idempotent
+/Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup --python tools/make_city_lod.py -- world   # whole-city layer → world/city/
+```
+The DEM build (`tools/data/make_height.py`) uses a grey-opening filter that erases every embankment, dam, ramp and river channel narrower than ~150 m, so `earth.json.gz` (2 m raster of final ground heights) puts them back: `groundY()` reads it, `groundDemY()` is the raw DEM. Test: `python3 tools/test_earthworks.py`. River/stream beds are `channels` in world.json (`mapcore.js` `RV`/`rv_dist`); those flagged `lined: true` in the specs (the canalised Bîc) get the concrete lining, railings and water from `bridges.js` `buildRiversTile`, and tiles crossing any channel use a finer ground grid.
+
+`world/city/` holds `buildings.glb` (Draco; every footprint extruded, UV = tile index so world.js hides tiles that are streamed in detail) and `ground.webp` (roads/water/parks draped on the distant terrain). `far.json` boxes are only a fallback when `city/` fails to load. `world.json` and packs are fetched with `cache:'no-cache'` so data changes reach players without a version bump.
+
+`tools/ARCHITECTURE.md`, `WORLD.md` and `TERRAIN.md` are the original design specs and the detailed reference for module APIs and data formats. Some of their details are outdated: `dev/` is now `tools/`, there's no `test.html`, data is in `packs/` and `height.json`, and they predate the `WS` scale.

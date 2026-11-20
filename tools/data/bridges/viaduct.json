@@ -1,0 +1,826 @@
+{
+ "area": "viaduct",
+ "notes": [
+  "The Viaduct = Bd. Dacia from the Ciuflea/Bucuresti junction (z~1500) to Botanica (z~3385): 3 bridges (N ~300 m, middle ~130 m, S ~470 m) joined by 2 embankments (~1.6 km total). It does NOT cross the railway or the Bic: no railway within 1.7 km of it (OSM), the Bic is ~1 km NE. Under it: Malina Mica ravine + Str. Valea Podului (N), a wooded gully (middle), Valea Trandafirilor valley + Str. Melestiu (S).",
+  "All 4 data spans of each bridge (2 carriageways w=11.2 + 2 outer sidewalks w=2.2) must share ONE deck profile (the 'deck' list, keyed by z; x is the centreline between carriageways). Today each span gets its own straight line from its own end DEM heights, so sidewalk and carriageway decks differ by up to ~1 m at the north abutments (e.g. idx 172 north end -3.7 vs 262 -4.1 vs 181 -5.2).",
+  "Main terrain defect: the ground-filtered DEM still contains part of the deck: valley floors directly under all three bridges are 3-6 m too high (flat shelves / bumps along the stream thalwegs exactly at the viaduct). Apply the 'channel'/'cutting' lines as LOWER-ONLY corrections (min with DEM), blended over their side slopes.",
+  "Embankment lines: set terrain under the road corridor to the line (both raise and lower) and blend outwards with the slope.",
+  "Real carriageways are ~13 m (4 lanes) with a ~3.5 m concrete median (Esri measurement, +-1.5 m); data says 11.2 m with 16.7 m centreline spacing - acceptable.",
+  "Heights: absolute game frame (Arc ground = 0, = 86.2 m ASL). Deck values are estimates +-1.5 m unless stated; pier positions are evenly spaced at the measured ~33 m span (exact pier stations not verified)."
+ ],
+ "sites": [
+  {
+   "id": "viaduct-north-bridge",
+   "name": "Viaductul (bd. Dacia) - podul de nord peste valea Malina Mica / str. Valea Podului",
+   "x": 744.9,
+   "z": 1854,
+   "lat": 47.007964,
+   "lon": 28.842413,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      262,
+      263,
+      172,
+      181
+     ],
+     "road": "Bulevardul Dacia (Viaduct, northern bridge ~300 m)",
+     "deck": [
+      [
+       762.5,
+       1706,
+       -3.3
+      ],
+      [
+       757.3,
+       1750,
+       -3.4
+      ],
+      [
+       756.1,
+       1760,
+       -3.4
+      ],
+      [
+       751.3,
+       1800,
+       -3.3
+      ],
+      [
+       748.6,
+       1823,
+       -3.2
+      ],
+      [
+       745.4,
+       1850,
+       -2.8
+      ],
+      [
+       739.4,
+       1900,
+       -2.2
+      ],
+      [
+       733.5,
+       1950,
+       -1.0
+      ],
+      [
+       727.6,
+       2000,
+       0.3
+      ],
+      [
+       727.3,
+       2002,
+       0.3
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.8,
+      "piers": [
+       [
+        758.4,
+        1740.2
+       ],
+       [
+        754.5,
+        1772.9
+       ],
+       [
+        750.7,
+        1805.7
+       ],
+       [
+        746.8,
+        1838.4
+       ],
+       [
+        742.9,
+        1871.1
+       ],
+       [
+        739.0,
+        1903.8
+       ],
+       [
+        735.1,
+        1936.6
+       ],
+       [
+        731.2,
+        1969.3
+       ]
+      ],
+      "pier_type": "twin_column",
+      "pier_note": "each pier line = 4 round RC columns (~1.4-1.6 m dia, 2 per carriageway) under transverse cap beams, on massive stepped RC footings (~2.5x2.5 m, up to ~4 m exposed on slopes); precast prestressed T-beams (~6-8 per carriageway) ~33 m spans",
+      "railing": "mixed",
+      "railing_note": "outer edge: steel vertical-bar pedestrian railing ~1.1 m; W-beam steel guardrail between carriageway and sidewalk; centre: concrete median barrier ~0.8 m painted black/white stripes",
+      "sidewalks": [
+       2.5,
+       2.5
+      ],
+      "colour": "#a8a59d"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Valea Podului",
+       "y": -11.0,
+       "width": 6.5,
+       "clearance": 5.5
+      },
+      {
+       "type": "river",
+       "name": "Malina Mica (piped/culverted directly under the bridge, OSM 893181799)",
+       "y": -11.2,
+       "width": 3,
+       "clearance": 6.0
+      },
+      {
+       "type": "valley",
+       "name": "Malina Mica ravine with private houses/gardens and garages",
+       "y": -11.2,
+       "width": 120,
+       "clearance": 6.0
+      }
+     ],
+     "evidence": "Lengths: IPN news: viaduct = 3 bridges of ~120/300/465 m (884 m) joined by two embankments, 1.6 km total; matches data spans 262/263 (297 m), 264/266 (131 m), 265/267 (475 m) and OSM ways 29022011/32888663 (bridge=yes layer 2). Deck height: user photosphere from deck (Google Maps, Ion Bragari Aug 2025, 47.0081159,28.8425791, GPS alt 84 m -> deck ~-3.7) and eastward view showing 1-storey garage roofs (ground ~-6) just below deck level at z~1850-1900; Commons 'Village yards under the bridge' looking steeply down at yards. Ravine floor: Google Earth terrain readout 75 m ASL (= -11.2) at (720,1839) and (791,1827), game DEM -8.5 there; SRTM30 also ~4-6 m lower than game DEM in this ravine. Span ~33 m: periodic deck joints in Esri imagery (148 px @0.223 m/px = 33 m, img/esri_N_zoom.jpg). Deck profile = game straight line within ~1 m (est +-1.5 m)."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "ramp",
+     "road": "Bulevardul Dacia - north approach to the viaduct",
+     "line": [
+      [
+       781.7,
+       1590,
+       -2.0
+      ],
+      [
+       770.8,
+       1650,
+       -2.6
+      ],
+      [
+       762.5,
+       1706,
+       -3.3
+      ]
+     ],
+     "top_w": 34,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "at-grade from the Ciuflea/Bucuresti junction (DEM -2.0) to the north abutment; DEM falls to -4.1/-4.9 at the abutment, deck ~-3.3 -> ~1 m fill (estimate)."
+    },
+    {
+     "type": "channel",
+     "road": "",
+     "line": [
+      [
+       646,
+       1916,
+       -8.0
+      ],
+      [
+       705,
+       1881,
+       -9.2
+      ],
+      [
+       726,
+       1837,
+       -10.6
+      ],
+      [
+       750,
+       1808,
+       -11.2
+      ],
+      [
+       791,
+       1792,
+       -11.6
+      ],
+      [
+       828,
+       1774,
+       -12.0
+      ],
+      [
+       881,
+       1744,
+       -12.6
+      ],
+      [
+       946,
+       1711,
+       -13.4
+      ],
+      [
+       1000,
+       1700,
+       -14.0
+      ]
+     ],
+     "top_w": 25,
+     "side": "slope",
+     "slope": 2.5,
+     "evidence": "Malina Mica ravine floor under the north bridge (LOWER ONLY: apply min(DEM, profile)). Game DEM is a flat -8.3..-8.5 shelf for ~80 m under the deck; Google Earth terrain = -11.2 at (720,1839) and (791,1827), -9.2 at (705,1881), -15.2 at (823,1757) (NE valley even deeper than this line; left as is); SRTM30 4-6 m below game DEM here. Thalweg = OSM Malina Mica 893181798/122223240."
+    },
+    {
+     "type": "cutting",
+     "road": "Strada Valea Podului (passes under the north bridge)",
+     "line": [
+      [
+       771,
+       1934,
+       -2.2
+      ],
+      [
+       767,
+       1908,
+       -5.2
+      ],
+      [
+       766,
+       1865,
+       -8.8
+      ],
+      [
+       769,
+       1834,
+       -10.6
+      ],
+      [
+       744,
+       1811,
+       -11.0
+      ],
+      [
+       733,
+       1816,
+       -11.0
+      ],
+      [
+       720,
+       1834,
+       -11.0
+      ]
+     ],
+     "top_w": 7,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "street descends the ravine side and runs under the deck at ~-11 (Google Earth terrain -11.2 next to it; deck ~-3.3 -> ~5.5 m clearance under a ~1.8 m superstructure). Lower only. Estimate +-1.5 m."
+    }
+   ]
+  },
+  {
+   "id": "viaduct-middle-bridge",
+   "name": "Viaductul (bd. Dacia) - podul din mijloc (langa Malldova / Lukoil)",
+   "x": 746.2,
+   "z": 2477,
+   "lat": 47.002329,
+   "lon": 28.842429,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      264,
+      266,
+      176,
+      178
+     ],
+     "road": "Bulevardul Dacia (Viaduct, middle bridge ~120-130 m)",
+     "deck": [
+      [
+       730.0,
+       2414,
+       7.6
+      ],
+      [
+       736.7,
+       2440,
+       7.8
+      ],
+      [
+       746.4,
+       2478,
+       8.1
+      ],
+      [
+       746.9,
+       2480,
+       8.1
+      ],
+      [
+       757.2,
+       2520,
+       8.5
+      ],
+      [
+       762.6,
+       2541,
+       8.7
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.8,
+      "piers": [
+       [
+        738.2,
+        2445.9
+       ],
+       [
+        746.4,
+        2477.8
+       ],
+       [
+        754.6,
+        2509.7
+       ]
+      ],
+      "pier_type": "twin_column",
+      "pier_note": "each pier line = 4 round RC columns (~1.4-1.6 m dia, 2 per carriageway) under transverse cap beams, on massive stepped RC footings (~2.5x2.5 m, up to ~4 m exposed on slopes); precast prestressed T-beams (~6-8 per carriageway) ~33 m spans",
+      "railing": "mixed",
+      "railing_note": "outer edge: steel vertical-bar pedestrian railing ~1.1 m; W-beam steel guardrail between carriageway and sidewalk; centre: concrete median barrier ~0.8 m painted black/white stripes",
+      "sidewalks": [
+       2.5,
+       2.5
+      ],
+      "colour": "#a8a59d"
+     },
+     "under": [
+      {
+       "type": "valley",
+       "name": "wooded gully draining east to Valea Trandafirilor (footpath on west side)",
+       "y": 2.5,
+       "width": 20,
+       "clearance": 4.0
+      }
+     ],
+     "evidence": "OSM 32888668/32888673 bridge=yes layer 1 (kerbs 1539945177-82 layer 1). Esri img/esri_M.jpg + esri_M_zoom.jpg: deck crosses a tree-filled E-W gully; at-grade signalised junctions both sides (Str. Arborilor z~2345, Str. N. Gheorghiu / Malina Mare z~2700) fix the deck between ~7.0 and ~10.4. Gully floor ESTIMATE: game DEM line is flat 4.5-4.9 at x 690-760 then drops 5%/m east (2.2 at x810, -1.2 at x870) = deck leaking into DEM; SRTM30 centre 0.8 (+1.5 datum) -> floor ~2.5 (+-2). In game today the deck runs 5.4->6.5 (end DEM) over a 4.6 floor = basically at grade."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "raised_road",
+     "road": "Bulevardul Dacia - embankment/sidehill between north and middle bridges (Malldova)",
+     "line": [
+      [
+       727.3,
+       2002,
+       0.3
+      ],
+      [
+       722.2,
+       2050,
+       2.1
+      ],
+      [
+       717.8,
+       2090,
+       3.6
+      ],
+      [
+       713.4,
+       2130,
+       4.9
+      ],
+      [
+       710.2,
+       2160,
+       5.9
+      ],
+      [
+       704.9,
+       2220,
+       6.8
+      ],
+      [
+       705.1,
+       2280,
+       6.9
+      ],
+      [
+       713.0,
+       2345,
+       7.0
+      ],
+      [
+       721.0,
+       2380,
+       7.3
+      ],
+      [
+       730.0,
+       2414,
+       7.6
+      ]
+     ],
+     "top_w": 36,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "IPN: the 3 bridges are joined by embankments (ramblee). Road anchored at N-bridge south abutment (~0.3) and the at-grade Str. Arborilor junction (DEM 7.0, z~2345); between z 2002-2160 it is a sidehill (DEM 5 m higher on the east than the west) -> flatten to the line (cut east / fill west); OSM barrier=retaining_wall 1055623670 on the east side at the abutment (764,1993)-(756,2012); pedestrian underpass (data tunnels 26-28, 'Istanbul') crosses under at z~2163 where the road is ~5.9. Last 70 m before the middle bridge is fill up to ~2 m (DEM 6.4 -> 5.5). Grades estimated (+-1.5 m)."
+    },
+    {
+     "type": "channel",
+     "road": "",
+     "line": [
+      [
+       630,
+       2470,
+       6.5
+      ],
+      [
+       690,
+       2478,
+       4.8
+      ],
+      [
+       745,
+       2486,
+       3.0
+      ],
+      [
+       780,
+       2490,
+       2.2
+      ],
+      [
+       810,
+       2495,
+       1.4
+      ],
+      [
+       840,
+       2500,
+       0.2
+      ],
+      [
+       870,
+       2500,
+       -1.4
+      ],
+      [
+       930,
+       2510,
+       -3.4
+      ]
+     ],
+     "top_w": 15,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "wooded gully under the middle bridge, lower only. ESTIMATE from smoothing the DEM thalweg (flat 4.5-4.9 shelf under the deck is deck leakage) + SRTM30 (centre 0.8, ~+1.5 datum). Drains east to OSM drain 1536747258 (925,2547,-3.1)."
+    },
+    {
+     "type": "embankment",
+     "road": "Bulevardul Dacia - embankment between middle and south bridges (Lukoil / N. Gheorghiu junction)",
+     "line": [
+      [
+       762.6,
+       2541,
+       8.7
+      ],
+      [
+       772.9,
+       2580,
+       9.2
+      ],
+      [
+       783.6,
+       2620,
+       9.7
+      ],
+      [
+       794.2,
+       2660,
+       10.0
+      ],
+      [
+       804.7,
+       2700,
+       10.4
+      ],
+      [
+       815.7,
+       2740,
+       10.3
+      ],
+      [
+       827.5,
+       2783,
+       10.2
+      ]
+     ],
+     "top_w": 36,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Anchored at middle-bridge south abutment (~8.7) and the at-grade junction with Str. Natalia Gheorghiu / Malina Mare at z~2700 (DEM 10.5). Fill ~1.8 m at z 2560 (DEM 7.1), ~0 from z 2650 on. Estimate."
+    }
+   ]
+  },
+  {
+   "id": "viaduct-south-bridge",
+   "name": "Viaductul (bd. Dacia) - podul de sud peste Valea Trandafirilor / str. Melestiu",
+   "x": 888.8,
+   "z": 3015,
+   "lat": 46.997464,
+   "lon": 28.844309,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      265,
+      267,
+      175,
+      177
+     ],
+     "road": "Bulevardul Dacia (Viaduct, southern bridge ~465 m)",
+     "deck": [
+      [
+       827.5,
+       2783,
+       10.2
+      ],
+      [
+       837.3,
+       2820,
+       11.2
+      ],
+      [
+       853.2,
+       2880,
+       12.8
+      ],
+      [
+       869.0,
+       2940,
+       14.4
+      ],
+      [
+       884.8,
+       3000,
+       16.0
+      ],
+      [
+       900.6,
+       3060,
+       17.6
+      ],
+      [
+       916.6,
+       3120,
+       19.2
+      ],
+      [
+       932.8,
+       3180,
+       20.9
+      ],
+      [
+       952.2,
+       3240,
+       22.5
+      ],
+      [
+       954.3,
+       3245,
+       22.6
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.8,
+      "piers": [
+       [
+        836.7,
+        2817.8
+       ],
+       [
+        845.4,
+        2850.3
+       ],
+       [
+        854.0,
+        2882.8
+       ],
+       [
+        863.1,
+        2917.7
+       ],
+       [
+        871.7,
+        2950.2
+       ],
+       [
+        880.2,
+        2982.7
+       ],
+       [
+        888.8,
+        3015.2
+       ],
+       [
+        898.0,
+        3050.0
+       ],
+       [
+        906.5,
+        3082.5
+       ],
+       [
+        915.2,
+        3115.0
+       ],
+       [
+        924.0,
+        3147.5
+       ],
+       [
+        933.5,
+        3182.3
+       ],
+       [
+        943.4,
+        3214.8
+       ]
+      ],
+      "pier_type": "twin_column",
+      "pier_note": "each pier line = 4 round RC columns (~1.4-1.6 m dia, 2 per carriageway) under transverse cap beams, on massive stepped RC footings (~2.5x2.5 m, up to ~4 m exposed on slopes); precast prestressed T-beams (~6-8 per carriageway) ~33 m spans",
+      "railing": "mixed",
+      "railing_note": "outer edge: steel vertical-bar pedestrian railing ~1.1 m; W-beam steel guardrail between carriageway and sidewalk; centre: concrete median barrier ~0.8 m painted black/white stripes",
+      "sidewalks": [
+       2.5,
+       2.5
+      ],
+      "colour": "#a8a59d"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Melestiu",
+       "y": -3.4,
+       "width": 6.5,
+       "clearance": 16.0
+      },
+      {
+       "type": "river",
+       "name": "Valea Trandafirilor stream (piped/canal underground, emerges at (920,2946) just east of the bridge)",
+       "y": -4.0,
+       "width": 3,
+       "clearance": 16.5
+      },
+      {
+       "type": "valley",
+       "name": "Valea Trandafirilor valley (garages, houses, woods)",
+       "y": -4.0,
+       "width": 250,
+       "clearance": 16.5
+      }
+     ],
+     "evidence": "OSM 25480033/847400602 bridge=viaduct layer 2. Commons photos taken under the bridge at Melestiu (46.9982,28.8440): 'Sectorul Botanica ... panoramio (10),(13),(15)' (img/c05.jpg, c07.jpg) show 4 round columns per pier line on ~4 m stepped footings; SUV for scale gives footing+column ~14 m, + ~2 m superstructure -> deck ~16 m above local ground. Google Earth terrain readout 82-84 m ASL (= -4.2..-2.2) at (877,2946)/(896,2966)/(883,2979) vs game DEM +0.3..+0.7; game DEM along the stream thalweg rises from -2.1 to +0.6 exactly under the viaduct then falls to -3.0/-5.4 downstream = deck leaked into the DEM. Deck: straight grade 10.2 -> 22.6 (same as game today; ground photo consistent within ~2 m)."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": "",
+     "line": [
+      [
+       798,
+       3069,
+       -1.9
+      ],
+      [
+       820,
+       3041,
+       -2.3
+      ],
+      [
+       842,
+       3014,
+       -2.8
+      ],
+      [
+       859,
+       2981,
+       -3.3
+      ],
+      [
+       877,
+       2950,
+       -4.0
+      ],
+      [
+       920,
+       2946,
+       -4.1
+      ],
+      [
+       952,
+       2922,
+       -4.2
+      ],
+      [
+       982,
+       2872,
+       -4.4
+      ],
+      [
+       1018,
+       2819,
+       -5.4
+      ]
+     ],
+     "top_w": 30,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Valea Trandafirilor valley floor under the south bridge (lower only). Game DEM thalweg bumps from -2.1 up to +0.6 under the deck and back down to -3.0/-5.4 downstream (deck leaked into DEM); Google Earth terrain -4.2/-3.2/-2.2 at (877,2946)/(896,2966)/(883,2979); Commons ground photos under the bridge show the deck ~16 m above. Thalweg = OSM canal 945284539 + stream 945284538."
+    },
+    {
+     "type": "cutting",
+     "road": "Strada Melestiu (passes under the south bridge)",
+     "line": [
+      [
+       799,
+       3058,
+       -1.9
+      ],
+      [
+       842,
+       3005,
+       -2.5
+      ],
+      [
+       854,
+       2983,
+       -3.0
+      ],
+      [
+       888,
+       2946,
+       -3.4
+      ],
+      [
+       911,
+       2915,
+       -3.5
+      ],
+      [
+       925,
+       2882,
+       -3.7
+      ],
+      [
+       1002,
+       2729,
+       -6.5
+      ]
+     ],
+     "top_w": 7,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "street on the valley floor; game DEM +0.4..+0.9 at (888..925, 2882..2946) is the deck artefact; set to the valley floor (Google terrain -3.2..-4.2). Lower only. Estimate +-1.5 m."
+    }
+   ]
+  },
+  {
+   "id": "valea-trandafirilor-footbridge-1059-2753",
+   "name": "Pasarela peste parau Valea Trandafirilor (parc)",
+   "x": 1059,
+   "z": 2753,
+   "lat": 46.99984,
+   "lon": 28.84656,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      180
+     ],
+     "road": "footway",
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Valea Trandafirilor",
+       "y": -9.0,
+       "width": 3,
+       "clearance": 1.5
+      }
+     ],
+     "evidence": "OSM 1022675531 footway bridge=yes layer 1 over the open stream (OSM 945284538/224117006); 7 m span; DEM along stream -8.7..-9.6 here (natural, away from the viaduct). Not inspected visually (estimate)."
+    }
+   ],
+   "earthworks": []
+  }
+ ]
+}

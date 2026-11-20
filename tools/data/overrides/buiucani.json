@@ -1,0 +1,615 @@
+{
+ "roads": [
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -3942,
+   "z": -2445,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -3447,
+   "z": -2224,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -3270,
+   "z": -2149,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -2974,
+   "z": -2021,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -2692,
+   "z": -1860,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -2318,
+   "z": -1636,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -1996,
+   "z": -1510,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -1798,
+   "z": -1484,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Calea Ieșilor",
+   "x": -3720,
+   "z": -2338,
+   "w": 18.5,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.7 km); satellite 47.0440,28.7895 and 47.0395,28.8020: 3+3 lanes, ~17.5-18.5 m curb-to-curb; data 14 (Overture default) draws only 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -5174,
+   "z": -1799,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -4910,
+   "z": -1610,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -4585,
+   "z": -1378,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -4169,
+   "z": -1080,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -3973,
+   "z": -940,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -3704,
+   "z": -747,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -3505,
+   "z": -604,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -3236,
+   "z": -412,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -4981,
+   "z": -1661,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -4782,
+   "z": -1520,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -3342,
+   "z": -488,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6 (2.8 km); satellite at 47.0410,28.7644 / 47.0372,28.7722 / 47.0302,28.7864: 3+3 lanes, ~19.5-20.5 m; data 14 draws 2+2"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -5547,
+   "z": -1999,
+   "w": 7.2,
+   "ow": 1,
+   "match_w": [
+    10.5,
+    7
+   ],
+   "reason": "west-end trolleybus loop: OSM oneway lanes=2; satellite 47.0428,28.7599 asphalt ~6.6-7.5 m; data 10.5 oneway draws 3 lanes"
+  },
+  {
+   "name": "Strada Alba Iulia",
+   "x": -5465,
+   "z": -2030,
+   "w": 7.2,
+   "ow": 1,
+   "match_w": [
+    10.5,
+    7
+   ],
+   "reason": "west-end trolleybus loop: OSM oneway lanes=2; satellite 47.0428,28.7599 asphalt ~6.6-7.5 m; data 10.5 oneway draws 3 lanes"
+  },
+  {
+   "name": "Strada Mihai Viteazul",
+   "x": -471,
+   "z": -1554,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6; satellite 47.0388,28.8264: 3+3 lanes ~19-20 m, traffic in lanes outside data edges; data 14 (adjacent SW pieces already 20.4)"
+  },
+  {
+   "name": "Strada Mihai Viteazul",
+   "x": -371,
+   "z": -1645,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6; satellite 47.0388,28.8264: 3+3 lanes ~19-20 m, traffic in lanes outside data edges; data 14 (adjacent SW pieces already 20.4)"
+  },
+  {
+   "name": "Strada Mihai Viteazul",
+   "x": -295,
+   "z": -1715,
+   "w": 20,
+   "ow": 0,
+   "match_w": [
+    14
+   ],
+   "reason": "OSM primary lanes=6; satellite 47.0388,28.8264: 3+3 lanes ~19-20 m, traffic in lanes outside data edges; data 14 (adjacent SW pieces already 20.4)"
+  },
+  {
+   "name": "Strada Liviu Deleanu",
+   "x": -4753,
+   "z": -1804,
+   "w": 14,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "satellite 47.0410,28.7700: zebra crossing spans ~14 m, centre line + dashed lane lines = 2+2 lanes; data 11 draws 1+1 (OSM lanes=2 undertagged here)"
+  },
+  {
+   "name": "Strada Alexei Șciusev",
+   "x": -1199,
+   "z": -710,
+   "w": 9,
+   "ow": 0,
+   "match_w": [
+    3.9
+   ],
+   "reason": "two-way trolleybus street stored 3.9 m (OSM lanes=1 -> 1*3.3+0.6); satellite 47.0312,28.8168 asphalt ~9-11 m"
+  },
+  {
+   "name": "Strada Alexei Șciusev",
+   "x": -1210,
+   "z": -857,
+   "w": 9,
+   "ow": 0,
+   "match_w": [
+    3.9
+   ],
+   "reason": "two-way trolleybus street stored 3.9 m (OSM lanes=1 -> 1*3.3+0.6); satellite 47.0312,28.8168 asphalt ~9-11 m"
+  },
+  {
+   "name": "Strada Nicolae Costin",
+   "x": -4349,
+   "z": -1776,
+   "w": 8,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=2 (2.0 km) -> 7.2; satellite 47.0366,28.7853 asphalt ~8-9 m; data 11 (secondary default). Lane count unchanged (1+1), only sidewalk/visual width"
+  },
+  {
+   "name": "Strada Nicolae Costin",
+   "x": -3796,
+   "z": -1459,
+   "w": 8,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=2 (2.0 km) -> 7.2; satellite 47.0366,28.7853 asphalt ~8-9 m; data 11 (secondary default). Lane count unchanged (1+1), only sidewalk/visual width"
+  },
+  {
+   "name": "Strada Nicolae Costin",
+   "x": -3592,
+   "z": -1315,
+   "w": 8,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=2 (2.0 km) -> 7.2; satellite 47.0366,28.7853 asphalt ~8-9 m; data 11 (secondary default). Lane count unchanged (1+1), only sidewalk/visual width"
+  },
+  {
+   "name": "Strada Nicolae Costin",
+   "x": -3358,
+   "z": -1148,
+   "w": 8,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=2 (2.0 km) -> 7.2; satellite 47.0366,28.7853 asphalt ~8-9 m; data 11 (secondary default). Lane count unchanged (1+1), only sidewalk/visual width"
+  },
+  {
+   "name": "Strada Nicolae Costin",
+   "x": -3098,
+   "z": -962,
+   "w": 8,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=2 (2.0 km) -> 7.2; satellite 47.0366,28.7853 asphalt ~8-9 m; data 11 (secondary default). Lane count unchanged (1+1), only sidewalk/visual width"
+  },
+  {
+   "name": "Strada Vissarion Belinski",
+   "x": -3100,
+   "z": -1295,
+   "w": 9,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=1-2; satellite 47.0337,28.7973 asphalt ~9 m; data 11 (secondary default)"
+  },
+  {
+   "name": "Strada Vissarion Belinski",
+   "x": -2677,
+   "z": -986,
+   "w": 9,
+   "ow": 0,
+   "match_w": [
+    11
+   ],
+   "reason": "OSM secondary lanes=1-2; satellite 47.0337,28.7973 asphalt ~9 m; data 11 (secondary default)"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4999,
+   "z": -3262,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4941,
+   "z": -3287,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4688,
+   "z": -3108,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4638,
+   "z": -3187,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4232,
+   "z": -3168,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4198,
+   "z": -3124,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -4051,
+   "z": -3291,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  },
+  {
+   "name": "Șoseaua Balcani - Centura Chișinăului",
+   "x": -3943,
+   "z": -3360,
+   "w": 7.6,
+   "ow": 1,
+   "match_w": [
+    11.2
+   ],
+   "reason": "OSM-only (satellite imagery predates/blurred): trunk oneway lanes=2 for these carriageways; data 11.2 = trunk 15*0.75 draws 3 lanes per carriageway"
+  }
+ ],
+ "buildings": [
+  {
+   "x": -1694,
+   "z": -1902,
+   "h": 8,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 28, panel style) @47.0418,28.8113"
+  },
+  {
+   "x": -1711,
+   "z": -1993,
+   "h": 9,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 16)"
+  },
+  {
+   "x": -2176,
+   "z": -2296,
+   "h": 8,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 28, panel style) @47.0451,28.8030"
+  },
+  {
+   "x": -2286,
+   "z": -2265,
+   "h": 8,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 19)"
+  },
+  {
+   "x": -2288,
+   "z": -2279,
+   "h": 8,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 16)"
+  },
+  {
+   "x": -2325,
+   "z": -2300,
+   "h": 8,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 16)"
+  },
+  {
+   "x": -1650,
+   "z": -1666,
+   "h": 8,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 19) @47.0397,28.8109"
+  },
+  {
+   "x": -1665,
+   "z": -1693,
+   "h": 9,
+   "reason": "industrial shed (Buiucani industrial zone, OSM landuse=industrial, no building:levels -> random pipeline height); satellite shows 1-2 storey hall with short shadow (data 16)"
+  },
+  {
+   "x": -792,
+   "z": -558,
+   "h": 8,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 16) @47.0295,28.8227"
+  },
+  {
+   "x": -718,
+   "z": -572,
+   "h": 8,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 28, panel style)"
+  },
+  {
+   "x": -755,
+   "z": -507,
+   "h": 7,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 13, red roof)"
+  },
+  {
+   "x": -759,
+   "z": -527,
+   "h": 7,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 13, red roof)"
+  },
+  {
+   "x": -774,
+   "z": -553,
+   "h": 7,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 13, red roof)"
+  },
+  {
+   "x": -709,
+   "z": -550,
+   "h": 8,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 13)"
+  },
+  {
+   "x": -776,
+   "z": -462,
+   "h": 9,
+   "reason": "old-centre fringe, no building:levels -> random 10-16/28 m; satellite shows 1-2 storey pitched-roof house (data 16, red hip roof 2-3 storey)"
+  },
+  {
+   "x": -1942,
+   "z": -1941,
+   "h": 100,
+   "style": 3,
+   "reason": "CET-1 heating-plant chimney (round 79 m2 footprint, very long shadow) @47.0423,28.8070; height plausible but stored as style 2 glass tower -> should be plain/chimney"
+  }
+ ],
+ "rules": [
+  {
+   "desc": "Floors->height overshoots Soviet blocks: pipeline uses lv*3.2+1.2/0.6 (5->17.2, 9->29.4, 16->51.8). Real panel blocks ~15/27/46 m, and the panel facade (3.0 m ground + 2.85 m floors) then draws 10 storeys on a 9-storey block.",
+   "match": "buildings with extra.floors>=5 (1453 tagged in Buiucani; 9-storey x174, 10 x63, 11 x46, 5 x258)",
+   "change": "h = floors*2.85 + 0.8  (5->15.1, 9->26.5, 10->29.3, 16->46.4); keep style 1 (panel) for floors 5-16 outside the old centre"
+  },
+  {
+   "desc": "Residential towers randomly styled 'glass': pipeline gives style 2 to 50% of h>=40. In Buiucani 27 of 31 glass buildings are 13-16-storey Soviet/1990s residential blocks (e.g. Alba Iulia 15-16 floors @47.0424,28.7603 and 47.0406,28.7743).",
+   "match": "style==2 && extra.floors>=12 && no extra.name in {Crown Plaza, Infinity Tower, Royal Tower}",
+   "change": "style = 1 (panel)"
+  },
+  {
+   "desc": "Industrial sheds get random 13-31 m heights (pipeline 'else' branch by area). 1234 untagged buildings inside OSM landuse=industrial in Buiucani, 353 of them h>=13 (13x158, 16x62, 19x55, 28x64, 31x12). Satellite (Mesager/Columna/Petricani industrial zone, 3 views, ~10 buildings) shows 1-2 storey halls.",
+   "match": "no extra.floors && centroid inside OSM landuse=industrial && h>=13 && style!=4",
+   "change": "h = 8 (A<1500) / 10 (A>=1500); style 3 plain"
+  },
+  {
+   "desc": "Small untagged buildings in old-centre fringe and private-house areas are too tall: A<400 m2 and no levels -> random 6.5/7.5/10/13 m (810 sector buildings h>=10). Satellite near Str. Sfatul Tarii/Bucuresti shows 1-2 storey pitched-roof houses tagged 13-16.",
+   "match": "no extra.floors && A<400 && h in {10,13} && style 0",
+   "change": "h = 7 (or random 5-8)"
+  },
+  {
+   "desc": "Two-way streets stored at 3.9 m: OSM lanes=1 on two-way streets -> lanes*3.3+0.6=3.9 m, narrower than one car lane each way. In sector: Serghei Lazo, Sfatul Tarii, Mitropolit Dosoftei, Anatol Corobceanu, Toma Ciorba, Alexei Sciusev, Nicolae Iorga (~4.9 km). Verified only on Sciusev (real ~9-11 m); others under tree cover.",
+   "match": "kind 0 && ow==0 && w<5",
+   "change": "w = max(w, 6.5) (Sciusev explicit override 9)"
+  },
+  {
+   "desc": "Oneway carriageways with untagged lanes get DEFW*0.75 (trunk 11.2, primary 10.5) -> round(w/3.3)=3 lanes; OSM tags most Buiucani oneway trunk/primary carriageways lanes=2 (Balcani ring 1.7 km, Calea Trusenilor 1.9 km, Calea Iesilor NW split 0.7 km).",
+   "match": "kind 0 && ow!=0 && w in {11.2,10.5} && OSM lanes==2",
+   "change": "w = 7.6 (2 lanes); keep 10.5 where OSM lanes=3 (Calea Iesilor east end, Banulescu-Bodoni)"
+  },
+  {
+   "desc": "Major primaries outside the centre OSM extract fell back to Overture default 14 m although OSM has lanes=6: Calea Iesilor, Alba Iulia, Mihai Viteazul (Stefan cel Mare already 20.4 from the centre extract).",
+   "match": "kind 0 && ow==0 && w==14 && OSM lanes>=6",
+   "change": "w = 6*3.0+0.5 ~ 18.5-20 (2.9-3.3 m lanes measured)"
+  }
+ ]
+}

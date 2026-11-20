@@ -1,0 +1,1507 @@
+{
+ "area": "bic-centre",
+ "frame": "game metres, x east, z south, y absolute (Arc de Triumf ground = 0)",
+ "channel_howto": "For each channel point: water surface = line y; bank top = bank_y (≈DEM, street level). Carve terrain at lateral distance d from the line: y = min(groundY, water - bed_below_water) for d <= top_w/2, else min(groundY, water + (d - top_w/2)/slope). Water mesh level = line y (slopes downstream ~0.6 m/km), not the lake-style single level. Bridges over it keep their decks at street level.",
+ "sites": [
+  {
+   "id": "mihai-viteazul-bridge",
+   "name": "Podul de pe str. Mihai Viteazul peste str. Albișoara, Bîc, str. Cantonului și calea ferată",
+   "x": -121,
+   "z": -1866,
+   "lat": 47.041606,
+   "lon": 28.831002,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      259,
+      166,
+      168
+     ],
+     "road": "Strada Mihai Viteazul (6 lanes, trolleybus)",
+     "deck": [
+      [
+       -246.2,
+       -1759.9,
+       -38.9
+      ],
+      [
+       -197.3,
+       -1804.2,
+       -36.9
+      ],
+      [
+       -141.7,
+       -1854.5,
+       -35.2
+      ],
+      [
+       -120.2,
+       -1874.0,
+       -34.6
+      ],
+      [
+       -53.5,
+       -1934.4,
+       -32.6
+      ],
+      [
+       -0.9,
+       -1982.1,
+       -32.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.8,
+      "piers": [
+       [
+        -221.6,
+        -1782.1
+       ],
+       [
+        -197.1,
+        -1804.3
+       ],
+       [
+        -172.6,
+        -1826.5
+       ],
+       [
+        -148.1,
+        -1848.8
+       ],
+       [
+        -123.5,
+        -1871.0
+       ],
+       [
+        -99.0,
+        -1893.2
+       ],
+       [
+        -74.5,
+        -1915.4
+       ],
+       [
+        -49.9,
+        -1937.7
+       ],
+       [
+        -25.4,
+        -1959.9
+       ]
+      ],
+      "pier_type": "twin_column",
+      "pier_note": "rectangular columns (~1.2x2 m) under each carriageway with a hammerhead cap beam; spacing ~33 m is an ESTIMATE (one pier line verified in the Albișoara median)",
+      "railing": "mixed",
+      "railing_note": "steel W-beam guardrail on a kerb between carriageway and sidewalk, outer metal mesh/bar railing; lime-green painted fascia/edge beam (2023-25 renovation)",
+      "sidewalks": [
+       1.5,
+       1.5
+      ],
+      "colour": "#bdb9b0",
+      "fascia_colour": "#9bc53d"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Albișoara (2 carriageways + median)",
+       "y": -44.4,
+       "width": 24,
+       "clearance": 5.7
+      },
+      {
+       "type": "river",
+       "name": "Bîc (concrete canal starts at the bridge, natural upstream)",
+       "y": -47.7,
+       "width": 10,
+       "clearance": 10.7
+      },
+      {
+       "type": "road",
+       "name": "Strada Cantonului",
+       "y": -44.5,
+       "width": 7,
+       "clearance": 8.1
+      },
+      {
+       "type": "rail",
+       "name": "Chișinău–Ghidighici line (not rendered)",
+       "y": -41.5,
+       "width": 8,
+       "clearance": 7.1
+      }
+     ],
+     "evidence": "Street View D.S. Oct 2025: side view from Albișoara (47.04086,28.83124 hdg 292) shows deck ~7-9 m above Albișoara (pier column ~4.7 m + cap + girders, car for scale); deck view hdg 40 shows 3+3 lanes gently rising NE, guardrail+sidewalk+mesh railing (hdg 120). SW approach view (47.04010,28.82859 hdg 40) gentle rise onto bridge. img/mv.jpg, img/mvhi.jpg (Esri). OSM 24858481 bridge layer 2, 709766341 man_made=bridge. Deck heights: ESTIMATE from clearance (~5.5-6 m, trolley wires on Albișoara) + 1.8 m structure, rail clearance >= 6.5 m; NE end tied to the Râșcani slope."
+    },
+    {
+     "data_idx": [
+      36
+     ],
+     "road": "service lane Cantonului - Albișoara",
+     "deck": [
+      [
+       -112,
+       -1868,
+       -44.3
+      ],
+      [
+       -120,
+       -1838,
+       -44.3
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.6,
+      "piers": [],
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#a9a59c"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc canal",
+       "y": -47.7,
+       "width": 10,
+       "clearance": 2.8
+      }
+     ],
+     "evidence": "img/mv.jpg (ladder-like deck at x≈-120 just E of the big bridge); flat at bank level. Fine once the canal is carved below it."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "embankment",
+     "road": "Strada Mihai Viteazul SW approach",
+     "line": [
+      [
+       -315.1,
+       -1696.0,
+       -42.14
+      ],
+      [
+       -294.8,
+       -1715.2,
+       -41.2
+      ],
+      [
+       -246.2,
+       -1759.9,
+       -38.9
+      ]
+     ],
+     "top_w": 30,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: needed to reach deck -38.9 at the SW abutment with <=3.5% grade; DEM there is -43.2 (valley floor). Merges with natural grade at x≈-314,z≈-1697."
+    },
+    {
+     "type": "embankment",
+     "road": "Strada Mihai Viteazul NE approach",
+     "line": [
+      [
+       -0.9,
+       -1982.1,
+       -32.0
+      ],
+      [
+       17.4,
+       -2010.8,
+       -31.6
+      ],
+      [
+       29.3,
+       -2035.0,
+       -31.26
+      ]
+     ],
+     "top_w": 30,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: NE abutment ~2.5 m above the DEM (-34.5) so the deck clears the railway; merges with the Râșcani slope by x≈29,z≈-2034."
+    }
+   ]
+  },
+  {
+   "id": "renasterii-podul-circului",
+   "name": "Podurile Circului nr. 1 și 2 (Bd. Renașterii Naționale peste str. Albișoara, Bîc, str. Luncii, calea ferată și Calea Moșilor)",
+   "x": 1090,
+   "z": -1084,
+   "lat": 47.034534,
+   "lon": 28.84696,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      276,
+      196,
+      198
+     ],
+     "road": "Bulevardul Renașterii Naționale (Podul Circului nr. 1)",
+     "deck": [
+      [
+       1018,
+       -1012,
+       -41.8
+      ],
+      [
+       1058,
+       -1052,
+       -40.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.3,
+      "piers": [
+       [
+        1033,
+        -1027
+       ],
+       [
+        1043,
+        -1037
+       ]
+      ],
+      "pier_type": "wall",
+      "abutment": "beige limestone-clad abutment wall at the SW end forming the Albișoara portal",
+      "railing": "metal",
+      "railing_note": "vertical-bar steel railing on a concrete kerb, ~2.5 m sidewalks",
+      "sidewalks": [
+       2.5,
+       2.5
+      ],
+      "colour": "#a8a49b"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Albișoara (underpass, dips under the bridge)",
+       "y": -47.6,
+       "width": 11,
+       "clearance": 4.8
+      },
+      {
+       "type": "river",
+       "name": "Bîc canal",
+       "y": -48.43,
+       "width": 10,
+       "clearance": 6.1
+      },
+      {
+       "type": "road",
+       "name": "Strada Luncii (unverified clearance)",
+       "y": -45.5,
+       "width": 6.5,
+       "clearance": 3.7
+      }
+     ],
+     "evidence": "Street View D.S. Oct 2025 on Albișoara (47.03436,28.84539 hdg 140): single-opening underpass with stone-clad abutment, clearance ~4.6-5.9 m, deck ~7 m above Albișoara. Cyclist pano on the deck (47.03383,28.84581 hdg 320) looks down onto Albișoara in a dip with grass slopes. img/circ_annot.jpg. Piers ESTIMATE (between canal and roads)."
+    },
+    {
+     "data_idx": [
+      275,
+      195,
+      197
+     ],
+     "road": "Bulevardul Renașterii Naționale (Podul Circului nr. 2)",
+     "deck": [
+      [
+       1116,
+       -1109,
+       -36.0
+      ],
+      [
+       1141,
+       -1134,
+       -34.7
+      ],
+      [
+       1167,
+       -1160,
+       -34.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.5,
+      "piers": [
+       [
+        1128,
+        -1121
+       ],
+       [
+        1141,
+        -1134
+       ],
+       [
+        1154,
+        -1147
+       ]
+      ],
+      "pier_type": "wall",
+      "railing": "metal",
+      "sidewalks": [
+       2.0,
+       2.0
+      ],
+      "colour": "#8f8c86",
+      "note": "two large billboards stand on the SE edge facing Calea Moșilor (SE)"
+     },
+     "under": [
+      {
+       "type": "road",
+       "name": "Strada Calea Moșilor (3+3 lanes, two carriageways)",
+       "y": -41.1,
+       "width": 24,
+       "clearance": 4.9
+      },
+      {
+       "type": "rail",
+       "name": "Chișinău–Visterniceni railway (not rendered)",
+       "y": -42.0,
+       "width": 8,
+       "clearance": 6.2
+      }
+     ],
+     "evidence": "Street View D.S. Oct 2025 on Calea Moșilor (47.03442,28.84868 hdg 302, 20° fov): a ~4 m truck passes under with ~0.8 m to spare → clearance ≈4.9 m, fascia top ≈6.8 m above road; 3 pier lines visible. Deck absolute heights = Calea Moșilor (≈DEM) + 6.3 m."
+    }
+   ],
+   "earthworks": [
+    {
+     "type": "retaining_wall_fill",
+     "road": "Bd. Renașterii Naționale SW approach (Circus junction → bridge 1)",
+     "line": [
+      [
+       960,
+       -955,
+       -43.8
+      ],
+      [
+       990,
+       -985,
+       -43.0
+      ],
+      [
+       1018,
+       -1012,
+       -41.8
+      ]
+     ],
+     "top_w": 32,
+     "side": "wall",
+     "evidence": "Beige stone block parapet/retaining wall on the NW side at the junction (Street View 47.03365,28.84552 hdg 45). Fill 0→4 m (ESTIMATE)."
+    },
+    {
+     "type": "embankment",
+     "road": "Bd. Renașterii Naționale between bridge 1 and bridge 2",
+     "line": [
+      [
+       1058,
+       -1052,
+       -40.0
+      ],
+      [
+       1087,
+       -1080,
+       -38.2
+      ],
+      [
+       1116,
+       -1109,
+       -36.0
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Grassy side slopes visible on imagery (img/circ_annot.jpg) between the two decks; fill ≈4-8 m over the valley floor (DEM -45..-42). Heights ESTIMATE interpolated between the two measured decks."
+    },
+    {
+     "type": "embankment",
+     "road": "Bd. Renașterii Naționale NE approach",
+     "line": [
+      [
+       1167,
+       -1160,
+       -34.0
+      ],
+      [
+       1200,
+       -1192,
+       -33.7
+      ],
+      [
+       1230,
+       -1222,
+       -33.5
+      ]
+     ],
+     "top_w": 32,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "ESTIMATE: deck end ~3.6 m above DEM (-37.6), merges with the Râșcani slope at x≈1230,z≈-1222."
+    },
+    {
+     "type": "cutting",
+     "road": "Strada Albișoara underpass under Renașterii",
+     "line": [
+      [
+       929,
+       -1100,
+       -45.7
+      ],
+      [
+       984,
+       -1056,
+       -47.1
+      ],
+      [
+       1024,
+       -1018,
+       -47.6
+      ],
+      [
+       1041,
+       -1002,
+       -47.4
+      ],
+      [
+       1080,
+       -958,
+       -46.6
+      ],
+      [
+       1124,
+       -908,
+       -45.8
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Road dips into the underpass (Street View from the deck hdg 320 and from Albișoara hdg 140). Depth ESTIMATE from clearance 4.8 m + 1.3 m structure below deck -41.7."
+    }
+   ]
+  },
+  {
+   "id": "petru-rares-bridge",
+   "name": "Podul de pe str. Petru Rareș peste Bîc",
+   "x": 647,
+   "z": -1423,
+   "lat": 47.0376,
+   "lon": 28.841123,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      261
+     ],
+     "road": "Strada Petru Rareș",
+     "deck": [
+      [
+       636,
+       -1401,
+       -43.1
+      ],
+      [
+       647,
+       -1422,
+       -43.2
+      ],
+      [
+       658,
+       -1444,
+       -43.6
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.0,
+      "piers": [],
+      "railing": "concrete_parapet",
+      "railing_note": "white precast concrete balustrade (panels between posts), ~2 m sidewalks",
+      "sidewalks": [
+       2.0,
+       2.0
+      ],
+      "colour": "#d9d6cf"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc canal",
+       "y": -48.12,
+       "width": 10,
+       "clearance": 3.5
+      }
+     ],
+     "evidence": "Street View Ion Bragari Aug 2025 (47.03717,28.84105 hdg 20): bridge is at street grade, flat, white balustrades both sides. Data geometry/length fine; only the canal under it must be carved (game water is ~5 m wide at road level here)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "cantonului-footbridges",
+   "name": "Pasarele peste Bîc (Albișoara–Cantonului) și podețe pe pârâul afluent de pe str. Cantonului",
+   "x": 269,
+   "z": -1779,
+   "lat": 47.040819,
+   "lon": 28.836141,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      170
+     ],
+     "road": "footbridge Albișoara → Cantonului",
+     "deck": [
+      [
+       108,
+       -1794,
+       -44.6
+      ],
+      [
+       110,
+       -1822,
+       -44.4
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#9c9890"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc canal",
+       "y": -47.8,
+       "width": 10,
+       "clearance": 2.7
+      }
+     ],
+     "evidence": "img/w5.jpg (thin deck across the concrete canal at x≈110), Google satellite. At bank level."
+    },
+    {
+     "data_idx": [
+      169
+     ],
+     "road": "footbridge",
+     "deck": [
+      [
+       244,
+       -1774,
+       -44.4
+      ],
+      [
+       248,
+       -1785,
+       -44.5
+      ]
+     ],
+     "structure": {
+      "type": "slab",
+      "deck_depth": 0.4,
+      "piers": [],
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ]
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc canal",
+       "y": -47.87,
+       "width": 10,
+       "clearance": 3.0
+      }
+     ],
+     "evidence": "OSM 758119279 footway bridge; only 12 m long so it spans the water between the slab slopes (ESTIMATE)."
+    },
+    {
+     "data_idx": [
+      260,
+      37
+     ],
+     "road": "Strada Cantonului / service lane over the northern tributary",
+     "deck": [
+      [
+       360,
+       -1744,
+       -45.0
+      ],
+      [
+       342,
+       -1761,
+       -44.9
+      ]
+     ],
+     "structure": {
+      "type": "culvert",
+      "deck_depth": 0.5,
+      "piers": [],
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ]
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "tributary stream (OSM 758119275, culvert 758119274)",
+       "y": -47.91,
+       "width": 3,
+       "clearance": 2.4
+      }
+     ],
+     "evidence": "OSM culvert tags; imagery shows road at grade. idx 37 (357,-1782)-(381,-1772) is the same stream's crossing of a service lane. Culverts: keep at grade."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "rail-bridge-bic-footway",
+   "name": "Pasarela lângă podul feroviar Chișinău–Visterniceni peste Bîc",
+   "x": 1405,
+   "z": -772,
+   "lat": 47.031712,
+   "lon": 28.851112,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      194
+     ],
+     "road": "footway beside the railway bridge (OSM 1087207670)",
+     "deck": [
+      [
+       1418,
+       -740,
+       -44.0
+      ],
+      [
+       1391,
+       -804,
+       -44.6
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.8,
+      "piers": [],
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#5d5a55"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc",
+       "y": -48.71,
+       "width": 11,
+       "clearance": 3.3
+      }
+     ],
+     "evidence": "img/w9.jpg: dark steel railway bridge ~67 m (OSM 26139857, layer 2) with the footway alongside. Railway itself is not in world data (no rail rendering). Rail top on the bridge ≈ -42.5 (ESTIMATE, rail embankment ~2 m above the valley floor); footway assumed at bank level (not verified)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "footbridge-over-railway-768",
+   "name": "Pasarelă pietonală peste căile ferate (zona Visterniceni)",
+   "x": 768,
+   "z": -1669,
+   "lat": 47.039825,
+   "lon": 28.842717,
+   "status": "wrong",
+   "bridges": [
+    {
+     "data_idx": [
+      171
+     ],
+     "road": "footbridge over the rail tracks",
+     "deck": [
+      [
+       747,
+       -1647,
+       -37.0
+      ],
+      [
+       772,
+       -1672,
+       -36.8
+      ],
+      [
+       786,
+       -1687,
+       -37.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 0.8,
+      "piers": [
+       [
+        759,
+        -1660
+       ],
+       [
+        778,
+        -1679
+       ]
+      ],
+      "pier_type": "single_column",
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#7f7c76",
+      "stairs": "stair towers at both ends down to ground (-43.7 / -43.4)"
+     },
+     "under": [
+      {
+       "type": "rail",
+       "name": "railway tracks (not rendered)",
+       "y": -43.6,
+       "width": 40,
+       "clearance": 5.8
+      }
+     ],
+     "evidence": "img/m1.jpg (tile s171): a ~56 m deck crossing ~6 tracks. Height ESTIMATE: rail clearance ~6 m + 0.8 m deck. Game today keeps it flat at ground (-43.5)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "elevated-dropoff-loop-1140",
+   "name": "Rampă/buclă supraînălțată la clădire (str. A. Șciusev / București)",
+   "x": -1140,
+   "z": -479,
+   "lat": 47.029063,
+   "lon": 28.817574,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      16
+     ],
+     "road": "service ramp + turning loop",
+     "evidence": "img/m1.jpg (tile s16): ramp from the north (-1151,-521) along a building, then a one-way turning loop (OSM 1148121552/3, 73667614, all bridge layer 1). Height NOT verified; probably a raised drop-off level 1-4 m up. Game keeps it at ground: acceptable until verified."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "service-over-garage-ramp-602",
+   "name": "Drum de serviciu peste rampa de garaj subteran (str. S. Lazo)",
+   "x": -602,
+   "z": -447,
+   "lat": 47.028773,
+   "lon": 28.824664,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      34
+     ],
+     "road": "service road",
+     "evidence": "OSM 1374842953 bridge layer 1 over tunnels 1374842952 (living_street, layer -1) and 1378397408 (service): a driveway over an underground-garage ramp beside a large building (img/m1.jpg s34). Deck at grade is right; the ramp below is a tunnel (tunnels stay at ground in game)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "footbridge-pushkin-309",
+   "name": "Pasarelă pietonală la clădire (str. A. Pușkin)",
+   "x": 309,
+   "z": -103,
+   "lat": 47.025662,
+   "lon": 28.836669,
+   "status": "ok",
+   "bridges": [
+    {
+     "data_idx": [
+      173,
+      174
+     ],
+     "road": "footway",
+     "evidence": "img/m1.jpg (tile s173): footway crossing a sunken service strip to a building entrance; not verified in 3D. Low priority."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "minor-footbridges",
+   "name": "Podețe pietonale mici (idx 165, 167, 114)",
+   "x": -709,
+   "z": -1370,
+   "lat": 47.03712,
+   "lon": 28.823254,
+   "status": "culvert",
+   "bridges": [
+    {
+     "data_idx": [
+      165
+     ],
+     "road": "footway to a building entrance off the boulevard (retaining walls OSM 963127871/915)",
+     "evidence": "img/m2.jpg s165; at grade."
+    },
+    {
+     "data_idx": [
+      167
+     ],
+     "road": "path bridge over the natural Bîc (OSM 965349921)",
+     "deck": [
+      [
+       -330,
+       -1905,
+       -43.9
+      ],
+      [
+       -331,
+       -1892,
+       -43.9
+      ]
+     ],
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc (natural)",
+       "y": -47.64,
+       "width": 5,
+       "clearance": 3.2
+      }
+     ],
+     "evidence": "img/m2.jpg s167, in trees; at bank level, river must be carved below."
+    },
+    {
+     "data_idx": [
+      114
+     ],
+     "road": "footway into a building entrance",
+     "evidence": "img/m2.jpg s114; 9 m, at grade."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "disused-rail-bridge-bic",
+   "name": "Pod feroviar dezafectat peste Bîc (lângă Lacul nr. 4)",
+   "x": -695,
+   "z": -2176,
+   "lat": 47.04441,
+   "lon": 28.823438,
+   "status": "missing_in_data",
+   "bridges": [
+    {
+     "data_idx": [],
+     "road": "disused railway",
+     "polyline": [
+      [
+       -737,
+       -2164
+      ],
+      [
+       -654,
+       -2188
+      ]
+     ],
+     "deck": [
+      [
+       -737,
+       -2164,
+       -44.0
+      ],
+      [
+       -654,
+       -2188,
+       -44.0
+      ]
+     ],
+     "structure": {
+      "type": "beam",
+      "deck_depth": 1.2,
+      "piers": [],
+      "railing": "metal",
+      "sidewalks": [
+       0,
+       0
+      ],
+      "colour": "#5a554f"
+     },
+     "under": [
+      {
+       "type": "river",
+       "name": "Bîc (natural)",
+       "y": -47.51,
+       "width": 5,
+       "clearance": 2.3
+      }
+     ],
+     "evidence": "OSM 26140058 railway=disused bridge layer 1, 86 m; visible as a dark linear deck in img/w2.jpg. Height NOT verified (ESTIMATE ~2 m above the marsh). Low priority (no rail rendering)."
+    }
+   ],
+   "earthworks": []
+  },
+  {
+   "id": "bic-channel-centre",
+   "name": "Albia râului Bîc (Lacul nr. 4 → podul feroviar Visterniceni)",
+   "x": 0,
+   "z": -1820,
+   "lat": 47.04119,
+   "lon": 28.832597,
+   "status": "wrong",
+   "bridges": [],
+   "earthworks": [
+    {
+     "type": "channel",
+     "road": "Bîc – straightened earth ditch along the N shore of Lacul nr. 4 (OSM 33187822 s=0–1100 m)",
+     "line": [
+      [
+       -1557.6,
+       -2840.1,
+       -47.3
+      ],
+      [
+       -1512.0,
+       -2819.6,
+       -47.31
+      ],
+      [
+       -1466.6,
+       -2798.7,
+       -47.32
+      ],
+      [
+       -1421.3,
+       -2777.6,
+       -47.33
+      ],
+      [
+       -1375.5,
+       -2757.5,
+       -47.34
+      ],
+      [
+       -1328.8,
+       -2739.9,
+       -47.35
+      ],
+      [
+       -1282.0,
+       -2722.2,
+       -47.35
+      ],
+      [
+       -1235.1,
+       -2704.9,
+       -47.36
+      ],
+      [
+       -1188.4,
+       -2687.0,
+       -47.37
+      ],
+      [
+       -1147.4,
+       -2658.7,
+       -47.38
+      ],
+      [
+       -1108.2,
+       -2627.6,
+       -47.39
+      ],
+      [
+       -1073.3,
+       -2591.9,
+       -47.4
+      ],
+      [
+       -1038.9,
+       -2555.5,
+       -47.41
+      ],
+      [
+       -1003.5,
+       -2520.3,
+       -47.42
+      ],
+      [
+       -968.0,
+       -2485.0,
+       -47.43
+      ],
+      [
+       -932.5,
+       -2449.9,
+       -47.44
+      ],
+      [
+       -895.3,
+       -2416.4,
+       -47.45
+      ],
+      [
+       -862.3,
+       -2379.0,
+       -47.45
+      ],
+      [
+       -827.2,
+       -2343.7,
+       -47.46
+      ],
+      [
+       -793.2,
+       -2307.2,
+       -47.47
+      ],
+      [
+       -755.5,
+       -2282.5,
+       -47.48
+      ],
+      [
+       -727.7,
+       -2247.8,
+       -47.49
+      ],
+      [
+       -704.3,
+       -2203.6,
+       -47.5
+      ]
+     ],
+     "bank_y": [
+      -45.1,
+      -45.3,
+      -45.6,
+      -45.9,
+      -46.1,
+      -46.2,
+      -46.3,
+      -46.4,
+      -46.4,
+      -46.5,
+      -46.5,
+      -46.5,
+      -46.6,
+      -46.6,
+      -46.6,
+      -46.6,
+      -46.6,
+      -46.7,
+      -46.7,
+      -46.5,
+      -46.3,
+      -46.1,
+      -45.8
+     ],
+     "top_w": 4,
+     "side": "slope",
+     "slope": 1.5,
+     "bed_below_water": 0.5,
+     "evidence": "img/w0.jpg, w1.jpg, w2.jpg: 3-5 m ditch in reeds between the lake and the railway, earth banks. Depth ~1.5-2 m (ESTIMATE). Game has no water polygon here (only the lake)."
+    },
+    {
+     "type": "channel",
+     "road": "Bîc – natural channel in the wooded strip W of the M. Viteazul bridge (s=1100–1830)",
+     "line": [
+      [
+       -704.3,
+       -2203.6,
+       -47.5
+      ],
+      [
+       -677.4,
+       -2161.5,
+       -47.51
+      ],
+      [
+       -644.8,
+       -2123.7,
+       -47.53
+      ],
+      [
+       -633.6,
+       -2075.9,
+       -47.54
+      ],
+      [
+       -603.1,
+       -2036.7,
+       -47.55
+      ],
+      [
+       -585.2,
+       -1990.1,
+       -47.57
+      ],
+      [
+       -551.4,
+       -1954.5,
+       -47.58
+      ],
+      [
+       -508.6,
+       -1928.8,
+       -47.59
+      ],
+      [
+       -462.0,
+       -1911.3,
+       -47.61
+      ],
+      [
+       -412.2,
+       -1912.4,
+       -47.62
+      ],
+      [
+       -363.4,
+       -1902.1,
+       -47.63
+      ],
+      [
+       -313.9,
+       -1895.1,
+       -47.65
+      ],
+      [
+       -264.6,
+       -1887.6,
+       -47.66
+      ],
+      [
+       -217.9,
+       -1870.2,
+       -47.67
+      ],
+      [
+       -169.3,
+       -1861.4,
+       -47.69
+      ],
+      [
+       -140.5,
+       -1853.3,
+       -47.69
+      ]
+     ],
+     "bank_y": [
+      -45.8,
+      -45.6,
+      -45.5,
+      -45.1,
+      -45.1,
+      -44.7,
+      -44.6,
+      -44.6,
+      -44.6,
+      -44.5,
+      -44.2,
+      -43.9,
+      -43.8,
+      -44.1,
+      -44.5,
+      -44.7
+     ],
+     "top_w": 6,
+     "side": "slope",
+     "slope": 1.5,
+     "bed_below_water": 0.5,
+     "evidence": "img/w3.jpg, mv.jpg: channel hidden under tree canopy; game water polygon is a 3 m ribbon at ground level. Depth 2.5-3.5 m below the DEM banks (ESTIMATE, from monotonic water profile)."
+    },
+    {
+     "type": "channel",
+     "road": "Bîc – trapezoidal canal with concrete-slab slopes, M. Viteazul bridge → railway bridge (s=1830–3870)",
+     "line": [
+      [
+       -140.5,
+       -1853.3,
+       -47.69
+      ],
+      [
+       -92.0,
+       -1841.1,
+       -47.71
+      ],
+      [
+       -42.9,
+       -1831.3,
+       -47.74
+      ],
+      [
+       5.8,
+       -1821.1,
+       -47.76
+      ],
+      [
+       54.0,
+       -1809.9,
+       -47.78
+      ],
+      [
+       103.8,
+       -1806.7,
+       -47.8
+      ],
+      [
+       153.2,
+       -1799.1,
+       -47.82
+      ],
+      [
+       202.2,
+       -1789.1,
+       -47.85
+      ],
+      [
+       251.2,
+       -1780.3,
+       -47.87
+      ],
+      [
+       300.3,
+       -1775.1,
+       -47.89
+      ],
+      [
+       340.6,
+       -1746.5,
+       -47.91
+      ],
+      [
+       370.4,
+       -1706.5,
+       -47.94
+      ],
+      [
+       405.3,
+       -1671.5,
+       -47.96
+      ],
+      [
+       443.5,
+       -1639.7,
+       -47.98
+      ],
+      [
+       476.3,
+       -1602.0,
+       -48.0
+      ],
+      [
+       510.9,
+       -1565.9,
+       -48.02
+      ],
+      [
+       544.8,
+       -1529.2,
+       -48.05
+      ],
+      [
+       577.5,
+       -1491.4,
+       -48.07
+      ],
+      [
+       609.4,
+       -1452.9,
+       -48.09
+      ],
+      [
+       643.4,
+       -1416.4,
+       -48.12
+      ],
+      [
+       677.2,
+       -1379.6,
+       -48.14
+      ],
+      [
+       712.0,
+       -1343.7,
+       -48.17
+      ],
+      [
+       747.3,
+       -1308.3,
+       -48.2
+      ],
+      [
+       783.4,
+       -1273.7,
+       -48.23
+      ],
+      [
+       820.2,
+       -1239.9,
+       -48.26
+      ],
+      [
+       856.0,
+       -1205.0,
+       -48.28
+      ],
+      [
+       891.8,
+       -1170.1,
+       -48.31
+      ],
+      [
+       927.6,
+       -1135.1,
+       -48.34
+      ],
+      [
+       963.0,
+       -1099.9,
+       -48.37
+      ],
+      [
+       998.6,
+       -1064.7,
+       -48.4
+      ],
+      [
+       1034.2,
+       -1029.6,
+       -48.43
+      ],
+      [
+       1069.5,
+       -994.3,
+       -48.46
+      ],
+      [
+       1105.0,
+       -959.0,
+       -48.49
+      ],
+      [
+       1140.1,
+       -923.5,
+       -48.52
+      ],
+      [
+       1175.1,
+       -887.7,
+       -48.55
+      ],
+      [
+       1210.4,
+       -852.3,
+       -48.58
+      ],
+      [
+       1248.8,
+       -820.5,
+       -48.61
+      ],
+      [
+       1293.8,
+       -798.7,
+       -48.64
+      ],
+      [
+       1338.7,
+       -777.0,
+       -48.67
+      ],
+      [
+       1387.4,
+       -775.0,
+       -48.7
+      ],
+      [
+       1434.1,
+       -792.8,
+       -48.73
+      ],
+      [
+       1473.4,
+       -799.8,
+       -48.75
+      ]
+     ],
+     "bank_y": [
+      -44.7,
+      -44.8,
+      -44.9,
+      -45.0,
+      -44.9,
+      -44.6,
+      -44.4,
+      -44.4,
+      -44.5,
+      -44.6,
+      -44.9,
+      -44.9,
+      -44.6,
+      -44.3,
+      -43.8,
+      -43.7,
+      -43.7,
+      -43.7,
+      -43.7,
+      -43.6,
+      -43.5,
+      -43.6,
+      -43.9,
+      -44.1,
+      -44.2,
+      -44.5,
+      -45.1,
+      -45.6,
+      -45.9,
+      -45.9,
+      -45.8,
+      -45.9,
+      -45.9,
+      -45.9,
+      -45.8,
+      -45.6,
+      -45.1,
+      -44.6,
+      -44.3,
+      -44.5,
+      -44.8,
+      -45.0
+     ],
+     "top_w": 10,
+     "side": "slope",
+     "slope": 2.0,
+     "bed_below_water": 0.7,
+     "lining": "precast concrete slabs on both slopes (light grey #c8c4ba), water dark green-brown; willows/reeds grow in it between Petru Rareș and Renașterii",
+     "evidence": "Street View Constantin P. Apr 2025 on Albișoara (47.04090,28.83405 hdg 30): water not visible from the road; far slab slope spans ~3.5°→12.4° below horizon at ~34→23 m → water ≈3.0 m below bank top. Esri img/mv_canal_crop.png: lit slab slope ≈5.7 m wide in plan (→ ~1:2), dark water+shade ≈15.7 m → water ≈10 m wide, top width ≈22 m. Ion Bragari pano (47.03882,28.83866 hdg 40): banks on both sides at street level. Game water polygons here are only 3-11 m wide and sit ~0.3 m below the DEM (= road level).",
+     "lined": true
+    }
+   ]
+  }
+ ]
+}
