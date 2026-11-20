@@ -7,8 +7,9 @@ fp[0]. Footprints come from the game's own building data (lp.footprint), so the 
 Look: simple massing, smooth shading with hard corners, and the small detail (windows, floor lines, joints, stripes,
 lettering, seat rows, grime) painted procedurally and baked with AO into one texture per landmark (lp.bake).
 
-Keys: cosmos, atrium, atriumtower, grandhall, national, romanita, gates, gates2, palatul, gara, piata, piata2, hotelchisinau, ciuflea,
-mazarache, pantelimon, eternitate, tvtower, zimbru.
+Keys: cosmos, atrium, atriumtower, grandhall, national, romanita, gates, gates2, gates3, palatul, gara, piata, piata2, piatagate,
+hotelchisinau, ciuflea,
+mazarache, pantelimon, eternitate, tvtower, zimbru, presedintia.
 
 A few parts that sit away from fp[0] on sloping ground carry a fixed height step measured in the game's terrain
 (hotelchisinau's south-west wing, zimbru's pitch level); they are commented where used.
@@ -249,7 +250,7 @@ FONT = {
     'O': ['###', '#.#', '#.#', '#.#', '###'], 'P': ['###', '#.#', '###', '#..', '#..'], 'R': ['###', '#.#', '##.', '#.#', '#.#'],
     'S': ['###', '#..', '###', '..#', '###'], 'T': ['###', '.#.', '.#.', '.#.', '.#.'], 'U': ['#.#', '#.#', '#.#', '#.#', '###'],
     'Z': ['###', '..#', '.#.', '#..', '###'], 'G': ['###', '#..', '#.#', '#.#', '###'], 'D': ['##.', '#.#', '#.#', '#.#', '##.'],
-    '-': ['...', '...', '###', '...', '...'],
+    '-': ['...', '...', '###', '...', '...'], 'V': ['#.#', '#.#', '#.#', '#.#', '.#.'],
 }
 
 
@@ -348,7 +349,7 @@ class NB:
 
 
 def paint(name, wall, mott=0.10, streak=0.25, base=0.35, wins=(), stripes=None, bands=(), socle=None, rust=None, joints=None,
-          ribs=None, rows=None, scales=None, graffiti=False, glass=0x2c3742, glass2=0x56687a, frame=None):
+          ribs=None, rows=None, scales=None, graffiti=False, vstripes=(), glass=0x2c3742, glass2=0x56687a, frame=None):
     """Procedural facade paint. wall = base colour. wins = [dict(px, pw, fl, sill, wh, y0, y1, arch, frame, glass, glass2,
     board=(col, share))]: window grids (px pitch along the wall, fl floor height, sill/wh in metres within the floor,
     y0..y1 height band). stripes=(period, col2, share[, y0, y1]) horizontal bands; bands=[(y0, y1, col)]; socle=(h, col)
@@ -364,6 +365,7 @@ def paint(name, wall, mott=0.10, streak=0.25, base=0.35, wins=(), stripes=None, 
         if len(stripes) > 3: m = s.mul(m, s.between(s.v, stripes[3], stripes[4]))
         c = s.mix(m, c, mot(stripes[1]))
     for y0, y1, c2 in bands: c = s.mix(s.between(s.v, y0, y1), c, mot(c2))
+    for p, st, w, c2 in vstripes: c = s.mix(s.lt(s.mul(s.fr(s.u, p, st), p), w), c, mot(c2))   # vertical bands along u
     if rust:
         y0, y1, c2, p = rust; m = s.between(s.v, y0, y1)
         r = s.shade(mot(c2), s.m('SUBTRACT', 1.0, s.mul(s.lines(s.m('SUBTRACT', s.v, y0), p, 0.07), 0.45)))
@@ -494,7 +496,13 @@ def fac_uv(o):
     for l in list(me.uv_layers): me.uv_layers.remove(l)
     a = me.uv_layers.new(name='UVMap'); fu = me.uv_layers.new(name='fac')
     me.uv_layers.active = a; a.active_render = True
-    V = me.vertices; bounds = {}
+    V = me.vertices; bounds = {}; img_u0 = {}
+    for p in me.polygons:                       # image faces: one u origin per (material, facing), so strips and both sides line up
+        mt = me.materials[p.material_index]; nm = mt.name if mt else ''
+        n = p.normal; nx, nz = n.x, -n.y; h = math.hypot(nx, nz)
+        if nm in IMGS and nm not in FRAMES and abs(n.z) <= 0.97 and h > 1e-6:
+            tx, tz = nz / h, -nx / h; k = (nm, round(tx, 2), round(tz, 2))
+            u = min(V[i].co.x * tx + (-V[i].co.y) * tz for i in p.vertices); img_u0[k] = min(img_u0.get(k, 1e9), u)
     for p in me.polygons:
         mt = me.materials[p.material_index]; nm = mt.name if mt else ''
         n = p.normal; nx, ny, nz = n.x, n.z, -n.y
@@ -504,7 +512,7 @@ def fac_uv(o):
         elif abs(ny) > 0.97: uv = [(q[0], q[2] + 5000.0) for q in pts]
         else:
             h = math.hypot(nx, nz); tx, tz = nz / h, -nx / h
-            us = [q[0] * tx + q[2] * tz for q in pts]; u0 = min(us); wd = max(us) - u0
+            us = [q[0] * tx + q[2] * tz for q in pts]; u0 = img_u0.get((nm, round(tx, 2), round(tz, 2)), min(us)); wd = max(us) - min(us)
             px = MATPX.get(nm); off = (wd % px) / 2 if px else 0.0
             uv = [(uu - u0 - off, q[1]) for uu, q in zip(us, pts)]
         for li, t in zip(p.loop_indices, uv): fu.data[li].uv = t
@@ -526,12 +534,17 @@ def bld(x, z, r=10):
 def _rr(r): return [[round(p[0], 1), round(p[1], 1)] for p in r]
 
 
-def finish(key, P, x, z, fp, h, skip, clear=(), tex=512, ao=0.7):
+def finish(key, P, x, z, fp, h, skip, clear=(), tex=512, ao=0.7, uv_angle=None):
     lm = {'x': round(x, 2), 'z': round(z, 2), 'fp': [_rr(r) for r in fp], 'h': h, 'skip': [[round(c[0], 2), round(c[1], 2)] for c in skip]}
     if clear: lm['clear'] = [_rr(r) for r in clear]  # tree-free, walkable areas
     o = P.obj(key, props={'lm': lm}, origin=(x, 0, z))
     fac_uv(o)
-    lp.bake([o], size=tex, name=key + '_tex', ao=ao)
+    if uv_angle:                                  # own unwrap with a tighter angle (thin boards next to sloped roofs)
+        bpy.ops.object.select_all(action='DESELECT'); o.select_set(True); bpy.context.view_layer.objects.active = o
+        bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT')
+        bpy.ops.uv.smart_project(angle_limit=math.radians(uv_angle), island_margin=0.004, area_weight=0.0, scale_to_bounds=False)
+        bpy.ops.uv.pack_islands(margin=0.004); bpy.ops.object.mode_set(mode='OBJECT')
+    lp.bake([o], size=tex, name=key + '_tex', ao=ao, unwrap=not uv_angle)
     fu = o.data.uv_layers.get('fac')
     if fu: o.data.uv_layers.remove(fu)
     me = o.data                                   # every material now shows the same baked image: keep one
@@ -729,32 +742,6 @@ def romanita():
     return finish('romanita', P, cx, cz, [r], H + 8, [b['c']], tex=512)
 
 
-def gate_tower(key, bx, bz, floors):
-    """Porțile Orașului: one of the twin 1980s towers flanking Bd. Dacia at the airport entrance. White panel slab
-    with dark ribbon windows, terracotta loggia stripes, a set-back two-floor crown."""
-    b = bld(bx, bz); r = b['ring']; cx, cz, a, L, W = mar(r); f = F(cx, cz, a); P = lp.Part()
-    H0, FL = 4.0, 2.85; N = floors - 1; H = H0 + N * FL; k = key + '_'
-    roof = plain(k + 'roof', 0x6d6f72, joints=(4, 4, .05, .2))
-    fac = paint(k + 'fac', 0xe2ded3, streak=.3, base=0, joints=(5.6, FL, .05, .18),
-                wins=[dict(px=2.8, pw=2.45, fl=FL, sill=0.95, wh=1.5, y0=H0, y1=H, glass=0x2e3945, glass2=0x56677a)])
-    endw = paint(k + 'end', 0xdedad0, streak=.35, base=0, joints=(3.0, FL, .05, .2),
-                 wins=[dict(px=4.0, pw=1.0, fl=FL, sill=1.0, wh=1.2, y0=H0, y1=H, glass=0x2e3945, glass2=0x4c5d6f)])
-    log = paint(k + 'log', 0x9b5843, streak=.25, base=0, mott=.14,
-                wins=[dict(px=5.2, pw=4.3, fl=FL, sill=1.05, wh=1.55, y0=H0, y1=H, glass=0x2a2420, glass2=0x3c342e)])
-    shop = paint(k + 'shop', 0x5a5f66, base=.3, streak=0, frame=0xb0b3b6,
-                 wins=[dict(px=3.6, pw=3.0, fl=5, sill=0.3, wh=3.0, y0=0, y1=4, glass=0x27313b, glass2=0x4a5b6d)])
-    crown = paint(k + 'crown', 0xd9d5cb, streak=.25, base=0,
-                  wins=[dict(px=3.0, pw=2.7, fl=2.7, sill=0.6, wh=1.6, y0=H, y1=H + 5.4, glass=0x2b3540, glass2=0x485a6b)])
-    f.box(P, 0, 0, -2.5, L - 2.4, H0 + 2.5, W - 2.6, shop, top=roof)
-    f.box(P, 0, 0, H0, L - 0.4, N * FL, W, fac, top=roof)
-    for su in (-1, 1):
-        f.box(P, su * (L / 2 - 1.1), 0, -2.5, 2.2, H + 3.2, W + 0.3, endw, top=roof)
-        f.box(P, su * (L / 2 - 6.5), 0, H0, 5.2, N * FL, W + 1.4, log, top=roof)
-    f.box(P, 0, 0, H, L - 7, 5.4, W - 3.0, crown, top=roof)
-    f.box(P, 0, 0, H + 5.4, L - 4.0, 0.9, W - 0.8, endw, top=roof)
-    return finish(key, P, cx, cz, [r], H + 6, [b['c']], tex=512)
-
-
 def palatul():
     """Palatul Republicii (1984): low modernist hall wrapped in a colonnade of slender red-granite piers holding a
     heavy white cornice, gilded glazing behind, red granite plinth."""
@@ -856,28 +843,6 @@ def gara():
 
 def _market_roofs(name):
     return paint(name, 0x8799a4, mott=.12, streak=.3, base=0, joints=(0.42, 1e4, .07, .25))
-
-
-def piata():
-    """Piața Centrală: the long main market pavilion (cream walls, glazed band, metal barrel roofs) with the market's
-    name over the entrance on Str. Mitropolit Varlaam."""
-    b = bld(873.9, 614.4); r = b['ring']; P = lp.Part()
-    wall = paint('pia_wall', 0xd6cbb0, streak=.35, base=.45, frame=0xe9e5da,
-                 wins=[dict(px=5.6, pw=4.6, fl=40, sill=3.2, wh=2.9, y0=0, y1=7, glass=0x4a5d70, glass2=0x6c8194, mullion=1.15),
-                       dict(px=11.2, pw=3.0, fl=40, sill=0.0, wh=2.6, y0=0, y1=3, glass=0x34393e, glass2=0x45494d)])
-    roof = _market_roofs('pia_roof'); flat = plain('pia_flat', 0x737f86, joints=(3, 3, .05, .2))
-    ent = paint('pia_ent', 0xe8e4d9, streak=.3, base=.35, frame=0xf4f1ea,
-                wins=[dict(px=15, pw=9.0, fl=40, sill=0.0, wh=5.5, y0=0, y1=6, glass=0x33393f, glass2=0x3d4349),
-                      dict(px=15, pw=11.0, fl=40, sill=6.5, wh=3.0, y0=0, y1=10, glass=0x4a5d70, glass2=0x6c8194, mullion=1.4)])
-    P.extrude(r, -2.5, 7.0, col=wall, top=flat)
-    f = F(868.1, 581.0, math.atan2(72.4, 75.2))                                        # u: along the long strip, v: towards SW
-    f.vault(P, 0.5, 103.5, 0.6, 17.4, 7.0, 4.8, roof, end=wall)
-    f.vault_v(P, 3.0, 24.8, 17.4, 57.2, 7.0, 5.4, roof, end=wall)
-    f.box(P, 52, -1.2, -2.5, 15, 13.5, 4.6, ent, top=flat)                             # entrance (Str. Mitropolit Varlaam, -v)
-    for su in (-1, 1): f.box(P, 52 + su * 11.5, -2.4, 7.0, 0.35, 4.0, 0.35, 0x666b70)
-    sign(P, f, 'pia_sign', 'PIATA CENTRALA', 0xc8302a, 0xeeebe3, 52, -2.6, 11.0, 2.9, sides=(-1,), back=0xe2ded4, depth=0.25)
-    cx, cz = _cen(r)
-    return finish('piata', P, cx, cz, [r], 12, [b['c']], tex=512)
 
 
 def piata2():
@@ -1185,6 +1150,295 @@ def zimbru():
     return finish('zimbru', P, 2692.0, 4910.0, [U['ring'], s], 14, [U['c'], S['c']], clear=[pitch], tex=1024)
 
 
-BUILD = [cosmos, atrium, atriumtower, grandhall, national, romanita, lambda: gate_tower('gates', 2825.4, 5325.6, 16), lambda: gate_tower('gates2', 2912.7, 5205.5, 17),
-         palatul, gara, piata, piata2, hotelchisinau, ciuflea, mazarache, pantelimon, eternitate, tvtower, zimbru]
-BUILD[6].key = 'gates'; BUILD[7].key = 'gates2'
+def _clip(r, p, n):
+    """Part of ring r on the side (q - p)·n >= 0 of the line through p (Sutherland-Hodgman, one half-plane)."""
+    out = []; m = len(r)
+    for i in range(m):
+        a, b = r[i], r[(i + 1) % m]
+        da = (a[0] - p[0]) * n[0] + (a[1] - p[1]) * n[1]; db = (b[0] - p[0]) * n[0] + (b[1] - p[1]) * n[1]
+        if da >= 0: out.append(a)
+        if (da >= 0) != (db >= 0):
+            t = da / (da - db); out.append((a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])))
+    return out
+
+
+def _path_at(path, s):
+    """Point and cut direction at arc length s along a polyline (bisector at the corners)."""
+    acc = 0.0
+    for i in range(len(path) - 1):
+        a, b = path[i], path[i + 1]; L = math.hypot(b[0] - a[0], b[1] - a[1]); d = ((b[0] - a[0]) / L, (b[1] - a[1]) / L)
+        if s <= acc + L + 1e-6 or i == len(path) - 2:
+            t = min(max((s - acc) / L, 0.0), 1.0); p = (a[0] + d[0] * L * t, a[1] + d[1] * L * t)
+            if t > 0.999 and i < len(path) - 2:
+                c = path[i + 2]; L2 = math.hypot(c[0] - b[0], c[1] - b[1]); d2 = ((c[0] - b[0]) / L2, (c[1] - b[1]) / L2)
+                d = _unit((d[0] + d2[0], 0, d[1] + d2[1])); d = (d[0], d[2])
+            return p, d
+        acc += L
+    return path[-1], d
+
+
+def _plen(path): return sum(math.hypot(path[i + 1][0] - path[i][0], path[i + 1][1] - path[i][1]) for i in range(len(path) - 1))
+
+
+def chain_sections(ring, path, cuts):
+    """Slice a long slab ring into sections between arc-length cuts along its centre path (heights falling with k)."""
+    out = []
+    for k in range(len(cuts) - 1):
+        r = list(ring)
+        if k > 0:                                                                      # reach 0.3 m into the taller neighbour:
+            p, d = _path_at(path, cuts[k]); r = _clip(r, (p[0] - d[0] * 0.3, p[1] - d[1] * 0.3), d)   # no back-to-back walls (AO)
+        if k < len(cuts) - 2: p, d = _path_at(path, cuts[k + 1]); r = _clip(r, p, (-d[0], -d[1]))
+        if len(r) >= 3 and abs(_sarea(r)) > 4: out.append(r)
+    return out
+
+
+def _gate_mats(k):
+    TC = 0xa9563b
+    fac = paint(k + 'fac', 0xf7f4ee, streak=.05, base=.05, mott=.03, frame=0xfbfaf6, joints=(3.0, 2.75, .03, .05),
+                vstripes=[(13.0, 0.0, 4.4, 0xeeebe4), (13.0, 0.0, 0.35, TC), (13.0, 4.05, 0.35, TC)],
+                bands=[(-3, 3.2, 0xc4c0b8)],
+                wins=[dict(px=2.6, pw=1.2, fl=2.75, sill=0.95, wh=1.3, y0=3.2, y1=200, glass=0x3a4757, glass2=0x5c6e82),
+                      dict(px=3.6, pw=3.0, fl=10, sill=0.3, wh=2.5, y0=0, y1=3.0, glass=0x2b3540, glass2=0x4c5d6e)])
+    par = paint(k + 'par', TC, streak=.12, base=0, mott=.1, joints=(1.5, 1e4, .04, .25))
+    roof = plain(k + 'roof', 0x6c6e70, joints=(4, 4, .05, .2))
+    return fac, par, roof
+
+
+def _hfl(n): return 3.2 + n * 2.75
+
+
+def _section(P, r, fl, mats, crown=False):
+    """One stepped section: walls to floor `fl`, terracotta parapet band on top (the red stepped outline)."""
+    fac, par, roof = mats; H = _hfl(fl)
+    P.extrude(r, -3.0, H, col=fac, top=roof)
+    P.extrude(offset(r, 0.15), H - 0.2, H + 1.2, col=par, top=roof)
+    if crown:                                                                          # stepped set-back crown, a floor per step
+        r1 = offset(r, -1.6); P.extrude(r1, H + 1.2, H + 3.95, col=fac, top=roof)
+        P.extrude(offset(r1, 0.15), H + 3.75, H + 5.15, col=par, top=roof)
+        r2 = offset(r, -3.4); P.extrude(r2, H + 5.15, H + 7.9, col=fac, top=roof)
+        P.extrude(offset(r2, 0.15), H + 7.7, H + 9.1, col=par, top=roof)
+        return H + 9.1
+    return H + 1.2
+
+
+def gates_tower():
+    """Porțile Orașului, north-east gate: the ~24-floor tower (22 + a two-step crown) beside Bd. Dacia (Dacia 51) with its stepped crown."""
+    b = bld(2969.5, 5251.8, 5); r = b['ring']; P = lp.Part()
+    top = _section(P, r, 22, _gate_mats('gt_'), crown=True)
+    cx, cz = _cen(r)
+    return finish('gates', P, cx, cz, [r], top, [b['c']], tex=512, ao=0.3)
+
+
+def gates_ne():
+    """Porțile Orașului, north-east chain (Dacia 51/1): sections stepping down floor by floor from 22 floors beside the
+    tower to 12 at the far end, each with a terracotta parapet."""
+    b = bld(3049.8, 5251.8, 5); r = b['ring']; P = lp.Part()
+    path = [(2979.0, 5241.0), (3049.0, 5239.0), (3075.0, 5262.0)]; L = _plen(path)
+    n = 10; cuts = [0.0] + [L * (k + 1) / n for k in range(n - 1)] + [L + 5]
+    mats = _gate_mats('gn_')
+    for k, sr in enumerate(chain_sections(r, path, cuts)): _section(P, sr, 21 - k, mats)
+    cx, cz = _cen(r)
+    return finish('gates2', P, cx, cz, [r], _hfl(21) + 1.2, [b['c']], tex=512, ao=0.3)
+
+
+def gates_sw():
+    """Porțile Orașului, south-west chain (mirror of the north-east one): a ~24-floor head with a stepped crown beside
+    Bd. Dacia, then sections stepping down from 21 to 12 floors away from the boulevard."""
+    b = bld(2870.6, 5408.2, 5); r = b['ring']; P = lp.Part()
+    path = [(2873.0, 5356.0), (2853.0, 5378.0), (2853.0, 5450.0), (2880.0, 5471.0)]; L = _plen(path)
+    head = 24.0; n = 10; cuts = [0.0, head] + [head + (L - head) * (k + 1) / n for k in range(n - 1)] + [L + 5]
+    mats = _gate_mats('gs_'); top = 0
+    for k, sr in enumerate(chain_sections(r, path, cuts)):
+        t = _section(P, sr, 22 if k == 0 else 22 - k, mats, crown=(k == 0)); top = max(top, t)
+    cx, cz = _cen(r)
+    return finish('gates3', P, cx, cz, [r], top, [b['c']], tex=512, ao=0.3)
+
+
+def _piata_front():
+    """Painted front of the main market entrance block (30 × 10.5 m): banner-covered glass curtain walls left and right,
+    the glazed opening and walk-through passage in the middle (framed by the red portal geometry)."""
+    cv = Canvas(30, 10.5, 0xdedbd3, ppm=12); rnd = random.Random('piata')
+    for x0, x1 in ((0.4, 8.6), (21.4, 29.6)):
+        cv.rect(x0, 0.0, x1, 10.2, 0x3c4c5c)
+        for gx in np.arange(x0, x1, 1.36): cv.rect(gx, 0, gx + 0.1, 10.2, 0x9aa3ab)
+        for gy in (3.4, 6.8): cv.rect(x0, gy, x1, gy + 0.12, 0x9aa3ab)
+        y = 3.6
+        while y < 9.6:                                                                  # advertising banners
+            x = x0 + 0.3
+            while x < x1 - 1.5:
+                w = rnd.uniform(1.8, 3.6); h = rnd.uniform(1.4, 2.6); c = rnd.choice([0xd8402f, 0xf0b52a, 0x2b7fc4, 0x3aa35a, 0xe86fa8, 0xf4f1e8])
+                cv.rect(x, y, min(x + w, x1 - 0.3), min(y + h, 10.0), c)
+                cv.rect(x + 0.3, y + h * 0.55, min(x + w * 0.8, x1 - 0.5), y + h * 0.75, 0xffffff if c != 0xf4f1e8 else 0xc8302a)
+                x += w + 0.25
+            y += 2.9
+        cv.rect(x0, 0, x1, 3.2, 0x2f3a45)
+    cv.rect(9.4, 4.6, 20.6, 10.2, 0x3e5266)                                            # tall glazed opening
+    for gx in np.arange(9.4, 20.6, 1.4): cv.rect(gx, 4.6, gx + 0.1, 10.2, 0xb8c0c6)
+    for gy in (6.4, 8.3): cv.rect(9.4, gy, 20.6, gy + 0.1, 0xb8c0c6)
+    cv.rect(10.4, 0, 19.6, 4.2, 0x23272b)                                              # passage into the market
+    cv.grain(0.06, 7)
+    return cv
+
+
+def _piata_roofsign():
+    big, small = 'PIATA CENTRALA', 'INTREPRINDEREA MUNICIPALA'
+    W = text_cells(big) * 0.4 + 1.6; cv = Canvas(W, 3.6, 0xf4f3ee, ppm=14)
+    cv.text(small, W / 2, 2.55, 0.15, 0x2c5aa8)
+    cv.text(big, W / 2, 0.35, 0.4, 0x1f4fa8)
+    cv.grain(0.04, 9)
+    return cv, W
+
+
+def piata():
+    """Piața Centrală: the long main market pavilion (cream walls, glazed band, metal barrel roofs) with its main
+    entrance block on Str. Mitropolit Varlaam: red portal around a glazed opening over the walk-through passage,
+    banner-covered glass on both sides, the blue PIATA CENTRALA roof sign, a red-framed kiosk."""
+    b = bld(873.9, 614.4); r = b['ring']; P = lp.Part()
+    wall = paint('pia_wall', 0xd6cbb0, streak=.35, base=.45, frame=0xe9e5da,
+                 wins=[dict(px=5.6, pw=4.6, fl=40, sill=3.2, wh=2.9, y0=0, y1=7, glass=0x4a5d70, glass2=0x6c8194, mullion=1.15),
+                       dict(px=11.2, pw=3.0, fl=40, sill=0.0, wh=2.6, y0=0, y1=3, glass=0x34393e, glass2=0x45494d)])
+    roof = _market_roofs('pia_roof'); flat = plain('pia_flat', 0x737f86, joints=(3, 3, .05, .2))
+    ent = paint('pia_ent', 0xdedbd3, streak=.3, base=.35, mott=.08)
+    red = paint('pia_red', 0xbf2f27, streak=.2, base=.2, mott=.1, joints=(1.2, 1.2, .03, .2))
+    kio = paint('pia_kio', 0xbf2f27, streak=.1, base=.2, mott=.08,
+                wins=[dict(px=1.5, pw=1.25, fl=10, sill=0.9, wh=1.6, y0=0, y1=2.6, glass=0x46596b, glass2=0x8095a8)])
+    front = img_mat('pia_front', _piata_front())
+    rs_cv, rs_w = _piata_roofsign(); rsign = img_mat('pia_rsign', rs_cv)
+    P.extrude(r, -2.5, 7.0, col=wall, top=flat)
+    f = F(868.1, 581.0, math.atan2(72.4, 75.2))                                        # u: along the long strip, v: towards SW
+    f.vault(P, 0.5, 103.5, 0.6, 17.4, 7.0, 4.8, roof, end=wall)
+    f.vault_v(P, 3.0, 24.8, 17.4, 57.2, 7.0, 5.4, roof, end=wall)
+    # entrance block, its front on the -v side (Str. Mitropolit Varlaam ~10 m away)
+    U0, V0 = 52.0, -5.5
+    f.box(P, U0, 0.25, -2.5, 30, 13.0, 11.5, ent, top=flat)
+    f.quad(P, U0 - 15, U0 + 15, V0, 0.0, 10.5, front, side=-1, out=0.03)
+    for su in (-1, 1): f.box(P, U0 + su * 6.4, V0 - 0.5, -2.5, 1.8, 2.5 + 12.6, 1.8, red, top=red)   # red portal pillars
+    f.box(P, U0, V0 - 0.5, 10.3, 14.6, 2.3, 1.8, red, top=red)                            # portal head
+    for su in (-1, 1): f.box(P, U0 + su * (rs_w / 2 - 1.0), -2.0, 10.5, 0.3, 1.0, 0.3, 0x5f6368)
+    f.quad(P, U0 - rs_w / 2, U0 + rs_w / 2, -2.0, 11.4, 15.0, rsign, side=-1, out=0.12)
+    f.box(P, U0, -2.0, 11.3, rs_w + 0.2, 3.8, 0.2, 0xe9e8e3)
+    f.box(P, U0 + 19.5, -7.0, -2.0, 4.2, 5.0, 3.0, kio, top=red)                        # kiosk
+    f.box(P, U0 + 19.5, -7.0, 3.0, 4.8, 0.35, 3.6, red, top=red)
+    cx, cz = _cen(r)
+    return finish('piata', P, cx, cz, [r], 12, [b['c']], tex=512)
+
+
+def _gate_board(W, H):
+    cv = Canvas(W, H, 0x2f7a43, ppm=60)
+    cv.ring(0.55, H * 0.42, 0.28, 0.36, 0xe8c64a); cv.disc(0.55, H * 0.42, 0.26, 0xc23a2f)
+    cv.ring(W - 0.55, H * 0.42, 0.28, 0.36, 0xe8c64a); cv.disc(W - 0.55, H * 0.42, 0.26, 0xc23a2f)
+    cv.text('PIATA CENTRALA', W / 2, 0.62, 0.105, 0xf2cf3d)
+    cv.text('MUNICIPIULUI CHISINAU', W / 2, 0.22, 0.05, 0xf2cf3d)
+    cv.rect(0, 0, W, 0.06, 0xf2cf3d)
+    cv.grain(0.06, 11)
+    return cv
+
+
+def piatagate():
+    """Piața Centrală, the older pedestrian gate at the south-east footpath into the market: two green posts with a
+    green arched board, yellow PIATA CENTRALA lettering, round emblems, stall awnings behind."""
+    px, pz = 901.9, 744.6; P = lp.Part()
+    f = F(px, pz, math.radians(45 + 90))                                               # u across the path, v along it
+    inside = 1 if (f.dir(0, 1)[0] * (830 - px) + f.dir(0, 1)[2] * (620 - pz)) > 0 else -1   # +v·inside → the market
+    GN = paint('pig_green', 0x2f7a43, streak=.2, base=.3, mott=.12)
+    W, y0, y1, y2 = 7.6, 3.5, 4.9, 5.7
+    cv = _gate_board(W, y2 - y0); board = img_mat('pig_board', cv)
+    pts = [(-W / 2, y0), (W / 2, y0)] + [(W / 2 * math.cos(t), y1 + (y2 - y1) * math.sin(t)) for t in [k * PI / 10 for k in range(11)]]
+    pts = pts[:2] + pts[2:]                                                             # bottom edge, then the arch from +u to -u
+    arc = pts[2:]                                                                       # board faces as vertical strips (clean unwrap)
+    for sv in (-1, 1):
+        for i in range(len(arc) - 1):
+            (ua, ya), (ub, yb) = arc[i], arc[i + 1]
+            oface(P, [f.P3(ua, y0, sv * 0.08), f.P3(ub, y0, sv * 0.08), f.P3(ub, yb, sv * 0.08), f.P3(ua, ya, sv * 0.08)], board, f.dir(0, sv))
+    for i in range(len(pts)):
+        (ua, ya), (ub, yb) = pts[i], pts[(i + 1) % len(pts)]
+        mu, my = (ua + ub) / 2, (ya + yb) / 2
+        oface(P, [f.P3(ua, ya, -0.08), f.P3(ub, yb, -0.08), f.P3(ub, yb, 0.08), f.P3(ua, ya, 0.08)], GN,
+              (f.dir(mu, 0)[0], my - (y0 + 0.3), f.dir(mu, 0)[2]))
+    for su in (-1, 1): f.box(P, su * (W / 2 - 0.2), 0, -1.5, 0.32, 1.5 + y1 + 0.3, 0.32, GN, top=GN)
+    awn = paint('pig_awn', 0xd9d4c8, streak=.2, base=0, mott=.08, vstripes=[(1.2, 0.0, 0.6, 0xc53a32)])
+    awn2 = paint('pig_awn2', 0xd9d4c8, streak=.2, base=0, mott=.08, vstripes=[(1.2, 0.0, 0.6, 0x2f6fb5)])
+    stall = paint('pig_stall', 0x8a8378, streak=.2, base=.3, mott=.12)
+    for k, (su, sv) in enumerate(((-6.5, 6.0), (0.0, 9.5), (6.5, 6.0))):
+        v = inside * sv
+        f.box(P, su, v, -1.5, 4.0, 2.6, 2.6, stall, top=stall)
+        f.gable(P, su, v, 2.3, 3.4, 1.0, 4.4, 'u', awn if k % 2 == 0 else awn2, ends=stall)
+        for a in (-1.8, 1.8):
+            for c in (-1.4, 1.4): f.box(P, su + a, v + c, -1.5, 0.1, 3.9, 0.1, 0x6a6e72)
+    fp = [[f.p(su * (W / 2 - 0.2) + du, dv) for du, dv in ((-0.3, -0.3), (0.3, -0.3), (0.3, 0.3), (-0.3, 0.3))] for su in (-1, 1)]
+    return finish('piatagate', P, px, pz, fp, 5, [], tex=512, uv_angle=30)
+
+
+def _pres_portal(W, H):
+    cv = Canvas(W, H, 0xebe6da, ppm=40)
+    for y in np.arange(0.6, H, 0.6): cv.rect(0, y, W, y + 0.025, 0xcfc8b8)
+    cv.rect(W / 2 - 2.4, 0, W / 2 + 2.4, 4.4, 0x2d2420)                                # ornate dark doors
+    for x in (W / 2 - 1.2, W / 2, W / 2 + 1.2): cv.rect(x - 0.04, 0, x + 0.04, 4.4, 0x8a6a35)
+    for y in (1.4, 2.9): cv.rect(W / 2 - 2.4, y, W / 2 + 2.4, y + 0.06, 0x8a6a35)
+    cv.text('PRESEDINTIA REPUBLICII MOLDOVA', W / 2, 4.85, 0.085, 0xb08b3a)
+    cv.disc(W / 2, H - 1.05, 0.62, 0xc9a24a); cv.disc(W / 2, H - 1.05, 0.42, 0x9b2a2a); cv.disc(W / 2, H - 0.95, 0.18, 0xd9b45a)
+    cv.grain(0.05, 13)
+    return cv
+
+
+def _flag():
+    cv = Canvas(3, 2, 0x1f4aa0, ppm=30); cv.rect(1, 0, 2, 2, 0xf2cf2a); cv.rect(2, 0, 3, 2, 0xc8202c)
+    cv.disc(1.5, 1.0, 0.25, 0x9a7a30); return cv
+
+
+def presedintia():
+    """Președinția (Presidential Palace, Bd. Ștefan cel Mare 154): white stone block of tall pylons with chamfered,
+    stepped tops, deep bronze-gold glass bands between them, gold centre strip under a small golden pinnacle with the
+    tricolour, a white stone portal with the coat of arms and lettering, on a high red-granite plinth with wide stairs."""
+    b = bld(-343.3, -408.8, 5); r = b['ring']; cx, cz, a, L, W = mar(r); P = lp.Part()
+    f = F(cx, cz, a)
+    if (f.dir(0, 1)[0] * (-478.5 - cx) + f.dir(0, 1)[2] * (-262.6 - cz)) < 0: f = F(cx, cz, a + PI)   # +v faces the boulevard
+    S = paint('prs_stone', 0xe9e4d8, streak=.3, base=0, mott=.08, joints=(2.4, 1.5, .025, .14))
+    G = paint('prs_glass', 0x9b7a3c, streak=.1, base=0, mott=.1, frame=0xc9a752,
+              wins=[dict(px=1.6, pw=1.45, fl=2.0, sill=0.08, wh=1.84, y0=0, y1=200, glass=0x6e5428, glass2=0xa48548)])
+    RG = paint('prs_gran', 0x8a3a30, streak=.1, base=.3, mott=.14, joints=(1.6, 0.8, .02, .25))
+    GS = paint('prs_steps', 0x8e8b86, streak=0, base=.2, mott=.1, joints=(1.4, 1e4, .02, .25))
+    roof = plain('prs_roof', 0x8d8a84, joints=(4, 4, .05, .2))
+    gold = plain('prs_gold', 0xd2aa4c, mott=.15)
+    portal = img_mat('prs_portal', _pres_portal(12.0, 8.0)); flag = img_mat('prs_flag', _flag())
+    PL, H = 4.0, 34.0; hw, hd = L / 2, W / 2
+    P.extrude(offset(r, 1.5), -3.0, PL, col=RG, top=roof)                              # red granite plinth
+    f.box(P, 0, 0, PL, L - 9, H, W - 9, G, top=roof)                                   # recessed gold glass body
+    def pylon(u, v, w, d, h, du=0.0, dv=0.0, cut=4.0):
+        """Stone pylon w×d from the plinth to h, the top cut at an angle (lower towards du/dv), with a small step."""
+        lo = [f.P3(u - w / 2, PL, v - d / 2), f.P3(u + w / 2, PL, v - d / 2), f.P3(u + w / 2, PL, v + d / 2), f.P3(u - w / 2, PL, v + d / 2)]
+        def ht(x, z): return h - cut * max(0.0, (x * du + z * dv))
+        hi = [f.P3(u - w / 2, ht(-.5, -.5), v - d / 2), f.P3(u + w / 2, ht(.5, -.5), v - d / 2), f.P3(u + w / 2, ht(.5, .5), v + d / 2), f.P3(u - w / 2, ht(-.5, .5), v + d / 2)]
+        hexa(P, lo, hi, S)
+    # front and back faces (±v): corner pylons, pairs stepping up towards the gold centre strip
+    for sv in (-1, 1):
+        vv = sv * (hd - 2.2)
+        for su in (-1, 1):
+            pylon(su * (hw - 4.0), vv, 8.0, 4.4, PL + H - 1.0, du=-su * 0.9, cut=3.5)
+            pylon(su * (hw - 14.5), vv, 4.6, 4.4, PL + H + 2.0, du=-su, cut=3.0)
+            pylon(su * 4.2, vv, 3.2, 5.0, PL + H + 4.5, du=su, cut=2.5)
+            for k in range(3): f.box(P, su * (1.0 + k * 0.9), vv + sv * 1.6, PL, 0.3, H + 1.5, 0.9, S)   # fins in the centre bay
+        for su in (-1, 1):
+            uu = su * (hw - 2.2)
+            pylon(uu, sv * (hd - 14.0), 4.4, 4.6, PL + H + 1.0, dv=-sv, cut=3.0)
+    for su in (-1, 1): pylon(su * (hw - 2.2), 0, 4.4, 6.0, PL + H + 2.5, du=0, cut=0.0)
+    f.box(P, 0, 0, PL + H, L - 12, 1.2, W - 12, S, top=roof)                            # roof slab
+    x, z = f.p(0, 0)
+    P.cyl(3.4, 0.0, 5.0, n=4, at=(x, PL + H + 1.2 + 2.5, z), ry=-f.a + PI / 4, col=gold)   # golden pinnacle
+    P.cyl(0.09, 0.07, 9.0, n=6, at=(x, PL + H + 6.2 + 4.5, z), col=0xd8d8d8)
+    oface(P, [f.P3(0.1, PL + H + 12.8, 0), f.P3(3.1, PL + H + 12.8, 0), f.P3(3.1, PL + H + 14.8, 0), f.P3(0.1, PL + H + 14.8, 0)], flag, f.dir(0, 1))
+    oface(P, [f.P3(0.1, PL + H + 12.8, 0), f.P3(3.1, PL + H + 12.8, 0), f.P3(3.1, PL + H + 14.8, 0), f.P3(0.1, PL + H + 14.8, 0)], flag, f.dir(0, -1))
+    # portal and stairs on the boulevard side (+v)
+    vf = hd + 1.5
+    f.box(P, 0, vf + 2.5, PL, 12.0, 8.0, 5.0, S, top=roof)
+    f.quad(P, -6.0, 6.0, vf + 5.0, PL, PL + 8.0, portal, side=1, out=0.03)
+    for k in range(8):                                                                 # red granite stairs, grey below
+        y = PL - (k + 1) * 0.5; d = vf + 5.0 + k * 1.1
+        f.box(P, 0, d + 0.55, -3.0, 30.0 + k * 1.5, y + 3.0 + 0.5, 1.1, RG if k < 5 else GS, top=RG if k < 5 else GS)
+    return finish('presedintia', P, cx, cz, [r], PL + H, [b['c']], tex=1024)
+
+
+
+BUILD = [cosmos, atrium, atriumtower, grandhall, national, romanita, gates_tower, gates_ne, gates_sw,
+         palatul, gara, piata, piata2, piatagate, hotelchisinau, ciuflea, mazarache, pantelimon, eternitate, tvtower, zimbru, presedintia]
+for _fn, _k in ((gates_tower, 'gates'), (gates_ne, 'gates2'), (gates_sw, 'gates3')): _fn.key = _k

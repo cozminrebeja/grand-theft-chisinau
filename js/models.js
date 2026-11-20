@@ -4,7 +4,7 @@
 // texture per model or atlas group (lp.bake: colour × AO, grime, painted detail); flat-colour meshes still work.
 // Textures load as LINEAR (the game renders without sRGB output, so baked values = the colours the scripts chose).
 // Bake models into merged buckets (mdl_meshes / mdl_bake) instead of adding the glTF meshes directly.
-const MDL={},MDL_V='20261121ps2';   // bump MDL_V when a .glb changes (deployed clients cache them)
+const MDL={},MDL_V='20261121ps3';   // bump MDL_V when a .glb changes (deployed clients cache them)
 async function mdl_preload(){
   const CDN='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/';
   if(!THREE.GLTFLoader)await world_script(CDN+'GLTFLoader.js');
