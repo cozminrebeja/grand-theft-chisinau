@@ -128,7 +128,7 @@ function startMission(){for(let t=0;t<40;t++){const e=randEdgeNear(player.x,play
 function endMission(){mission=null;mkP.visible=mkD.visible=false;if(paxMesh){scene.remove(paxMesh);paxMesh=null;}missionCD=4;}
 function updMission(dt){const v=player.car;
   if(!v||v.type!=='taxi'){if(mission){if(mission.stage==='drop')say('Cursă anulată','Clientul a coborât',2,'#ff8a65');endMission();}return;}
-  if(!mission){missionCD-=dt;if(missionCD<=0)startMission();return;}
+  if(!mission){if(hook('phoneBusy'))return;missionCD-=dt;if(missionCD<=0)startMission();return;}
   const d=Math.hypot(mission.x-v.x,mission.z-v.z);if(paxMesh)paxMesh.rotation.y=Math.atan2(v.x-mission.x,v.z-mission.z);
   if(mission.stage==='pickup'){if(d<8&&Math.abs(v.speed)<3){const opts=DESTS.filter(D=>{const k=Math.hypot(D.x-v.x,D.z-v.z);return k>400&&k<2500;});const T=mpick(opts.length?opts:DESTS);const dist=Math.hypot(T.x-v.x,T.z-v.z);
       mission={stage:'drop',x:T.x,z:T.z,name:T.name,fare:Math.round(25+dist*.05),t:Math.round(dist*1.35/10+25)};mkP.visible=false;mkD.position.set(T.x,surfaceY(T.x,T.z),T.z);mkD.visible=true;if(paxMesh){scene.remove(paxMesh);paxMesh=null;}
@@ -177,7 +177,7 @@ const DISTRICTS=(D.districts||[]).map(([name,flat])=>{const ring=dec(flat);let x
 function districtAt(x,z){for(const d of DISTRICTS)if(x>=d.x0&&x<=d.x1&&z>=d.z0&&z<=d.z1&&pip(x,z,d.ring))return d.name;return null;}
 
 // ================= enter / exit =================
-function toggleCar(){if(hook('carcareAction'))return;if(hook('storeInside')||hook('airportInside')||hook('bemolBusy'))return;
+function toggleCar(){if(hook('missionAction'))return;if(hook('carcareAction'))return;if(hook('storeInside')||hook('airportInside')||hook('bemolBusy'))return;
   if(player.mode==='foot'){let best=null,bd=1e9;for(const v of vehicles){if(Math.abs(v.x-player.x)>10||Math.abs(v.z-player.z)>10)continue;const d=segDist(v,player.x,player.z)-v.spec.wid/2;if(d<bd){bd=d;best=v;}}
     if(!best||bd>2.6)return;const v=best;
     if(v.driver){const p=peds.reduce((a,b)=>Math.hypot(b.x-player.x,b.z-player.z)>Math.hypot(a.x-player.x,a.z-player.z)?b:a);p.a.x=v.x+Math.cos(v.h)*2;p.a.z=v.z-Math.sin(v.h)*2;p.x=p.a.x;p.z=p.a.z;p.flee=4;
@@ -248,7 +248,7 @@ function respawnPoints(){if(RESPAWNS)return RESPAWNS;RESPAWNS=[{name:'Arcul de T
   for(const d of DESTS){if(RESPAWNS.length>=16)break;if(!districtAt(d.cx,d.cz))continue;if(RESPAWNS.some(p=>Math.hypot(p.x-d.x,p.z-d.z)<1300))continue;
     RESPAWNS.push({name:d.name,x:d.x,z:d.z,h:Math.atan2(d.x-d.cx,d.z-d.cz)});}
   return RESPAWNS;}
-function busted(){hook('fxEvent','busted',{x:player.x,z:player.z});const bx=player.x,bz=player.z;let R=null,rd=1e18;for(const p of respawnPoints()){const d=(p.x-bx)**2+(p.z-bz)**2;if(d<rd){rd=d;R=p;}}const fine=Math.round(money*.25);money-=fine;stars=0;bustT=0;bustShow=3;$('busted').style.opacity=1;
+function busted(){hook('fxEvent','busted',{x:player.x,z:player.z});hook('missionEvent','busted');const bx=player.x,bz=player.z;let R=null,rd=1e18;for(const p of respawnPoints()){const d=(p.x-bx)**2+(p.z-bz)**2;if(d<rd){rd=d;R=p;}}const fine=Math.round(money*.25);money-=fine;stars=0;bustT=0;bustShow=3;$('busted').style.opacity=1;
   if(player.car){player.car.mode='parked';player.car.speed=0;player.car=null;}player.mode='foot';player.m.visible=true;player.x=R.x;player.z=R.z;player.h=R.h;camYaw=R.h;camPos.set(R.x-Math.sin(R.h)*6,groundY(R.x,R.z)+4,R.z-Math.cos(R.h)*6);endMission();
   for(const v of vehicles)if(v.mode==='chase'){v.mode='parked';v.speed=0;}setTimeout(()=>say('Amendă: '+fine+' lei',(R.name==='Arcul de Triumf'?'Te-au lăsat la Arcul de Triumf':'Te-au lăsat lângă '+R.name),3,'#ff8a65'),1200);}
 function updPeds(dt){
@@ -415,7 +415,7 @@ function updTrolleyStation(){const v=player.car;if(!v||v.type!=='trolley'||Math.
 function v_steerTrack(dt,inp){for(const v of vehicles){if(v===player.car)v.steer=inp.s;else{const h0=v._ph==null?v.h:v._ph;v.steer=clamp(-angDiff(v.h,h0)/Math.max(dt,1e-3)/1.5,-1,1);}v._ph=v.h;}}
 // ================= main loop =================
 // small API for side modules (Linella store interior)
-window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v},set shake(v){shake=Math.max(shake,v)}};
+window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v},set shake(v){shake=Math.max(shake,v)},get stars(){return stars},get taxiMission(){return !!mission&&mission.stage==='drop'},cancelTaxi:()=>{if(mission)endMission();},gps:(x,z)=>gpsSet(x,z),gpsOff:()=>gpsClear()};
 await progress('JOACĂ');playBtn.disabled=false;
 let last=performance.now(),titleT=0,parkT=0,mapT=0;
 // frame cap (pause menu → Setări): renders at most fpsCap frames/s; 0 = unlimited (monitor refresh rate)
@@ -429,7 +429,7 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
   else{const inp=input();window.gtcInput=inp;const inStore=(player.mode==='foot'&&hook('storeUpdate',dt,inp))||hook('airportUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('phoneUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);

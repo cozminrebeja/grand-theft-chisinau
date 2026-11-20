@@ -119,7 +119,7 @@ function bemol_play(dt,player,S){const G=bemol_game,api=window.gtcApi,st=bemol_s
   G.roundT-=dt;if(G.roundT<=0){G.roundT=mr(10,16);const a=Math.round(mr(2,14))*10+(Math.random()<.25?20:0);G.score[0]+=a;G.score[1]+=Math.max(0,162-a);
     if(G.score[0]>=BEMOL_WIN||G.score[1]>=BEMOL_WIN){const win=G.score[0]>=G.score[1],sc=G.score[0]+' — '+G.score[1];
       if(win){api.money+=40;api.say('Ați câștigat la belot!','+40 lei · '+sc,2.8,'#7dff8a');}else{const f=Math.min(api.money,20);api.money-=f;api.say('Ați pierdut la belot','-'+f+' lei · '+sc,2.8,'#ff8a65');}
-      G.score=[0,0];bemol_talk(G.players[0].name,win?'Oo, bizon! Încă o partidă?':'Hai, revanșa!');}}
+      if(typeof missionEvent==='function')missionEvent('belot_end',{win});G.score=[0,0];bemol_talk(G.players[0].name,win?'Oo, bizon! Încă o partidă?':'Hai, revanșa!');}}
   bemol_hint('Belot · Noi <b>'+G.score[0]+'</b> — Ei <b>'+G.score[1]+'</b> (până la '+BEMOL_WIN+') · '+BEMOL_KEY+'ridică-te');}
 // game.js hooks
 function bemolSeat(){return !!bemol_seat;}

@@ -99,8 +99,9 @@ function cc_holeHits(v,dt,now){const sp=Math.abs(v.speed);
 let cc_gList=null;   // map icon list (x,z; moves to the snapped spot once placed)
 function cc_initGarages(){cc_gList=CC_GARAGES.map((G,i)=>{
     // street candidates near the target: mid-size roads, closest first
-    const cand=edges.filter(e=>e.w>=6&&e.w<=13&&e.len>25&&!e.tw&&Math.hypot(e.mid[0]-G.x,e.mid[1]-G.z)<650)
+    const near=(w0,w1,R)=>edges.filter(e=>e.w>=w0&&e.w<=w1&&e.len>20&&!e.tw&&Math.hypot(e.mid[0]-G.x,e.mid[1]-G.z)<R)
       .sort((a,b)=>Math.hypot(a.mid[0]-G.x,a.mid[1]-G.z)-Math.hypot(b.mid[0]-G.x,b.mid[1]-G.z)).slice(0,40);
+    let cand=near(6,13,650);if(!cand.length)cand=near(4,16,1500);
     const c0=cand[0];return {G,i,cand,x:c0?c0.mid[0]:G.x,z:c0?c0.mid[1]:G.z,placed:null,grp:null,mech:null,greet:0};});}
 function cc_W(s,lx,lz){const c=Math.cos(s.a),n=Math.sin(s.a);return [s.x+lx*c+lz*n,s.z-lx*n+lz*c];}
 function cc_tryPlace(g){

@@ -238,7 +238,8 @@ function lst_exit(){const api=gtcApi,P=api.player,s=lst_cur,D=s.door;const h=Mat
   P.x=D.x+D.ox*1.7;P.z=D.z+D.oz*1.7;P.h=h;P.y=groundY(P.x,P.z);api.camYaw=h;api.camPos.set(P.x-Math.sin(h)*6,P.y+3,P.z-Math.cos(h)*6);
   P.m.position.set(P.x,P.y,P.z);P.m.rotation.y=h;lst_int.visible=false;lst_lights.amb.intensity=0;lst_lights.dir.intensity=0;
   if(lst_item){const nm=lst_item.name;if(!lst_item.paid){lst_ionStart(D);const gn=lst_guardName;setTimeout(()=>api.say('Ai furat: '+nm,'Paznicul '+gn+' fuge după tine!',2.6,'#ffd23f'),50);}
-    else setTimeout(()=>api.say('Ai cumpărat: '+nm,'Poftă bună!',2,'#7dff8a'),50);}
+    else setTimeout(()=>api.say('Ai cumpărat: '+nm,'Poftă bună!',2,'#7dff8a'),50);
+    if(typeof missionEvent==='function')missionEvent('store_exit',{name:nm,paid:lst_item.paid});}
   lst_item=null;lst_ui.hint.style.display='none';lst_ui.bub.style.display='none';lst_bub=null;lst_cur=null;s.armed=false;}
 function storeInside(){return !!lst_cur;}
 function storeSavePos(){if(!lst_cur)return null;const D=lst_cur.door;return {x:D.x+D.ox*1.7,z:D.z+D.oz*1.7,h:Math.atan2(D.ox,D.oz)};}

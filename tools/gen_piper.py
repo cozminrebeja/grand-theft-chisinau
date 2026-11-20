@@ -43,7 +43,12 @@ def lines():
         L += [f"Atenție! Pasagerii zborului {code} spre {d} sunt rugați să se prezinte la poarta {gate} pentru îmbarcare.",
               f"Check-in-ul pentru zborul {code} spre {d} se închide în 20 de minute."]
     L += ["Vă rugăm să nu lăsați bagajele nesupravegheate."]
-    seen = set(); return [t for t in L if not (t in seen or seen.add(t))]
+    # Car care (garage mechanics, Bemol pump) and phone missions (callers)
+    cc, ph = js("carcare.js"), js("phone.js")
+    for n in ["CC_MECH_HI", "CC_MECH_DONE", "CC_MECH_OK", "CC_MECH_BROKE", "CC_PUMP"]: L += arr(cc, n)
+    S = r"'((?:[^'\\]|\\.)*)'"
+    for pat in [r"sms:" + S, r"ph_say\('[^']*'," + S, r"ph_done\(m,\d+," + S, r"ph_fail\(m," + S]: L += re.findall(pat, ph)
+    seen = set(); return [t for t in L if re.search(r"[A-Za-zăâîșțĂÂÎȘȚ]", t) and not (t in seen or seen.add(t))]
 
 
 def speakable(t):
