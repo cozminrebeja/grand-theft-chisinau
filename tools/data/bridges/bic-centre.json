@@ -259,7 +259,12 @@
      "structure": {
       "type": "beam",
       "deck_depth": 1.3,
-      "piers": [],
+      "piers": [
+       [
+        1029.7,
+        -1023.7
+       ]
+      ],
       "pier_type": "wall",
       "abutment": "beige limestone-clad abutment wall at the SW end forming the Albișoara portal",
       "railing": "metal",
@@ -269,7 +274,7 @@
        2.5
       ],
       "colour": "#a8a49b",
-      "pier_note": "no piers: Street View shows a single opening over Albișoara; the canal and Luncii run skewed under the deck, so the old ESTIMATE wall piers stood diagonally in the Bîc"
+      "pier_note": "one wall pier in the strip between the Bîc canal and Albișoara (aerial photo of the bridge: canal opening and road opening either side of it); Albișoara passes the single opening to the SW abutment. Position from the 2020 ortho: canal SW rim / Albișoara NE kerb line, ~8 m SW of the canal centreline."
      },
      "under": [
       {
@@ -368,12 +373,31 @@
    "earthworks": [
     {
      "type": "retaining_wall_fill",
-     "road": "Bd. Renașterii Naționale SW approach (Circus junction → bridge 1)",
+     "road": "Bd. Grigore Vieru twin carriageways → Circus junction (walled part)",
      "line": [
       [
        960,
        -955,
        -43.8
+      ],
+      [
+       985.0,
+       -980.0,
+       -43.13
+      ]
+     ],
+     "top_w": 30,
+     "side": "wall",
+     "evidence": "Beige stone block parapet/retaining wall on the NW side at the junction (Street View 47.03365,28.84552 hdg 45). Fill 0→4 m (ESTIMATE). Walls stop short of the junction: the two slip roads (to Albișoara W, from the S) leave the junction at the fill top and grade down beside it (OSM nodes shared at grade)."
+    },
+    {
+     "type": "embankment",
+     "road": "Circus junction → Podul Circului nr. 1 (slip roads join here)",
+     "line": [
+      [
+       985.0,
+       -980.0,
+       -43.13
       ],
       [
        990,
@@ -386,9 +410,95 @@
        -41.8
       ]
      ],
-     "top_w": 32,
-     "side": "wall",
-     "evidence": "Beige stone block parapet/retaining wall on the NW side at the junction (Street View 47.03365,28.84552 hdg 45). Fill 0→4 m (ESTIMATE)."
+     "top_w": 26.0,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Junction node shared by the boulevard and both slip roads, so they meet at the fill top; grass side slopes (imagery). Heights as the walled part (ESTIMATE)."
+    },
+    {
+     "type": "ramp",
+     "road": "slip road junction → Albișoara loop (OSM one-way, W of the junction)",
+     "line": [
+      [
+       1002.0,
+       -996.8,
+       -42.44
+      ],
+      [
+       984.4,
+       -997.4,
+       -42.79
+      ],
+      [
+       980.2,
+       -998.3,
+       -43.08
+      ],
+      [
+       976.3,
+       -999.7,
+       -43.36
+      ],
+      [
+       971.4,
+       -1002.1,
+       -43.74
+      ],
+      [
+       962.7,
+       -1011.4,
+       -44.6
+      ],
+      [
+       955.4,
+       -1016.0,
+       -45.19
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Follows the road centreline; flat on the junction fill, then grades to natural ground where it meets the loop to Albișoara (ESTIMATE)."
+    },
+    {
+     "type": "ramp",
+     "road": "slip road from the S into the junction",
+     "line": [
+      [
+       1002.0,
+       -996.8,
+       -42.44
+      ],
+      [
+       1003.0,
+       -982.6,
+       -42.7
+      ],
+      [
+       1003.6,
+       -977.1,
+       -43.04
+      ],
+      [
+       1004.9,
+       -972.4,
+       -43.34
+      ],
+      [
+       1007.4,
+       -967.8,
+       -43.66
+      ],
+      [
+       1022.4,
+       -948.4,
+       -45.17
+      ]
+     ],
+     "top_w": 9,
+     "side": "slope",
+     "slope": 1.5,
+     "evidence": "Follows the road centreline; grades from natural ground up to the junction fill (ESTIMATE)."
     },
     {
      "type": "embankment",
@@ -442,7 +552,7 @@
     },
     {
      "type": "cutting",
-     "road": "Strada Albișoara underpass under Renașterii",
+     "road": "Strada Albișoara underpass, NW approach",
      "line": [
       [
        929,
@@ -455,10 +565,45 @@
        -47.1
       ],
       [
-       1024,
-       -1018,
+       1006.6,
+       -1034.5,
+       -47.5
+      ]
+     ],
+     "top_w": 14,
+     "side": "slope",
+     "slope": 2.0,
+     "evidence": "Road dips into the underpass (Street View from the deck hdg 320 and from Albișoara hdg 140). Depth ESTIMATE from clearance 4.8 m + 1.3 m structure below deck -41.7."
+    },
+    {
+     "type": "cutting",
+     "road": "Strada Albișoara under Podul Circului nr. 1 (abutment + pier wall)",
+     "line": [
+      [
+       1006.6,
+       -1034.5,
+       -47.5
+      ],
+      [
+       1024.05,
+       -1018.05,
        -47.6
       ],
+      [
+       1041,
+       -1002,
+       -47.4
+      ]
+     ],
+     "top_w": 14,
+     "side": "wall",
+     "slope": 2.0,
+     "evidence": "Vertical faces under the deck: the stone-clad SW abutment and the wall pier between the road and the canal (aerial photo of the bridge). With 1:2 slopes here the cut ran ~3 m past the abutment and left a pit in the boulevard at the deck end."
+    },
+    {
+     "type": "cutting",
+     "road": "Strada Albișoara underpass, SE approach",
+     "line": [
       [
        1041,
        -1002,
@@ -1366,38 +1511,38 @@
        -48.31
       ],
       [
-       927.6,
-       -1135.1,
+       928.3,
+       -1135.8,
        -48.34
       ],
       [
-       963.0,
-       -1099.9,
+       964.4,
+       -1101.3,
        -48.37
       ],
       [
-       998.6,
-       -1064.7,
+       1000.0,
+       -1066.1,
        -48.4
       ],
       [
-       1034.2,
-       -1029.6,
+       1035.6,
+       -1031.0,
        -48.43
       ],
       [
-       1069.5,
-       -994.3,
+       1070.9,
+       -995.7,
        -48.46
       ],
       [
-       1105.0,
-       -959.0,
+       1106.4,
+       -960.4,
        -48.49
       ],
       [
-       1140.1,
-       -923.5,
+       1140.8,
+       -924.2,
        -48.52
       ],
       [
@@ -1485,12 +1630,12 @@
       -44.8,
       -45.0
      ],
-     "top_w": 10,
+     "top_w": 8,
      "side": "slope",
-     "slope": 2.0,
+     "slope": 1.5,
      "bed_below_water": 0.7,
-     "lining": "precast concrete slabs on both slopes (light grey #c8c4ba), water dark green-brown; willows/reeds grow in it between Petru Rareș and Renașterii",
-     "evidence": "Street View Constantin P. Apr 2025 on Albișoara (47.04090,28.83405 hdg 30): water not visible from the road; far slab slope spans ~3.5°→12.4° below horizon at ~34→23 m → water ≈3.0 m below bank top. Esri img/mv_canal_crop.png: lit slab slope ≈5.7 m wide in plan (→ ~1:2), dark water+shade ≈15.7 m → water ≈10 m wide, top width ≈22 m. Ion Bragari pano (47.03882,28.83866 hdg 40): banks on both sides at street level. Game water polygons here are only 3-11 m wide and sit ~0.3 m below the DEM (= road level).",
+     "lining": "precast concrete slabs on the far slope from Albișoara (grey), the Albișoara-side slope is grass and shrubs; water dark green-brown; willows/reeds grow in it between Petru Rareș and Renașterii",
+     "evidence": "Street View Constantin P. Apr 2025 on Albișoara (47.04090,28.83405 hdg 30): water not visible from the road; far slab slope spans ~3.5°→12.4° below horizon at ~34→23 m → water ≈3.0 m below bank top. Esri img/mv_canal_crop.png: lit slab slope ≈5.7 m wide in plan (→ ~1:2), dark water+shade ≈15.7 m → water ≈10 m wide, top width ≈22 m. Ion Bragari pano (47.03882,28.83866 hdg 40): banks on both sides at street level. Game water polygons here are only 3-11 m wide and sit ~0.3 m below the DEM (= road level). 2020 AGCC ortho cross-sections at s≈2950/3150/3300 (Podul Circului ±150 m): rim to rim 20-22 m, slab slope ~8 m in plan on the NE side, water+shade ~9 m, SW slope ~4-5 m of shrubs down to Albișoara's kerb; old 10 m bed + 1:2 slopes (~26 m) ran 3 m into Albișoara. Ground photos (Podul Circului, trolleybus aerial) show no railings along the canal. Line moved 2 m NE for ±130 m around Podul Circului to the ortho rim-to-rim centre (it ran Albișoara's kerb into the SW slope).",
      "lined": true
     }
    ]

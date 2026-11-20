@@ -194,7 +194,7 @@ function bridgesUnloadTile(t){}
 
 // ================= river channels (Bîc): concrete trapezoid + water + rim coping + railing =================
 // The cut itself lives in groundY (mapcore rv_*); this draws the lining exactly on that profile.
-const RVC={bed:0x6c6a63,bank:0xa39f95,wall:0xb5ab98,floor:0x6a6a66,cope:0xbdb8ac,rail:0x2f3236};
+const RVC={bed:0x4a4a40,bank:0x8e8a82,grass:0x6a7d3a,wall:0xb5ab98,floor:0x6a6a66,cope:0xb0ada4,rail:0x2f3236};
 let rv_sm=null,rv_wmat=null;
 function rv_samples(){if(rv_sm)return rv_sm;rv_sm=[];if(typeof rv_init!=='function')return rv_sm;if(!RV)rv_init();
   // sample = [x,z,nx,nz,water y,depth,rim half-width,slope run,bed y] every ~4 m along each LINED audited channel
@@ -207,7 +207,7 @@ function rv_samples(){if(rv_sm)return rv_sm;rv_sm=[];if(typeof rv_init!=='functi
     rv_sm.push({water:L.water,S});}
   return rv_sm;}
 function buildRiversTile(t){const LS=rv_samples();if(!LS.length)return;
-  const B=new Bk(br_mat,false),Wb=new Bk(rv_wmat||(rv_wmat=(typeof st_waterMat!=='undefined'&&st_waterMat)||new THREE.MeshPhongMaterial({color:0x3b6f7f,specular:0x99bbcc,shininess:80})),false);let any=false,anyW=false;
+  const B=new Bk(br_mat,false),Wb=new Bk(rv_wmat||(rv_wmat=new THREE.MeshPhongMaterial({color:0x3b4232,specular:0x3a4436,shininess:40})),false);let any=false,anyW=false;
   const inTile=(x,z)=>x>=t.x0&&x<t.x1&&z>=t.z0&&z<t.z1;
   const roadAt=(x,z,m)=>{if(typeof nearestSeg!=='function')return false;const ns=nearestSeg(x,z,30,s=>s.r&&s.r.kind!==3);return ns&&ns.d<ns.s.r.w/2+m;};
   for(const {water,S} of LS){
@@ -218,13 +218,17 @@ function buildRiversTile(t){const LS=rv_samples();if(!LS.length)return;
     for(let i=0;i<S.length;i++){const p=S[i],cur=sec(p);
       if(prev){const mx=(p[0]+prevP[0])/2,mz=(p[1]+prevP[1])/2,dep=(p[5]+prevP[5])/2;
         if(inTile(mx,mz)&&dep>.05){any=true;const road=roadAt(mx,mz,2.5),rim=dep>.6&&!(water&&road);
+          // a wet canal (the Bîc) has slabs only on the bank away from the road beside it; that bank is grass and
+          // shrubs, with no coping (Albișoara runs along the SW rim at Podul Circului, photo + 2020 ortho)
+          const off=(prevP[6]+p[6])/2+1.5,rdP=water&&roadAt(mx+prevP[2]*off,mz+prevP[3]*off,2),rdN=water&&roadAt(mx-prevP[2]*off,mz-prevP[3]*off,2);
           for(let k=0;k<7;k++){if(!rim&&(k<2||k>4))continue;if(!water&&k===3&&dep<.3)continue;
-            const a=prev[k],b=prev[k+1],c=cur[k+1],d=cur[k];br_quad(B,a,d,c,b,cols[k]);}
+            if((rdP&&k<2)||(rdN&&k>4))continue;
+            const a=prev[k],b=prev[k+1],c=cur[k+1],d=cur[k];br_quad(B,a,d,c,b,(rdP&&k===2)||(rdN&&k===4)?RVC.grass:cols[k]);}
           if(water){anyW=true;const wl0=prevP[4],wl1=p[4];   // waterline sits up the slope by water depth × slope
             const ww=P=>Math.max(.5,P[6]-P[7])+(P[5]>.05?(P[4]-P[8])/P[5]*P[7]:0),w0=ww(prevP),w1=ww(p),q=(P,o,y)=>[P[0]+P[2]*o,y,P[1]+P[3]*o];
             br_quad(Wb,q(prevP,w0,wl0),q(p,w1,wl1),q(p,-w1,wl1),q(prevP,-w0,wl0),0xffffff);}
-          // railings along both rims (not where a road deck crosses)
-          if(rim)for(const sd of [1,-1]){const o=sd*((prevP[6]+p[6])/2+1.0),a=[prevP[0]+prevP[2]*o,0,prevP[1]+prevP[3]*o],b=[p[0]+p[2]*o,0,p[1]+p[3]*o];
+          // railings along both rims of dry channels only: none along the Bîc canal in photos
+          if(rim&&!water)for(const sd of [1,-1]){const o=sd*((prevP[6]+p[6])/2+1.0),a=[prevP[0]+prevP[2]*o,0,prevP[1]+prevP[3]*o],b=[p[0]+p[2]*o,0,p[1]+p[3]*o];
             if(!water&&roadAt((a[0]+b[0])/2,(a[2]+b[2])/2,.5))continue;
             a[1]=hmY(a[0],a[2])+.12;b[1]=hmY(b[0],b[2])+.12;
             br_wall(B,[[a[0],a[1]+1.0,a[2]],[b[0],b[1]+1.0,b[2]]],.07,.07,RVC.rail,RVC.rail);br_wall(B,[[a[0],a[1]+.5,a[2]],[b[0],b[1]+.5,b[2]]],.04,.04,RVC.rail,RVC.rail);

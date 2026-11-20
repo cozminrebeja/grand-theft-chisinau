@@ -436,7 +436,8 @@ function buildStreetsTile(t){
     for(const side of[-1,1]){
       const slab=p=>{const g=st_cur;const A0=p.a(p.ta),A1=p.a(p.tb),B0=p.b(p.ta),B1=p.b(p.tb);
         st_fquad(g,st_Y.SW,A0[0],A0[1],A1[0],A1[1],B1[0],B1[1],B0[0],B0[1],st_T.SIDEWALK,2,cSide);return [A0,A1,B0,B1,g];};
-      st_ribbon(r,side*(r.w/2+1.2),side*(r.w/2+sw),2,clip,slab,S);
+      const inCanal=p=>typeof rv_dist==='function'&&[p.b(p.ta),p.b(p.tb)].some(q=>rv_dist(q[0],q[1],true)<0);   // no sidewalk down a lined canal's slope
+      st_ribbon(r,side*(r.w/2+1.2),side*(r.w/2+sw),2,clip,p=>{if(!inCanal(p))slab(p);},S);
       st_ribbon(r,side*r.w/2,side*(r.w/2+1.2),2,(s,a,b,i)=>!inRamp(s)&&clip(s,a,b,i),p=>{const [A0,A1,B0,B1,g]=slab(p);
         const ix=(B0[0]-A0[0])/1.2*.3,iz=(B0[1]-A0[1])/1.2*.3;const fn=[-(B0[0]-A0[0])/1.2,0,-(B0[1]-A0[1])/1.2];
         st_quad(g,[[A0[0],st_Y.KERB,A0[1],p.sa,0],[A1[0],st_Y.KERB,A1[1],p.sb,0],[A1[0]+ix,st_Y.KERB,A1[1]+iz,p.sb,.999],[A0[0]+ix,st_Y.KERB,A0[1]+iz,p.sa,.999]],[0,1,0],st_T.KERB,cKerb);
@@ -506,7 +507,7 @@ function buildStreetsTile(t){
     for(const [r,S] of RM){const blvd=r.kind===0&&/Ștefan cel Mare|Grigore Vieru|Negruzzi|Renașterii|Dacia/.test(r.name);if(!blvd&&r.kind!==2)continue;
       const tot=r.cum[r.cum.length-1];const sp=blvd?26:14;if(tot<8)continue;let alt=1;
       for(let s=6;s<tot-3;s+=sp){alt=-alt;const P=st_pointAt(r,s);if(!S.has(P.i))continue;const nx=-P.uz,nz=P.ux;
-        for(const sd of (blvd?[1,-1]:[alt])){const e=blvd?r.w/2+st_sw(r)-.55:r.w/2+.55,x=P.x+nx*e*sd,z=P.z+nz*e*sd;if(solidAt(x,z,.3))continue;
+        for(const sd of (blvd?[1,-1]:[alt])){const e=blvd?r.w/2+st_sw(r)-.55:r.w/2+.55,x=P.x+nx*e*sd,z=P.z+nz*e*sd;if(solidAt(x,z,.3)||(typeof onBridge==='function'&&onBridge(x,z)))continue;   // no benches on bridge decks
           if(!blvd){const q=nearestSeg(x,z,8);if(q&&q.d<q.s.r.w/2+1)continue;}bench(x,z,Math.atan2(-nx*sd,-nz*sd),blvd?st_Y.SW:0,P.ux,P.uz);}}}
     for(const f of foot){const tot=f.cum[f.cum.length-1];if(tot<8)continue;let alt=1;
       for(let s=6;s<tot-3;s+=22){alt=-alt;let i=0;while(i<f.cum.length-2&&f.cum[i+1]<s)i++;const tt=(s-f.cum[i])/((f.cum[i+1]-f.cum[i])||1);
@@ -537,9 +538,10 @@ function buildStreetsTile(t){
 function st_buildWaterTile(list,group,t){const p=[],n=[];
   for(const w of list){const o=w.o,hs=w.hs,lv=w.level;const c=o.map(q=>new THREE.Vector2(q[0],q[1])),h=hs.map(r=>r.map(q=>new THREE.Vector2(q[0],q[1])));let tris;try{tris=THREE.ShapeUtils.triangulateShape(c,h);}catch(e){continue;}
     const all=c.concat(...h);for(const tr of tris){let a=all[tr[0]],b=all[tr[1]],d=all[tr[2]];if(!a||!b||!d)continue;if((b.y-a.y)*(d.x-a.x)-(b.x-a.x)*(d.y-a.y)<0){const tt=b;b=d;d=tt;}
+      if(typeof rv_dist==='function'&&rv_dist((a.x+b.x+d.x)/3,(a.y+b.y+d.y)/3,true)<2)continue;   // lined canal: bridges.js draws its own (murky) water
       for(const q of[a,b,d]){const rl=riverLevelAt(q.x,q.y);p.push(q.x,(rl!==null?rl:lv)+.07,q.y);n.push(0,1,0);}}   // rivers slope, lakes are level
     let A=0;for(let i=0;i<o.length;i++){const a=o[i],b=o[(i+1)%o.length];A+=a[0]*b[1]-b[0]*a[1];}A/=2;if(Math.abs(A)<1500)continue;const ring=A>0?o:o.slice().reverse();
-    for(let i=0;i<ring.length;i++){const a=ring[i],b=ring[(i+1)%ring.length],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz);if(l<.2||st_onBorder(t,a,b))continue;const nx=dz/l,nz=-dx/l;const g=st_cur;
+    for(let i=0;i<ring.length;i++){const a=ring[i],b=ring[(i+1)%ring.length],dx=b[0]-a[0],dz=b[1]-a[1],l=Math.hypot(dx,dz);if(l<.2||st_onBorder(t,a,b))continue;if(typeof rv_dist==='function'&&rv_dist((a[0]+b[0])/2,(a[1]+b[1])/2,true)<2)continue;const nx=dz/l,nz=-dx/l;const g=st_cur;
       // absolute heights: top follows the shore but never below lake level + 0.42; inner face reaches below the water
       const W=.9,nseg=Math.max(1,Math.ceil(l/st_MAXE));st_noDrape=true;
       for(let k=0;k<nseg;k++){const t0=k/nseg,t1=(k+1)/nseg,A=[a[0]+dx*t0,a[1]+dz*t0],B=[a[0]+dx*t1,a[1]+dz*t1];
