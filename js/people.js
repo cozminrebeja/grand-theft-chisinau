@@ -13,27 +13,31 @@ const SHIRTS=[0xc0392b,0x2c3e50,0x27ae60,0x8e44ad,0xecf0f1,0x34495e,0xd35400,0x1
 const ppl_F={hairS:1,hairL:2,bun:4,cap:8,scarf:16,skirt:32,pack:64,bag:128,sleeves:256,pants:512,coat:1024,beard:2048,jacket:4096,hair:8192,stripes:16384,bust:32768,glasses:65536,shop:131072,phone:262144,hood:524288};
 const ppl_S={fix:0,skin:1,top:2,bot:3,hair:4,shoe:5,acc:6,sleeve:7,shin:8,topDk:9,lip:10,hairDk:11};
 
-// ---------- geometry: models/people.glb (tools/blender/people.py) → merged parts with aSF = [slot, feature] ----------
-// Each glb node is one part, its origin at the joint (see PPL_* below); <part>_lo is the far LOD. The material name says
-// what each face is: s_<slot>[__f_<feature>|__nf_<feature>][__c_<rrggbb>] (feature shown only with / hidden with that
-// ppl_F bit; the hex is a tint multiplied with the slot colour, or the colour itself for slot 'fix').
-const ppl_v=new THREE.Vector3(),ppl_n=new THREE.Vector3(),ppl_nm=new THREE.Matrix3(),ppl_c=new THREE.Color();
+// ---------- geometry: models/people.glb (tools/blender/people.py) → merged parts with uv + aSF = [slot, feature] ----------
+// Each glb node is one part, its origin at the joint (see PPL_* below); <part>_lo is the far LOD. Smooth-shaded, all
+// detail painted into one atlas per LOD set (256 px near, 128 px far). The material name says what each face is:
+// s_<slot>[__f_<feature>|__nf_<feature>] (feature shown only with / hidden with that ppl_F bit). Texture RGB = light-grey
+// paint (× the person's slot colour) or the real colour on 'fix' faces; texture ALPHA = 1 where the slot colour applies,
+// 0 on painted detail that keeps its own colour (eyes, buckle, phone screen…).
+const ppl_v=new THREE.Vector3(),ppl_n=new THREE.Vector3(),ppl_nm=new THREE.Matrix3();
 class ppl_Part{
-  constructor(){this.p=[];this.n=[];this.c=[];this.sf=[];}
-  add(geo,m,slot,feat=0,col=0xffffff){const g=geo.index?geo.toNonIndexed():geo;const P=g.attributes.position,N=g.attributes.normal;
-    ppl_nm.getNormalMatrix(m);ppl_c.set(col);
+  constructor(){this.p=[];this.n=[];this.c=[];this.u=[];this.sf=[];this.map=null;}
+  add(geo,m,slot,feat=0){const g=geo.index?geo.toNonIndexed():geo;const P=g.attributes.position,N=g.attributes.normal,U=g.attributes.uv;
+    ppl_nm.getNormalMatrix(m);
     for(let i=0;i<P.count;i++){ppl_v.fromBufferAttribute(P,i).applyMatrix4(m);ppl_n.fromBufferAttribute(N,i).applyMatrix3(ppl_nm).normalize();
-      this.p.push(ppl_v.x,ppl_v.y,ppl_v.z);this.n.push(ppl_n.x,ppl_n.y,ppl_n.z);this.c.push(ppl_c.r,ppl_c.g,ppl_c.b);this.sf.push(slot,feat);}
+      this.p.push(ppl_v.x,ppl_v.y,ppl_v.z);this.n.push(ppl_n.x,ppl_n.y,ppl_n.z);this.c.push(1,1,1);this.u.push(U?U.getX(i):0,U?U.getY(i):0);this.sf.push(slot,feat);}
     return this;}
   geo(){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(this.p,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(this.n,3));
-    g.setAttribute('color',new THREE.Float32BufferAttribute(this.c,3));g.setAttribute('aSF',new THREE.Float32BufferAttribute(this.sf,2));g.computeBoundingSphere();return g;}
+    g.setAttribute('color',new THREE.Float32BufferAttribute(this.c,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(this.u,2));
+    g.setAttribute('aSF',new THREE.Float32BufferAttribute(this.sf,2));g.computeBoundingSphere();g.userData.map=this.map;return g;}
 }
-// material name → {slot, feat (negative = hidden when the bit is set), col}
-function ppl_sf(name){const m=/^s_([A-Za-z]+)(?:__(n?)f_([A-Za-z]+))?(?:__c_([0-9a-fA-F]{6}))?/.exec(name||'');
+// material name → {slot, feat (negative = hidden when the bit is set)}
+function ppl_sf(name){const m=/^s_([A-Za-z]+)(?:__(n?)f_([A-Za-z]+))?/.exec(name||'');
   if(!m||!(m[1] in ppl_S)||(m[3]&&!(m[3] in ppl_F)))return null;
-  return {slot:ppl_S[m[1]],feat:m[3]?(m[2]?-ppl_F[m[3]]:ppl_F[m[3]]):0,col:m[4]?parseInt(m[4],16):0xffffff};}
+  return {slot:ppl_S[m[1]],feat:m[3]?(m[2]?-ppl_F[m[3]]:ppl_F[m[3]]):0};}
 function ppl_partGeo(name){const P=new ppl_Part(),node=typeof mdl_get==='function'?mdl_get('people',name):null;
-  if(node)mdl_each(node,(g,m,mt)=>{const sf=ppl_sf(mt&&mt.name);if(sf)P.add(g,m,sf.slot,sf.feat,sf.col);else console.warn('people.glb: unknown material',mt&&mt.name);});
+  if(node)mdl_each(node,(g,m,mt)=>{const sf=ppl_sf(mt&&mt.name);if(!sf){console.warn('people.glb: unknown material',mt&&mt.name);return;}
+    P.add(g,m,sf.slot,sf.feat);if(mt.map&&!P.map)P.map=mt.map;});
   if(!P.p.length){console.error('people.glb: missing part '+name);P.add(new THREE.BoxGeometry(.12,.12,.12),new THREE.Matrix4(),ppl_S.top);}
   return P.geo();}
 
@@ -54,21 +58,36 @@ if(s>0.5){if(s<1.5)c=skin;else if(s<2.5)c=top;else if(s<3.5)c=bot;else if(s<4.5)
 else if(s<7.5)c=pplBit(iA.w,256.0)>0.5?top:skin;else if(s<8.5)c=pplBit(iA.w,512.0)>0.5?bot:skin;else if(s<9.5)c=top*0.62;
 else if(s<10.5)c=skin*vec3(0.8,0.52,0.52);else c=hair*0.72;vColor.rgb=c*color;}}
 #endif`);
+  // texture × slot colour where the texture's alpha says so (alpha 0 = painted detail with its own colour)
+  if(colour)sh.fragmentShader=sh.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
+vec4 pplTx=texture2D(map,vUv);diffuseColor.rgb*=pplTx.rgb;
+#else
+vec4 pplTx=vec4(1.0);
+#endif`).replace('#include <color_fragment>',`#ifdef USE_COLOR
+diffuseColor.rgb*=mix(vec3(1.0),vColor,pplTx.a);
+#endif`);
 }
+// near set + player (256 px atlas) and far set (128 px atlas); maps attached by ppl_init() once the glb is loaded
 const ppl_mat=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});
 ppl_mat.onBeforeCompile=sh=>ppl_patchVS(sh,true);
+const ppl_matLO=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});
+ppl_matLO.onBeforeCompile=sh=>ppl_patchVS(sh,true);
 const ppl_depthMat=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking});
 ppl_depthMat.onBeforeCompile=sh=>ppl_patchVS(sh,false);
 
 // geometry instance for a mesh with its own per-instance palette attributes
-function ppl_inst(base,count){const g=new THREE.BufferGeometry();for(const k of['position','normal','color','aSF'])g.setAttribute(k,base.getAttribute(k));
+function ppl_inst(base,count,mat=ppl_mat){const g=new THREE.BufferGeometry();for(const k of['position','normal','color','uv','aSF'])g.setAttribute(k,base.getAttribute(k));
   for(const [k,n] of [['iA',4],['iB',4],['iC',4],['iD',4],['iE',3]]){const a=new THREE.InstancedBufferAttribute(new Float32Array(count*n),n);a.setUsage(THREE.StaticDrawUsage);g.setAttribute(k,a);}
   g.boundingSphere=base.boundingSphere.clone();g.boundingSphere.radius+=2;
-  const m=new THREE.InstancedMesh(g,ppl_mat,count);m.customDepthMaterial=ppl_depthMat;m.frustumCulled=false;m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);m.castShadow=true;return m;}
+  const m=new THREE.InstancedMesh(g,mat,count);m.customDepthMaterial=ppl_depthMat;m.frustumCulled=false;m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);m.castShadow=true;return m;}
 const ppl_cc=new THREE.Color();
+// palette colour, slightly desaturated (k = colour kept) for the muted real-world look
+const ppl_hr=new THREE.Color();
+function ppl_ds(c,hex,k){c.set(hex);const l=c.r*.3+c.g*.59+c.b*.11;c.r=l+(c.r-l)*k;c.g=l+(c.g-l)*k;c.b=l+(c.b-l)*k;return c;}
 function ppl_setLook(m,i,L,mask){const a=m.geometry.attributes;const s=ppl_cc;
-  s.set(L.skin);a.iA.setXYZW(i,s.r,s.g,s.b,mask);const hr=new THREE.Color(L.hair);
-  s.set(L.top);a.iB.setXYZW(i,s.r,s.g,s.b,hr.r);s.set(L.bot);a.iC.setXYZW(i,s.r,s.g,s.b,hr.g);s.set(L.shoe);a.iD.setXYZW(i,s.r,s.g,s.b,hr.b);s.set(L.acc);a.iE.setXYZ(i,s.r,s.g,s.b);
+  ppl_ds(s,L.skin,.92);a.iA.setXYZW(i,s.r,s.g,s.b,mask);const hr=ppl_ds(ppl_hr,L.hair,.85);
+  ppl_ds(s,L.top,.82);a.iB.setXYZW(i,s.r,s.g,s.b,hr.r);ppl_ds(s,L.bot,.82);a.iC.setXYZW(i,s.r,s.g,s.b,hr.g);ppl_ds(s,L.shoe,.85);a.iD.setXYZW(i,s.r,s.g,s.b,hr.b);
+  ppl_ds(s,L.acc,.85);a.iE.setXYZ(i,s.r,s.g,s.b);
   for(const k of['iA','iB','iC','iD','iE'])a[k].needsUpdate=true;}
 
 // ---------- outfits (Chișinău street casting) ----------
@@ -109,7 +128,7 @@ function ppl_randKind(){let t=0;for(const k of ppl_KINDS)t+=k[1];let r=Math.rand
 // Built by ppl_init() on first use (main() has loaded models/people.glb by then): one near set (PPL_NEAR detailed people
 // closest to the camera) and one far set (every pedestrian, <part>_lo geometry).
 const PPL_PARTS=['torso','head','uArm','fArm','thigh','shin','foot'],PPL_DOUBLE=[0,0,1,1,1,1,1];
-const ppl_mkSet=(G,n)=>PPL_PARTS.map((k,j)=>ppl_inst(G[k],PPL_DOUBLE[j]?n*2:n));
+const ppl_mkSet=(G,n,mat)=>PPL_PARTS.map((k,j)=>ppl_inst(G[k],PPL_DOUBLE[j]?n*2:n,mat));
 const PPL_NEAR=30,PPL_NEAR_D=48;
 let ppl_G=null,ppl_GL=null,ppl_LOSET=null,ppl_HISET=null,ppl_MESHES=null;
 const ppl_hiUsed=new Array(PPL_NEAR).fill(null);let ppl_hiTop=0;
@@ -118,7 +137,8 @@ scene.add(ppl_blobs);
 const ppl_zero=new THREE.Matrix4().makeScale(0,0,0);
 function ppl_init(){if(ppl_G)return;ppl_G={};ppl_GL={};
   for(const k of PPL_PARTS){ppl_G[k]=ppl_partGeo(k);ppl_GL[k]=mdl_get('people',k+'_lo')?ppl_partGeo(k+'_lo'):ppl_G[k];}
-  ppl_LOSET=ppl_mkSet(ppl_GL,PEDN);ppl_HISET=ppl_mkSet(ppl_G,PPL_NEAR);ppl_MESHES=ppl_LOSET.concat(ppl_HISET);
+  ppl_mat.map=ppl_G.torso.userData.map;ppl_matLO.map=ppl_GL.torso.userData.map||ppl_mat.map;ppl_mat.needsUpdate=ppl_matLO.needsUpdate=true;
+  ppl_LOSET=ppl_mkSet(ppl_GL,PEDN,ppl_matLO);ppl_HISET=ppl_mkSet(ppl_G,PPL_NEAR,ppl_mat);ppl_MESHES=ppl_LOSET.concat(ppl_HISET);
   for(const m of ppl_MESHES){for(let i=0;i<m.count;i++)m.setMatrixAt(i,ppl_zero);scene.add(m);}
   for(const m of ppl_HISET)m.count=0;
   for(const p of peds)ppl_applyLook(ppl_LOSET,p.i,PEDN,p.pplO);}

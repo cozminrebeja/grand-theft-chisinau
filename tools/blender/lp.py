@@ -4,16 +4,22 @@ Everything here works in GAME coordinates: metres, x = east, y = up, z = south (
 around +y with the same sense as three.js `rotation.y`. Blender is z-up, so vertices go through B() below; the glTF
 exporter's +Y-up conversion maps Blender back to exactly these game axes.
 
-Style: PS2-era low poly. Few segments (6-12 round), flat shading, one flat colour per face (no textures).
-Colours are 0xRRGGBB ints written to the material as-is (the game renders without sRGB output, so the hex you pick
-is the colour you see), material name 'c_rrggbb' (or a custom name for colour slots, see Part.add_material).
+Style: PS2-era (early-2000s console) low poly: simple silhouettes, SMOOTH shading, and all small detail painted into one
+small texture per model (128-512 px) with baked darkening in creases (AO), grime, folds, seams, panel lines, windows.
+Pipeline: build geometry with lp primitives using flat colours (material()) and/or procedural "paint" materials (pmat(),
+or your own node trees), then lp.bake([objs], size) → welds + smooth-shades, UV-unwraps, bakes colour × AO into one image
+and switches the materials to that texture (material names are kept: people encode colour slots in them). Then export().
+Colours are 0xRRGGBB ints written as-is (the game renders without sRGB output and loads textures as linear, so the hex
+you pick is the colour you see; baked images are stored Non-Color for the same reason). Material name 'c_rrggbb' or custom.
 
     import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import lp
     lp.reset()
     p = lp.Part()
     p.box(4, 3, 6, at=(0, 1.5, 0), col=0xd8c8a0)           # w (x), h (y), d (z), centred at `at`
+    p.box(4, 1, 6, at=(0, 3.5, 0), col=lp.pmat('plaster', 0xd8c8a0, 'noise', grime=.5))  # col may be a material
     p.cyl(1, 1, 5, n=8, at=(0, 3, 0), col=0x4b6172)          # r_bottom, r_top, h; `at` = centre
     o = p.obj('thing', props={'lm': {...}})                  # one Blender object; props → glTF extras (JSON strings)
+    lp.bake([o], size=256)                                   # PS2 texture: colour × AO, smooth shading, UVs
     lp.export('models/thing.glb', [o])
     lp.preview([o], '/tmp/thing.png')                        # Workbench render for a quick visual check (Read the PNG)
 
@@ -40,7 +46,7 @@ _mats = {}
 def material(col, name=None):
     """Flat-colour material. col: 0xRRGGBB. name defaults to 'c_rrggbb'; give one to tag colour slots (people)."""
     name = name or 'c_%06x' % col
-    m = _mats.get(name)
+    m = _mats.get(name) or bpy.data.materials.get(name)  # reuse pmat()/custom materials by name
     if m and m.name in bpy.data.materials: return m
     m = bpy.data.materials.new(name)
     rgb = [((col >> s) & 255) / 255 for s in (16, 8, 0)]
@@ -80,6 +86,9 @@ class Part:
         return ('named', col, name)
 
     def _mid(self, col):
+        if isinstance(col, bpy.types.Material):  # pmat() or any custom material: col=wall_mat
+            if col.name not in self._mi: self._mi[col.name] = len(self.mats); self.mats.append(col)
+            return self._mi[col.name]
         if isinstance(col, tuple) and col[0] == 'named': return self._m(col[1], col[2])
         return self._m(col)
 
@@ -239,7 +248,8 @@ def export(path, objs=None):
             for c in o.children: sel(c)
         for o in objs: sel(o)
     bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', use_selection=objs is not None, export_extras=True,
-                              export_yup=True, export_apply=True, export_normals=True, export_texcoords=False,
+                              export_yup=True, export_apply=True, export_normals=True, export_texcoords=True,
+                              export_image_format='AUTO',
                               export_materials='EXPORT', export_animations=False, export_cameras=False, export_lights=False)
     print('wrote', path, os.path.getsize(path) // 1024, 'KB')
 
@@ -269,7 +279,7 @@ def preview(objs, path, yaw=35, pitch=25, size=900, ortho=False):
     cam_d.clip_end = rad * 20
     sc.camera = cam
     sc.render.engine = 'BLENDER_WORKBENCH'
-    sh = sc.display.shading; sh.light = 'STUDIO'; sh.color_type = 'MATERIAL'; sh.show_object_outline = True
+    sh = sc.display.shading; sh.light = 'STUDIO'; sh.color_type = 'TEXTURE'; sh.show_object_outline = False  # TEXTURE: baked image, else material colour
     sh.show_shadows = True
     sc.render.resolution_x = sc.render.resolution_y = size
     sc.render.filepath = path; sc.render.image_settings.file_format = 'PNG'
@@ -320,3 +330,136 @@ def footprint(x, z, r=25):
 
 def special():
     return json.load(open(os.path.join(WORLD, 'world.json'))).get('special', {})
+
+
+# ---------------- PS2 look: procedural paint, smooth shading, baked textures ----------------
+def _hex(col): return [((col >> k) & 255) / 255 for k in (16, 8, 0)]
+
+
+def pmat(name, col, kind='noise', col2=None, scale=1.0, grime=0.25, rough=1.0):
+    """Procedural "painted" material, baked into the texture by bake(). col/col2 0xRRGGBB, scale = pattern size in metres.
+    kind: 'noise' (mottled plaster/paint/fabric), 'brick' (col2 = mortar), 'stripes' (horizontal bands of col2, e.g. floor
+    lines, siding), 'planks', 'flat'. grime 0-1 darkens with large-scale blotches + streaks (weathering). Build your own
+    node trees for anything else (windows, faces, signs): bake() reads whatever ends up in Base Color."""
+    m = bpy.data.materials.new(name); m.use_nodes = True
+    nt = m.node_tree; N = nt.nodes; L = nt.links
+    bsdf = next(n for n in N if n.type == 'BSDF_PRINCIPLED'); bsdf.inputs['Roughness'].default_value = rough
+    tc = N.new('ShaderNodeTexCoord'); mp = N.new('ShaderNodeMapping'); L.new(tc.outputs['Object'], mp.inputs['Vector'])
+    mp.inputs['Scale'].default_value = (1 / scale, 1 / scale, 1 / scale)
+    c1 = (*_hex(col), 1); c2 = (*_hex(col2 if col2 is not None else col), 1)
+    if kind == 'brick':
+        t = N.new('ShaderNodeTexBrick'); L.new(mp.outputs['Vector'], t.inputs['Vector'])
+        t.inputs['Color1'].default_value = c1; t.inputs['Color2'].default_value = tuple(v * .85 for v in c1[:3]) + (1,)
+        t.inputs['Mortar'].default_value = c2; t.inputs['Scale'].default_value = 4; t.inputs['Mortar Size'].default_value = .015
+        out = t.outputs['Color']
+    elif kind in ('stripes', 'planks'):
+        t = N.new('ShaderNodeTexWave'); t.bands_direction = 'Z'; L.new(mp.outputs['Vector'], t.inputs['Vector'])
+        t.inputs['Scale'].default_value = 1.0; t.inputs['Distortion'].default_value = 0 if kind == 'stripes' else 1.5
+        r = N.new('ShaderNodeValToRGB'); L.new(t.outputs['Fac'], r.inputs['Fac'])
+        r.color_ramp.elements[0].color = c2; r.color_ramp.elements[1].color = c1
+        r.color_ramp.elements[0].position = .08 if kind == 'stripes' else .4; r.color_ramp.elements[1].position = .12 if kind == 'stripes' else .6
+        out = r.outputs['Color']
+    elif kind == 'flat':
+        rgb = N.new('ShaderNodeRGB'); rgb.outputs[0].default_value = c1; out = rgb.outputs[0]
+    else:
+        t = N.new('ShaderNodeTexNoise'); L.new(mp.outputs['Vector'], t.inputs['Vector'])
+        t.inputs['Scale'].default_value = 6; t.inputs['Detail'].default_value = 6
+        r = N.new('ShaderNodeValToRGB'); L.new(t.outputs['Fac'], r.inputs['Fac'])
+        r.color_ramp.elements[0].color = tuple(v * .86 for v in c1[:3]) + (1,); r.color_ramp.elements[1].color = c1
+        r.color_ramp.elements[0].position = .35; r.color_ramp.elements[1].position = .65
+        if col2 is not None:  # second colour as sparse blotches
+            e = r.color_ramp.elements.new(.9); e.color = c2
+        out = r.outputs['Color']
+    if grime > 0:
+        g = N.new('ShaderNodeTexNoise'); L.new(tc.outputs['Object'], g.inputs['Vector']); g.inputs['Scale'].default_value = .35 / scale
+        g.inputs['Detail'].default_value = 3
+        gr = N.new('ShaderNodeValToRGB'); L.new(g.outputs['Fac'], gr.inputs['Fac'])
+        gr.color_ramp.elements[0].color = (1 - .45 * grime,) * 3 + (1,); gr.color_ramp.elements[0].position = .45
+        gr.color_ramp.elements[1].color = (1, 1, 1, 1); gr.color_ramp.elements[1].position = .62
+        mx = N.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs['Factor'].default_value = 1
+        L.new(out, mx.inputs['A']); L.new(gr.outputs['Color'], mx.inputs['B']); out = mx.outputs['Result']
+    L.new(out, bsdf.inputs['Base Color'])
+    m.diffuse_color = c1
+    return m
+
+
+def smooth(o, angle=40):
+    """Weld coincident vertices (Part writes a face soup) and smooth-shade, keeping edges sharper than `angle` degrees."""
+    bm = bmesh.new(); bm.from_mesh(o.data)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
+    bm.to_mesh(o.data); bm.free()
+    o.data.shade_smooth(); o.data.set_sharp_from_angle(angle=math.radians(angle))
+    return o
+
+
+def _meshes(objs):
+    out = []
+    def walk(o):
+        if o.type == 'MESH' and o not in out: out.append(o)
+        for c in o.children: walk(c)
+    for o in objs: walk(o)
+    return out
+
+
+def bake(objs, size=256, name=None, ao=0.75, ao_dist=None, smooth_angle=40, margin=3, samples=24, unwrap=True, jpeg=True):
+    """Bake the PS2 texture for objs (and their mesh children) into ONE size×size image shared by all of them:
+    weld + smooth (smooth_angle=None to skip), smart-UV-unwrap together (unwrap=False keeps your UVs), bake Base Color and
+    ambient occlusion, multiply (ao = strength 0-1, ao_dist = AO reach in metres, default ~5% of the group size), store the
+    result as a packed JPEG/PNG image and rewire every material on these meshes to that texture (names kept, base colour
+    white). Returns the image. Bake each model or each shared-atlas group separately."""
+    import numpy as np
+    ms = _meshes(objs)
+    if not ms: return None
+    sc = bpy.context.scene
+    name = name or ms[0].name + '_tex'
+    if smooth_angle is not None:
+        for o in ms: smooth(o, smooth_angle)
+    bpy.ops.object.select_all(action='DESELECT')
+    for o in ms: o.select_set(True)
+    bpy.context.view_layer.objects.active = ms[0]
+    if unwrap:
+        bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT')
+        bpy.ops.uv.smart_project(angle_limit=math.radians(60), island_margin=0.004, area_weight=0.0, scale_to_bounds=False)
+        bpy.ops.uv.pack_islands(margin=0.004)
+        bpy.ops.object.mode_set(mode='OBJECT')
+    img = bpy.data.images.new(name, size, size, alpha=False)
+    img.colorspace_settings.name = 'Non-Color'  # raw values = the hex colours (game loads textures as linear)
+    mats = []
+    for o in ms:
+        for m in o.data.materials:
+            if m and m not in mats: mats.append(m)
+    for m in mats:
+        m.use_nodes = True
+        n = m.node_tree.nodes.new('ShaderNodeTexImage'); n.image = img; n.name = '_bake'; m.node_tree.nodes.active = n
+    sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = samples
+    sc.render.bake.margin = margin
+    if not sc.world: sc.world = bpy.data.worlds.new('w')
+    if ao_dist is None:
+        pts = [o.matrix_world @ Vector(c) for o in ms for c in o.bound_box]
+        ext = max(max(p[i] for p in pts) - min(p[i] for p in pts) for i in range(3))
+        ao_dist = max(.15, ext * .05)
+    sc.world.light_settings.distance = ao_dist
+    def run(kind, **kw):
+        bpy.ops.object.bake(type=kind, use_clear=True, margin=margin, **kw)
+        a = np.empty(size * size * 4, np.float32); img.pixels.foreach_get(a); return a.reshape(size, size, 4)
+    col = run('DIFFUSE', pass_filter={'COLOR'})
+    if ao > 0:
+        occ = run('AO')
+        col[..., :3] *= (1 - ao * (1 - occ[..., :3]))
+    col[..., 3] = 1
+    img.pixels.foreach_set(col.ravel())
+    import tempfile
+    img.file_format = 'JPEG' if jpeg else 'PNG'
+    img.filepath_raw = os.path.join(tempfile.gettempdir(), name + ('.jpg' if jpeg else '.png'))
+    img.save(); img.pack()
+    for m in mats:  # rewire: Image → Base Color, nothing else (glTF: baseColorTexture, factor 1)
+        nt = m.node_tree; N = nt.nodes
+        for n in list(N):
+            if n.name != '_bake': N.remove(n)
+        tex = N['_bake']; bsdf = N.new('ShaderNodeBsdfPrincipled'); out = N.new('ShaderNodeOutputMaterial')
+        bsdf.inputs['Roughness'].default_value = 1.0
+        nt.links.new(tex.outputs['Color'], bsdf.inputs['Base Color']); nt.links.new(bsdf.outputs['BSDF'], out.inputs['Surface'])
+        m.diffuse_color = (1, 1, 1, 1)
+    sc.render.engine = 'BLENDER_WORKBENCH'
+    print('baked', name, size, 'px,', len(ms), 'meshes,', len(mats), 'materials, ao_dist %.2f' % ao_dist)
+    return img

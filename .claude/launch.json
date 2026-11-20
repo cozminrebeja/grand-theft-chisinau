@@ -1,6 +1,24 @@
 {
   "version": "0.0.1",
   "configurations": [
-    {"name": "game", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "8000"], "port": 8000}
+    {
+      "name": "game",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8000"
+      ],
+      "port": 8000
+    },
+    {
+      "name": "game-8001",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "python3 -m http.server ${PORT:-8001}"
+      ],
+      "port": 8001
+    }
   ]
 }

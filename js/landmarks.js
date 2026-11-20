@@ -9,7 +9,7 @@
 //  - geometry is relative to (x, base, z), base = lowest ground under `base` (default fp[0]): the uphill side embeds, nothing floats;
 //  - fp rings ([[x,z],...] world metres) become colliders of height hs[i] (default h);
 //  - skip = vertex-mean centroids of the generic OSM footprints the model replaces (removed from facades.js via LANDMARK_SKIP).
-// All landmarks bake into ONE vertex-coloured mesh (1 draw call).
+// Each landmark carries one baked texture (lp.bake): one draw call per landmark texture.
 const lm_BASE={};
 function lm_ccw(r){return sArea(r)<0?r.slice().reverse():r;}
 function lm_glbList(){const r=MDL.landmarks;return r?r.children.filter(o=>o.userData&&o.userData.lm).map(o=>[o,o.userData._lm||(o.userData._lm=JSON.parse(o.userData.lm))]):[];}
@@ -23,6 +23,10 @@ function lm_glbColliders(){if(lm_colDone)return;lm_colDone=true;
     const b=lm_glbBase(e);for(let i=n0;i<polys.length;i++)polys[i].y0=b;}}
 // world.js calls landmarksPreBuild() once before any tile is built, so vegetation/agents/streets avoid the colliders
 function landmarksPreBuild(){try{lm_glbColliders();}catch(e){console.error('lm colliders',e);}}
+// GLTFLoader decodes one THREE.Texture per glTF texture entry even when they share an image, so a landmark whose baked
+// materials were not collapsed would split into several meshes: within a landmark, maps of the same size are one bake image.
+function lm_oneTex(o){const by=new Map();o.traverse(n=>{const mt=n.isMesh&&n.material;if(!mt||!mt.map)return;const im=mt.map.image,k=im?im.width+'x'+im.height:'';
+  if(!by.has(k))by.set(k,mt.map);mt.map=by.get(k);});}
+// one merged Lambert mesh per landmark texture (untextured flat-colour parts share the vertex-colour material)
 function buildLandmarks(){landmarksPreBuild();
-  const bk=new Bk(VC);for(const [o,e] of lm_glbList())mdl_bake(o,bk,M(e.x,lm_glbBase(e),e.z));
-  if(bk.p.length){const m=bk.mesh();m.name='landmarks';m.castShadow=m.receiveShadow=true;scene.add(m);}}
+  for(const [o,e] of lm_glbList()){lm_oneTex(o);for(const m of mdl_meshes(o,M(e.x,lm_glbBase(e),e.z))){m.name='lm_'+o.name;m.castShadow=m.receiveShadow=true;scene.add(m);}}}
