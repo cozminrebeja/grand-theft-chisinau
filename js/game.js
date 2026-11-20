@@ -61,7 +61,7 @@ function collideVehicle(v){let tx=0,tz=0,hit=false,other=null,wall=false;const c
     for(const [x,z,r] of cs)for(const [ox,oz,orr] of circles(o)){const dx=x-ox,dz=z-oz,d=Math.hypot(dx,dz),m=r+orr;
       if(d<m&&d>1e-4){const k=(m-d)/d;if(o.mode==='chase'||(o.mode==='parked'&&o.spec.len<7)){tx+=dx*k*.5;tz+=dz*k*.5;o.x-=dx*k*.5;o.z-=dz*k*.5;}else{tx+=dx*k;tz+=dz*k;}hit=true;other=o;}}}
   if(hit){v.x+=tx;v.z+=tz;const imp=Math.abs(v.speed),newCar=!wall&&other!==v.lastHit; // car contact: -10% once per new contact, not per substep/frame while overlapping
-    if(wall||newCar){if(wall)v.speed*=imp>4?.7:.925;else v.speed*=.9;if(imp>4&&v===player.car){shake=Math.min(1,imp/(wall?25:40));if(imp>9)crashSnd(imp);hook('fxEvent','crash',{x:v.x,z:v.z,imp,v});}}}
+    if(wall||newCar){if(wall)v.speed*=imp>4?.7:.925;else v.speed*=.9;if(imp>4&&v===player.car){shake=Math.min(1,imp/(wall?25:40));if(imp>9)crashSnd(imp);hook('fxEvent','crash',{x:v.x,z:v.z,imp,v});hook('carcareCrash',v,imp);}}}
   v.lastHit=other;
   v.x=clamp(v.x,BX0,BX1);v.z=clamp(v.z,BZ0,BZ1);return other;}
 
@@ -177,7 +177,7 @@ const DISTRICTS=(D.districts||[]).map(([name,flat])=>{const ring=dec(flat);let x
 function districtAt(x,z){for(const d of DISTRICTS)if(x>=d.x0&&x<=d.x1&&z>=d.z0&&z<=d.z1&&pip(x,z,d.ring))return d.name;return null;}
 
 // ================= enter / exit =================
-function toggleCar(){if(hook('storeInside')||hook('airportInside')||hook('bemolBusy'))return;
+function toggleCar(){if(hook('carcareAction'))return;if(hook('storeInside')||hook('airportInside')||hook('bemolBusy'))return;
   if(player.mode==='foot'){let best=null,bd=1e9;for(const v of vehicles){if(Math.abs(v.x-player.x)>10||Math.abs(v.z-player.z)>10)continue;const d=segDist(v,player.x,player.z)-v.spec.wid/2;if(d<bd){bd=d;best=v;}}
     if(!best||bd>2.6)return;const v=best;
     if(v.driver){const p=peds.reduce((a,b)=>Math.hypot(b.x-player.x,b.z-player.z)>Math.hypot(a.x-player.x,a.z-player.z)?b:a);p.a.x=v.x+Math.cos(v.h)*2;p.a.z=v.z-Math.sin(v.h)*2;p.x=p.a.x;p.z=p.a.z;p.flee=4;
@@ -190,7 +190,7 @@ function toggleCar(){if(hook('storeInside')||hook('airportInside')||hook('bemolB
 function wireInfo(v){const ns=nearestSeg(v.x,v.z,14,s=>s.r.tw);if(!ns)return false;const s=ns.s,dx=s.b[0]-s.a[0],dz=s.b[1]-s.a[1],l=Math.hypot(dx,dz);
   if(Math.abs(Math.sin(v.h)*dx/l+Math.cos(v.h)*dz/l)<.8)return false;const nPer=s.r.ow?Math.max(1,Math.round(s.r.w/3.3)):Math.max(1,Math.floor(s.r.w/2/3));
   const o=s.r.ow?Math.abs(-s.r.w/2+(nPer-.5)*s.r.w/nPer):(nPer-.5)*(s.r.w/2)/nPer;return Math.abs(ns.d-o)<2.2;}
-function drive(v,dt,inp){const sp=v.spec;let max=sp.max;if(v.type==='trolley'){v.wire=wireInfo(v);if(!v.wire)max*=.5;}const t=inp.t;
+function drive(v,dt,inp){const sp=v.spec;let max=sp.max;if(v.type==='trolley'){v.wire=wireInfo(v);if(!v.wire)max*=.5;}const cm=hook('carcareDrive',v,dt,inp);if(cm)max*=cm.max;const t=inp.t*(cm?cm.t:1);
   if(t>.05){if(v.speed<-.5)v.speed+=sp.brake*t*dt;else v.speed+=sp.acc*t*dt*Math.max(0,1-Math.max(0,v.speed)/max);}
   else if(t<-.05){if(v.speed>.5)v.speed+=sp.brake*t*dt;else v.speed+=sp.acc*.7*t*dt*Math.max(0,1-Math.max(0,-v.speed)/(max*.35));}
   else v.speed-=Math.sign(v.speed)*Math.min(Math.abs(v.speed),(Math.abs(v.speed)<1.5&&Math.abs(v.grade||0)<.045?3:.45+.0012*v.speed*v.speed)*dt); // rolling resistance + air drag; parked-ish on gentle slopes
@@ -415,7 +415,7 @@ function updTrolleyStation(){const v=player.car;if(!v||v.type!=='trolley'||Math.
 function v_steerTrack(dt,inp){for(const v of vehicles){if(v===player.car)v.steer=inp.s;else{const h0=v._ph==null?v.h:v._ph;v.steer=clamp(-angDiff(v.h,h0)/Math.max(dt,1e-3)/1.5,-1,1);}v._ph=v.h;}}
 // ================= main loop =================
 // small API for side modules (Linella store interior)
-window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v}};
+window.gtcApi={player,camPos,addStar,say,get camYaw(){return camYaw},set camYaw(v){camYaw=v},get camPitch(){return camPitch},get money(){return money},set money(v){money=v},set shake(v){shake=Math.max(shake,v)}};
 await progress('JOACĂ');playBtn.disabled=false;
 let last=performance.now(),titleT=0,parkT=0,mapT=0;
 // frame cap (pause menu → Setări): renders at most fpsCap frames/s; 0 = unlimited (monitor refresh rate)
@@ -429,7 +429,7 @@ function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsC
   else if(!started){titleT+=dt*.06;const cx=SAVE?player.x:arcP[0]+60,cz=SAVE?player.z:arcP[1]-60;{const ox=cx+Math.sin(titleT)*260,oz=cz+Math.cos(titleT)*260;camera.position.set(ox,Math.max(groundY(ox,oz),groundY(cx,cz))+140,oz);camera.lookAt(cx,groundY(cx,cz)+10,cz);}envUpdate(dt);worldUpdate(dt,player.x,player.z);}
   else{const inp=input();window.gtcInput=inp;const inStore=(player.mode==='foot'&&hook('storeUpdate',dt,inp))||hook('airportUpdate',dt,inp);const seated=!inStore&&player.mode==='foot'&&hook('bemolSeat');if(inStore||seated){}else if(player.mode==='foot')updFoot(dt,inp);else{drive(player.car,dt,inp);player.x=player.car.x;player.z=player.car.z;player.h=player.car.h;}
     for(const v of vehicles)if(v.mode==='chase')updChase(v,dt);
-    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
+    window.gtcPlayer=player;worldUpdate(dt,player.x,player.z);parkT-=dt;if(parkT<=0){parkT=1;updParked();}v_steerTrack(dt,inp);updWanted(dt);updMission(dt);gpsUpdate(dt);hook('bemolUpdate',dt,player,say);hook('carcareUpdate',dt,player);hook('linellaUpdate');hook('fxUpdate',dt);saveT-=dt;if(saveT<=0){saveT=4;saveGame();}updTrolleyStation();if(!inStore)updCamera(dt);updHUD(dt);mapT-=dt;if(mapT<=0){mapT=1/30;drawMap();}engineUpdate();
     if(msgT>0){msgT-=dt;if(msgT<=0)$('msg').style.opacity=0;}if(bustShow>0){bustShow-=dt;if(bustShow<=0)$('busted').style.opacity=0;}
     if(mission){const mk=mission.stage==='pickup'?mkP:mkD;mk.children[0].material.opacity=.22+Math.sin(now/200)*.08;}}
   for(const v of vehicles)if(v.poles)updPoles(v,dt);
