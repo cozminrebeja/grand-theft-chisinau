@@ -138,10 +138,10 @@ function fac_material(atlas){
   const mat=new THREE.MeshLambertMaterial({map:atlas.tex,vertexColors:true});
   const pad=(4/FAC_A).toFixed(6),w2=renderer.capabilities.isWebGL2;
   mat.onBeforeCompile=sh=>{
-    sh.uniforms.facMask={value:atlas.mask};
+    sh.uniforms.facMask={value:atlas.mask};sh.uniforms.uNight=env_nightU;sh.uniforms.uSunD=env_skyU.uSun;
     sh.vertexShader='attribute vec4 atl;\nvarying vec4 vAtl;\nvarying vec3 vFacWP;\nvarying vec3 vFacN;\n'+sh.vertexShader.replace('#include <begin_vertex>',
       '#include <begin_vertex>\nvAtl=atl;vec4 facWP4=modelMatrix*vec4(transformed,1.0);vFacWP=facWP4.xyz;vFacN=normalize(mat3(modelMatrix)*objectNormal);');
-    sh.fragmentShader='uniform sampler2D facMask;\nvarying vec4 vAtl;\nvarying vec3 vFacWP;\nvarying vec3 vFacN;\n'+sh.fragmentShader
+    sh.fragmentShader='uniform sampler2D facMask;\nuniform float uNight;\nuniform vec3 uSunD;\nvarying vec4 vAtl;\nvarying vec3 vFacWP;\nvarying vec3 vFacN;\n'+sh.fragmentShader
       .replace('#include <map_fragment>',`
   vec2 fT=vUv;vec2 fF=fract(fT);vec2 fP=vec2(${pad});vec2 fA=vAtl.xy+fP+fF*(vAtl.zw-2.0*fP);
   ${w2?'vec2 fGx=dFdx(fT)*vAtl.zw,fGy=dFdy(fT)*vAtl.zw;vec4 fC=textureGrad(map,fA,fGx,fGy);vec4 fM=textureGrad(facMask,fA,fGx,fGy);':'vec4 fC=texture2D(map,fA);vec4 fM=texture2D(facMask,fA);'}
@@ -153,10 +153,13 @@ function fac_material(atlas){
    float fres=0.18+0.82*pow(1.0-clamp(dot(-V,N),0.0,1.0),3.0);
    vec3 sky=mix(vec3(0.70,0.76,0.80),vec3(0.36,0.55,0.80),clamp(Rf.y*1.6,0.0,1.0));
    sky=mix(vec3(0.22,0.23,0.22),sky,smoothstep(-0.12,0.06,Rf.y));
-   float sun=pow(max(dot(Rf,normalize(vec3(-0.62,0.52,0.58))),0.0),80.0)*2.5;
-   outgoingLight=mix(outgoingLight,sky*0.85+sun,facGlass*fres*0.7);}`);
+   float sun=pow(max(dot(Rf,uSunD),0.0),80.0)*2.5*(1.0-uNight);
+   outgoingLight=mix(outgoingLight,(sky*0.85*(1.0-0.88*uNight))+sun,facGlass*fres*0.7);
+   // night: ~40% of windows lit warm (hash per window cell + building colour)
+   vec2 wc=floor(fT)+vColor.rg*97.0;float lit=step(0.6,fract(sin(dot(wc,vec2(12.9898,78.233)))*43758.5453));
+   outgoingLight+=vec3(1.0,0.74,0.42)*facGlass*lit*uNight*0.85;}`);
   };
-  mat.customProgramCacheKey=()=>'facades_v1';
+  mat.customProgramCacheKey=()=>'facades_v2';
   return mat;
 }
 

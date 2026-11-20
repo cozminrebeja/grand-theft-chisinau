@@ -115,6 +115,11 @@ function veh_init(){if(veh_ready)return;veh_ready=true;
 const veh_glowTex=ctex(64,64,g=>{const gr=g.createRadialGradient(32,32,2,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,255,255,.55)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);},false);
 const veh_lampIM=new THREE.InstancedMesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:veh_glowTex,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}),700);
 veh_lampIM.frustumCulled=false;veh_lampIM.instanceMatrix.setUsage(THREE.DynamicDrawUsage);veh_lampIM.setColorAt(0,veh_c.set(0));veh_lampIM.count=0;veh_lampIM.renderOrder=3;scene.add(veh_lampIM);
+// headlight beams on the road at night: additive fan decal in car space ahead of each moving car (no real lights: Lambert is per-vertex)
+const veh_beamTex=ctex(64,128,(g,w,h)=>{const im=g.createImageData(w,h);for(let y=0;y<h;y++)for(let x=0;x<w;x++){const t=y/h,u=Math.abs(x/(w-1)*2-1),half=.32+.68*t;
+  const a=Math.pow(1-t,1.3)*clamp((half-u)/(.35*half),0,1)*clamp(t*6,0,1),i=(y*w+x)*4;im.data[i]=im.data[i+1]=im.data[i+2]=255;im.data[i+3]=a*255;}g.putImageData(im,0,0);},false);
+const veh_beamIM=new THREE.InstancedMesh(new THREE.PlaneGeometry(1,1).rotateX(-Math.PI/2),new THREE.MeshBasicMaterial({map:veh_beamTex,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-4}),120);
+veh_beamIM.frustumCulled=false;veh_beamIM.instanceMatrix.setUsage(THREE.DynamicDrawUsage);veh_beamIM.setColorAt(0,veh_c.set(0));veh_beamIM.count=0;veh_beamIM.renderOrder=2;scene.add(veh_beamIM);
 // blob shadows
 const veh_blobIM=new THREE.InstancedMesh(new THREE.PlaneGeometry(1,1).rotateX(-Math.PI/2),blobMat,700);veh_blobIM.frustumCulled=false;veh_blobIM.instanceMatrix.setUsage(THREE.DynamicDrawUsage);veh_blobIM.count=0;scene.add(veh_blobIM);
 
@@ -168,7 +173,7 @@ function veh_ground(v,dt){const W=v.veh_pool.d.wheel,zf=W.zf,zr=W.zr,hw=v.spec.w
 function renderVehicles(dt){dt=dt||0.016;if(!veh_ready)return;
   camera.updateMatrixWorld();veh_pmx.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);veh_fr.setFromProjectionMatrix(veh_pmx);
   const cx=camera.position.x,cz=camera.position.z,now=performance.now(),flash=(now/140|0)%2,flash2=(now/70|0)%4===0;
-  for(const k in VEH_POOL){const P=VEH_POOL[k];P.nk=P.fk=P.wk=0;}veh_lk=0;let bk=0,blk=0,pk=0;
+  for(const k in VEH_POOL){const P=VEH_POOL[k];P.nk=P.fk=P.wk=0;}veh_lk=0;let bk=0,blk=0,pk=0,bmk=0;const hl=env_lightsU.value;
   for(const v of vehicles){const sp=v.speed||0,P=v.veh_pool,d=P.d;v.veh_rot+=sp*dt/d.wheel.r;
     const acc=(sp-v.veh_ps)/Math.max(dt,1e-3);v.veh_ps=sp;const moving=v.mode!=='parked';
     const want=moving&&(acc<-1.2||(Math.abs(sp)<.4&&v.mode!=='player')||(v.mode==='player'&&Math.abs(sp)<.4))?1:0;v.veh_brk+=(want-v.veh_brk)*Math.min(1,dt*12);
@@ -185,8 +190,10 @@ function renderVehicles(dt){dt=dt||0.016;if(!veh_ready)return;
     if(blk<700){veh_m5.compose(veh_tp.set(v.x,v.y+.055,v.z),veh_qq,veh_ts.set(v.spec.wid*1.45,1,v.spec.len*1.12));veh_blobIM.setMatrixAt(blk++,veh_m5);}
     if(v.poles&&pk<60)for(let i=0;i<v.poles.length;i++){const pv=d.poles[i];veh_m5.compose(veh_tp.set(pv[0],pv[1],pv[2]),veh_qs.setFromAxisAngle(veh_X,v.poles[i].rotation.x),veh_one);veh_m5.premultiply(veh_m4);veh_poleIM.setMatrixAt(pk++,veh_m5);}
     if(d2<veh_NEAR2*3){const b=v.veh_brk,rev=sp<-.3,big=v.spec.len>7?1.4:1;
-      for(const t of d.tail){const k=.22+b*1.0;veh_lamp(veh_m4,t[0],t[1],t[2],(.36*k+.12)*big,(.22*k+.1)*big,rev?0xbfbfbf:veh_c.setRGB(.95*k,.07*k,.05*k).getHex(),Math.PI);}
-      if(moving)for(const t of d.head)veh_lamp(veh_m4,t[0],t[1],t[2],.32*big,.2*big,0x5a5548,0);}
+      for(const t of d.tail){const k=.22+b*1.0+hl*.3;veh_lamp(veh_m4,t[0],t[1],t[2],(.36*k+.12)*big,(.22*k+.1)*big,rev?0xbfbfbf:veh_c.setRGB(.95*k,.07*k,.05*k).getHex(),Math.PI);}
+      if(moving){const hs=1+hl*1.6,hc=veh_c.setRGB(.35+.65*hl,.33+.62*hl,.28+.52*hl).getHex();for(const t of d.head)veh_lamp(veh_m4,t[0],t[1],t[2],.32*big*hs,.2*big*hs,hc,0);
+        if(hl>.01&&bmk<120&&(d2<veh_NEAR2||v.mode==='player')){const L=v.spec.len,bl=big>1?20:16;veh_m5.compose(veh_tp.set(0,.14,L/2+bl/2-.2),veh_qs.identity(),veh_ts.set(v.spec.wid*3.4,1,bl));veh_m5.premultiply(veh_m4);
+          veh_beamIM.setMatrixAt(bmk,veh_m5);veh_beamIM.setColorAt(bmk++,veh_c.setRGB(.5*hl,.46*hl,.36*hl));}}}
     if(d.bar&&bk<60){const [bx,by,bz]=d.bar;veh_barIM.setMatrixAt(bk,veh_m4);
       const ch=v.mode==='chase';veh_barIM.setColorAt(bk,ch?veh_c.setRGB(flash?1:.15,flash?.4:.4,flash?.15:1):veh_c.setRGB(.35,.35,.35));bk++;
       if(ch){const red=flash;veh_lamp(veh_m4,red?bx-.31:bx+.31,by,bz,2.2,1.4,red?0xff2020:0x2060ff,0);veh_lamp(veh_m4,red?bx-.31:bx+.31,by,bz,2.2,1.4,red?0xff2020:0x2060ff,Math.PI);
@@ -196,7 +203,8 @@ function renderVehicles(dt){dt=dt||0.016;if(!veh_ready)return;
   veh_poleIM.count=pk;veh_poleIM.instanceMatrix.needsUpdate=true;
   veh_lampIM.count=veh_lk;veh_lampIM.instanceMatrix.needsUpdate=true;if(veh_lampIM.instanceColor)veh_lampIM.instanceColor.needsUpdate=true;
   veh_barIM.count=bk;veh_barIM.instanceMatrix.needsUpdate=true;if(veh_barIM.instanceColor)veh_barIM.instanceColor.needsUpdate=true;
-  veh_blobIM.count=blk;veh_blobIM.instanceMatrix.needsUpdate=true;}
+  veh_blobIM.count=blk;veh_blobIM.instanceMatrix.needsUpdate=true;
+  veh_beamIM.count=bmk;veh_beamIM.instanceMatrix.needsUpdate=true;if(veh_beamIM.instanceColor)veh_beamIM.instanceColor.needsUpdate=true;}
 window.veh_stats=()=>{if(!veh_ready)return null;let t=0,calls=0;for(const k in VEH_POOL){const P=VEH_POOL[k];t+=P.near.count*veh_TRIS[k][0]+P.far.count*veh_TRIS[k][1]+P.wheel.count*veh_TRIS[k][2];calls+=(P.near.count?1:0)+(P.far.count?1:0)+(P.wheel.count?1:0);}
   t+=veh_poleIM.count*veh_poleIM.geometry.attributes.position.count/3;calls+=(veh_poleIM.count?1:0)+(veh_barIM.count?1:0)+(veh_lampIM.count?1:0)+(veh_blobIM.count?1:0);
   return {frameVehicleTris:Math.round(t),approxCalls:calls,model:veh_TRIS};};

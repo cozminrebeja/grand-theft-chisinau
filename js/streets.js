@@ -287,8 +287,9 @@ function st_free(x,z,r){if(solidAt(x,z,.5))return false;const ns=nearestSeg(x,z,
 let st_globalDone=false,st_TILE=500;
 const st_tileSegs=new Map();   // tile key -> [[road, segIndex], ...]
 const st_tileNodes=new Map();  // tile key -> [junction node, ...]
-const st_POLES=false; // street lamps + trolley catenary poles (and their cross-span wires) switched off; contact wires stay
-let st_lampMat=null,st_glassMat=null,st_wireMat=null,st_waterMat=null,st_kioskMat=null;
+const st_POLES=false; // trolley catenary poles (and their cross-span wires) switched off; contact wires stay. Street lamps: st_LAMPS
+const st_LAMPS=true; // street lamps (also on trolley roads while their catenary poles are off); lens glows + light pool on the road at night
+let st_poolMat=null,st_lampMat=null,st_glassMat=null,st_wireMat=null,st_waterMat=null,st_kioskMat=null;
 let st_curF=null,st_curGlass=null;
 function st_f(x,z){return st_curF;}
 // deterministic small RNG + string hash (tile keys, road/node ids)
@@ -313,20 +314,26 @@ const N=['FLORI','ZIARE','CAFEA','COVRIGI','LOTO','SUCURI','ÎNGHEȚATĂ','TUTUN
     g.fillStyle='#d6d2c8';g.fillRect(x0+14,y0+180,228,10);g.fillStyle='#bdb8ad';g.fillRect(x0,y0+190,256,66);g.fillStyle='#8b867c';g.fillRect(x0+120,y0+200,16,40);}
   return c;}
 function st_waterMaterial(){const m=new THREE.MeshPhongMaterial({color:0x2f6f8f,specular:0xcfe6f2,shininess:120,transparent:true,opacity:.93});
-  m.onBeforeCompile=sh=>{sh.uniforms.uTime=st_waterUni.uTime;
+  m.onBeforeCompile=sh=>{sh.uniforms.uTime=st_waterUni.uTime;sh.uniforms.uWSky=env_skyU.uMid;
     sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vStW;').replace('#include <worldpos_vertex>','#include <worldpos_vertex>\nvStW=(modelMatrix*vec4(transformed,1.0)).xyz;');
-    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vStW;\nuniform float uTime;').replace('#include <normal_fragment_begin>',`#include <normal_fragment_begin>
+    sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nvarying vec3 vStW;\nuniform float uTime;\nuniform vec3 uWSky;').replace('#include <normal_fragment_begin>',`#include <normal_fragment_begin>
       vec2 sp=vStW.xz;float t=uTime;
       vec3 rn=vec3(sin(sp.x*.37+t*1.3)*.5+sin(sp.y*.53-t*1.05)*.35+sin((sp.x+sp.y)*1.3+t*2.3)*.18+sin((sp.x*2.7-sp.y*1.9)+t*3.1)*.08,0.,
                    cos(sp.y*.41+t*1.2)*.5+cos(sp.x*.61-t*.9)*.35+cos((sp.x-sp.y)*1.1-t*1.9)*.18+cos((sp.y*2.3+sp.x*1.7)-t*2.7)*.08)*.16;
       normal=normalize(normal+(viewMatrix*vec4(rn,0.)).xyz);`).replace('#include <dithering_fragment>',`#include <dithering_fragment>
-      float fr=pow(1.0-abs(dot(normalize(vViewPosition),normal)),3.0);gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(.62,.76,.86),fr*.55);`);};
+      float fr=pow(1.0-abs(dot(normalize(vViewPosition),normal)),3.0);gl_FragColor.rgb=mix(gl_FragColor.rgb,uWSky,fr*.55);`);};
   m.customProgramCacheKey=()=>'st_water';return m;}
 
 function buildStreetsGlobal(){
   if(st_globalDone)return;st_globalDone=true;st_TILE=(typeof WORLD!=='undefined'&&WORLD.T)||D.tile||500;
   st_makeMat();st_TPL=st_templates();
   st_lampMat=new THREE.MeshLambertMaterial({vertexColors:true});
+  st_lampMat.onBeforeCompile=sh=>{sh.uniforms.uLights=env_lightsU;sh.fragmentShader='uniform float uLights;\n'+sh.fragmentShader.replace('#include <emissivemap_fragment>',
+    '#include <emissivemap_fragment>\n if(vColor.r>0.97&&vColor.b>0.7&&vColor.b<0.85)totalEmissiveRadiance+=vec3(1.4,1.15,0.75)*uLights;');}; // lens (0xfff0c4)
+  st_lampMat.customProgramCacheKey=()=>'st_lamp1';
+  // light pool under each lamp; colour/visibility driven by env_tod (env.js)
+  st_poolMat=new THREE.MeshBasicMaterial({map:ctex(64,64,g=>{const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.45,'rgba(255,255,255,.5)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);},false),
+    color:0,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-4,visible:false});
   st_glassMat=new THREE.MeshPhongMaterial({vertexColors:true,transparent:true,opacity:.32,shininess:90,specular:0xffffff,depthWrite:false,side:THREE.DoubleSide});
   st_wireMat=new THREE.LineBasicMaterial({color:0x1d1d1d});st_waterMat=st_waterMaterial();
   {const tex=new THREE.CanvasTexture(st_kioskTexture());tex.anisotropy=8;st_kioskMat=new THREE.MeshLambertMaterial({map:tex,vertexColors:true});}
@@ -391,7 +398,12 @@ const st_onBorder=(t,a,b)=>{const e=.06;return (Math.abs(a[0]-t.x0)<e&&Math.abs(
 function st_addRectPoly(x,z,w,d,ang,h,t){const c=Math.cos(ang),s=Math.sin(ang);const pts=[[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([a,b])=>[x+a*c+b*s,z-a*s+b*c]);if(sArea(pts)<0)pts.reverse();return addPoly([pts],h,t);}
 function st_lampMesh(kind,list,group){if(!list.length)return;const geo=st_TPL[kind].clone();const im=new THREE.InstancedMesh(geo,st_lampMat,list.length);let cx=0,cz=0;const _m=new THREE.Matrix4(),up=new THREE.Vector3(0,1,0);
   list.forEach(([x,z,ry],i)=>{_m.compose(_p.set(x,(kind==='lamp'?st_Y.SW-.17:0)+st_sy(x,z),z),_q.setFromAxisAngle(up,ry),_s.set(1,1,1));im.setMatrixAt(i,_m);cx+=x;cz+=z;});
-  cx/=list.length;cz/=list.length;let rad=0;for(const [x,z] of list)rad=Math.max(rad,Math.hypot(x-cx,z-cz));geo.boundingSphere=new THREE.Sphere(new THREE.Vector3(cx,5+st_gy(cx,cz),cz),rad+30);im.frustumCulled=true;group.add(im);}
+  cx/=list.length;cz/=list.length;let rad=0;for(const [x,z] of list)rad=Math.max(rad,Math.hypot(x-cx,z-cz));geo.boundingSphere=new THREE.Sphere(new THREE.Vector3(cx,5+st_gy(cx,cz),cz),rad+30);im.frustumCulled=true;im.userData.env_done=true;im.receiveShadow=true;group.add(im); // ponytail: no pole shadows (shadow pass cost); re-enable via castShadow if missed
+  // light pools: disc under the luminaire (arm reach 1.95 m / 1.85 m along +z), tilted to the ground slope
+  const reach=kind==='lamp'?1.95:1.85,pg=new THREE.PlaneGeometry(18,18).rotateX(-Math.PI/2),pm=new THREE.InstancedMesh(pg,st_poolMat,list.length),n=new THREE.Vector3();
+  list.forEach(([x,z,ry],i)=>{const px=x+Math.sin(ry)*reach,pz=z+Math.cos(ry)*reach,g=groundNormal(px,pz);n.set(g[0],g[1],g[2]);
+    _m.compose(_p.set(px,st_sy(px,pz)+.12,pz),_q.setFromUnitVectors(up,n),_s.set(1,1,1));pm.setMatrixAt(i,_m);});
+  pg.boundingSphere=new THREE.Sphere(geo.boundingSphere.center.clone(),rad+15);pm.renderOrder=2;group.add(pm);}
 
 function buildStreetsTile(t){
   buildStreetsGlobal();
@@ -487,10 +499,10 @@ function buildStreetsTile(t){
         st_quad(st_cur,[[p0[0]-ax,st_Y.ZEBRA,p0[1]-az,0,0],[p1[0]-ax,st_Y.ZEBRA,p1[1]-az,1,0],[p1[0]+ax,st_Y.ZEBRA,p1[1]+az,1,.4],[p0[0]+ax,st_Y.ZEBRA,p0[1]+az,0,.4]],[0,1,0],st_T.PAINT,cPaint);}}
     // ---- street lamps along drivable roads without trolley wires (spacing along the whole road) ----
     const lamps=[];
-    if(st_POLES)for(const [r,S] of RM){if(r.kind!==0||r.tw||r.w<4.5)continue;const rr=st_rng(r.idx*7919+1),both=r.w>=9.5,sp=r.w>=9.5?30:36;const tot=r.cum[r.cum.length-1];let flip=1;
+    if(st_LAMPS)for(const [r,S] of RM){if(r.kind!==0||(r.tw&&st_POLES)||r.w<4.5)continue;const rr=st_rng(r.idx*7919+1),both=r.w>=9.5,sp=r.w>=9.5?30:36;const tot=r.cum[r.cum.length-1];let flip=1;
       for(let s=8+rr()*8;s<tot-4;s+=sp){const sides=both?[1,-1]:[flip];flip=-flip;const P=st_pointAt(r,s);if(!S.has(P.i))continue;const nx=-P.uz,nz=P.ux;
         for(const sd of sides){const e=r.w/2+.55,x=P.x+nx*e*sd,z=P.z+nz*e*sd;if(!st_free(x,z,.25))continue;lamps.push([x,z,Math.atan2(-nx*sd,-nz*sd)]);}}}
-    if(st_POLES)st_lampMesh('lamp',lamps,grp);
+    if(st_LAMPS)st_lampMesh('lamp',lamps,grp);
     // ---- junction furniture: traffic lights (+mast arms, lenses), yield signs ----
     for(const N of nodes){const major=st_isMajor(N);const ref=N.arms[0];
       for(const A of N.arms){const oth=N.arms.filter(o=>o!==A);if(!oth.length)continue;const Ld=Math.max(...oth.map(o=>o.w/2))+2.2;const nx=A.uz,nz=-A.ux;const face=Math.atan2(A.ux,A.uz);

@@ -50,12 +50,12 @@ sun.shadow.bias=-0.00035;sun.shadow.normalBias=0.035;sun.shadow.radius=1.5;
 scene.add(sun);scene.add(sun.target);
 
 // ================= sky (shader dome: gradient + sun + glow + drifting clouds) =================
-const env_skyU={uSun:{value:env_sunDir.clone()},uTime:{value:0},uHor:{value:new THREE.Color(FOGC)},uZen:{value:new THREE.Color(0x5a8fd0)},uMid:{value:new THREE.Color(0x9bbde0)}};
+const env_skyU={uSun:{value:env_sunDir.clone()},uTime:{value:0},uNight:{value:0},uCloud:{value:new THREE.Color(0xffffff)},uHor:{value:new THREE.Color(FOGC)},uZen:{value:new THREE.Color(0x5a8fd0)},uMid:{value:new THREE.Color(0x9bbde0)}};
 const env_skyMat=new THREE.ShaderMaterial({uniforms:env_skyU,side:THREE.BackSide,depthWrite:false,fog:false,toneMapped:false,
   vertexShader:`varying vec3 vDir;void main(){vDir=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
   fragmentShader:`
   precision mediump float;
-  uniform vec3 uSun,uHor,uZen,uMid;uniform float uTime;varying vec3 vDir;
+  uniform vec3 uSun,uHor,uZen,uMid,uCloud;uniform float uTime,uNight;varying vec3 vDir;
   float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
   float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
   float fbm(vec2 p){float s=0.0,a=0.5;for(int i=0;i<${isTouch?3:5};i++){s+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=0.5;}return s;}
@@ -64,16 +64,19 @@ const env_skyMat=new THREE.ShaderMaterial({uniforms:env_skyU,side:THREE.BackSide
     float t=clamp(y,0.0,1.0);
     vec3 c=mix(uHor,uMid,smoothstep(0.0,0.18,t));c=mix(c,uZen,smoothstep(0.15,0.75,t));
     if(y<0.0)c=uHor*0.97;
-    float sd=max(dot(d,uSun),0.0);
-    c+=vec3(1.0,0.78,0.48)*pow(sd,8.0)*0.20;          // broad warm glow
-    c+=vec3(1.0,0.86,0.62)*pow(sd,64.0)*0.30;         // halo
-    c+=vec3(1.0,0.97,0.88)*smoothstep(0.9993,0.9997,sd)*1.15; // disc
+    float sd=max(dot(d,uSun),0.0),sk=smoothstep(-0.12,0.02,uSun.y);
+    c+=vec3(1.0,0.66,0.36)*pow(sd,8.0)*0.24*sk;          // broad warm glow
+    c+=vec3(1.0,0.80,0.55)*pow(sd,64.0)*0.30*sk;         // halo
+    c+=vec3(1.0,0.97,0.88)*smoothstep(0.9993,0.9997,sd)*1.15*smoothstep(-0.03,0.01,uSun.y); // disc
+    if(uNight>0.0&&y>0.0){                              // stars + moon (opposite the sun)
+      vec3 sp=floor(d*190.0);c+=vec3(0.85,0.9,1.0)*step(0.9972,h(sp.xy+sp.z*1.73))*uNight*smoothstep(0.02,0.25,y);
+      float md=max(dot(d,-uSun),0.0);c+=vec3(0.92,0.94,1.0)*(smoothstep(0.99955,0.99975,md)*0.9+pow(md,200.0)*0.12)*uNight;}
     // clouds on a virtual plane
     if(y>0.02){
       vec2 uv=d.xz/(y+0.08)*1.35+vec2(uTime*0.004,uTime*0.0015);
       float cl=fbm(uv);cl=smoothstep(0.52,0.82,cl)*smoothstep(0.02,0.22,y);
       vec3 cc=mix(vec3(0.98,0.95,0.90),vec3(1.0,0.88,0.70),pow(sd,4.0));
-      cc*=0.88+0.12*fbm(uv*2.0+3.0);
+      cc*=(0.88+0.12*fbm(uv*2.0+3.0))*uCloud;
       c=mix(c,cc,cl*0.85);
     }
     c=mix(c,uHor,smoothstep(0.10,0.0,abs(y))*0.55);   // horizon haze band
@@ -154,12 +157,44 @@ function env_scan(){scene.traverse(env_tagMesh);}
 function envPostBuild(){env_scan();}
 let env_scanT=0;
 
+// ================= day / night cycle (driven by game.js gameMin, 1 game minute per real second) =================
+// Sun from a simple solar model for Chișinău (lat 47°, declination 12°: sunrise ~5:35, sunset ~19:25, noon 55° high).
+// Palette keyed by sun height e (sin elevation). Each stop: [e, fog/horizon, zenith, mid sky, hemi sky, hemi ground, hemi I, light colour, light I, clouds].
+// Light below the horizon is the moon (opposite the sun). The 'day' stop is the original fixed afternoon look.
+const env_TOD=[
+  [-0.30,0x0f1522,0x02050e,0x0a1226,0x4a5c88,0x1e1e26,0.42,0x9fb4ff,0.26,0x141a28],
+  [-0.06,0x3a3a50,0x15204a,0x3e4270,0x8088b4,0x40383c,0.40,0x9fb4ff,0.00,0x4a4660],
+  [ 0.00,0xc98d70,0x34589a,0xb89892,0xb0a8c4,0x6a5848,0.44,0xff8040,0.00,0xf0a088],
+  [ 0.10,0xdcc2a4,0x4c7cc2,0xb6c0d2,0xc0cce0,0x7d6a52,0.48,0xffb46e,0.72,0xffe6cc],
+  [ 0.35,FOGC,    0x5a8fd0,0x9bbde0,0xc2d6ee,0x7d705a,0.50,0xffdcaa,0.86,0xffffff]].map(r=>r.map((v,i)=>[1,2,3,4,5,7,9].includes(i)?new THREE.Color(v):v));
+const env_LAT=47*Math.PI/180,env_DEC=12*Math.PI/180,env_FOG0=new THREE.Color(FOGC),env_tc=new THREE.Color();
+const env_nightU={value:0},env_dayU={value:1},env_lightsU={value:0}; // env_lightsU: street lamps / headlights on (0..1), from sunset // shared with facades (lit windows) / vehicles (reflections)
+let env_hour=-1,env_gameMin=17.5*60; // game.js updHUD writes the clock here (its gameMin is local to main())
+function env_tod(hour){
+  const H=(hour-12.5)/12*Math.PI,cl=Math.cos(env_LAT),sl=Math.sin(env_LAT),cd=Math.cos(env_DEC),sdc=Math.sin(env_DEC);
+  const up=sl*sdc+cl*cd*Math.cos(H),east=-cd*Math.sin(H),north=cl*sdc-sl*cd*Math.cos(H);
+  const sd=new THREE.Vector3(east,up,-north).normalize(),e=sd.y;env_skyU.uSun.value.copy(sd);
+  let k=0;while(k<env_TOD.length-2&&e>env_TOD[k+1][0])k++;const A=env_TOD[k],B=env_TOD[k+1],f=clamp((e-A[0])/(B[0]-A[0]),0,1);
+  const L=(i,out)=>out.copy(A[i]).lerp(B[i],f),N=i=>A[i]+(B[i]-A[i])*f;
+  L(1,scene.fog.color);scene.background.copy(scene.fog.color);env_skyU.uHor.value.copy(scene.fog.color);
+  L(2,env_skyU.uZen.value);L(3,env_skyU.uMid.value);L(9,env_skyU.uCloud.value);
+  L(4,env_hemi.color);L(5,env_hemi.groundColor);env_hemi.intensity=N(6);L(7,sun.color);sun.intensity=N(8);
+  env_amb.intensity=0.05*clamp(e*4+1,0.3,1);
+  const fc=scene.fog.color;env_hills.material.color.setRGB(fc.r/env_FOG0.r,fc.g/env_FOG0.g,fc.b/env_FOG0.b);
+  env_sunDir.copy(e>=0?sd:sd.negate());if(env_sunDir.y<0.08){env_sunDir.y=0.08;env_sunDir.normalize();} // light never from below
+  env_U.crossVectors(env_sunDir,new THREE.Vector3(0,1,0)).normalize();env_V.crossVectors(env_U,env_sunDir).normalize();
+  env_nightU.value=env_skyU.uNight.value=clamp((0.02-e)/0.2,0,1);env_lightsU.value=clamp((0.04-e)/0.1,0,1);env_dayU.value=clamp((e+0.1)/0.3,0.08,1);
+  if(typeof st_poolMat!=='undefined'&&st_poolMat){st_poolMat.visible=env_lightsU.value>0.01;st_poolMat.color.setRGB(.42,.33,.18).multiplyScalar(env_lightsU.value);}
+  if(typeof veh_MATS!=='undefined')for(const m of veh_MATS.values())m.envMapIntensity=0.45*env_dayU.value;
+}
+
 // ================= per-frame =================
 const env_fwd=new THREE.Vector3(),env_U=new THREE.Vector3(),env_V=new THREE.Vector3(),env_T=new THREE.Vector3();
 env_U.crossVectors(env_sunDir,new THREE.Vector3(0,1,0)).normalize();env_V.crossVectors(env_U,env_sunDir).normalize();
 let env_time=0;
 function envUpdate(dt){
   env_time+=dt||0;env_skyU.uTime.value=env_time;
+  {const h=(env_gameMin/60)%24;if(Math.abs(h-env_hour)>0.02){env_hour=h;env_tod(h);}} // ~every 1.2 game min
   env_sky.position.set(camera.position.x,0,camera.position.z);
   env_hills.visible=!HM; // real relief replaces the fake hills ring when a heightmap is loaded
   env_hills.position.set(camera.position.x,0,camera.position.z);

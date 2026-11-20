@@ -118,7 +118,7 @@ let money=50,stars=0,starCool=0,bustT=0,bustShow=0,mission=null,missionCD=2,last
 if(SAVE&&isFinite(SAVE.money))money=Math.max(0,Math.round(SAVE.money));
 let saveOff=false,saveT=4;
 function saveGame(){if(saveOff||!started)return;const v=player.car,sp=hook('storeSavePos')||hook('airportSavePos')||player;
-  try{localStorage.setItem(SAVE_K,JSON.stringify({v:1,x:+sp.x.toFixed(1),z:+sp.z.toFixed(1),h:+sp.h.toFixed(3),money,car:v?v.type:null,paint:v&&v.paint!=null?v.paint:null,t:Date.now()}));}catch(e){}}
+  try{localStorage.setItem(SAVE_K,JSON.stringify({v:1,x:+sp.x.toFixed(1),z:+sp.z.toFixed(1),h:+sp.h.toFixed(3),money,tm:+(gameMin%1440).toFixed(1),car:v?v.type:null,paint:v&&v.paint!=null?v.paint:null,t:Date.now()}));}catch(e){}}
 addEventListener('pagehide',saveGame);document.addEventListener('visibilitychange',()=>{if(document.hidden)saveGame();});
 function say(t,sub='',dur=2.6,color='#fff'){const m=$('msg');m.innerHTML=t+(sub?`<small>${sub}</small>`:'');m.style.color=color;m.style.opacity=1;msgT=dur;}
 function addStar(n=1){if(window.__dbg&&__dbg.noPolice)return;const was=stars;stars=Math.min(4,stars+n);starCool=0;if(stars!==was)hook('fxEvent','wanted',{stars});if(stars>was)say(stars===1?'Ești căutat!':'Nivel căutare: '+stars,'Poliția te urmărește',2,'#ffd23f');}
@@ -297,9 +297,9 @@ function updCamera(dt){let tx,ty,tz,dist,h;
   envUpdate(dt);}
 let hudCache={},streetT=0;
 const setH=(id,v)=>{if(hudCache[id]!==v){hudCache[id]=v;$(id).innerHTML=v;}};
-let gameMin=17*60+30,zoneName='',zoneT=0;
+let gameMin=SAVE&&isFinite(SAVE.tm)?SAVE.tm:17*60+30,zoneName='',zoneT=0;
 function showZone(n){zoneName=n;const z=$('zone');z.textContent=n;z.style.opacity=1;zoneT=3.2;}
-function updHUD(dt){gameMin+=dt*(60/60);const hh=Math.floor(gameMin/60)%24,mm=Math.floor(gameMin%60);setH('clock',String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0'));
+function updHUD(dt){gameMin=(gameMin+dt*(60/60))%1440;env_gameMin=gameMin;const hh=Math.floor(gameMin/60)%24,mm=Math.floor(gameMin%60);setH('clock',String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0'));
   setH('money',money+' lei');setH('stars',[0,1,2,3].map(i=>i<stars?'★':'<span class="off">★</span>').join(''));
   $('stars').classList.toggle('flash',stars>0&&starCool<1);
   const x=player.x,z=player.z;streetT-=dt;
@@ -490,7 +490,7 @@ playBtn.addEventListener('click',()=>{started=true;setTimeout(lockMouse,0);$('ti
   if(isTouch&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});
   camPos.set(player.x-Math.sin(camYaw)*6,groundY(player.x,player.z)+4,player.z-Math.cos(camYaw)*6);if(player.car)engineInit();
   if(ARRIVAL)hook('introStart');else if(SAVE)say('Bine ai revenit!','Continui de unde ai rămas · '+money+' lei',3.6,'#ffd23f');else say('Bun venit în Chișinău!','Taxiul galben de pe Ștefan cel Mare e liber — urcă',3.6,'#ffd23f');});
-window.__dbg={scene,player,renderer,camera,vehicles,peds,edges,toggleCar,keys,get stars(){return stars},set stars(v){stars=v;starCool=0;bustT=0;},noPolice:false,SPAWN,stops,DESTS,WORLD,
+window.__dbg={get hour(){return gameMin/60%24},set hour(h){gameMin=h*60;},scene,player,renderer,camera,vehicles,peds,edges,toggleCar,keys,get stars(){return stars},set stars(v){stars=v;starCool=0;bustT=0;},noPolice:false,SPAWN,stops,DESTS,WORLD,
   teleport(x,z){if(player.car){player.car.x=x;player.car.z=z;player.car.speed=0;}player.x=x;player.z=z;camPos.set(x,groundY(x,z)+20,z);}};
 }
 main().catch(e=>{console.error(e);window.__err=e&&e.stack;const b=document.getElementById('play');b.textContent='Eroare: '+e.message;});
