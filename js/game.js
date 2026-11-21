@@ -82,10 +82,11 @@ addEventListener('keydown',e=>{keys[e.code]=true;if(!started)return;if(e.code===
 addEventListener('keyup',e=>{keys[e.code]=false;});
 let drag=null;
 canvas.addEventListener('pointerdown',e=>{if(!isTouch&&started&&!paused){if(!locked())lockMouse();return;}drag={id:e.pointerId,x:e.clientX};});
-addEventListener('mousemove',e=>{if(!locked()||paused)return;const k=.0022*mouseSens,dx=e.movementX||0,dy=e.movementY||0;
-  if(fly){fly.yaw-=dx*k;fly.pitch=clamp(fly.pitch-(invertY?-dy:dy)*k,-1.5,1.5);return;}
-  if(player.mode==='foot')camYaw-=dx*k;else{lookOff=clamp(lookOff-dx*k,-Math.PI,Math.PI);mouseT=performance.now();}
-  camPitch=clamp(camPitch+(invertY?-dy:dy)*k*.8,-.35,.95);});
+addEventListener('mousemove',e=>{if(!locked()||paused)return;const k=.0022*mouseSens;look((e.movementX||0)*k,(e.movementY||0)*k);});
+function look(dx,dy){  // radians
+  if(fly){fly.yaw-=dx;fly.pitch=clamp(fly.pitch-(invertY?-dy:dy),-1.5,1.5);return;}
+  if(player.mode==='foot')camYaw-=dx;else{lookOff=clamp(lookOff-dx,-Math.PI,Math.PI);mouseT=performance.now();}
+  camPitch=clamp(camPitch+(invertY?-dy:dy)*.8,-.35,.95);}
 addEventListener('pointermove',e=>{if(drag&&e.pointerId===drag.id){const dx=e.clientX-drag.x;drag.x=e.clientX;if(player.mode==='foot')camYaw-=dx*.008;else lookOff=clamp(lookOff-dx*.008,-Math.PI,Math.PI);}});
 addEventListener('pointerup',e=>{if(drag&&e.pointerId===drag.id)drag=null;});
 const joy={x:0,y:0,id:null},joyEl=$('joy'),knob=$('knob');
@@ -96,7 +97,26 @@ const joyEnd=e=>{if(e.pointerId===joy.id){joy.id=null;joy.x=joy.y=0;knob.style.t
 const btn={brake:false};
 function bindBtn(id,down,up){const el=$(id);el.addEventListener('pointerdown',e=>{e.stopPropagation();el.classList.add('on');down&&down();});const u=()=>{el.classList.remove('on');up&&up();};el.addEventListener('pointerup',u);el.addEventListener('pointercancel',u);el.addEventListener('pointerleave',u);}
 bindBtn('bEnter',()=>toggleCar());bindBtn('bBrake',()=>btn.brake=true,()=>btn.brake=false);bindBtn('bHorn',()=>horn());bindBtn('bCam',()=>camMode=(camMode+1)%4);
-function input(){const k=keys;const t=(k.KeyW||k.ArrowUp?1:0)-(k.KeyS||k.ArrowDown?1:0)+joy.y,s=(k.KeyD||k.ArrowRight?1:0)-(k.KeyA||k.ArrowLeft?1:0)+joy.x;
+// ---- gamepad (standard mapping): left stick + triggers feed input(), right stick looks; buttons replay as keyboard keys,
+// so every module's key handler (car, store, phone, radio, menus) works unchanged. Title: A/Start = play.
+const gp={t:0,s:0,down:[]};
+const GP_KEYS=['Space','KeyH','KeyE','KeyF','KeyQ','KeyC',0,0,'Tab','Escape',0,0,'KeyP','KeyR','ArrowLeft','ArrowRight'];  // A B X Y LB RB LT RT Back Start L3 R3 ↑ ↓ ← →
+const GP_MENU={0:'Enter',1:'Escape',9:'Escape',12:'ArrowUp',13:'ArrowDown',14:'ArrowLeft',15:'ArrowRight'};
+const gpKey=(type,code)=>document.body.dispatchEvent(new KeyboardEvent(type,{code,key:code,bubbles:true,cancelable:true}));
+function gpPoll(dt){const p=[...(navigator.getGamepads?navigator.getGamepads():[])].find(p=>p&&p.connected);gp.t=gp.s=0;if(!p)return;
+  const dz=v=>Math.abs(v||0)<.15?0:(v-Math.sign(v)*.15)/.85,A=p.axes,bv=i=>p.buttons[i]?p.buttons[i].value:0;
+  const menu=scrTop()||FM.on||(typeof radio_open!=='undefined'&&radio_open);
+  if(started&&!paused&&!menu){gp.s=dz(A[0]);gp.t=bv(7)-bv(6)-dz(A[1]);const rx=dz(A[2]),ry=dz(A[3]);if(rx||ry)look(rx*2.6*dt*mouseSens,ry*1.8*dt*mouseSens);}
+  p.buttons.forEach((B,i)=>{const was=gp.down[i];if(B.pressed===!!was)return;
+    if(!B.pressed){if(was!=='-')gpKey('keyup',was);gp.down[i]=null;return;}
+    $('lockhint').style.display='none';  // no mouse lock needed on a pad
+    let code=null;
+    if(!started){if((i===0||i===9)&&!playBtn.disabled)playBtn.click();}
+    else if(menu)code=GP_MENU[i];
+    else if(i<2&&typeof ph_state!=='undefined'&&ph_state==='ringing')code=i?'KeyN':'KeyY';  // A answers, B declines
+    else code=i===0&&player.mode==='foot'?'ShiftLeft':GP_KEYS[i];  // A: sprint on foot, handbrake in a car
+    gp.down[i]=code||'-';if(code)gpKey('keydown',code);});}
+function input(){const k=keys;const t=(k.KeyW||k.ArrowUp?1:0)-(k.KeyS||k.ArrowDown?1:0)+joy.y+gp.t,s=(k.KeyD||k.ArrowRight?1:0)-(k.KeyA||k.ArrowLeft?1:0)+joy.x+gp.s;
   return{t:clamp(t,-1,1),s:clamp(s,-1,1),hb:!!k.Space||btn.brake,run:!!(k.ShiftLeft||k.ShiftRight)||Math.hypot(joy.x,joy.y)>.92};}
 
 // ================= audio =================
@@ -455,7 +475,7 @@ let last=performance.now(),titleT=0,parkT=0,mapT=0;
 let fpsCap=+LS('gtc_fps',60);const fpsEl=/[?&]fps/.test(location.search)?Object.assign(document.body.appendChild(document.createElement('div')),{style:'position:fixed;left:8px;bottom:8px;z-index:40;font:700 12px monospace;color:#7dff8a;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:5px;pointer-events:none'}):null;let fpsN=0,fpsT=0,fpsWorst=0;
 function frame(now){requestAnimationFrame(frame);if(fpsCap>0&&now-last<1000/fpsCap*.8)return;const dt=Math.min(.1,(now-last)/1000); // ponytail: clamp only stalls; at .05 anything under 20 fps ran in slow motion while the speedo read true
   if(fpsEl){fpsN++;fpsT+=now-last;fpsWorst=Math.max(fpsWorst,now-last);if(fpsT>=500){const r=__dbg.renderer.info.render;fpsEl.textContent=Math.round(fpsN*1000/fpsT)+' fps · worst '+Math.round(fpsWorst)+' ms · '+r.calls+' draws · '+Math.round(r.triangles/1000)+'k tris';fpsN=fpsT=fpsWorst=0;}}
-  last=now;
+  last=now;gpPoll(dt);
   if(!paused){for(const v of vehicles)if(v.mode==='ai')updAI(v,dt);
   updPeds(dt);}
   if(paused){}
