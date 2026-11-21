@@ -98,8 +98,9 @@ const btn={brake:false};
 function bindBtn(id,down,up){const el=$(id);el.addEventListener('pointerdown',e=>{e.stopPropagation();el.classList.add('on');down&&down();});const u=()=>{el.classList.remove('on');up&&up();};el.addEventListener('pointerup',u);el.addEventListener('pointercancel',u);el.addEventListener('pointerleave',u);}
 bindBtn('bEnter',()=>toggleCar());bindBtn('bBrake',()=>btn.brake=true,()=>btn.brake=false);bindBtn('bHorn',()=>horn());bindBtn('bCam',()=>camMode=(camMode+1)%4);
 // ---- gamepad (standard mapping): left stick + triggers feed input(), right stick looks; buttons replay as keyboard keys,
-// so every module's key handler (car, store, phone, radio, menus) works unchanged. Title: A/Start = play.
-const gp={t:0,s:0,down:[]};
+// so every module's key handler (car, store, phone, radio, menus) works unchanged. Title: D-pad picks Play/Settings, A/Start opens.
+// Big map: left stick pans, RT/LT zoom, A sets the GPS at the crosshair (or clears it when the crosshair is on the flag).
+const gp={t:0,s:0,down:[],ti:0};
 const GP_KEYS=['Space','KeyH','KeyE','KeyF','KeyQ','KeyC',0,0,'Tab','Escape',0,0,'KeyP','KeyR','ArrowLeft','ArrowRight'];  // A B X Y LB RB LT RT Back Start L3 R3 ↑ ↓ ← →
 const GP_MENU={0:'Enter',1:'Escape',9:'Escape',12:'ArrowUp',13:'ArrowDown',14:'ArrowLeft',15:'ArrowRight'};
 const gpKey=(type,code)=>document.body.dispatchEvent(new KeyboardEvent(type,{code,key:code,bubbles:true,cancelable:true}));
@@ -107,12 +108,17 @@ function gpPoll(dt){const p=[...(navigator.getGamepads?navigator.getGamepads():[
   const dz=v=>Math.abs(v||0)<.15?0:(v-Math.sign(v)*.15)/.85,A=p.axes,bv=i=>p.buttons[i]?p.buttons[i].value:0;
   const menu=scrTop()||FM.on||(typeof radio_open!=='undefined'&&radio_open);
   if(started&&!paused&&!menu){gp.s=dz(A[0]);gp.t=bv(7)-bv(6)-dz(A[1]);const rx=dz(A[2]),ry=dz(A[3]);if(rx||ry)look(rx*2.6*dt*mouseSens,ry*1.8*dt*mouseSens);}
+  if(FM.on){const mx=dz(A[0]),my=dz(A[1]),z=bv(7)-bv(6)-dz(A[3]);
+    if(mx||my||z||p.buttons.some(b=>b.pressed)){FM.pad=true;FM.cx+=mx*700*dt/FM.s;FM.cz+=my*700*dt/FM.s;FM.s=clamp(FM.s*Math.exp(z*1.6*dt),.02,2.5);fmDraw();}}
   p.buttons.forEach((B,i)=>{const was=gp.down[i];if(B.pressed===!!was)return;
     if(!B.pressed){if(was!=='-')gpKey('keyup',was);gp.down[i]=null;return;}
     $('lockhint').style.display='none';  // no mouse lock needed on a pad
     let code=null;
-    if(!started){if((i===0||i===9)&&!playBtn.disabled)playBtn.click();}
-    else if(menu)code=GP_MENU[i];
+    if(FM.on&&i===0)fmPick(FM.cx,FM.cz);
+    else if(menu)code=GP_MENU[i];  // before !started: Settings opens over the title screen
+    else if(!started){const bs=[playBtn,$('setBtn')];
+      if(i===12||i===13){gp.ti^=1;bs.forEach((b,k)=>b.classList.toggle('pad',k===gp.ti));}
+      else if((i===0||i===9)&&!bs[gp.ti].disabled)bs[gp.ti].click();}
     else if(i<2&&typeof ph_state!=='undefined'&&ph_state==='ringing')code=i?'KeyN':'KeyY';  // A answers, B declines
     else code=i===0&&player.mode==='foot'?'ShiftLeft':GP_KEYS[i];  // A: sprint on foot, handbrake in a car
     gp.down[i]=code||'-';if(code)gpKey('keydown',code);});}
@@ -393,19 +399,21 @@ function fmDraw(){if(!FM.on)return;const dpr=devicePixelRatio||1,W=innerWidth,H=
     g.font='800 13px Inter';g.textAlign='center';g.lineWidth=3;g.strokeStyle='#000';g.fillStyle='#fff';g.strokeText(gpsFmt(gpsLeft()),gx,gz-42);g.fillText(gpsFmt(gpsLeft()),gx,gz-42);}
   if(mission){const [mx,mz]=P(mission.x,mission.z);g.fillStyle=mission.stage==='pickup'?'#3cff6e':'#ffd23f';g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.arc(mx,mz,8,0,TAU);g.fill();g.stroke();}
   const [qx,qz]=P(player.x,player.z);g.save();g.translate(qx,qz);g.rotate(-player.h+Math.PI);g.fillStyle='#fff';g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.moveTo(0,-12);g.lineTo(8,10);g.lineTo(0,5);g.lineTo(-8,10);g.closePath();g.fill();g.stroke();g.restore();
-  g.font='600 11px Inter';g.fillStyle='rgba(255,255,255,.75)';g.textAlign='left';g.fillText('Click: GPS (click pe steag îl șterge) · Trage pentru a muta · rotița pentru zoom · Tab / Esc închide',14,H-14);
+  if(FM.pad){for(const [c,w] of[['#000',4],['#fff',2]]){g.strokeStyle=c;g.lineWidth=w;g.beginPath();g.moveTo(ox-14,oy);g.lineTo(ox-4,oy);g.moveTo(ox+4,oy);g.lineTo(ox+14,oy);g.moveTo(ox,oy-14);g.lineTo(ox,oy-4);g.moveTo(ox,oy+4);g.lineTo(ox,oy+14);g.stroke();}}
+  g.font='600 11px Inter';g.fillStyle='rgba(255,255,255,.75)';g.textAlign='left';g.fillText(FM.pad?'A: GPS (A pe steag îl șterge) · Stick stânga mută · RT / LT zoom · B închide':'Click: GPS (click pe steag îl șterge) · Trage pentru a muta · rotița pentru zoom · Tab / Esc închide',14,H-14);
   if(missing&&!FM.raf)FM.raf=requestAnimationFrame(()=>{FM.raf=0;fmDraw();});}
-function openBigMap(){FM.on=true;FM.cx=player.x;FM.cz=player.z;FM.s=.35;bigEl.classList.add('on');fmDraw();}
+function openBigMap(){FM.on=true;FM.pad=false;FM.cx=player.x;FM.cz=player.z;FM.s=.35;bigEl.classList.add('on');fmDraw();}
 function closeBigMap(){FM.on=false;bigEl.classList.remove('on');}
 $('mapwrap').addEventListener('pointerdown',e=>{e.stopPropagation();openBigMap();});
-bigC.addEventListener('pointerdown',e=>{e.stopPropagation();FM.drag={x:e.clientX,y:e.clientY};FM.down={x:e.clientX,y:e.clientY};bigC.setPointerCapture(e.pointerId);});
+bigC.addEventListener('pointerdown',e=>{e.stopPropagation();FM.pad=false;FM.drag={x:e.clientX,y:e.clientY};FM.down={x:e.clientX,y:e.clientY};bigC.setPointerCapture(e.pointerId);});
 bigC.addEventListener('pointermove',e=>{if(!FM.drag)return;FM.cx-=(e.clientX-FM.drag.x)/FM.s;FM.cz-=(e.clientY-FM.drag.y)/FM.s;FM.drag={x:e.clientX,y:e.clientY};fmDraw();});
 bigC.addEventListener('pointerup',e=>{FM.drag=null;const d=FM.down;FM.down=null;if(!d||Math.hypot(e.clientX-d.x,e.clientY-d.y)>6)return;   // a click, not a drag
-  const x=FM.cx+(e.clientX-innerWidth/2)/FM.s,z=FM.cz+(e.clientY-innerHeight/2)/FM.s;
+  fmPick(FM.cx+(e.clientX-innerWidth/2)/FM.s,FM.cz+(e.clientY-innerHeight/2)/FM.s);});
+function fmPick(x,z){
   const fd=gps?Math.min(Math.hypot((x-gps.x)*FM.s,(z-gps.z)*FM.s+24),Math.hypot((x-gps.x)*FM.s,(z-gps.z)*FM.s)):1e9;   // flag head / tip
   if(fd<18)gpsClear('GPS oprit');
   else if(x>=BX0&&x<=BX1&&z>=BZ0&&z<=BZ1)gpsSet(x,z);
-  fmDraw();});
+  fmDraw();}
 bigC.addEventListener('wheel',e=>{e.preventDefault();const k=Math.exp(-e.deltaY*.0015),ns=clamp(FM.s*k,.02,2.5);const mx=e.clientX-innerWidth/2,my=e.clientY-innerHeight/2;
   FM.cx+=mx/FM.s-mx/ns;FM.cz+=my/FM.s-my/ns;FM.s=ns;fmDraw();},{passive:false});
 $('bigx').addEventListener('pointerdown',e=>{e.stopPropagation();closeBigMap();lockMouse();});
