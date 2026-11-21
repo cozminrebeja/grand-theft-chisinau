@@ -39,5 +39,6 @@ Tab — map · M — sound · R — music on/off · Q — car radio (tap: next s
 - three.js © three.js authors (MIT). Fonts: Google Fonts (Anton, Pirata One, Inter — OFL).
 
 ## Contributors
+- [@dumitrulunic](https://github.com/dumitrulunic)
 - [@cozminrebeja](https://github.com/cozminrebeja) — creator
 - [@xDGeo](https://github.com/xDGeo)
