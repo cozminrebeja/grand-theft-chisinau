@@ -37,3 +37,8 @@ Tab — map · M — sound · R — music on/off · Q — car radio (tap: next s
 - Terrain: Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018, provided under COPERNICUS
   by the European Union and ESA; all rights reserved.
 - three.js © three.js authors (MIT). Fonts: Google Fonts (Anton, Pirata One, Inter — OFL).
+
+## Contributors
+- [@dumitrulunic](https://github.com/dumitrulunic)
+- [@cozminrebeja](https://github.com/cozminrebeja) — creator
+- [@xDGeo](https://github.com/xDGeo)
